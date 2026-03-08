@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stickforge Arena</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="backdrop backdrop-one"></div>
+    <div class="backdrop backdrop-two"></div>
+
+    <header class="masthead">
+      <div>
+        <p class="eyebrow">Forge. Paint. Fight.</p>
+        <h1>Stickforge Arena</h1>
+        <p class="subtitle">
+          Build a weapon from scratch, carve out a brutal arena, and throw your
+          stick fighter into skirmishes against bots or a second local player.
+        </p>
+      </div>
+      <div class="hero-note">
+        <p>Core loop</p>
+        <strong>Craft a weapon. Save it to the armory. Edit the arena. Start a round.</strong>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <div class="sidebar-stack">
+        <section class="panel forge-panel">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Weapon Forge</p>
+              <h2>Blueprint Bench</h2>
+            </div>
+            <span class="section-tag">Main feature</span>
+          </div>
+
+          <div class="forge-grid">
+            <label>
+              <span>Name</span>
+              <input id="weapon-name" type="text" maxlength="22" value="Ashbite" />
+            </label>
+
+            <label>
+              <span>Frame</span>
+              <select id="frame-select"></select>
+            </label>
+
+            <label>
+              <span>Material</span>
+              <select id="material-select"></select>
+            </label>
+
+            <label>
+              <span>Edge Style</span>
+              <select id="edge-select"></select>
+            </label>
+
+            <label>
+              <span>Length</span>
+              <input id="length-range" type="range" min="28" max="92" value="62" />
+              <output id="length-value">62</output>
+            </label>
+
+            <label>
+              <span>Balance</span>
+              <input id="balance-range" type="range" min="-30" max="30" value="4" />
+              <output id="balance-value">4</output>
+            </label>
+
+            <label>
+              <span>Temper</span>
+              <input id="temper-range" type="range" min="20" max="100" value="76" />
+              <output id="temper-value">76</output>
+            </label>
+          </div>
+
+          <div class="preview-card">
+            <canvas id="forge-preview" width="360" height="150"></canvas>
+            <div>
+              <h3 id="weapon-title">Ashbite</h3>
+              <p id="weapon-lore">
+                A responsive forge piece tuned for quick openings and clean
+                finishers.
+              </p>
+            </div>
+          </div>
+
+          <div class="stats-grid" id="forge-stats"></div>
+
+          <div class="action-row">
+            <button id="save-weapon" class="primary-button">Save To Armory</button>
+            <button id="equip-weapon" class="ghost-button">Equip For Player 1</button>
+          </div>
+
+          <div class="section-head compact">
+            <div>
+              <p class="eyebrow">Loadouts</p>
+              <h3>Armory</h3>
+            </div>
+          </div>
+          <div id="armory-list" class="armory-list"></div>
+        </section>
+
+        <section class="panel arena-panel">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Arena Builder</p>
+              <h2>Paint The Battlefield</h2>
+            </div>
+            <span class="section-tag">Custom arenas</span>
+          </div>
+
+          <div class="preset-row">
+            <button class="ghost-button preset-button" data-preset="foundry">Foundry</button>
+            <button class="ghost-button preset-button" data-preset="ring">Ring</button>
+            <button class="ghost-button preset-button" data-preset="crossfire">Crossfire</button>
+          </div>
+
+          <div id="tool-palette" class="tool-palette"></div>
+
+          <div class="arena-hint">
+            Paint at least one <strong>Player</strong> tile and one
+            <strong>Bot</strong> or <strong>Rival</strong> tile.
+          </div>
+
+          <div id="arena-editor" class="arena-editor" aria-label="Arena editor"></div>
+
+          <div class="action-row">
+            <button id="clear-arena" class="ghost-button">Clear Arena</button>
+            <button id="mirror-arena" class="ghost-button">Mirror Arena</button>
+          </div>
+        </section>
+      </div>
+
+      <section class="panel stage-panel">
+        <div class="stage-topbar">
+          <div>
+            <p class="eyebrow">Combat Stage</p>
+            <h2>Live Arena</h2>
+          </div>
+          <div class="mode-row">
+            <label>
+              <span>Mode</span>
+              <select id="match-mode">
+                <option value="skirmish">Player vs Bots</option>
+                <option value="duel">Player vs Local Rival</option>
+              </select>
+            </label>
+
+            <label id="bot-count-label">
+              <span>Bots</span>
+              <input id="bot-count" type="range" min="1" max="5" value="3" />
+              <output id="bot-count-value">3</output>
+            </label>
+
+            <button id="start-match" class="primary-button">Start Match</button>
+          </div>
+        </div>
+
+        <div class="hud-strip">
+          <div class="hud-chip">
+            <span>Player 1</span>
+            <strong id="hud-player-weapon">Ashbite</strong>
+          </div>
+          <div class="hud-chip">
+            <span>Challenger</span>
+            <strong id="hud-rival-weapon">Auto Forge</strong>
+          </div>
+          <div class="hud-chip">
+            <span>Arena</span>
+            <strong id="hud-arena-name">Foundry</strong>
+          </div>
+          <div class="hud-chip">
+            <span>Result</span>
+            <strong id="hud-result">Waiting</strong>
+          </div>
+        </div>
+
+        <canvas id="battlefield" width="960" height="540" aria-label="Battlefield"></canvas>
+
+        <div class="touch-controls" id="touch-controls">
+          <div class="touch-pad">
+            <button data-touch="up">Up</button>
+            <button data-touch="left">Left</button>
+            <button data-touch="down">Down</button>
+            <button data-touch="right">Right</button>
+          </div>
+          <div class="touch-actions">
+            <button data-touch="attack">Slash</button>
+            <button data-touch="dash">Dash</button>
+          </div>
+        </div>
+
+        <div class="footer-row">
+          <div class="controls-card">
+            <h3>Controls</h3>
+            <p><strong>P1:</strong> WASD move, F attack, G dash</p>
+            <p><strong>P2:</strong> IJKL move, O attack, P dash</p>
+            <p><strong>Mobile:</strong> touch buttons for P1</p>
+          </div>
+          <div class="controls-card">
+            <h3>Round Feed</h3>
+            <p id="match-summary">
+              Save a forged weapon, customize the arena, and launch a round.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="game.js" defer></script>
+  </body>
+</html>
