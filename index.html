@@ -12,16 +12,16 @@
 
     <header class="masthead">
       <div>
-        <p class="eyebrow">Forge. Paint. Fight.</p>
+        <p class="eyebrow">Forge. Duel. Fight.</p>
         <h1>Stickforge Arena</h1>
         <p class="subtitle">
-          Build a weapon from scratch, carve out a brutal arena, and throw your
-          stick fighter into skirmishes against bots or a second local player.
+          Forge a weapon, pick a duel stage, and throw your stick fighter into
+          hard rounds against bots or a second local player.
         </p>
       </div>
       <div class="hero-note">
         <p>Core loop</p>
-        <strong>Craft a weapon. Save it to the armory. Edit the arena. Start a round.</strong>
+        <strong>Craft a weapon. Lock a stage. Start a set. Win the round war.</strong>
       </div>
     </header>
 
@@ -106,10 +106,10 @@
         <section class="panel arena-panel">
           <div class="section-head">
             <div>
-              <p class="eyebrow">Arena Builder</p>
-              <h2>Paint The Battlefield</h2>
+              <p class="eyebrow">Stage Forge</p>
+              <h2>Pick The Battleground</h2>
             </div>
-            <span class="section-tag">Custom arenas</span>
+            <span class="section-tag">Round fighter</span>
           </div>
 
           <div class="preset-row">
@@ -118,18 +118,17 @@
             <button class="ghost-button preset-button" data-preset="crossfire">Crossfire</button>
           </div>
 
-          <div id="tool-palette" class="tool-palette"></div>
-
           <div class="arena-hint">
-            Paint at least one <strong>Player</strong> tile and one
-            <strong>Bot</strong> or <strong>Rival</strong> tile.
+            Pick a duel stage, then tune hazards, pillars, and crowd lights for
+            the match atmosphere.
           </div>
 
-          <div id="arena-editor" class="arena-editor" aria-label="Arena editor"></div>
+          <div id="stage-summary" class="stage-summary"></div>
 
           <div class="action-row">
-            <button id="clear-arena" class="ghost-button">Clear Arena</button>
-            <button id="mirror-arena" class="ghost-button">Mirror Arena</button>
+            <button id="toggle-hazard" class="ghost-button">Center Hazard: On</button>
+            <button id="toggle-pillars" class="ghost-button">Corner Pillars: On</button>
+            <button id="toggle-lights" class="ghost-button">Crowd Lights: On</button>
           </div>
         </section>
       </div>
@@ -138,24 +137,24 @@
         <div class="stage-topbar">
           <div>
             <p class="eyebrow">Combat Stage</p>
-            <h2>Live Arena</h2>
+            <h2>Live Duel</h2>
           </div>
           <div class="mode-row">
             <label>
               <span>Mode</span>
               <select id="match-mode">
-                <option value="skirmish">Player vs Bots</option>
+                <option value="solo">Player vs Bot</option>
                 <option value="duel">Player vs Local Rival</option>
               </select>
             </label>
 
-            <label id="bot-count-label">
-              <span>Bots</span>
-              <input id="bot-count" type="range" min="1" max="5" value="3" />
-              <output id="bot-count-value">3</output>
+            <label id="rounds-label">
+              <span>Rounds To Win</span>
+              <input id="rounds-to-win" type="range" min="1" max="3" value="2" />
+              <output id="rounds-to-win-value">2</output>
             </label>
 
-            <button id="start-match" class="primary-button">Start Match</button>
+            <button id="start-match" class="primary-button">Start Set</button>
           </div>
         </div>
 
@@ -169,11 +168,15 @@
             <strong id="hud-rival-weapon">Auto Forge</strong>
           </div>
           <div class="hud-chip">
-            <span>Arena</span>
+            <span>Stage</span>
             <strong id="hud-arena-name">Foundry</strong>
           </div>
           <div class="hud-chip">
-            <span>Result</span>
+            <span>Set</span>
+            <strong id="hud-set-score">0 - 0</strong>
+          </div>
+          <div class="hud-chip">
+            <span>Status</span>
             <strong id="hud-result">Waiting</strong>
           </div>
         </div>
@@ -182,28 +185,30 @@
 
         <div class="touch-controls" id="touch-controls">
           <div class="touch-pad">
-            <button data-touch="up">Up</button>
             <button data-touch="left">Left</button>
+            <button data-touch="up">Jump</button>
             <button data-touch="down">Down</button>
             <button data-touch="right">Right</button>
           </div>
           <div class="touch-actions">
-            <button data-touch="attack">Slash</button>
-            <button data-touch="dash">Dash</button>
+            <button data-touch="attack">Strike</button>
+            <button data-touch="block">Block</button>
+            <button data-touch="dodge">Backstep</button>
+            <button data-touch="slide">Lunge</button>
           </div>
         </div>
 
         <div class="footer-row">
           <div class="controls-card">
             <h3>Controls</h3>
-            <p><strong>P1:</strong> WASD move, F attack, G dash</p>
-            <p><strong>P2:</strong> IJKL move, O attack, P dash</p>
-            <p><strong>Mobile:</strong> touch buttons for P1</p>
+            <p><strong>P1:</strong> A/D walk, W jump, S crouch, move mouse to steer weapon, left click strike, right click block</p>
+            <p><strong>Abilities:</strong> Q backstep, E lunge, quick mouse swings do light bonus damage</p>
+            <p><strong>P2 duel mode:</strong> J/L walk, I jump, K crouch, O strike, U block, P backstep, ; lunge</p>
           </div>
           <div class="controls-card">
             <h3>Round Feed</h3>
             <p id="match-summary">
-              Save a forged weapon, customize the arena, and launch a round.
+              Forge a weapon, pick a stage, and launch a proper round set.
             </p>
           </div>
         </div>

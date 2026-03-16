@@ -1,22 +1,14 @@
 "use strict";
 
-const TILE_SIZE = 48;
-const GRID_COLS = 18;
-const GRID_ROWS = 10;
-const ARENA_WIDTH = GRID_COLS * TILE_SIZE;
-const ARENA_HEIGHT = GRID_ROWS * TILE_SIZE;
-const HUD_HEIGHT = 60;
 const PLAYER_TEAM = "player";
 const ENEMY_TEAM = "enemy";
-
-const toolDefinitions = [
-  { id: "empty", label: "Empty" },
-  { id: "wall", label: "Wall" },
-  { id: "hazard", label: "Hazard" },
-  { id: "player", label: "Player" },
-  { id: "bot", label: "Bot" },
-  { id: "rival", label: "Rival" }
-];
+const HUD_HEIGHT = 64;
+const STAGE_WIDTH = 860;
+const STAGE_HEIGHT = 420;
+const STAGE_TOP = 28;
+const GROUND_Y = 320;
+const FLOOR_THICKNESS = 66;
+const ROUND_TIME = 60;
 
 const frameCatalog = {
   saber: {
@@ -25,7 +17,7 @@ const frameCatalog = {
     reach: 78,
     cooldown: 0.62,
     knockback: 1.08,
-    arc: 1.38,
+    arc: 1.18,
     speed: 1.02,
     moveScale: 1
   },
@@ -45,9 +37,9 @@ const frameCatalog = {
     reach: 68,
     cooldown: 0.86,
     knockback: 1.34,
-    arc: 1.1,
+    arc: 1.04,
     speed: 0.86,
-    moveScale: 0.93
+    moveScale: 0.92
   },
   chainblade: {
     label: "Chainblade",
@@ -55,8 +47,8 @@ const frameCatalog = {
     reach: 88,
     cooldown: 0.52,
     knockback: 0.94,
-    arc: 1.58,
-    speed: 1.18,
+    arc: 1.42,
+    speed: 1.16,
     moveScale: 1.04
   }
 };
@@ -90,7 +82,7 @@ const materialCatalog = {
     cooldown: -0.06,
     knockback: -0.02,
     moveScale: 0.02,
-    color: "#9e84ff"
+    color: "#90a2ff"
   },
   embersteel: {
     label: "Embersteel",
@@ -143,57 +135,61 @@ const edgeCatalog = {
   }
 };
 
-const arenaPresets = {
-  foundry: [
-    "WWWWWWWWWWWWWWWWWW",
-    "W...H..........B.W",
-    "W....WWW..........W",
-    "W.................W",
-    "W.P....H....WWW...W",
-    "W.......W.........W",
-    "W....WWW.....H....W",
-    "W.........R.......W",
-    "W.B.............B.W",
-    "WWWWWWWWWWWWWWWWWW"
-  ],
-  ring: [
-    "WWWWWWWWWWWWWWWWWW",
-    "W.B.....H....R...W",
-    "W....WW....WW....W",
-    "W................W",
-    "W...W........W...W",
-    "W...W...P....W...W",
-    "W................W",
-    "W....WW....WW....W",
-    "W.B.....H......B.W",
-    "WWWWWWWWWWWWWWWWWW"
-  ],
-  crossfire: [
-    "WWWWWWWWWWWWWWWWWW",
-    "W.B...W.....W...BW",
-    "W.....W..H..W....W",
-    "W.....W.....W....W",
-    "W.WWWWW..P..WWWW.W",
-    "W.....W.....W....W",
-    "W.....W..H..W....W",
-    "W.B...W.....W..R.W",
-    "W.................W",
-    "WWWWWWWWWWWWWWWWWW"
-  ]
-};
-
-const tileLegend = {
-  ".": "empty",
-  W: "wall",
-  H: "hazard",
-  P: "player",
-  B: "bot",
-  R: "rival"
+const stageCatalog = {
+  foundry: {
+    label: "Foundry",
+    description: "A molten forge lane with chain lifts, ash smoke, and a furnace pit in the middle.",
+    skyTop: "#31161b",
+    skyBottom: "#120c12",
+    floor: "#3b2c31",
+    floorEdge: "#9f6a44",
+    accent: "#ff8752",
+    crowd: "#ffb36b",
+    hazard: "#ff6a38"
+  },
+  ring: {
+    label: "Ring",
+    description: "A championship platform with banners, cold spotlights, and heavy steel corners.",
+    skyTop: "#192036",
+    skyBottom: "#0c0f1b",
+    floor: "#263146",
+    floorEdge: "#78a3dd",
+    accent: "#cfd8ff",
+    crowd: "#7db7ff",
+    hazard: "#7dd0ff"
+  },
+  crossfire: {
+    label: "Crossfire",
+    description: "A brutal test gallery lined with burners, rigging, and weapon trial rails.",
+    skyTop: "#2a1f16",
+    skyBottom: "#100c08",
+    floor: "#463426",
+    floorEdge: "#d6a16a",
+    accent: "#ffd37d",
+    crowd: "#ffc16b",
+    hazard: "#ff8f5c"
+  }
 };
 
 const keyBindings = {
-  p1: { up: "KeyW", left: "KeyA", down: "KeyS", right: "KeyD", attack: "KeyF", dash: "KeyG" },
-  p2: { up: "KeyI", left: "KeyJ", down: "KeyK", right: "KeyL", attack: "KeyO", dash: "KeyP" }
+  p1: {
+    left: "KeyA",
+    right: "KeyD",
+    jump: "KeyW",
+    crouch: "KeyS",
+    dodge: "KeyQ",
+    slide: "KeyE"
+  },
+  p2: {
+    left: "KeyJ",
+    right: "KeyL",
+    jump: "KeyI",
+    crouch: "KeyK",
+    attack: "KeyO",
+    block: "KeyU",
+    dodge: "KeyP",
+    slide: "Semicolon"
+  }
 };
 
 const ui = {
@@ -214,20 +210,20 @@ const ui = {
   saveWeapon: document.querySelector("#save-weapon"),
   equipWeapon: document.querySelector("#equip-weapon"),
   armoryList: document.querySelector("#armory-list"),
-  toolPalette: document.querySelector("#tool-palette"),
-  arenaEditor: document.querySelector("#arena-editor"),
-  clearArena: document.querySelector("#clear-arena"),
-  mirrorArena: document.querySelector("#mirror-arena"),
+  stageSummary: document.querySelector("#stage-summary"),
   presetButtons: Array.from(document.querySelectorAll(".preset-button")),
+  toggleHazard: document.querySelector("#toggle-hazard"),
+  togglePillars: document.querySelector("#toggle-pillars"),
+  toggleLights: document.querySelector("#toggle-lights"),
   matchMode: document.querySelector("#match-mode"),
-  botCount: document.querySelector("#bot-count"),
-  botCountValue: document.querySelector("#bot-count-value"),
-  botCountLabel: document.querySelector("#bot-count-label"),
+  roundsToWin: document.querySelector("#rounds-to-win"),
+  roundsToWinValue: document.querySelector("#rounds-to-win-value"),
   startMatch: document.querySelector("#start-match"),
   battlefield: document.querySelector("#battlefield"),
   hudPlayerWeapon: document.querySelector("#hud-player-weapon"),
   hudRivalWeapon: document.querySelector("#hud-rival-weapon"),
   hudArenaName: document.querySelector("#hud-arena-name"),
+  hudSetScore: document.querySelector("#hud-set-score"),
   hudResult: document.querySelector("#hud-result"),
   matchSummary: document.querySelector("#match-summary"),
   touchControls: document.querySelector("#touch-controls")
@@ -239,6 +235,7 @@ const previewCtx = ui.forgePreview.getContext("2d");
 
 const state = {
   forge: {
+    id: "weapon-player",
     name: "Ashbite",
     frame: "saber",
     material: "sunsteel",
@@ -250,191 +247,210 @@ const state = {
   armory: [],
   activeWeaponId: null,
   rivalWeaponId: null,
-  arenaName: "Foundry",
-  selectedTool: "wall",
-  arenaTiles: parseArena(arenaPresets.foundry),
-  pointerPainting: false,
-  round: null,
-  roundId: 0,
+  stage: {
+    id: "foundry",
+    hazard: true,
+    pillars: true,
+    lights: true
+  },
+  match: null,
   keysDown: new Set(),
-  touchState: {
-    up: false,
+  mouse: {
     left: false,
-    down: false,
     right: false,
+    x: canvas.width * 0.5,
+    y: canvas.height * 0.5
+  },
+  touchState: {
+    left: false,
+    right: false,
+    up: false,
+    down: false,
     attack: false,
-    dash: false
+    block: false,
+    dodge: false,
+    slide: false
   },
-  controlLatch: {
-    p1Attack: false,
-    p1Dash: false,
-    p2Attack: false,
-    p2Dash: false
+  previousInputs: {
+    p1: {},
+    p2: {}
   },
-  lastFrameTime: 0,
-  sparkId: 0
+  sparkId: 0,
+  lastFrameTime: performance.now()
 };
 
 function clamp(value, min, max) {
-  return Math.max(min, Math.min(max, value));
+  return Math.min(max, Math.max(min, value));
 }
 
-function randomChoice(values) {
-  return values[Math.floor(Math.random() * values.length)];
+function lerp(start, end, amount) {
+  return start + (end - start) * amount;
+}
+
+function approach(current, target, delta) {
+  if (current < target) {
+    return Math.min(target, current + delta);
+  }
+  return Math.max(target, current - delta);
 }
 
 function randomRange(min, max) {
   return min + Math.random() * (max - min);
 }
 
+function randomChoice(items) {
+  return items[Math.floor(Math.random() * items.length)];
+}
+
 function makeId(prefix) {
   return `${prefix}-${Math.random().toString(36).slice(2, 9)}`;
 }
 
-function parseArena(rows) {
-  return rows.flatMap((row) => row.split("").map((symbol) => tileLegend[symbol] || "empty"));
+function stageOffsetX() {
+  return Math.round((canvas.width - STAGE_WIDTH) / 2);
 }
 
-function cloneTiles(tiles) {
-  return tiles.slice();
+function currentStageConfig(stageId = state.stage.id) {
+  return stageCatalog[stageId] || stageCatalog.foundry;
 }
 
-function indexFromCell(col, row) {
-  return row * GRID_COLS + col;
-}
-
-function cellFromIndex(index) {
-  return { col: index % GRID_COLS, row: Math.floor(index / GRID_COLS) };
-}
-
-function getTile(col, row, tiles = state.arenaTiles) {
-  if (col < 0 || col >= GRID_COLS || row < 0 || row >= GRID_ROWS) {
-    return "wall";
-  }
-  return tiles[indexFromCell(col, row)];
-}
-
-function cellCenter(col, row) {
-  return {
-    x: col * TILE_SIZE + TILE_SIZE * 0.5,
-    y: row * TILE_SIZE + TILE_SIZE * 0.5
-  };
-}
-
-function pointToCell(x, y) {
-  return {
-    col: clamp(Math.floor(x / TILE_SIZE), 0, GRID_COLS - 1),
-    row: clamp(Math.floor(y / TILE_SIZE), 0, GRID_ROWS - 1)
-  };
+function activeStageState() {
+  return state.match ? state.match.stage : state.stage;
 }
 
 function populateSelect(select, catalog) {
-  Object.entries(catalog).forEach(([id, entry]) => {
+  select.innerHTML = "";
+  Object.entries(catalog).forEach(([id, item]) => {
     const option = document.createElement("option");
     option.value = id;
-    option.textContent = entry.label;
+    option.textContent = item.label;
     select.append(option);
   });
+}
+
+function setMatchSummary(text) {
+  ui.matchSummary.textContent = text;
+}
+
+function setStatus(text) {
+  ui.hudResult.textContent = text;
 }
 
 function buildWeaponFromForge(forge) {
   const frame = frameCatalog[forge.frame];
   const material = materialCatalog[forge.material];
   const edge = edgeCatalog[forge.edge];
+  const lengthBias = (forge.length - 60) / 8;
+  const balanceBias = forge.balance / 12;
+  const temperBias = (forge.temper - 60) / 14;
 
-  const lengthFactor = (forge.length - 60) * 0.48;
-  const balanceFactor = forge.balance / 30;
-  const temperFactor = (forge.temper - 60) / 40;
-
-  const damage = Math.round(
-    frame.damage +
-      material.damage +
-      edge.damage +
-      lengthFactor * 0.24 +
-      balanceFactor * 2 +
-      temperFactor * 3
+  const damage = clamp(
+    Math.round(frame.damage + material.damage + edge.damage + temperBias * 1.4 + Math.abs(balanceBias) * 0.5),
+    10,
+    34
   );
-  const reach = Math.round(frame.reach + material.reach + edge.reach + lengthFactor * 0.95);
-  const speed = clamp(frame.speed + material.speed + edge.speed - lengthFactor * 0.004 - balanceFactor * 0.08, 0.68, 1.38);
+  const reach = clamp(
+    Math.round(frame.reach + material.reach + edge.reach + lengthBias * 4),
+    54,
+    132
+  );
+  const speed = clamp(
+    Number((frame.speed + material.speed + edge.speed - Math.abs(balanceBias) * 0.015).toFixed(2)),
+    0.7,
+    1.35
+  );
   const cooldown = clamp(
-    frame.cooldown + material.cooldown + edge.cooldown + lengthFactor * 0.003 + balanceFactor * 0.05 - temperFactor * 0.03,
-    0.38,
-    1.08
+    Number((frame.cooldown + material.cooldown + edge.cooldown - temperBias * 0.01).toFixed(2)),
+    0.34,
+    1.1
   );
   const knockback = clamp(
-    frame.knockback + material.knockback + edge.knockback + lengthFactor * 0.003 + Math.max(balanceFactor, 0) * 0.08,
-    0.84,
-    1.78
+    Number((frame.knockback + material.knockback + edge.knockback + temperBias * 0.025).toFixed(2)),
+    0.8,
+    1.65
   );
-  const arc = clamp(frame.arc + edge.arc - balanceFactor * 0.08, 0.68, 1.78);
-  const moveScale = clamp(frame.moveScale + material.moveScale - Math.max(lengthFactor, 0) * 0.0015, 0.82, 1.12);
-  const staminaCost = Math.round(clamp(11 + damage * 0.42 + (1 - speed) * 14 + knockback * 2.8, 9, 26));
+  const arc = clamp(
+    Number((frame.arc + edge.arc + (20 - Math.abs(forge.balance)) * 0.008).toFixed(2)),
+    0.74,
+    1.72
+  );
+  const moveScale = clamp(
+    Number((frame.moveScale + material.moveScale - Math.max(0, damage - 20) * 0.012).toFixed(2)),
+    0.74,
+    1.12
+  );
 
-  const styleText =
-    damage >= 24
-      ? "a heavy execution piece"
-      : speed >= 1.12
-        ? "a twitch-fast dueling build"
-        : reach >= 95
-          ? "a long-control spacing weapon"
-          : "a balanced arena weapon";
+  let styleText = "balanced duel control";
+  if (damage >= 25) {
+    styleText = "heavy crack-open pressure";
+  } else if (speed >= 1.12) {
+    styleText = "quick strike pressure";
+  } else if (reach >= 102) {
+    styleText = "long-range lane control";
+  }
 
   return {
     id: forge.id || makeId("weapon"),
-    name: forge.name.trim() || `${material.label} ${frame.label}`,
+    name: forge.name.trim() || "Nameless Steel",
     frameId: forge.frame,
-    materialId: forge.material,
-    edgeId: forge.edge,
     frame: frame.label,
+    materialId: forge.material,
     material: material.label,
+    edgeId: forge.edge,
     edge: edge.label,
+    length: Number(forge.length),
+    balance: Number(forge.balance),
+    temper: Number(forge.temper),
     damage,
     reach,
     speed,
     cooldown,
     knockback,
     arc,
-    staminaCost,
     moveScale,
-    temper: forge.temper,
-    balance: forge.balance,
-    length: forge.length,
     color: material.color,
-    lore: `${forge.name.trim() || "This weapon"} is ${styleText}, tuned with ${edge.label.toLowerCase()} and ${material.label.toLowerCase()}.`
+    lore: `${frame.label}, ${material.label.toLowerCase()}, and ${edge.label.toLowerCase()} tuned for ${styleText}.`
   };
 }
 
 function createRandomEnemyWeapon() {
+  const prefixes = ["Iron", "Dread", "Night", "Ash", "War", "Storm", "Cinder", "Ruin"];
+  const suffixes = ["fang", "bite", "lance", "edge", "hook", "brand", "talon", "reaver"];
   const forge = {
-    name: randomChoice(["Grinder", "Wisp", "Cinder", "Vault", "Raze", "Hollow", "Shard"]),
+    id: makeId("rival"),
+    name: `${randomChoice(prefixes)}${randomChoice(suffixes)}`,
     frame: randomChoice(Object.keys(frameCatalog)),
     material: randomChoice(Object.keys(materialCatalog)),
     edge: randomChoice(Object.keys(edgeCatalog)),
-    length: Math.round(randomRange(42, 88)),
-    balance: Math.round(randomRange(-22, 22)),
-    temper: Math.round(randomRange(36, 96))
+    length: Math.round(randomRange(38, 90)),
+    balance: Math.round(randomRange(-24, 24)),
+    temper: Math.round(randomRange(30, 98))
   };
+
   return buildWeaponFromForge(forge);
 }
 
 function currentBlueprint() {
+  if (!state.forge.id) {
+    state.forge.id = makeId("weapon");
+  }
   return buildWeaponFromForge(state.forge);
 }
 
 function syncForgeOutputs() {
-  ui.lengthValue.textContent = `${state.forge.length}`;
-  ui.balanceValue.textContent = `${state.forge.balance}`;
-  ui.temperValue.textContent = `${state.forge.temper}`;
+  ui.lengthValue.textContent = `${ui.lengthRange.value}`;
+  ui.balanceValue.textContent = `${ui.balanceRange.value}`;
+  ui.temperValue.textContent = `${ui.temperRange.value}`;
 }
 
 function renderForgeStats(weapon) {
   const stats = [
-    { label: "Damage", value: weapon.damage, max: 32 },
-    { label: "Reach", value: weapon.reach, max: 128 },
-    { label: "Speed", value: Math.round(weapon.speed * 100), max: 140 },
-    { label: "Knockback", value: Math.round(weapon.knockback * 100), max: 180 },
-    { label: "Stamina", value: weapon.staminaCost, max: 28 },
-    { label: "Arc", value: Math.round(weapon.arc * 100), max: 180 }
+    { label: "Damage", value: weapon.damage, max: 34 },
+    { label: "Reach", value: weapon.reach, max: 132 },
+    { label: "Tempo", value: Math.round(weapon.speed * 100), max: 135 },
+    { label: "Recovery", value: Math.round((1.16 - weapon.cooldown) * 100), max: 82 },
+    { label: "Drive", value: Math.round(weapon.knockback * 100), max: 165 },
+    { label: "Arc", value: Math.round(weapon.arc * 100), max: 172 }
   ];
 
   ui.forgeStats.innerHTML = "";
@@ -454,58 +470,73 @@ function renderForgeStats(weapon) {
 
 function renderForgePreview(weapon) {
   previewCtx.clearRect(0, 0, ui.forgePreview.width, ui.forgePreview.height);
-  previewCtx.save();
-  previewCtx.translate(54, ui.forgePreview.height / 2);
-  previewCtx.lineCap = "round";
 
-  previewCtx.strokeStyle = "rgba(255,255,255,0.18)";
+  const gradient = previewCtx.createLinearGradient(0, 0, 0, ui.forgePreview.height);
+  gradient.addColorStop(0, "rgba(255,255,255,0.08)");
+  gradient.addColorStop(1, "rgba(0,0,0,0.12)");
+  previewCtx.fillStyle = gradient;
+  previewCtx.fillRect(0, 0, ui.forgePreview.width, ui.forgePreview.height);
+
+  previewCtx.save();
+  previewCtx.translate(52, ui.forgePreview.height * 0.62);
+  previewCtx.lineCap = "round";
+  previewCtx.strokeStyle = "rgba(255,255,255,0.12)";
   previewCtx.lineWidth = 2;
+
   for (let i = 0; i < 7; i += 1) {
-    const x = i * 44;
     previewCtx.beginPath();
-    previewCtx.moveTo(x, -50);
-    previewCtx.lineTo(x + 10, 50);
+    previewCtx.moveTo(i * 44, -50);
+    previewCtx.lineTo(i * 44 + 8, 46);
     previewCtx.stroke();
   }
 
+  const shaft = clamp(weapon.reach * 0.8, 48, 128);
+  const bladeSize = clamp(weapon.damage * 1.4, 18, 46);
+
+  previewCtx.strokeStyle = "#e9dfd2";
+  previewCtx.lineWidth = 8;
+  previewCtx.beginPath();
+  previewCtx.moveTo(-14, 0);
+  previewCtx.lineTo(shaft, 0);
+  previewCtx.stroke();
+
   previewCtx.strokeStyle = weapon.color;
   previewCtx.fillStyle = weapon.color;
-  const shaft = clamp(weapon.reach * 0.8, 40, 120);
-  const bladeSize = clamp(weapon.damage * 1.4, 20, 48);
-
   previewCtx.lineWidth = 10;
   previewCtx.beginPath();
   previewCtx.moveTo(0, 0);
   previewCtx.lineTo(shaft, 0);
   previewCtx.stroke();
 
-  previewCtx.lineWidth = 6;
-  previewCtx.strokeStyle = "#f4efe7";
-  previewCtx.beginPath();
-  previewCtx.moveTo(-16, 0);
-  previewCtx.lineTo(0, 0);
-  previewCtx.stroke();
+  previewCtx.fillStyle = "#f3ead8";
+  previewCtx.fillRect(-22, -4, 16, 8);
 
   previewCtx.fillStyle = weapon.color;
   previewCtx.beginPath();
   if (weapon.frameId === "spear") {
     previewCtx.moveTo(shaft, 0);
     previewCtx.lineTo(shaft + bladeSize, -10);
-    previewCtx.lineTo(shaft + bladeSize * 0.65, 0);
+    previewCtx.lineTo(shaft + bladeSize * 0.62, 0);
     previewCtx.lineTo(shaft + bladeSize, 10);
   } else if (weapon.frameId === "cleaver") {
-    previewCtx.moveTo(shaft - 6, -bladeSize * 0.55);
-    previewCtx.lineTo(shaft + bladeSize * 0.5, -bladeSize * 0.35);
-    previewCtx.lineTo(shaft + bladeSize * 0.44, bladeSize * 0.38);
-    previewCtx.lineTo(shaft - 10, bladeSize * 0.45);
+    previewCtx.moveTo(shaft - 4, -bladeSize * 0.55);
+    previewCtx.lineTo(shaft + bladeSize * 0.5, -bladeSize * 0.34);
+    previewCtx.lineTo(shaft + bladeSize * 0.42, bladeSize * 0.38);
+    previewCtx.lineTo(shaft - 10, bladeSize * 0.48);
   } else if (weapon.frameId === "chainblade") {
-    previewCtx.arc(shaft + bladeSize * 0.2, 0, bladeSize * 0.45, 0, Math.PI * 2);
+    previewCtx.arc(shaft + bladeSize * 0.18, 0, bladeSize * 0.42, 0, Math.PI * 2);
   } else {
     previewCtx.moveTo(shaft, -bladeSize * 0.48);
-    previewCtx.lineTo(shaft + bladeSize * 0.8, 0);
+    previewCtx.lineTo(shaft + bladeSize * 0.82, 0);
     previewCtx.lineTo(shaft, bladeSize * 0.48);
   }
   previewCtx.closePath();
+  previewCtx.fill();
+
+  previewCtx.globalAlpha = 0.2;
+  previewCtx.fillStyle = weapon.color;
+  previewCtx.beginPath();
+  previewCtx.arc(shaft * 0.82, 0, bladeSize * 1.1, 0, Math.PI * 2);
   previewCtx.fill();
   previewCtx.restore();
 }
@@ -519,6 +550,21 @@ function renderForge() {
   renderForgePreview(weapon);
 }
 
+function weaponById(id) {
+  return state.armory.find((weapon) => weapon.id === id) || null;
+}
+
+function updateHudLabels() {
+  const activeWeapon = state.match?.playerWeapon || weaponById(state.activeWeaponId) || currentBlueprint();
+  const rivalWeapon = state.match?.rivalWeapon || weaponById(state.rivalWeaponId);
+  const stageState = activeStageState();
+
+  ui.hudPlayerWeapon.textContent = activeWeapon?.name || "Unarmed";
+  ui.hudRivalWeapon.textContent = rivalWeapon?.name || "Auto Forge";
+  ui.hudArenaName.textContent = currentStageConfig(stageState.id).label;
+  ui.hudSetScore.textContent = state.match ? `${state.match.score.player} - ${state.match.score.enemy}` : "0 - 0";
+}
+
 function saveCurrentWeapon({ equip = true } = {}) {
   const blueprint = currentBlueprint();
   const existingIndex = state.armory.findIndex((weapon) => weapon.id === blueprint.id);
@@ -529,8 +575,9 @@ function saveCurrentWeapon({ equip = true } = {}) {
     state.armory.unshift(blueprint);
   }
 
-  if (!state.rivalWeaponId) {
-    state.rivalWeaponId = blueprint.id;
+  if (!state.rivalWeaponId || state.rivalWeaponId === blueprint.id) {
+    const alternate = state.armory.find((weapon) => weapon.id !== blueprint.id);
+    state.rivalWeaponId = alternate?.id || blueprint.id;
   }
   if (equip || !state.activeWeaponId) {
     state.activeWeaponId = blueprint.id;
@@ -568,7 +615,7 @@ function deleteWeapon(id) {
     state.activeWeaponId = state.armory[0]?.id || null;
   }
   if (state.rivalWeaponId === id) {
-    state.rivalWeaponId = state.armory[0]?.id || null;
+    state.rivalWeaponId = state.armory.find((weapon) => weapon.id !== state.activeWeaponId)?.id || state.armory[0]?.id || null;
   }
   renderArmory();
   updateHudLabels();
@@ -610,955 +657,1517 @@ function renderArmory() {
     const actions = document.createElement("div");
     actions.className = "armory-actions";
 
-    const equip = document.createElement("button");
-    equip.className = "ghost-button";
-    equip.textContent = "Equip";
-    equip.addEventListener("click", () => {
+    const equipButton = document.createElement("button");
+    equipButton.className = "ghost-button";
+    equipButton.textContent = "Equip";
+    equipButton.addEventListener("click", () => {
       state.activeWeaponId = weapon.id;
       renderArmory();
       updateHudLabels();
+      renderBattlefield();
     });
 
-    const rival = document.createElement("button");
-    rival.className = "ghost-button";
-    rival.textContent = "Set Rival";
-    rival.addEventListener("click", () => {
+    const rivalButton = document.createElement("button");
+    rivalButton.className = "ghost-button";
+    rivalButton.textContent = "Set Rival";
+    rivalButton.addEventListener("click", () => {
       state.rivalWeaponId = weapon.id;
       renderArmory();
       updateHudLabels();
+      renderBattlefield();
     });
 
-    const edit = document.createElement("button");
-    edit.className = "ghost-button";
-    edit.textContent = "Reforge";
-    edit.addEventListener("click", () => loadWeaponIntoForge(weapon));
+    const editButton = document.createElement("button");
+    editButton.className = "ghost-button";
+    editButton.textContent = "Reforge";
+    editButton.addEventListener("click", () => loadWeaponIntoForge(weapon));
 
-    const remove = document.createElement("button");
-    remove.className = "ghost-button";
-    remove.textContent = "Delete";
-    remove.addEventListener("click", () => deleteWeapon(weapon.id));
+    const removeButton = document.createElement("button");
+    removeButton.className = "ghost-button";
+    removeButton.textContent = "Delete";
+    removeButton.addEventListener("click", () => deleteWeapon(weapon.id));
 
-    actions.append(equip, rival, edit, remove);
+    actions.append(equipButton, rivalButton, editButton, removeButton);
     card.append(header, meta, actions);
     ui.armoryList.append(card);
   });
 }
 
-function createToolPalette() {
-  toolDefinitions.forEach((tool) => {
-    const button = document.createElement("button");
-    button.className = "ghost-button tool-button";
-    button.dataset.tool = tool.id;
-    button.textContent = tool.label;
-    button.addEventListener("click", () => {
-      state.selectedTool = tool.id;
-      renderToolPalette();
-    });
-    ui.toolPalette.append(button);
+function renderStageSummary() {
+  const config = currentStageConfig();
+  const stageState = state.stage;
+  const toggles = [
+    stageState.hazard ? "Center hazard on" : "Center hazard off",
+    stageState.pillars ? "Corner pillars on" : "Corner pillars off",
+    stageState.lights ? "Crowd lights on" : "Crowd lights off"
+  ];
+
+  ui.stageSummary.innerHTML = `
+    <article class="stage-card">
+      <h3>${config.label}</h3>
+      <p>${config.description}</p>
+      <div class="armory-meta">
+        ${toggles.map((label) => `<span class="pill">${label}</span>`).join("")}
+      </div>
+    </article>
+  `;
+
+  ui.toggleHazard.textContent = `Center Hazard: ${stageState.hazard ? "On" : "Off"}`;
+  ui.togglePillars.textContent = `Corner Pillars: ${stageState.pillars ? "On" : "Off"}`;
+  ui.toggleLights.textContent = `Crowd Lights: ${stageState.lights ? "On" : "Off"}`;
+
+  ui.presetButtons.forEach((button) => {
+    button.classList.toggle("active", button.dataset.preset === stageState.id);
   });
 }
 
-function renderToolPalette() {
-  Array.from(ui.toolPalette.children).forEach((button) => {
-    button.classList.toggle("active", button.dataset.tool === state.selectedTool);
-  });
-}
-
-function renderArenaEditor() {
-  ui.arenaEditor.innerHTML = "";
-  for (let row = 0; row < GRID_ROWS; row += 1) {
-    for (let col = 0; col < GRID_COLS; col += 1) {
-      const tile = getTile(col, row);
-      const cell = document.createElement("button");
-      cell.className = `arena-cell ${tile}`;
-      cell.dataset.col = `${col}`;
-      cell.dataset.row = `${row}`;
-      cell.type = "button";
-      cell.ariaLabel = `${tile} tile`;
-      ui.arenaEditor.append(cell);
-    }
-  }
-}
-
-function paintArenaCell(col, row) {
-  const index = indexFromCell(col, row);
-  const nextTiles = cloneTiles(state.arenaTiles);
-
-  if (state.selectedTool === "player" || state.selectedTool === "rival") {
-    for (let i = 0; i < nextTiles.length; i += 1) {
-      if (nextTiles[i] === state.selectedTool) {
-        nextTiles[i] = "empty";
-      }
-    }
-  }
-
-  nextTiles[index] = state.selectedTool;
-  state.arenaTiles = nextTiles;
-  state.arenaName = "Custom Arena";
-  renderArenaEditor();
-  updateHudLabels();
-}
-
-function ensureArenaSpawns() {
-  const tiles = cloneTiles(state.arenaTiles);
-  if (!tiles.includes("player")) {
-    tiles[indexFromCell(3, 5)] = "player";
-  }
-  if (!tiles.includes("bot")) {
-    tiles[indexFromCell(14, 2)] = "bot";
-  }
-  if (!tiles.includes("rival")) {
-    tiles[indexFromCell(14, 7)] = "rival";
-  }
-  state.arenaTiles = tiles;
-}
-
-function arenaLabelFromId(id) {
-  return id.charAt(0).toUpperCase() + id.slice(1);
-}
-
-function loadArenaPreset(id) {
-  state.arenaTiles = parseArena(arenaPresets[id]);
-  state.arenaName = arenaLabelFromId(id);
-  ensureArenaSpawns();
-  renderArenaEditor();
-  updateHudLabels();
-}
-
-function clearArena() {
-  const tiles = new Array(GRID_COLS * GRID_ROWS).fill("empty");
-  tiles[indexFromCell(2, 5)] = "player";
-  tiles[indexFromCell(15, 5)] = "bot";
-  tiles[indexFromCell(15, 2)] = "rival";
-  state.arenaTiles = tiles;
-  state.arenaName = "Custom Blank";
-  renderArenaEditor();
-  updateHudLabels();
-}
-
-function mirrorArena() {
-  const nextTiles = cloneTiles(state.arenaTiles);
-  for (let row = 0; row < GRID_ROWS; row += 1) {
-    for (let col = 0; col < Math.floor(GRID_COLS / 2); col += 1) {
-      const leftIndex = indexFromCell(col, row);
-      const rightIndex = indexFromCell(GRID_COLS - col - 1, row);
-      nextTiles[rightIndex] = state.arenaTiles[leftIndex];
-    }
-  }
-  state.arenaTiles = nextTiles;
-  state.arenaName = `${state.arenaName} Mirror`;
-  ensureArenaSpawns();
-  renderArenaEditor();
-  updateHudLabels();
-}
-
-function weaponById(id) {
-  return state.armory.find((weapon) => weapon.id === id) || null;
-}
-
-function updateHudLabels() {
-  const activeWeapon = weaponById(state.activeWeaponId);
-  const rivalWeapon = weaponById(state.rivalWeaponId);
-  ui.hudPlayerWeapon.textContent = activeWeapon?.name || "Unarmed";
-  ui.hudRivalWeapon.textContent = rivalWeapon?.name || "Auto Forge";
-  ui.hudArenaName.textContent = state.arenaName;
-}
-
-function spawnEntity({
-  name,
-  team,
-  x,
-  y,
-  weapon,
-  color,
-  controlScheme = null,
-  kind = "fighter"
-}) {
+function fighterProfileForWeapon(weapon) {
   return {
-    id: makeId("entity"),
-    name,
-    team,
-    x,
-    y,
-    moveX: 0,
-    moveY: 0,
-    facingX: 1,
-    facingY: 0,
-    radius: 16,
-    hp: 100,
-    maxHp: 100,
-    stamina: 100,
-    maxStamina: 100,
-    pushX: 0,
-    pushY: 0,
-    attackCooldown: 0,
-    dashCooldown: 0,
-    invulnerable: 0,
-    attackFlash: 0,
-    weapon,
-    color,
-    controlScheme,
-    alive: true,
-    kind,
-    aiRouteTimer: randomRange(0.12, 0.28),
-    aiNextCell: null,
-    stepTimer: randomRange(0, 0.6)
+    damage: clamp(Math.round(weapon.damage * 0.95 + weapon.arc * 2.2), 11, 34),
+    reach: clamp(Math.round(weapon.reach * 0.78), 44, 118),
+    windup: clamp(0.11 + weapon.cooldown * 0.11 - weapon.speed * 0.025, 0.08, 0.22),
+    active: clamp(0.07 + weapon.arc * 0.03, 0.08, 0.16),
+    recover: clamp(0.15 + weapon.cooldown * 0.2, 0.14, 0.36),
+    knockback: clamp(180 + weapon.knockback * 70, 190, 320),
+    blockDrain: clamp(Math.round(10 + weapon.damage * 0.45), 10, 22),
+    lunge: clamp(48 + weapon.reach * 0.18, 52, 84)
   };
 }
 
-function getArenaSpawns(tiles) {
-  const player = [];
-  const bots = [];
-  const rivals = [];
-  const safe = [];
-
-  tiles.forEach((tile, index) => {
-    const cell = cellFromIndex(index);
-    const center = cellCenter(cell.col, cell.row);
-    if (tile !== "wall") {
-      safe.push(center);
-    }
-    if (tile === "player") {
-      player.push(center);
-    } else if (tile === "bot") {
-      bots.push(center);
-    } else if (tile === "rival") {
-      rivals.push(center);
-    }
-  });
-
-  return { player, bots, rivals, safe };
+function stageBounds(stageState) {
+  const inset = stageState.pillars ? 108 : 72;
+  return {
+    left: inset,
+    right: STAGE_WIDTH - inset
+  };
 }
 
-function fallbackSpawn(usedSpawns, preferredCell) {
-  usedSpawns.push(preferredCell);
-  return { x: preferredCell.x, y: preferredCell.y };
+function spawnFighter({ team, control, weapon, x, name, color }) {
+  return {
+    team,
+    control,
+    name,
+    color,
+    weapon,
+    profile: fighterProfileForWeapon(weapon),
+    x,
+    y: GROUND_Y,
+    vx: 0,
+    vy: 0,
+    moveIntent: 0,
+    facing: team === PLAYER_TEAM ? 1 : -1,
+    width: 34,
+    standHeight: 126,
+    crouchHeight: 86,
+    slideHeight: 54,
+    gravity: 1680,
+    walkSpeed: clamp(150 + weapon.speed * 36 + weapon.moveScale * 28, 136, 220),
+    onGround: true,
+    health: 100,
+    maxHealth: 100,
+    stamina: 100,
+    maxStamina: 100,
+    blocking: false,
+    crouching: false,
+    hitstun: 0,
+    invulnerable: 0,
+    attack: null,
+    attackFlash: 0,
+    dodgeCooldown: 0,
+    slideCooldown: 0,
+    jumpCooldown: 0,
+    manualSwingCooldown: 0,
+    dodgeTimer: 0,
+    slideTimer: 0,
+    slideDir: 0,
+    stepTimer: 0,
+    mouseWeaponAngle: -0.18,
+    previousMouseWeaponAngle: -0.18,
+    weaponTip: null,
+    aiDecisionTimer: 0,
+    aiIntent: {
+      left: false,
+      right: false,
+      block: false,
+      crouch: false
+    },
+    alive: true
+  };
 }
 
-function availableSpawn(spawns, safe, usedSpawns, fallbackIndex) {
-  const pick = spawns.find((spawn) => !usedSpawns.includes(spawn));
-  if (pick) {
-    usedSpawns.push(pick);
-    return { x: pick.x, y: pick.y };
-  }
-  const safePick = safe[fallbackIndex % safe.length] || { x: 120, y: 120 };
-  return fallbackSpawn(usedSpawns, safePick);
-}
-
-function buildRound() {
-  ensureArenaSpawns();
-  const tiles = cloneTiles(state.arenaTiles);
-  const mode = ui.matchMode.value;
-  const botCount = Number(ui.botCount.value);
-  const spawns = getArenaSpawns(tiles);
-  const usedSpawns = [];
-
-  const playerWeapon = weaponById(state.activeWeaponId) || currentBlueprint();
-  const rivalWeapon = weaponById(state.rivalWeaponId) || createRandomEnemyWeapon();
-  const playerSpawn = availableSpawn(spawns.player, spawns.safe, usedSpawns, 2);
-
-  const entities = [
-    spawnEntity({
-      name: "Player 1",
+function createRoundFighters(match) {
+  return [
+    spawnFighter({
       team: PLAYER_TEAM,
-      x: playerSpawn.x,
-      y: playerSpawn.y,
-      weapon: playerWeapon,
-      color: "#6fd2c6",
-      controlScheme: "p1"
+      control: "p1",
+      weapon: match.playerWeapon,
+      x: 220,
+      name: "Player 1",
+      color: "#89e6dc"
+    }),
+    spawnFighter({
+      team: ENEMY_TEAM,
+      control: match.mode === "duel" ? "p2" : "bot",
+      weapon: match.rivalWeapon,
+      x: STAGE_WIDTH - 220,
+      name: match.mode === "duel" ? "Player 2" : "Bot",
+      color: match.mode === "duel" ? "#f0d48b" : "#f4efe7"
     })
   ];
+}
 
-  if (mode === "duel") {
-    const rivalSpawn = availableSpawn(spawns.rivals, spawns.safe, usedSpawns, spawns.safe.length - 2);
-    entities.push(
-      spawnEntity({
-        name: "Player 2",
-        team: ENEMY_TEAM,
-        x: rivalSpawn.x,
-        y: rivalSpawn.y,
-        weapon: rivalWeapon,
-        color: "#d5b96f",
-        controlScheme: "p2",
-        kind: "rival"
-      })
-    );
-  } else {
-    for (let i = 0; i < botCount; i += 1) {
-      const enemySpawn = availableSpawn(spawns.bots, spawns.safe, usedSpawns, 10 + i * 7);
-      const weapon = i === 0 ? rivalWeapon : createRandomEnemyWeapon();
-      entities.push(
-        spawnEntity({
-          name: i === 0 ? "Forged Rival" : `Bot ${i + 1}`,
-          team: ENEMY_TEAM,
-          x: enemySpawn.x,
-          y: enemySpawn.y,
-          weapon,
-          color: i === 0 ? "#d5b96f" : "#f4efe7",
-          kind: i === 0 ? "rival" : "bot"
-        })
-      );
-    }
+function readRawInput(slot) {
+  if (slot === "p1") {
+    return {
+      left: state.keysDown.has(keyBindings.p1.left) || state.touchState.left,
+      right: state.keysDown.has(keyBindings.p1.right) || state.touchState.right,
+      jump: state.keysDown.has(keyBindings.p1.jump) || state.touchState.up,
+      crouch: state.keysDown.has(keyBindings.p1.crouch) || state.touchState.down,
+      attack: state.mouse.left || state.touchState.attack,
+      block: state.mouse.right || state.touchState.block,
+      dodge: state.keysDown.has(keyBindings.p1.dodge) || state.touchState.dodge,
+      slide: state.keysDown.has(keyBindings.p1.slide) || state.touchState.slide
+    };
   }
 
   return {
-    id: ++state.roundId,
-    mode,
-    tiles,
-    entities,
+    left: state.keysDown.has(keyBindings.p2.left),
+    right: state.keysDown.has(keyBindings.p2.right),
+    jump: state.keysDown.has(keyBindings.p2.jump),
+    crouch: state.keysDown.has(keyBindings.p2.crouch),
+    attack: state.keysDown.has(keyBindings.p2.attack),
+    block: state.keysDown.has(keyBindings.p2.block),
+    dodge: state.keysDown.has(keyBindings.p2.dodge),
+    slide: state.keysDown.has(keyBindings.p2.slide)
+  };
+}
+
+function inputSnapshot(slot) {
+  const raw = readRawInput(slot);
+  const previous = state.previousInputs[slot] || {};
+  const snapshot = {
+    ...raw,
+    jumpPressed: raw.jump && !previous.jump,
+    attackPressed: raw.attack && !previous.attack,
+    dodgePressed: raw.dodge && !previous.dodge,
+    slidePressed: raw.slide && !previous.slide
+  };
+  state.previousInputs[slot] = raw;
+  return snapshot;
+}
+
+function primeInputMemory() {
+  state.previousInputs.p1 = readRawInput("p1");
+  state.previousInputs.p2 = readRawInput("p2");
+}
+
+function autoFace(fighter, opponent) {
+  if (!fighter.alive || !opponent.alive) {
+    return;
+  }
+  fighter.facing = fighter.x <= opponent.x ? 1 : -1;
+}
+
+function currentFighterHeight(fighter) {
+  if (fighter.slideTimer > 0) {
+    return fighter.slideHeight;
+  }
+  if (fighter.crouching && fighter.onGround) {
+    return fighter.crouchHeight;
+  }
+  return fighter.standHeight;
+}
+
+function onFrontSide(defender, attacker) {
+  return (attacker.x - defender.x) * defender.facing > 0;
+}
+
+function fighterHitbox(fighter) {
+  const height = currentFighterHeight(fighter);
+  return {
+    left: fighter.x - fighter.width / 2,
+    right: fighter.x + fighter.width / 2,
+    top: fighter.y - height,
+    bottom: fighter.y
+  };
+}
+
+function expandHitbox(box, padding) {
+  return {
+    left: box.left - padding,
+    right: box.right + padding,
+    top: box.top - padding,
+    bottom: box.bottom + padding
+  };
+}
+
+function pointInsideHitbox(x, y, box) {
+  return x >= box.left && x <= box.right && y >= box.top && y <= box.bottom;
+}
+
+function segmentsIntersect(ax, ay, bx, by, cx, cy, dx, dy) {
+  const denominator = (bx - ax) * (dy - cy) - (by - ay) * (dx - cx);
+  if (Math.abs(denominator) < 0.0001) {
+    return false;
+  }
+
+  const ua = ((cx - ax) * (dy - cy) - (cy - ay) * (dx - cx)) / denominator;
+  const ub = ((cx - ax) * (by - ay) - (cy - ay) * (bx - ax)) / denominator;
+  return ua >= 0 && ua <= 1 && ub >= 0 && ub <= 1;
+}
+
+function lineIntersectsHitbox(x1, y1, x2, y2, box) {
+  if (pointInsideHitbox(x1, y1, box) || pointInsideHitbox(x2, y2, box)) {
+    return true;
+  }
+
+  return (
+    segmentsIntersect(x1, y1, x2, y2, box.left, box.top, box.right, box.top) ||
+    segmentsIntersect(x1, y1, x2, y2, box.right, box.top, box.right, box.bottom) ||
+    segmentsIntersect(x1, y1, x2, y2, box.right, box.bottom, box.left, box.bottom) ||
+    segmentsIntersect(x1, y1, x2, y2, box.left, box.bottom, box.left, box.top)
+  );
+}
+
+function weaponPoseForFighter(fighter) {
+  const height = currentFighterHeight(fighter);
+  const torsoTop = -height * 0.6;
+  const shoulderX = fighter.facing * 11;
+  const shoulderY = torsoTop * 0.46;
+  let weaponAngle = -0.18;
+  let weaponLength = fighter.profile.reach * 0.78;
+
+  if (fighter.blocking) {
+    weaponAngle = -0.92;
+  } else if (fighter.attack) {
+    const swingWindow = clamp(
+      (fighter.attack.timer - fighter.profile.windup) / Math.max(fighter.profile.active, 0.01),
+      0,
+      1
+    );
+    weaponAngle = lerp(-1.12, 0.48, swingWindow);
+    weaponLength += 10 * swingWindow;
+  } else if (fighter.slideTimer > 0) {
+    weaponAngle = 0.02;
+  } else if (fighter.control === "p1") {
+    weaponAngle = fighter.mouseWeaponAngle;
+  }
+
+  return {
+    baseX: fighter.x + shoulderX,
+    baseY: fighter.y + shoulderY,
+    tipX: fighter.x + shoulderX + fighter.facing * Math.cos(weaponAngle) * weaponLength,
+    tipY: fighter.y + shoulderY + Math.sin(weaponAngle) * weaponLength * 0.56,
+    angle: weaponAngle,
+    length: weaponLength
+  };
+}
+
+function updateMouseWeaponControl(fighter, dt) {
+  if (fighter.control !== "p1") {
+    return;
+  }
+
+  const height = currentFighterHeight(fighter);
+  const torsoTop = -height * 0.6;
+  const shoulderX = fighter.x + fighter.facing * 11;
+  const shoulderY = fighter.y + torsoTop * 0.46;
+  const stageMouseX = clamp(state.mouse.x - stageOffsetX(), 0, STAGE_WIDTH);
+  const stageMouseY = clamp(state.mouse.y - STAGE_TOP, 0, STAGE_HEIGHT);
+  const localX = (stageMouseX - shoulderX) * fighter.facing;
+  const localY = stageMouseY - shoulderY;
+  const targetAngle = clamp(Math.atan2(localY, Math.max(-42, Math.min(160, localX))), -1.22, 0.92);
+
+  fighter.previousMouseWeaponAngle = fighter.mouseWeaponAngle;
+  fighter.mouseWeaponAngle = lerp(fighter.mouseWeaponAngle, targetAngle, clamp(dt * 16, 0, 1));
+}
+
+function addSpark(match, x, y, color, amount = 8) {
+  for (let i = 0; i < amount; i += 1) {
+    match.sparks.push({
+      id: state.sparkId,
+      x,
+      y,
+      vx: randomRange(-140, 140),
+      vy: randomRange(-180, -24),
+      life: randomRange(0.18, 0.36),
+      color,
+      size: randomRange(1.5, 4.5)
+    });
+    state.sparkId += 1;
+  }
+}
+
+function performJump(fighter, match) {
+  if (!fighter.alive || !fighter.onGround || fighter.jumpCooldown > 0 || fighter.hitstun > 0) {
+    return false;
+  }
+
+  fighter.vy = -620;
+  fighter.onGround = false;
+  fighter.jumpCooldown = 0.22;
+  fighter.blocking = false;
+  fighter.crouching = false;
+  addSpark(match, fighter.x, fighter.y - 4, "rgba(255,255,255,0.7)", 6);
+  return true;
+}
+
+function performBackstep(fighter, match) {
+  if (!fighter.alive || !fighter.onGround || fighter.hitstun > 0 || fighter.dodgeCooldown > 0 || fighter.attack) {
+    return false;
+  }
+
+  fighter.blocking = false;
+  fighter.crouching = false;
+  fighter.dodgeTimer = 0.22;
+  fighter.dodgeCooldown = 0.82;
+  fighter.invulnerable = 0.14;
+  fighter.vx = -fighter.facing * 360;
+  addSpark(match, fighter.x, fighter.y - 8, fighter.weapon.color, 8);
+  return true;
+}
+
+function performLunge(fighter, match) {
+  if (!fighter.alive || !fighter.onGround || fighter.hitstun > 0 || fighter.slideCooldown > 0 || fighter.attack) {
+    return false;
+  }
+
+  fighter.blocking = false;
+  fighter.crouching = false;
+  fighter.slideTimer = 0.2;
+  fighter.slideCooldown = 0.96;
+  fighter.slideDir = fighter.facing;
+  fighter.vx = fighter.facing * 420;
+  addSpark(match, fighter.x, fighter.y - 10, fighter.weapon.color, 10);
+  return true;
+}
+
+function startAttack(fighter) {
+  if (
+    !fighter.alive ||
+    fighter.hitstun > 0 ||
+    fighter.attack ||
+    fighter.blocking ||
+    fighter.dodgeTimer > 0 ||
+    fighter.slideTimer > 0 ||
+    fighter.stamina < 8
+  ) {
+    return false;
+  }
+
+  fighter.attack = {
+    timer: 0,
+    connected: false
+  };
+  fighter.attackFlash = 0.18;
+  fighter.stamina = clamp(fighter.stamina - 8, 0, fighter.maxStamina);
+  fighter.vx += fighter.facing * fighter.profile.lunge * 0.45;
+  return true;
+}
+
+function attemptAttackHit(attacker, defender, match) {
+  if (!attacker.attack || attacker.attack.connected || !defender.alive || defender.invulnerable > 0) {
+    return;
+  }
+
+  const attackHeight = currentFighterHeight(attacker);
+  const attackBottom = attacker.y - (attacker.crouching ? 8 : 18);
+  const attackTop = attacker.y - attackHeight + 18;
+  const attackRange = attacker.profile.reach + (attacker.slideTimer > 0 ? 12 : 0);
+  const attackBox = {
+    left: attacker.facing === 1 ? attacker.x + attacker.width * 0.12 : attacker.x - attackRange - attacker.width * 0.12,
+    right: attacker.facing === 1 ? attacker.x + attackRange + attacker.width * 0.12 : attacker.x - attacker.width * 0.12,
+    top: attackTop,
+    bottom: attackBottom
+  };
+  const defenderBox = fighterHitbox(defender);
+
+  const overlaps =
+    attackBox.left < defenderBox.right &&
+    attackBox.right > defenderBox.left &&
+    attackBox.top < defenderBox.bottom &&
+    attackBox.bottom > defenderBox.top;
+
+  if (!overlaps) {
+    return;
+  }
+
+  attacker.attack.connected = true;
+
+  if (defender.blocking && defender.onGround && onFrontSide(defender, attacker)) {
+    defender.stamina = clamp(defender.stamina - attacker.profile.blockDrain, 0, defender.maxStamina);
+    defender.vx += attacker.facing * attacker.profile.knockback * 0.18;
+    defender.hitstun = Math.max(defender.hitstun, 0.08);
+    addSpark(match, (attacker.x + defender.x) / 2, attacker.y - attackHeight * 0.6, "#ffffff", 8);
+
+    if (defender.stamina <= 0) {
+      const guardBreakDamage = Math.round(attacker.profile.damage * 0.32);
+      defender.blocking = false;
+      defender.hitstun = 0.28;
+      defender.health = clamp(defender.health - guardBreakDamage, 0, defender.maxHealth);
+      defender.vx = attacker.facing * attacker.profile.knockback * 0.54;
+      match.shake = Math.max(match.shake, 6);
+      setMatchSummary(`${attacker.name} broke ${defender.name}'s guard.`);
+    } else {
+      setMatchSummary(`${defender.name} blocked the strike.`);
+    }
+    return;
+  }
+
+  const damage = clamp(
+    Math.round(attacker.profile.damage * (attacker.slideTimer > 0 ? 1.08 : 1)),
+    8,
+    38
+  );
+
+  defender.health = clamp(defender.health - damage, 0, defender.maxHealth);
+  defender.hitstun = 0.18 + damage * 0.006;
+  defender.vx = attacker.facing * attacker.profile.knockback;
+  defender.vy = Math.min(defender.vy, -80);
+  defender.blocking = false;
+  defender.crouching = false;
+  defender.attackFlash = 0.16;
+  defender.alive = defender.health > 0;
+
+  addSpark(match, (attacker.x + defender.x) / 2, defender.y - currentFighterHeight(defender) * 0.62, attacker.weapon.color, 12);
+  match.shake = Math.max(match.shake, 8);
+  setMatchSummary(`${attacker.name} landed ${damage} damage with ${attacker.weapon.name}.`);
+}
+
+function attemptMouseSwingHit(attacker, defender, match, dt) {
+  if (
+    attacker.control !== "p1" ||
+    !attacker.alive ||
+    !defender.alive ||
+    attacker.hitstun > 0 ||
+    attacker.attack ||
+    attacker.blocking ||
+    attacker.slideTimer > 0 ||
+    attacker.dodgeTimer > 0 ||
+    attacker.manualSwingCooldown > 0 ||
+    attacker.stamina < 3
+  ) {
+    const currentPose = weaponPoseForFighter(attacker);
+    attacker.weaponTip = { x: currentPose.tipX, y: currentPose.tipY };
+    return;
+  }
+
+  const currentPose = weaponPoseForFighter(attacker);
+  const previousTip = attacker.weaponTip || { x: currentPose.tipX, y: currentPose.tipY };
+  attacker.weaponTip = { x: currentPose.tipX, y: currentPose.tipY };
+
+  const tipTravel = Math.hypot(currentPose.tipX - previousTip.x, currentPose.tipY - previousTip.y);
+  const swingSpeed = tipTravel / Math.max(dt, 0.001);
+
+  if (tipTravel < 10 || swingSpeed < 280) {
+    return;
+  }
+
+  const defenderBox = expandHitbox(fighterHitbox(defender), 10);
+  if (!lineIntersectsHitbox(previousTip.x, previousTip.y, currentPose.tipX, currentPose.tipY, defenderBox)) {
+    return;
+  }
+
+  attacker.manualSwingCooldown = 0.16;
+  attacker.stamina = clamp(attacker.stamina - 3, 0, attacker.maxStamina);
+
+  if (defender.blocking && defender.onGround && onFrontSide(defender, attacker)) {
+    defender.stamina = clamp(defender.stamina - 5, 0, defender.maxStamina);
+    defender.vx += attacker.facing * 42;
+    defender.hitstun = Math.max(defender.hitstun, 0.05);
+    addSpark(match, (currentPose.tipX + defender.x) / 2, currentPose.tipY, "#ffffff", 6);
+    setMatchSummary(`${defender.name} checked the mouse swing.`);
+    return;
+  }
+
+  const damage = clamp(Math.round(1 + swingSpeed / 180), 2, 6);
+  defender.health = clamp(defender.health - damage, 0, defender.maxHealth);
+  defender.hitstun = Math.max(defender.hitstun, 0.08 + damage * 0.01);
+  defender.vx += attacker.facing * (44 + damage * 12);
+  defender.attackFlash = 0.12;
+  defender.alive = defender.health > 0;
+
+  addSpark(match, currentPose.tipX, currentPose.tipY, attacker.weapon.color, 9);
+  match.shake = Math.max(match.shake, 4);
+  setMatchSummary(`${attacker.name} clipped ${defender.name} with a weapon swing for ${damage}.`);
+}
+
+function updateAttackState(fighter, opponent, match, dt) {
+  if (!fighter.attack) {
+    return;
+  }
+
+  fighter.attack.timer += dt;
+  const windupEnd = fighter.profile.windup;
+  const activeEnd = windupEnd + fighter.profile.active;
+  const recoverEnd = activeEnd + fighter.profile.recover;
+
+  if (fighter.attack.timer >= windupEnd && fighter.attack.timer <= activeEnd) {
+    attemptAttackHit(fighter, opponent, match);
+  }
+
+  if (fighter.attack.timer >= recoverEnd) {
+    fighter.attack = null;
+  }
+}
+
+function applyHumanControl(fighter, input, match) {
+  fighter.moveIntent = 0;
+
+  if (!fighter.alive) {
+    fighter.blocking = false;
+    fighter.crouching = false;
+    return;
+  }
+
+  if (fighter.hitstun > 0) {
+    fighter.blocking = false;
+    fighter.crouching = false;
+    return;
+  }
+
+  if (input.left) {
+    fighter.moveIntent -= 1;
+  }
+  if (input.right) {
+    fighter.moveIntent += 1;
+  }
+
+  if (input.jumpPressed) {
+    performJump(fighter, match);
+  }
+  if (input.dodgePressed) {
+    performBackstep(fighter, match);
+  }
+  if (input.slidePressed) {
+    performLunge(fighter, match);
+  }
+  if (input.attackPressed) {
+    startAttack(fighter);
+  }
+
+  fighter.blocking =
+    input.block &&
+    fighter.onGround &&
+    !fighter.attack &&
+    fighter.dodgeTimer <= 0 &&
+    fighter.slideTimer <= 0;
+
+  fighter.crouching =
+    input.crouch &&
+    fighter.onGround &&
+    !fighter.blocking &&
+    fighter.dodgeTimer <= 0 &&
+    fighter.slideTimer <= 0;
+}
+
+function applyAiControl(fighter, opponent, match, dt) {
+  fighter.moveIntent = 0;
+  fighter.aiDecisionTimer -= dt;
+
+  const gap = opponent.x - fighter.x;
+  const absGap = Math.abs(gap);
+
+  if (fighter.aiDecisionTimer <= 0) {
+    fighter.aiDecisionTimer = randomRange(0.08, 0.22);
+    fighter.aiIntent.left = false;
+    fighter.aiIntent.right = false;
+    fighter.aiIntent.block = false;
+    fighter.aiIntent.crouch = false;
+
+    if (opponent.attack && absGap < opponent.profile.reach + 42 && Math.random() < 0.72) {
+      if (Math.random() < 0.68) {
+        fighter.aiIntent.block = true;
+      } else {
+        performBackstep(fighter, match);
+      }
+    } else if (absGap > fighter.profile.reach + 42) {
+      fighter.aiIntent.right = gap > 0;
+      fighter.aiIntent.left = gap < 0;
+    } else if (absGap < fighter.profile.reach * 0.7 && Math.random() < 0.26) {
+      performBackstep(fighter, match);
+    } else if (Math.random() < 0.55) {
+      startAttack(fighter);
+    } else if (Math.random() < 0.22) {
+      performLunge(fighter, match);
+    } else if (Math.random() < 0.14) {
+      performJump(fighter, match);
+    }
+  }
+
+  if (fighter.hitstun > 0) {
+    fighter.blocking = false;
+    fighter.crouching = false;
+    return;
+  }
+
+  if (fighter.aiIntent.left) {
+    fighter.moveIntent = -1;
+  }
+  if (fighter.aiIntent.right) {
+    fighter.moveIntent = 1;
+  }
+
+  fighter.blocking =
+    fighter.aiIntent.block &&
+    fighter.onGround &&
+    !fighter.attack &&
+    fighter.dodgeTimer <= 0 &&
+    fighter.slideTimer <= 0;
+
+  fighter.crouching =
+    fighter.aiIntent.crouch &&
+    fighter.onGround &&
+    !fighter.blocking &&
+    fighter.dodgeTimer <= 0 &&
+    fighter.slideTimer <= 0;
+}
+
+function updateFighter(fighter, opponent, match, dt) {
+  fighter.hitstun = Math.max(0, fighter.hitstun - dt);
+  fighter.invulnerable = Math.max(0, fighter.invulnerable - dt);
+  fighter.attackFlash = Math.max(0, fighter.attackFlash - dt);
+  fighter.dodgeCooldown = Math.max(0, fighter.dodgeCooldown - dt);
+  fighter.slideCooldown = Math.max(0, fighter.slideCooldown - dt);
+  fighter.jumpCooldown = Math.max(0, fighter.jumpCooldown - dt);
+  fighter.manualSwingCooldown = Math.max(0, fighter.manualSwingCooldown - dt);
+  fighter.dodgeTimer = Math.max(0, fighter.dodgeTimer - dt);
+  fighter.slideTimer = Math.max(0, fighter.slideTimer - dt);
+
+  if (!fighter.onGround) {
+    fighter.blocking = false;
+    fighter.crouching = false;
+  }
+
+  const movementLocked = fighter.hitstun > 0 || !fighter.alive;
+
+  if (fighter.dodgeTimer > 0) {
+    fighter.vx = -fighter.facing * 360;
+  } else if (fighter.slideTimer > 0) {
+    fighter.vx = fighter.slideDir * 430;
+  } else if (!movementLocked) {
+    const controlScale = fighter.blocking ? 0.24 : fighter.attack ? 0.38 : 1;
+    const crouchScale = fighter.crouching ? 0.46 : 1;
+    const airScale = fighter.onGround ? 1 : 0.66;
+    const targetSpeed = fighter.moveIntent * fighter.walkSpeed * controlScale * crouchScale * airScale;
+    const acceleration = fighter.onGround ? 2200 : 1100;
+    fighter.vx = approach(fighter.vx, targetSpeed, acceleration * dt);
+  } else {
+    const friction = fighter.onGround ? 1100 : 240;
+    fighter.vx = approach(fighter.vx, 0, friction * dt);
+  }
+
+  if (fighter.hitstun > 0) {
+    fighter.blocking = false;
+    fighter.crouching = false;
+  }
+
+  if (!fighter.onGround) {
+    fighter.vy += fighter.gravity * dt;
+  }
+
+  fighter.x += fighter.vx * dt;
+  fighter.y += fighter.vy * dt;
+
+  if (fighter.y >= GROUND_Y) {
+    fighter.y = GROUND_Y;
+    fighter.vy = 0;
+    fighter.onGround = true;
+  } else {
+    fighter.onGround = false;
+  }
+
+  const bounds = stageBounds(match.stage);
+  fighter.x = clamp(fighter.x, bounds.left, bounds.right);
+
+  if (fighter.onGround && Math.abs(fighter.vx) < 5 && fighter.dodgeTimer <= 0 && fighter.slideTimer <= 0) {
+    fighter.vx = 0;
+  }
+
+  if (Math.abs(fighter.vx) > 18 && fighter.onGround) {
+    fighter.stepTimer += dt * Math.abs(fighter.vx) * 0.055;
+  }
+
+  fighter.stamina = clamp(
+    fighter.stamina + dt * (fighter.blocking ? 5 : 14),
+    0,
+    fighter.maxStamina
+  );
+
+  updateMouseWeaponControl(fighter, dt);
+  updateAttackState(fighter, opponent, match, dt);
+  attemptMouseSwingHit(fighter, opponent, match, dt);
+}
+
+function resolveFighterSpacing(leftFighter, rightFighter, match) {
+  const minimumGap = leftFighter.width + rightFighter.width + 20;
+  const gap = rightFighter.x - leftFighter.x;
+
+  if (gap < minimumGap) {
+    const push = (minimumGap - gap) / 2;
+    leftFighter.x -= push;
+    rightFighter.x += push;
+  }
+
+  const bounds = stageBounds(match.stage);
+  leftFighter.x = clamp(leftFighter.x, bounds.left, bounds.right);
+  rightFighter.x = clamp(rightFighter.x, bounds.left, bounds.right);
+
+  autoFace(leftFighter, rightFighter);
+  autoFace(rightFighter, leftFighter);
+}
+
+function finishMatch(match, winnerTeam, reason) {
+  match.phase = "match-over";
+  match.finished = true;
+  match.setWinner = winnerTeam;
+  match.phaseTimer = 999;
+
+  const winnerName =
+    winnerTeam === PLAYER_TEAM ? "Player 1" : match.mode === "duel" ? "Player 2" : "Bot";
+
+  setStatus(`${winnerName} wins`);
+  setMatchSummary(reason || `${winnerName} wins the set.`);
+  updateHudLabels();
+}
+
+function finishRound(match, winner, reason) {
+  if (match.phase !== "fight") {
+    return;
+  }
+
+  match.phase = "round-over";
+  match.phaseTimer = 2.25;
+  match.roundWinner = winner ? winner.team : null;
+
+  if (winner) {
+    if (winner.team === PLAYER_TEAM) {
+      match.score.player += 1;
+    } else {
+      match.score.enemy += 1;
+    }
+    setStatus(`${winner.name} wins`);
+  } else {
+    setStatus("Draw");
+  }
+
+  setMatchSummary(reason || (winner ? `${winner.name} took round ${match.round}.` : `Round ${match.round} ended in a draw.`));
+  updateHudLabels();
+}
+
+function resetRound(match) {
+  match.round += 1;
+  match.timer = ROUND_TIME;
+  match.phase = "intro";
+  match.phaseTimer = 2.1;
+  match.roundWinner = null;
+  match.sparks = [];
+  match.fighters = createRoundFighters(match);
+  autoFace(match.fighters[0], match.fighters[1]);
+  autoFace(match.fighters[1], match.fighters[0]);
+  setStatus(`Round ${match.round}`);
+  setMatchSummary(`Round ${match.round}. First to ${match.roundsToWin} round wins takes the set.`);
+  updateHudLabels();
+}
+
+function createMatch() {
+  const playerWeapon = weaponById(state.activeWeaponId) || currentBlueprint();
+  let rivalWeapon = weaponById(state.rivalWeaponId);
+
+  if (!rivalWeapon || rivalWeapon.id === playerWeapon.id) {
+    rivalWeapon = createRandomEnemyWeapon();
+  }
+
+  return {
+    mode: ui.matchMode.value,
+    roundsToWin: Number(ui.roundsToWin.value),
+    stage: { ...state.stage },
+    playerWeapon,
+    rivalWeapon,
+    round: 0,
+    timer: ROUND_TIME,
+    score: {
+      player: 0,
+      enemy: 0
+    },
+    fighters: [],
     sparks: [],
-    running: true,
-    result: "Fighting",
-    resultDetail: "Steel is in the air.",
-    elapsed: 0
+    phase: "intro",
+    phaseTimer: 0,
+    roundWinner: null,
+    setWinner: null,
+    finished: false,
+    shake: 0,
+    hazardTick: 0
   };
 }
 
 function startMatch() {
-  if (!state.armory.length) {
-    saveCurrentWeapon({ equip: true });
-  }
-
-  state.round = buildRound();
-  ui.hudResult.textContent = "Fighting";
-  ui.matchSummary.textContent =
-    state.round.mode === "duel"
-      ? "Local duel started. P2 uses IJKL, O, and P."
-      : "Skirmish started. The first enemy carries your rival loadout.";
+  state.match = createMatch();
+  primeInputMemory();
+  resetRound(state.match);
+  updateHudLabels();
 }
 
-function rawPressed(code) {
-  return state.keysDown.has(code);
-}
-
-function controlSnapshot(scheme) {
-  if (scheme === "p1") {
-    return {
-      up: rawPressed(keyBindings.p1.up) || state.touchState.up,
-      left: rawPressed(keyBindings.p1.left) || state.touchState.left,
-      down: rawPressed(keyBindings.p1.down) || state.touchState.down,
-      right: rawPressed(keyBindings.p1.right) || state.touchState.right,
-      attack: rawPressed(keyBindings.p1.attack) || state.touchState.attack,
-      dash: rawPressed(keyBindings.p1.dash) || state.touchState.dash
-    };
-  }
-
-  return {
-    up: rawPressed(keyBindings.p2.up),
-    left: rawPressed(keyBindings.p2.left),
-    down: rawPressed(keyBindings.p2.down),
-    right: rawPressed(keyBindings.p2.right),
-    attack: rawPressed(keyBindings.p2.attack),
-    dash: rawPressed(keyBindings.p2.dash)
-  };
-}
-
-function normalizeVector(x, y) {
-  const length = Math.hypot(x, y);
-  if (!length) {
-    return { x: 0, y: 0 };
-  }
-  return { x: x / length, y: y / length };
-}
-
-function hostileEntities(round, team) {
-  return round.entities.filter((entity) => entity.alive && entity.team !== team);
-}
-
-function applyHumanControl(entity, scheme) {
-  const snapshot = controlSnapshot(scheme);
-  const dirX = (snapshot.right ? 1 : 0) - (snapshot.left ? 1 : 0);
-  const dirY = (snapshot.down ? 1 : 0) - (snapshot.up ? 1 : 0);
-  const direction = normalizeVector(dirX, dirY);
-
-  entity.moveX = direction.x;
-  entity.moveY = direction.y;
-  if (direction.x || direction.y) {
-    entity.facingX = direction.x;
-    entity.facingY = direction.y;
-  }
-
-  const attackLatchKey = scheme === "p1" ? "p1Attack" : "p2Attack";
-  const dashLatchKey = scheme === "p1" ? "p1Dash" : "p2Dash";
-
-  if (snapshot.attack && !state.controlLatch[attackLatchKey]) {
-    performAttack(entity);
-  }
-  if (snapshot.dash && !state.controlLatch[dashLatchKey]) {
-    performDash(entity);
-  }
-
-  state.controlLatch[attackLatchKey] = snapshot.attack;
-  state.controlLatch[dashLatchKey] = snapshot.dash;
-}
-
-function walkable(tile) {
-  return tile !== "wall";
-}
-
-function findNextCell(startCell, goalCell, tiles) {
-  const startIndex = indexFromCell(startCell.col, startCell.row);
-  const goalIndex = indexFromCell(goalCell.col, goalCell.row);
-  if (startIndex === goalIndex) {
-    return goalCell;
-  }
-
-  const prev = new Array(tiles.length).fill(-1);
-  const queue = [startIndex];
-  prev[startIndex] = startIndex;
-  let head = 0;
-
-  while (head < queue.length) {
-    const current = queue[head];
-    head += 1;
-    if (current === goalIndex) {
-      break;
-    }
-
-    const { col, row } = cellFromIndex(current);
-    const candidates = [
-      { col: col + 1, row },
-      { col: col - 1, row },
-      { col, row: row + 1 },
-      { col, row: row - 1 }
-    ];
-
-    candidates.forEach((next) => {
-      if (next.col < 0 || next.col >= GRID_COLS || next.row < 0 || next.row >= GRID_ROWS) {
-        return;
-      }
-      const nextIndex = indexFromCell(next.col, next.row);
-      if (prev[nextIndex] !== -1 || !walkable(tiles[nextIndex])) {
-        return;
-      }
-      prev[nextIndex] = current;
-      queue.push(nextIndex);
-    });
-  }
-
-  if (prev[goalIndex] === -1) {
-    return goalCell;
-  }
-
-  let cursor = goalIndex;
-  while (prev[cursor] !== startIndex && cursor !== startIndex) {
-    cursor = prev[cursor];
-  }
-  return cellFromIndex(cursor);
-}
-
-function applyAiControl(entity, round, dt) {
-  const enemies = hostileEntities(round, entity.team);
-  if (!enemies.length) {
-    entity.moveX = 0;
-    entity.moveY = 0;
-    return;
-  }
-
-  const target = enemies.reduce((best, candidate) => {
-    const bestDist = best ? Math.hypot(best.x - entity.x, best.y - entity.y) : Infinity;
-    const nextDist = Math.hypot(candidate.x - entity.x, candidate.y - entity.y);
-    return nextDist < bestDist ? candidate : best;
-  }, null);
-
-  const dx = target.x - entity.x;
-  const dy = target.y - entity.y;
-  const distance = Math.hypot(dx, dy);
-  const directionToTarget = normalizeVector(dx, dy);
-  entity.facingX = directionToTarget.x || entity.facingX;
-  entity.facingY = directionToTarget.y || entity.facingY;
-
-  entity.aiRouteTimer -= dt;
-  if (entity.aiRouteTimer <= 0) {
-    entity.aiRouteTimer = randomRange(0.16, 0.34);
-    const nextCell = findNextCell(pointToCell(entity.x, entity.y), pointToCell(target.x, target.y), round.tiles);
-    entity.aiNextCell = cellCenter(nextCell.col, nextCell.row);
-  }
-
-  let moveTarget = entity.aiNextCell || target;
-  if (distance < entity.weapon.reach * 0.72) {
-    const orbit = normalizeVector(-directionToTarget.y, directionToTarget.x);
-    moveTarget = {
-      x: entity.x + orbit.x * 44 - directionToTarget.x * 18,
-      y: entity.y + orbit.y * 44 - directionToTarget.y * 18
-    };
-  }
-
-  const move = normalizeVector(moveTarget.x - entity.x, moveTarget.y - entity.y);
-  entity.moveX = move.x;
-  entity.moveY = move.y;
-
-  if (distance <= entity.weapon.reach + target.radius + 8) {
-    performAttack(entity);
-    if (Math.random() < 0.05) {
-      performDash(entity);
-    }
-  }
-}
-
-function performDash(entity) {
-  if (!entity.alive || entity.dashCooldown > 0 || entity.stamina < 18) {
-    return;
-  }
-  const facing = normalizeVector(entity.facingX, entity.facingY);
-  entity.pushX += facing.x * 340;
-  entity.pushY += facing.y * 340;
-  entity.stamina = clamp(entity.stamina - 18, 0, entity.maxStamina);
-  entity.dashCooldown = 1.1;
-}
-
-function addSpark(round, x, y, color, size = 10) {
-  round.sparks.push({
-    id: ++state.sparkId,
-    x,
-    y,
-    vx: randomRange(-70, 70),
-    vy: randomRange(-70, 70),
-    life: randomRange(0.16, 0.34),
-    maxLife: randomRange(0.16, 0.34),
-    color,
-    size
-  });
-}
-
-function performAttack(entity) {
-  if (!state.round || !entity.alive || entity.attackCooldown > 0 || entity.stamina < entity.weapon.staminaCost) {
-    return;
-  }
-
-  entity.attackCooldown = entity.weapon.cooldown;
-  entity.attackFlash = 0.14;
-  entity.stamina = clamp(entity.stamina - entity.weapon.staminaCost, 0, entity.maxStamina);
-
-  const round = state.round;
-  const facing = normalizeVector(entity.facingX, entity.facingY);
-  const cosArc = Math.cos(entity.weapon.arc * 0.5);
-
-  hostileEntities(round, entity.team).forEach((target) => {
-    if (!target.alive || target.invulnerable > 0) {
-      return;
-    }
-    const dx = target.x - entity.x;
-    const dy = target.y - entity.y;
-    const distance = Math.hypot(dx, dy);
-    if (distance > entity.weapon.reach + target.radius) {
-      return;
-    }
-    const toward = normalizeVector(dx, dy);
-    const alignment = toward.x * facing.x + toward.y * facing.y;
-    if (alignment < cosArc) {
-      return;
-    }
-
-    const crit = entity.weapon.temper > 84 && Math.random() < 0.18;
-    const damage = entity.weapon.damage * (crit ? 1.24 : 1) * randomRange(0.92, 1.08);
-    target.hp = clamp(target.hp - damage, 0, target.maxHp);
-    target.pushX += toward.x * entity.weapon.knockback * 220;
-    target.pushY += toward.y * entity.weapon.knockback * 220;
-    target.invulnerable = 0.08;
-
-    for (let i = 0; i < 5; i += 1) {
-      addSpark(round, target.x, target.y, crit ? "#ffd46d" : entity.weapon.color, crit ? 13 : 9);
-    }
-  });
-}
-
-function resolveWalls(entity, tiles) {
-  const minCol = clamp(Math.floor((entity.x - entity.radius) / TILE_SIZE), 0, GRID_COLS - 1);
-  const maxCol = clamp(Math.floor((entity.x + entity.radius) / TILE_SIZE), 0, GRID_COLS - 1);
-  const minRow = clamp(Math.floor((entity.y - entity.radius) / TILE_SIZE), 0, GRID_ROWS - 1);
-  const maxRow = clamp(Math.floor((entity.y + entity.radius) / TILE_SIZE), 0, GRID_ROWS - 1);
-
-  for (let row = minRow; row <= maxRow; row += 1) {
-    for (let col = minCol; col <= maxCol; col += 1) {
-      if (tiles[indexFromCell(col, row)] !== "wall") {
-        continue;
-      }
-
-      const left = col * TILE_SIZE;
-      const top = row * TILE_SIZE;
-      const nearestX = clamp(entity.x, left, left + TILE_SIZE);
-      const nearestY = clamp(entity.y, top, top + TILE_SIZE);
-      const dx = entity.x - nearestX;
-      const dy = entity.y - nearestY;
-      const distSq = dx * dx + dy * dy;
-      if (distSq >= entity.radius * entity.radius) {
-        continue;
-      }
-
-      const dist = Math.sqrt(distSq) || 0.001;
-      const overlap = entity.radius - dist;
-      entity.x += (dx / dist) * overlap;
-      entity.y += (dy / dist) * overlap;
-      entity.pushX *= 0.6;
-      entity.pushY *= 0.6;
-    }
-  }
-
-  entity.x = clamp(entity.x, entity.radius, ARENA_WIDTH - entity.radius);
-  entity.y = clamp(entity.y, entity.radius, ARENA_HEIGHT - entity.radius);
-}
-
-function hazardAt(entity, tiles) {
-  const cell = pointToCell(entity.x, entity.y);
-  return tiles[indexFromCell(cell.col, cell.row)] === "hazard";
-}
-
-function updateEntity(entity, round, dt) {
-  if (!entity.alive) {
-    return;
-  }
-
-  if (entity.controlScheme) {
-    applyHumanControl(entity, entity.controlScheme);
-  } else {
-    applyAiControl(entity, round, dt);
-  }
-
-  const speed = 170 * entity.weapon.moveScale;
-  entity.x += entity.moveX * speed * dt + entity.pushX * dt;
-  entity.y += entity.moveY * speed * dt + entity.pushY * dt;
-  entity.pushX *= Math.pow(0.08, dt);
-  entity.pushY *= Math.pow(0.08, dt);
-
-  resolveWalls(entity, round.tiles);
-
-  if (hazardAt(entity, round.tiles)) {
-    entity.hp = clamp(entity.hp - 18 * dt, 0, entity.maxHp);
-    addSpark(round, entity.x, entity.y, "#ff8752", 7);
-  }
-
-  entity.attackCooldown = Math.max(0, entity.attackCooldown - dt);
-  entity.dashCooldown = Math.max(0, entity.dashCooldown - dt);
-  entity.invulnerable = Math.max(0, entity.invulnerable - dt);
-  entity.attackFlash = Math.max(0, entity.attackFlash - dt);
-  entity.stamina = clamp(entity.stamina + 24 * dt, 0, entity.maxStamina);
-  entity.stepTimer += dt * (0.8 + Math.hypot(entity.moveX, entity.moveY));
-
-  if (entity.hp <= 0 && entity.alive) {
-    entity.alive = false;
-    entity.hp = 0;
-    for (let i = 0; i < 12; i += 1) {
-      addSpark(round, entity.x, entity.y, entity.color, 12);
-    }
-  }
-}
-
-function updateRound(round, dt) {
-  if (!round.running) {
-    return;
-  }
-
-  round.elapsed += dt;
-  round.entities.forEach((entity) => updateEntity(entity, round, dt));
-
-  round.sparks = round.sparks.filter((spark) => {
+function updateSparks(match, dt) {
+  match.sparks = match.sparks.filter((spark) => {
     spark.life -= dt;
     spark.x += spark.vx * dt;
     spark.y += spark.vy * dt;
-    spark.vx *= 0.96;
-    spark.vy *= 0.96;
+    spark.vy += 320 * dt;
     return spark.life > 0;
   });
+}
 
-  const liveTeams = new Set(round.entities.filter((entity) => entity.alive).map((entity) => entity.team));
-  if (liveTeams.size <= 1) {
-    round.running = false;
-    const survivingTeam = round.entities.find((entity) => entity.alive)?.team;
-    const isPlayerWin = survivingTeam === PLAYER_TEAM;
-    round.result = isPlayerWin ? "Victory" : "Defeat";
-    round.resultDetail = isPlayerWin
-      ? `Round won in ${round.elapsed.toFixed(1)}s with ${Math.ceil(round.entities[0].hp)} HP left.`
-      : `Your fighter was dropped after ${round.elapsed.toFixed(1)}s.`;
-    ui.hudResult.textContent = round.result;
-    ui.matchSummary.textContent = round.resultDetail;
+function applyStageHazard(match, dt) {
+  if (!match.stage.hazard || match.phase !== "fight") {
+    return;
+  }
+
+  const center = STAGE_WIDTH / 2;
+  match.hazardTick += dt;
+
+  match.fighters.forEach((fighter) => {
+    if (!fighter.alive || !fighter.onGround) {
+      return;
+    }
+
+    const distance = Math.abs(fighter.x - center);
+    if (distance > 34) {
+      return;
+    }
+
+    fighter.health = clamp(fighter.health - dt * 8, 0, fighter.maxHealth);
+    fighter.vx += (fighter.x < center ? -1 : 1) * 88 * dt;
+    fighter.attackFlash = 0.08;
+
+    if (match.hazardTick >= 0.08) {
+      addSpark(match, center + randomRange(-10, 10), GROUND_Y - randomRange(14, 38), currentStageConfig(match.stage.id).hazard, 4);
+      match.hazardTick = 0;
+    }
+
+    if (fighter.health <= 0) {
+      fighter.alive = false;
+    }
+  });
+}
+
+function updateMatch(dt) {
+  const match = state.match;
+  if (!match) {
+    return;
+  }
+
+  const p1Input = inputSnapshot("p1");
+  const p2Input = inputSnapshot("p2");
+
+  updateSparks(match, dt);
+  match.shake = Math.max(0, match.shake - dt * 18);
+
+  if (!match.fighters.length) {
+    return;
+  }
+
+  const [player, enemy] = match.fighters;
+
+  if (match.phase === "intro") {
+    player.moveIntent = 0;
+    enemy.moveIntent = 0;
+    player.blocking = false;
+    enemy.blocking = false;
+    updateFighter(player, enemy, match, dt);
+    updateFighter(enemy, player, match, dt);
+    resolveFighterSpacing(player, enemy, match);
+    match.phaseTimer -= dt;
+
+    if (match.phaseTimer <= 0) {
+      match.phase = "fight";
+      setStatus("Fight");
+      setMatchSummary(`Round ${match.round} is live. Break guard, manage range, and close the set.`);
+    }
+    return;
+  }
+
+  if (match.phase === "fight") {
+    match.timer = Math.max(0, match.timer - dt);
+
+    applyHumanControl(player, p1Input, match);
+    if (match.mode === "duel") {
+      applyHumanControl(enemy, p2Input, match);
+    } else {
+      applyAiControl(enemy, player, match, dt);
+    }
+
+    updateFighter(player, enemy, match, dt);
+    updateFighter(enemy, player, match, dt);
+    resolveFighterSpacing(player, enemy, match);
+    applyStageHazard(match, dt);
+
+    if (!player.alive || player.health <= 0) {
+      finishRound(match, enemy, `${enemy.name} finished round ${match.round}.`);
+      return;
+    }
+    if (!enemy.alive || enemy.health <= 0) {
+      finishRound(match, player, `${player.name} finished round ${match.round}.`);
+      return;
+    }
+
+    if (match.timer <= 0) {
+      if (player.health > enemy.health) {
+        finishRound(match, player, `${player.name} won on time.`);
+      } else if (enemy.health > player.health) {
+        finishRound(match, enemy, `${enemy.name} won on time.`);
+      } else {
+        finishRound(match, null, `Round ${match.round} timed out in a draw.`);
+      }
+    }
+    return;
+  }
+
+  if (match.phase === "round-over") {
+    player.moveIntent = 0;
+    enemy.moveIntent = 0;
+    player.blocking = false;
+    enemy.blocking = false;
+    updateFighter(player, enemy, match, dt);
+    updateFighter(enemy, player, match, dt);
+    resolveFighterSpacing(player, enemy, match);
+    match.phaseTimer -= dt;
+
+    if (match.phaseTimer <= 0) {
+      if (match.score.player >= match.roundsToWin) {
+        finishMatch(match, PLAYER_TEAM, "Player 1 wins the set.");
+      } else if (match.score.enemy >= match.roundsToWin) {
+        finishMatch(match, ENEMY_TEAM, `${match.mode === "duel" ? "Player 2" : "Bot"} wins the set.`);
+      } else {
+        resetRound(match);
+      }
+    }
+    return;
+  }
+
+  if (match.phase === "match-over") {
+    player.moveIntent = 0;
+    enemy.moveIntent = 0;
+    updateFighter(player, enemy, match, dt);
+    updateFighter(enemy, player, match, dt);
+    resolveFighterSpacing(player, enemy, match);
   }
 }
 
-function drawArena(round) {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.save();
-  ctx.translate((canvas.width - ARENA_WIDTH) * 0.5, HUD_HEIGHT);
+function drawStage(sceneStage) {
+  const stageState = sceneStage || activeStageState();
+  const config = currentStageConfig(stageState.id);
+  const offsetX = stageOffsetX();
+  const groundY = STAGE_TOP + GROUND_Y;
+  const floorTop = groundY + 10;
+  const bottom = STAGE_TOP + STAGE_HEIGHT;
 
-  ctx.fillStyle = "#18141c";
-  ctx.fillRect(0, 0, ARENA_WIDTH, ARENA_HEIGHT);
+  const sky = ctx.createLinearGradient(0, STAGE_TOP, 0, bottom);
+  sky.addColorStop(0, config.skyTop);
+  sky.addColorStop(1, config.skyBottom);
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  for (let row = 0; row < GRID_ROWS; row += 1) {
-    for (let col = 0; col < GRID_COLS; col += 1) {
-      const tile = round.tiles[indexFromCell(col, row)];
-      const x = col * TILE_SIZE;
-      const y = row * TILE_SIZE;
-
-      ctx.fillStyle = "rgba(255,255,255,0.035)";
-      ctx.fillRect(x, y, TILE_SIZE - 2, TILE_SIZE - 2);
-
-      if (tile === "wall") {
-        ctx.fillStyle = "#463d50";
-        ctx.fillRect(x + 2, y + 2, TILE_SIZE - 4, TILE_SIZE - 4);
-        ctx.fillStyle = "#5e5368";
-        ctx.fillRect(x + 4, y + 4, TILE_SIZE - 16, 10);
-      } else if (tile === "hazard") {
-        const pulse = 0.5 + Math.sin(state.lastFrameTime * 0.005 + col + row) * 0.15;
-        ctx.fillStyle = `rgba(232,107,58,${pulse})`;
-        ctx.fillRect(x + 2, y + 2, TILE_SIZE - 4, TILE_SIZE - 4);
-        ctx.strokeStyle = "rgba(255,220,160,0.5)";
-        ctx.strokeRect(x + 7, y + 7, TILE_SIZE - 14, TILE_SIZE - 14);
-      } else if (tile === "player" || tile === "bot" || tile === "rival") {
-        const colors = {
-          player: "rgba(111,210,198,0.18)",
-          bot: "rgba(244,239,231,0.18)",
-          rival: "rgba(213,185,111,0.18)"
-        };
-        ctx.fillStyle = colors[tile];
-        ctx.fillRect(x + 8, y + 8, TILE_SIZE - 16, TILE_SIZE - 16);
-      }
+  if (stageState.lights) {
+    for (let i = 0; i < 5; i += 1) {
+      const x = offsetX + 90 + i * 170;
+      const glow = ctx.createRadialGradient(x, STAGE_TOP + 64, 8, x, STAGE_TOP + 64, 120);
+      glow.addColorStop(0, `${config.crowd}80`);
+      glow.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(x, STAGE_TOP + 64, 120, 0, Math.PI * 2);
+      ctx.fill();
     }
   }
 
-  ctx.restore();
-}
-
-function drawHealthBar(entity, x, y) {
-  const width = 44;
-  ctx.fillStyle = "rgba(0,0,0,0.45)";
-  ctx.fillRect(x - width / 2, y, width, 6);
-
-  ctx.fillStyle = entity.team === PLAYER_TEAM ? "#6fd2c6" : entity.kind === "rival" ? "#d5b96f" : "#f4efe7";
-  ctx.fillRect(x - width / 2, y, width * (entity.hp / entity.maxHp), 6);
-
-  ctx.fillStyle = "rgba(0,0,0,0.45)";
-  ctx.fillRect(x - width / 2, y + 8, width, 4);
-  ctx.fillStyle = "#e86b3a";
-  ctx.fillRect(x - width / 2, y + 8, width * (entity.stamina / entity.maxStamina), 4);
-}
-
-function drawStickman(entity) {
-  const arenaOffsetX = (canvas.width - ARENA_WIDTH) * 0.5;
-  const px = arenaOffsetX + entity.x;
-  const py = HUD_HEIGHT + entity.y;
-  const angle = Math.atan2(entity.facingY, entity.facingX);
-  const step = Math.sin(entity.stepTimer * 8) * 5;
-
-  ctx.save();
-  ctx.translate(px, py);
-  ctx.rotate(angle);
-  ctx.lineCap = "round";
-  ctx.lineWidth = 3;
-  ctx.strokeStyle = entity.color;
-
-  if (entity.attackFlash > 0) {
-    ctx.strokeStyle = entity.weapon.color;
-    ctx.lineWidth = 5;
-    ctx.beginPath();
-    ctx.arc(0, 0, entity.weapon.reach * 0.42, -entity.weapon.arc * 0.5, entity.weapon.arc * 0.5);
-    ctx.stroke();
-    ctx.strokeStyle = entity.color;
-    ctx.lineWidth = 3;
+  ctx.fillStyle = "rgba(255,255,255,0.04)";
+  for (let i = 0; i < 10; i += 1) {
+    const x = offsetX + i * 88;
+    ctx.fillRect(x, STAGE_TOP + 180 + Math.sin(i) * 8, 32, 50);
   }
 
+  ctx.fillStyle = `${config.crowd}66`;
+  for (let i = 0; i < 26; i += 1) {
+    ctx.fillRect(offsetX + 16 + i * 32, STAGE_TOP + 186 + Math.sin(i * 0.8) * 6, 16, 28);
+  }
+
+  ctx.fillStyle = config.floor;
+  ctx.fillRect(offsetX, floorTop, STAGE_WIDTH, FLOOR_THICKNESS);
+  ctx.fillStyle = config.floorEdge;
+  ctx.fillRect(offsetX, floorTop, STAGE_WIDTH, 10);
+
+  ctx.strokeStyle = "rgba(255,255,255,0.12)";
+  ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.arc(0, -16, 7, 0, Math.PI * 2);
+  ctx.moveTo(offsetX, floorTop);
+  ctx.lineTo(offsetX + STAGE_WIDTH, floorTop);
   ctx.stroke();
 
-  ctx.beginPath();
-  ctx.moveTo(0, -9);
-  ctx.lineTo(0, 9);
-  ctx.moveTo(0, -1);
-  ctx.lineTo(10, 4);
-  ctx.lineTo(entity.weapon.reach * 0.38, 0);
-  ctx.moveTo(0, -1);
-  ctx.lineTo(-8, 3);
-  ctx.moveTo(0, 9);
-  ctx.lineTo(9, 19 + step);
-  ctx.moveTo(0, 9);
-  ctx.lineTo(-9, 19 - step);
-  ctx.stroke();
+  ctx.fillStyle = "rgba(0,0,0,0.18)";
+  ctx.fillRect(offsetX, floorTop + 20, STAGE_WIDTH, 18);
 
-  ctx.strokeStyle = entity.weapon.color;
-  ctx.lineWidth = 4;
+  if (stageState.pillars) {
+    [offsetX + 48, offsetX + STAGE_WIDTH - 80].forEach((x) => {
+      ctx.fillStyle = "rgba(255,255,255,0.08)";
+      ctx.fillRect(x, STAGE_TOP + 112, 32, 222);
+      ctx.fillStyle = config.accent;
+      ctx.fillRect(x - 8, STAGE_TOP + 126, 48, 16);
+      ctx.fillRect(x - 10, STAGE_TOP + 286, 52, 12);
+    });
+  }
+
+  if (stageState.hazard) {
+    const centerX = offsetX + STAGE_WIDTH / 2;
+    ctx.fillStyle = "rgba(0,0,0,0.34)";
+    ctx.fillRect(centerX - 20, floorTop - 8, 40, 18);
+    ctx.fillStyle = `${config.hazard}bb`;
+    ctx.beginPath();
+    ctx.moveTo(centerX - 18, floorTop);
+    ctx.lineTo(centerX - 4, floorTop - 38);
+    ctx.lineTo(centerX + 8, floorTop - 18);
+    ctx.lineTo(centerX + 18, floorTop - 42);
+    ctx.lineTo(centerX + 24, floorTop);
+    ctx.closePath();
+    ctx.fill();
+
+    const flare = ctx.createRadialGradient(centerX, floorTop - 18, 10, centerX, floorTop - 18, 50);
+    flare.addColorStop(0, `${config.hazard}aa`);
+    flare.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = flare;
+    ctx.beginPath();
+    ctx.arc(centerX, floorTop - 18, 50, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function drawHealthBar(x, y, width, ratio, fill, reverse = false) {
+  ctx.fillStyle = "rgba(0,0,0,0.55)";
+  ctx.fillRect(x, y, width, 18);
+  ctx.fillStyle = "rgba(255,255,255,0.08)";
+  ctx.fillRect(x + 2, y + 2, width - 4, 14);
+
+  const filledWidth = Math.round((width - 4) * clamp(ratio, 0, 1));
+  ctx.fillStyle = fill;
+  if (reverse) {
+    ctx.fillRect(x + width - 2 - filledWidth, y + 2, filledWidth, 14);
+  } else {
+    ctx.fillRect(x + 2, y + 2, filledWidth, 14);
+  }
+}
+
+function drawRoundPips(x, y, wins, roundsToWin, fill, reverse = false) {
+  const gap = 22;
+  for (let i = 0; i < roundsToWin; i += 1) {
+    const dx = reverse ? x - i * gap : x + i * gap;
+    ctx.fillStyle = i < wins ? fill : "rgba(255,255,255,0.15)";
+    ctx.beginPath();
+    ctx.arc(dx, y, 7, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function drawFighter(fighter) {
+  const stageX = stageOffsetX() + fighter.x;
+  const footY = STAGE_TOP + fighter.y + 10;
+  const height = currentFighterHeight(fighter);
+  const jumpLift = GROUND_Y - fighter.y;
+  const shadowScale = clamp(1 - jumpLift / 260, 0.46, 1);
+  const bob = fighter.onGround ? 0 : Math.sin(performance.now() * 0.015) * 1.5;
+  const walkAmount =
+    fighter.onGround && fighter.slideTimer <= 0 && fighter.dodgeTimer <= 0
+      ? clamp(Math.abs(fighter.vx) / Math.max(fighter.walkSpeed, 1), 0, 1)
+      : 0;
+  const walkCycle = fighter.onGround ? Math.sin(fighter.stepTimer) : 0;
+  const counterCycle = fighter.onGround ? Math.cos(fighter.stepTimer) : 0;
+  const stride = walkCycle * 24 * walkAmount;
+  const armSwing = counterCycle * 14 * walkAmount;
+  const bodyLift = Math.abs(counterCycle) * 4 * walkAmount;
+  const weaponPose = weaponPoseForFighter(fighter);
+
+  ctx.save();
+  ctx.fillStyle = "rgba(0,0,0,0.28)";
   ctx.beginPath();
-  ctx.moveTo(9, 4);
-  ctx.lineTo(entity.weapon.reach * 0.52, 0);
-  ctx.stroke();
+  ctx.ellipse(stageX, STAGE_TOP + GROUND_Y + 18, 24 * shadowScale, 8 * shadowScale, 0, 0, Math.PI * 2);
+  ctx.fill();
   ctx.restore();
 
-  drawHealthBar(entity, px, py - 34);
-}
+  ctx.save();
+  ctx.translate(stageX, footY + bob + bodyLift);
 
-function drawSparks(round) {
-  const arenaOffsetX = (canvas.width - ARENA_WIDTH) * 0.5;
-  round.sparks.forEach((spark) => {
-    const alpha = clamp(spark.life / spark.maxLife, 0, 1);
-    ctx.globalAlpha = alpha;
-    ctx.fillStyle = spark.color;
+  const torsoTop = -height * 0.6;
+  const headRadius = 10.5;
+  const headCenterX = fighter.facing * 2;
+  const headCenterY = torsoTop - headRadius + 5;
+  const neckY = headCenterY + headRadius - 1;
+  const shoulderY = torsoTop * 0.46;
+  const shoulderFrontX = fighter.facing * (19 + walkAmount * 5);
+  const shoulderRearX = -fighter.facing * (17 + walkAmount * 4);
+  const hipFrontX = fighter.facing * 23;
+  const hipRearX = -fighter.facing * 21;
+  const frontArmY =
+    shoulderY + (fighter.blocking ? -14 : fighter.attack || fighter.slideTimer > 0 ? 4 : 12 + armSwing * 0.3);
+  const rearArmY = shoulderY + 14 - armSwing * 0.34;
+  const frontLegY = fighter.slideTimer > 0 ? 10 : 20 + stride * 0.7;
+  const rearLegY = fighter.slideTimer > 0 ? 14 : 20 - stride * 0.7;
+  const lean =
+    fighter.slideTimer > 0 ? fighter.facing * 0.28 : fighter.hitstun > 0 ? -fighter.facing * 0.18 : 0;
+  ctx.rotate(lean);
+
+  ctx.strokeStyle = fighter.color;
+  ctx.lineWidth = 4.5;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.quadraticCurveTo(fighter.facing * 2, torsoTop * 0.44, headCenterX * 0.35, neckY);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(0, shoulderY);
+  ctx.quadraticCurveTo(shoulderFrontX * 0.45, shoulderY + 12, shoulderFrontX, frontArmY);
+  ctx.moveTo(0, shoulderY);
+  ctx.quadraticCurveTo(shoulderRearX * 0.42, shoulderY + 10, shoulderRearX, rearArmY);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.quadraticCurveTo(hipFrontX * 0.34, 12, hipFrontX, frontLegY);
+  ctx.moveTo(0, 0);
+  ctx.quadraticCurveTo(hipRearX * 0.32, 12, hipRearX, rearLegY);
+  ctx.stroke();
+
+  ctx.fillStyle = fighter.color;
+  ctx.beginPath();
+  ctx.arc(headCenterX, headCenterY, headRadius, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = fighter.color;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  if (fighter.attackFlash > 0) {
+    ctx.fillStyle = `rgba(255,255,255,${fighter.attackFlash * 0.75})`;
     ctx.beginPath();
-    ctx.arc(arenaOffsetX + spark.x, HUD_HEIGHT + spark.y, spark.size * alpha * 0.4, 0, Math.PI * 2);
+    ctx.arc(0, torsoTop * 0.64, 18, 0, Math.PI * 2);
     ctx.fill();
-    ctx.globalAlpha = 1;
+  }
+
+  const weaponBaseX = weaponPose.baseX - fighter.x;
+  const weaponBaseY = weaponPose.baseY - fighter.y;
+  const weaponTipX = weaponPose.tipX - fighter.x;
+  const weaponTipY = weaponPose.tipY - fighter.y;
+
+  ctx.strokeStyle = fighter.color;
+  ctx.lineWidth = 3.5;
+  ctx.beginPath();
+  ctx.moveTo(shoulderFrontX * 0.86, shoulderY - 2);
+  ctx.lineTo(weaponBaseX, weaponBaseY);
+  ctx.stroke();
+
+  ctx.strokeStyle = fighter.weapon.color;
+  ctx.lineWidth = 7;
+  ctx.beginPath();
+  ctx.moveTo(weaponBaseX, weaponBaseY);
+  ctx.lineTo(weaponTipX, weaponTipY);
+  ctx.stroke();
+
+  ctx.fillStyle = fighter.weapon.color;
+  ctx.beginPath();
+  ctx.arc(weaponTipX, weaponTipY, fighter.weapon.frameId === "chainblade" ? 8 : 5, 0, Math.PI * 2);
+  ctx.fill();
+
+  if (fighter.blocking) {
+    ctx.strokeStyle = "rgba(255,255,255,0.28)";
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.arc(fighter.facing * 18, torsoTop * 0.56, 18, -1.4, 1.4);
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+function drawSparks(match) {
+  match.sparks.forEach((spark) => {
+    ctx.fillStyle = spark.color;
+    ctx.globalAlpha = clamp(spark.life * 3, 0, 1);
+    ctx.beginPath();
+    ctx.arc(stageOffsetX() + spark.x, STAGE_TOP + spark.y + 10, spark.size, 0, Math.PI * 2);
+    ctx.fill();
   });
+  ctx.globalAlpha = 1;
 }
 
-function drawHud(round) {
-  ctx.fillStyle = "rgba(0,0,0,0.28)";
-  ctx.fillRect(0, 0, canvas.width, HUD_HEIGHT - 12);
+function drawHud(match) {
+  const [player, enemy] = match.fighters;
+  const playerLabel = `PLAYER 1  ${match.playerWeapon.name.toUpperCase()}`;
+  const enemyLabel = `${(match.mode === "duel" ? "PLAYER 2" : "BOT")}  ${match.rivalWeapon.name.toUpperCase()}`;
+
+  ctx.fillStyle = "rgba(0,0,0,0.42)";
+  ctx.fillRect(0, 0, canvas.width, HUD_HEIGHT);
+
   ctx.fillStyle = "#f4efe7";
-  ctx.font = '600 18px "Trebuchet MS"';
-  ctx.fillText(round.result, 20, 28);
-  ctx.font = '14px "Trebuchet MS"';
-  ctx.fillStyle = "#b9ad9e";
-  ctx.fillText(round.resultDetail, 20, 48);
+  ctx.font = "700 15px 'Trebuchet MS', sans-serif";
+  ctx.fillText(playerLabel, 44, 24);
+  ctx.fillText(enemyLabel, canvas.width - 44 - ctx.measureText(enemyLabel).width, 24);
 
-  const player = round.entities[0];
-  ctx.fillStyle = "#6fd2c6";
-  ctx.fillRect(canvas.width - 250, 16, 200 * (player.hp / player.maxHp), 10);
-  ctx.fillStyle = "#e86b3a";
-  ctx.fillRect(canvas.width - 250, 32, 200 * (player.stamina / player.maxStamina), 8);
-  ctx.strokeStyle = "rgba(255,255,255,0.16)";
-  ctx.strokeRect(canvas.width - 250, 16, 200, 10);
-  ctx.strokeRect(canvas.width - 250, 32, 200, 8);
+  drawHealthBar(42, 30, 320, player.health / player.maxHealth, "#89e6dc");
+  drawHealthBar(canvas.width - 362, 30, 320, enemy.health / enemy.maxHealth, "#f0d48b", true);
+
+  ctx.fillStyle = "#d7c9b7";
+  ctx.font = "700 28px Georgia, serif";
+  const timerText = `${Math.ceil(match.timer)}`;
+  ctx.fillText(timerText, canvas.width / 2 - ctx.measureText(timerText).width / 2, 38);
+
+  drawRoundPips(48, 56, match.score.player, match.roundsToWin, "#89e6dc");
+  drawRoundPips(canvas.width - 48, 56, match.score.enemy, match.roundsToWin, "#f0d48b", true);
+
+  ctx.fillStyle = "rgba(255,255,255,0.6)";
+  ctx.fillRect(42, 52, 320 * (player.stamina / player.maxStamina), 4);
+  ctx.fillRect(canvas.width - 42 - 320 * (enemy.stamina / enemy.maxStamina), 52, 320 * (enemy.stamina / enemy.maxStamina), 4);
 }
 
-function renderBattlefield(round) {
-  drawArena(round);
-  round.entities.filter((entity) => entity.alive).forEach(drawStickman);
-  drawSparks(round);
-  drawHud(round);
+function drawBanner(title, subtitle) {
+  ctx.save();
+  ctx.fillStyle = "rgba(0,0,0,0.38)";
+  ctx.fillRect(canvas.width / 2 - 220, canvas.height / 2 - 58, 440, 116);
+
+  ctx.fillStyle = "#f4efe7";
+  ctx.font = "700 38px Georgia, serif";
+  const titleWidth = ctx.measureText(title).width;
+  ctx.fillText(title, canvas.width / 2 - titleWidth / 2, canvas.height / 2 - 6);
+
+  ctx.fillStyle = "rgba(255,255,255,0.75)";
+  ctx.font = "600 16px 'Trebuchet MS', sans-serif";
+  const subtitleWidth = ctx.measureText(subtitle).width;
+  ctx.fillText(subtitle, canvas.width / 2 - subtitleWidth / 2, canvas.height / 2 + 24);
+  ctx.restore();
 }
 
 function renderIdleStage() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-  gradient.addColorStop(0, "#241d29");
-  gradient.addColorStop(1, "#120f15");
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  drawStage(state.stage);
 
-  ctx.fillStyle = "#f4efe7";
-  ctx.font = '700 42px Georgia';
-  ctx.fillText("Stickforge Arena", 42, 88);
-  ctx.font = '18px "Trebuchet MS"';
-  ctx.fillStyle = "#b9ad9e";
-  ctx.fillText("Forge a weapon, draw the arena, and start a round.", 42, 126);
+  const leftPose = spawnFighter({
+    team: PLAYER_TEAM,
+    control: "p1",
+    weapon: weaponById(state.activeWeaponId) || currentBlueprint(),
+    x: 300,
+    name: "Player 1",
+    color: "#89e6dc"
+  });
+  const rightPose = spawnFighter({
+    team: ENEMY_TEAM,
+    control: "bot",
+    weapon: weaponById(state.rivalWeaponId) || createRandomEnemyWeapon(),
+    x: STAGE_WIDTH - 300,
+    name: "Rival",
+    color: "#f0d48b"
+  });
 
-  ctx.strokeStyle = "rgba(232,107,58,0.34)";
-  ctx.lineWidth = 6;
-  ctx.beginPath();
-  ctx.moveTo(70, 210);
-  ctx.lineTo(310, 210);
-  ctx.stroke();
+  leftPose.stepTimer = 0.8;
+  leftPose.attack = { timer: leftPose.profile.windup + leftPose.profile.active * 0.66, connected: true };
+  rightPose.blocking = true;
 
-  ctx.strokeStyle = "#d5b96f";
-  ctx.beginPath();
-  ctx.moveTo(312, 210);
-  ctx.lineTo(390, 184);
-  ctx.lineTo(370, 210);
-  ctx.lineTo(390, 236);
-  ctx.closePath();
-  ctx.stroke();
+  drawFighter(leftPose);
+  drawFighter(rightPose);
 
-  ctx.fillStyle = "#f4efe7";
-  ctx.fillText("Weapons saved in the armory can be equipped for Player 1 or the rival.", 42, 310);
-  ctx.fillText("Arena editor tiles feed directly into the match spawns and terrain.", 42, 344);
+  ctx.fillStyle = "rgba(0,0,0,0.34)";
+  ctx.fillRect(140, 176, canvas.width - 280, 132);
+  drawBanner("ROUND SET FIGHTER", "Forge a weapon, choose a stage, then start the duel.");
+
+  ctx.fillStyle = "rgba(255,255,255,0.7)";
+  ctx.font = "600 16px 'Trebuchet MS', sans-serif";
+  const stageText = `${currentStageConfig().label}  |  ${state.stage.hazard ? "hazard on" : "hazard off"}  |  first to ${ui.roundsToWin.value}`;
+  ctx.fillText(stageText, canvas.width / 2 - ctx.measureText(stageText).width / 2, canvas.height / 2 + 74);
 }
 
-function loop(timestamp) {
-  if (!state.lastFrameTime) {
-    state.lastFrameTime = timestamp;
-  }
-  const dt = Math.min((timestamp - state.lastFrameTime) / 1000, 0.033);
-  state.lastFrameTime = timestamp;
+function renderBattlefield() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  if (state.round) {
-    updateRound(state.round, dt);
-    renderBattlefield(state.round);
-  } else {
+  if (!state.match) {
     renderIdleStage();
+    return;
   }
 
+  const match = state.match;
+  drawStage(match.stage);
+
+  ctx.save();
+  if (match.shake > 0) {
+    ctx.translate(randomRange(-match.shake, match.shake), randomRange(-match.shake, match.shake));
+  }
+
+  match.fighters.forEach((fighter) => drawFighter(fighter));
+  drawSparks(match);
+  ctx.restore();
+
+  drawHud(match);
+
+  if (match.phase === "intro") {
+    if (match.phaseTimer > 0.9) {
+      drawBanner(`ROUND ${match.round}`, `First to ${match.roundsToWin} wins`);
+    } else {
+      drawBanner("FIGHT", `${match.mode === "duel" ? "Local duel" : "Bot duel"} on ${currentStageConfig(match.stage.id).label}`);
+    }
+  } else if (match.phase === "round-over") {
+    const title = match.roundWinner
+      ? `${match.roundWinner === PLAYER_TEAM ? "PLAYER 1" : match.mode === "duel" ? "PLAYER 2" : "BOT"} TAKES ROUND`
+      : "DRAW";
+    drawBanner(title, `Set score ${match.score.player} - ${match.score.enemy}`);
+  } else if (match.phase === "match-over") {
+    const title =
+      match.setWinner === PLAYER_TEAM ? "PLAYER 1 WINS" : match.mode === "duel" ? "PLAYER 2 WINS" : "BOT WINS";
+    drawBanner(title, "Set complete. Reforge or start another match.");
+  }
+}
+
+function loop(now) {
+  const dt = clamp((now - state.lastFrameTime) / 1000, 0, 0.033);
+  state.lastFrameTime = now;
+  updateMatch(dt);
+  renderBattlefield();
   requestAnimationFrame(loop);
 }
 
 function handleForgeChange() {
-  state.forge = {
-    ...state.forge,
-    name: ui.weaponName.value,
-    frame: ui.frameSelect.value,
-    material: ui.materialSelect.value,
-    edge: ui.edgeSelect.value,
-    length: Number(ui.lengthRange.value),
-    balance: Number(ui.balanceRange.value),
-    temper: Number(ui.temperRange.value)
-  };
+  state.forge.name = ui.weaponName.value;
+  state.forge.frame = ui.frameSelect.value;
+  state.forge.material = ui.materialSelect.value;
+  state.forge.edge = ui.edgeSelect.value;
+  state.forge.length = Number(ui.lengthRange.value);
+  state.forge.balance = Number(ui.balanceRange.value);
+  state.forge.temper = Number(ui.temperRange.value);
   renderForge();
-}
-
-function pointerPaintFromEvent(event) {
-  const cell = event.target.closest(".arena-cell");
-  if (!cell) {
-    return;
-  }
-  paintArenaCell(Number(cell.dataset.col), Number(cell.dataset.row));
-}
-
-function bindArenaEditor() {
-  ui.arenaEditor.addEventListener("pointerdown", (event) => {
-    state.pointerPainting = true;
-    pointerPaintFromEvent(event);
-  });
-  ui.arenaEditor.addEventListener("pointermove", (event) => {
-    if (state.pointerPainting) {
-      pointerPaintFromEvent(event);
-    }
-  });
-  window.addEventListener("pointerup", () => {
-    state.pointerPainting = false;
-  });
+  updateHudLabels();
 }
 
 function bindTouchControls() {
-  Array.from(ui.touchControls.querySelectorAll("button")).forEach((button) => {
+  const buttons = ui.touchControls.querySelectorAll("[data-touch]");
+  buttons.forEach((button) => {
     const action = button.dataset.touch;
-    const start = (event) => {
+    const setPressed = (value, event) => {
       event.preventDefault();
-      state.touchState[action] = true;
+      state.touchState[action] = value;
     };
-    const stop = (event) => {
-      event.preventDefault();
-      state.touchState[action] = false;
-    };
-    button.addEventListener("pointerdown", start);
-    button.addEventListener("pointerup", stop);
-    button.addEventListener("pointercancel", stop);
-    button.addEventListener("pointerleave", stop);
+
+    button.addEventListener("pointerdown", (event) => setPressed(true, event));
+    button.addEventListener("pointerup", (event) => setPressed(false, event));
+    button.addEventListener("pointerleave", (event) => setPressed(false, event));
+    button.addEventListener("pointercancel", (event) => setPressed(false, event));
   });
 }
 
+function bindPointerInput() {
+  const updateMousePosition = (event) => {
+    const rect = ui.battlefield.getBoundingClientRect();
+    state.mouse.x = ((event.clientX - rect.left) / Math.max(rect.width, 1)) * canvas.width;
+    state.mouse.y = ((event.clientY - rect.top) / Math.max(rect.height, 1)) * canvas.height;
+  };
+
+  ui.battlefield.addEventListener("pointermove", updateMousePosition);
+  ui.battlefield.addEventListener("pointerdown", (event) => {
+    updateMousePosition(event);
+    if (event.button === 0) {
+      state.mouse.left = true;
+    } else if (event.button === 2) {
+      state.mouse.right = true;
+    }
+    event.preventDefault();
+  });
+
+  window.addEventListener("pointerup", (event) => {
+    if (event.button === 0) {
+      state.mouse.left = false;
+    } else if (event.button === 2) {
+      state.mouse.right = false;
+    }
+  });
+
+  window.addEventListener("pointercancel", () => {
+    state.mouse.left = false;
+    state.mouse.right = false;
+  });
+
+  ui.battlefield.addEventListener("contextmenu", (event) => event.preventDefault());
+}
+
 function bindEvents() {
-  [ui.weaponName, ui.frameSelect, ui.materialSelect, ui.edgeSelect, ui.lengthRange, ui.balanceRange, ui.temperRange].forEach((input) => {
-    input.addEventListener("input", handleForgeChange);
+  [
+    ui.weaponName,
+    ui.frameSelect,
+    ui.materialSelect,
+    ui.edgeSelect,
+    ui.lengthRange,
+    ui.balanceRange,
+    ui.temperRange
+  ].forEach((element) => {
+    element.addEventListener("input", handleForgeChange);
+    element.addEventListener("change", handleForgeChange);
   });
 
-  ui.saveWeapon.addEventListener("click", () => saveCurrentWeapon({ equip: false }));
-  ui.equipWeapon.addEventListener("click", () => saveCurrentWeapon({ equip: true }));
-  ui.clearArena.addEventListener("click", clearArena);
-  ui.mirrorArena.addEventListener("click", mirrorArena);
+  ui.saveWeapon.addEventListener("click", () => {
+    saveCurrentWeapon({ equip: false });
+    setMatchSummary(`Saved ${currentBlueprint().name} to the armory.`);
+  });
+
+  ui.equipWeapon.addEventListener("click", () => {
+    saveCurrentWeapon({ equip: true });
+    setMatchSummary(`${currentBlueprint().name} equipped for Player 1.`);
+  });
+
   ui.presetButtons.forEach((button) => {
-    button.addEventListener("click", () => loadArenaPreset(button.dataset.preset));
+    button.addEventListener("click", () => {
+      state.stage.id = button.dataset.preset;
+      renderStageSummary();
+      updateHudLabels();
+      renderBattlefield();
+    });
   });
 
-  ui.botCount.addEventListener("input", () => {
-    ui.botCountValue.textContent = ui.botCount.value;
+  ui.toggleHazard.addEventListener("click", () => {
+    state.stage.hazard = !state.stage.hazard;
+    renderStageSummary();
+    updateHudLabels();
+    renderBattlefield();
+  });
+
+  ui.togglePillars.addEventListener("click", () => {
+    state.stage.pillars = !state.stage.pillars;
+    renderStageSummary();
+    renderBattlefield();
+  });
+
+  ui.toggleLights.addEventListener("click", () => {
+    state.stage.lights = !state.stage.lights;
+    renderStageSummary();
+    renderBattlefield();
+  });
+
+  ui.roundsToWin.addEventListener("input", () => {
+    ui.roundsToWinValue.textContent = ui.roundsToWin.value;
+    renderBattlefield();
   });
 
   ui.matchMode.addEventListener("change", () => {
-    const isSkirmish = ui.matchMode.value === "skirmish";
-    ui.botCountLabel.style.display = isSkirmish ? "" : "none";
+    setMatchSummary(
+      ui.matchMode.value === "duel"
+        ? "Local duel mode active. Player 2 uses keyboard attacks and defense."
+        : "Bot mode active. Fight the AI in a round set."
+    );
   });
 
   ui.startMatch.addEventListener("click", startMatch);
 
+  const preventedKeys = new Set([
+    "Space",
+    ...Object.values(keyBindings.p1),
+    ...Object.values(keyBindings.p2)
+  ]);
+
   window.addEventListener("keydown", (event) => {
-    if (["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.code)) {
+    if (preventedKeys.has(event.code)) {
       event.preventDefault();
     }
     state.keysDown.add(event.code);
@@ -1568,43 +2177,32 @@ function bindEvents() {
     state.keysDown.delete(event.code);
   });
 
-  bindArenaEditor();
+  window.addEventListener("blur", () => {
+    state.keysDown.clear();
+    state.mouse.left = false;
+    state.mouse.right = false;
+    Object.keys(state.touchState).forEach((key) => {
+      state.touchState[key] = false;
+    });
+  });
+
+  bindPointerInput();
   bindTouchControls();
 }
 
 function seedArmory() {
-  const starterWeapons = [
-    state.forge,
-    {
-      name: "Warden Pike",
-      frame: "spear",
-      material: "ironwood",
-      edge: "needle",
-      length: 86,
-      balance: 10,
-      temper: 68
-    },
-    {
-      name: "Cinder Maw",
-      frame: "cleaver",
-      material: "embersteel",
-      edge: "breaker",
-      length: 54,
-      balance: 18,
-      temper: 88
-    }
-  ];
+  if (state.armory.length) {
+    return;
+  }
 
-  starterWeapons.forEach((recipe, index) => {
-    const weapon = buildWeaponFromForge(recipe);
-    state.armory.push(weapon);
-    if (index === 0) {
-      state.activeWeaponId = weapon.id;
-    }
-    if (index === 1) {
-      state.rivalWeaponId = weapon.id;
-    }
-  });
+  const playerWeapon = currentBlueprint();
+  const rivalWeapon = createRandomEnemyWeapon();
+  const alternateWeapon = createRandomEnemyWeapon();
+
+  state.armory.push(playerWeapon, rivalWeapon, alternateWeapon);
+  state.activeWeaponId = playerWeapon.id;
+  state.rivalWeaponId = rivalWeapon.id;
+  renderArmory();
 }
 
 function init() {
@@ -1615,22 +2213,26 @@ function init() {
   ui.frameSelect.value = state.forge.frame;
   ui.materialSelect.value = state.forge.material;
   ui.edgeSelect.value = state.forge.edge;
+  ui.weaponName.value = state.forge.name;
+  ui.lengthRange.value = `${state.forge.length}`;
+  ui.balanceRange.value = `${state.forge.balance}`;
+  ui.temperRange.value = `${state.forge.temper}`;
+  ui.roundsToWinValue.textContent = ui.roundsToWin.value;
 
-  createToolPalette();
-  renderToolPalette();
-  ensureArenaSpawns();
-  renderArenaEditor();
   seedArmory();
-  loadWeaponIntoForge(state.armory[0]);
+  renderForge();
   renderArmory();
+  renderStageSummary();
   updateHudLabels();
+  setStatus("Waiting");
+  setMatchSummary("Forge a weapon, pick a stage, and launch a proper round set.");
   bindEvents();
+  renderBattlefield();
 
-  ui.botCountValue.textContent = ui.botCount.value;
-  ui.matchMode.dispatchEvent(new Event("change"));
-  if (window.location.hash === "#autostart") {
+  if (window.location.hash.includes("autostart")) {
     startMatch();
   }
+
   requestAnimationFrame(loop);
 }
 
