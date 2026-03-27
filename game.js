@@ -21,7 +21,8 @@ const frameCatalog = {
     knockback: 1.08,
     arc: 1.18,
     speed: 1.02,
-    moveScale: 1
+    moveScale: 1,
+    weight: 10
   },
   spear: {
     label: "Spear",
@@ -33,7 +34,8 @@ const frameCatalog = {
     knockback: 1.14,
     arc: 0.86,
     speed: 0.92,
-    moveScale: 0.96
+    moveScale: 0.96,
+    weight: 12
   },
   cleaver: {
     label: "Cleaver",
@@ -45,7 +47,8 @@ const frameCatalog = {
     knockback: 1.34,
     arc: 1.04,
     speed: 0.86,
-    moveScale: 0.92
+    moveScale: 0.92,
+    weight: 16
   },
   chainblade: {
     label: "Chainblade",
@@ -57,7 +60,8 @@ const frameCatalog = {
     knockback: 0.94,
     arc: 1.42,
     speed: 1.16,
-    moveScale: 1.04
+    moveScale: 1.04,
+    weight: 11
   },
   dagger: {
     label: "Dagger",
@@ -69,7 +73,8 @@ const frameCatalog = {
     knockback: 0.9,
     arc: 0.98,
     speed: 1.24,
-    moveScale: 1.08
+    moveScale: 1.08,
+    weight: 7
   },
   greatblade: {
     label: "Greatblade",
@@ -81,7 +86,8 @@ const frameCatalog = {
     knockback: 1.42,
     arc: 1.08,
     speed: 0.8,
-    moveScale: 0.88
+    moveScale: 0.88,
+    weight: 20
   },
   warhammer: {
     label: "War Hammer",
@@ -93,7 +99,8 @@ const frameCatalog = {
     knockback: 1.58,
     arc: 0.9,
     speed: 0.72,
-    moveScale: 0.84
+    moveScale: 0.84,
+    weight: 24
   },
   halberd: {
     label: "Halberd",
@@ -105,7 +112,8 @@ const frameCatalog = {
     knockback: 1.28,
     arc: 1.06,
     speed: 0.88,
-    moveScale: 0.9
+    moveScale: 0.9,
+    weight: 17
   }
 };
 
@@ -119,6 +127,7 @@ const materialCatalog = {
     cooldown: -0.05,
     knockback: -0.08,
     moveScale: 0.03,
+    weight: -2.5,
     color: "#89e6dc"
   },
   sunsteel: {
@@ -130,6 +139,7 @@ const materialCatalog = {
     cooldown: -0.02,
     knockback: 0.02,
     moveScale: 0,
+    weight: 0,
     color: "#f0d48b"
   },
   voidglass: {
@@ -141,6 +151,7 @@ const materialCatalog = {
     cooldown: -0.06,
     knockback: -0.02,
     moveScale: 0.02,
+    weight: -1.2,
     color: "#90a2ff"
   },
   embersteel: {
@@ -152,50 +163,55 @@ const materialCatalog = {
     cooldown: 0.06,
     knockback: 0.12,
     moveScale: -0.04,
+    weight: 3,
     color: "#ff8752"
   }
 };
 
 const edgeCatalog = {
   needle: {
-    label: "Needle Edge",
-    summary: "Sharp straight point. Best for extra reach and faster pokes.",
+    label: "Pierce Tip",
+    summary: "Longest and quickest sub type. Best when you want easy pokes from farther away.",
     damage: 1,
     reach: 6,
     speed: 0.08,
     cooldown: -0.04,
     knockback: -0.02,
-    arc: -0.08
+    arc: -0.08,
+    weight: -1
   },
   crescent: {
-    label: "Crescent Sweep",
-    summary: "Curved edge that widens your swing arc, so it is easier to catch movement.",
+    label: "Sweep Edge",
+    summary: "Wider swing sub type. Easier to catch movement at close and mid range.",
     damage: 0,
     reach: 2,
     speed: 0.02,
     cooldown: -0.01,
     knockback: 0.04,
-    arc: 0.18
+    arc: 0.18,
+    weight: 0.5
   },
   breaker: {
-    label: "Breaker Face",
-    summary: "Flat crushing face. Slower, shorter, but much stronger on impact and guard pressure.",
+    label: "Breaker Head",
+    summary: "Heavy crushing sub type. Strongest push and block pressure, but it adds the most weight.",
     damage: 4,
     reach: -4,
     speed: -0.12,
     cooldown: 0.09,
     knockback: 0.16,
-    arc: -0.02
+    arc: -0.02,
+    weight: 2.5
   },
   serrated: {
-    label: "Serrated Bite",
-    summary: "Aggressive cutting edge. Adds damage and drive without changing the weapon too much.",
+    label: "Bite Edge",
+    summary: "Power-focused sub type. Adds clean damage without changing the weapon too much.",
     damage: 3,
     reach: 0,
     speed: -0.03,
     cooldown: 0.03,
     knockback: 0.08,
-    arc: 0.06
+    arc: 0.06,
+    weight: 1
   }
 };
 
@@ -263,6 +279,8 @@ const keyBindings = {
 };
 
 const ui = {
+  introScreen: document.querySelector("#intro-screen"),
+  introPlay: document.querySelector("#intro-play"),
   mainMenu: document.querySelector("#main-menu"),
   closeMenu: document.querySelector("#close-menu"),
   openMenu: document.querySelector("#open-menu"),
@@ -272,16 +290,16 @@ const ui = {
   menuPlayPvp: document.querySelector("#menu-play-pvp"),
   menuOpenWorkshop: document.querySelector("#menu-open-workshop"),
   menuSummary: document.querySelector("#menu-summary"),
+  tutorialOffer: document.querySelector("#tutorial-offer"),
+  tutorialOfferCopy: document.querySelector("#tutorial-offer-copy"),
+  startTutorial: document.querySelector("#start-tutorial"),
+  skipTutorial: document.querySelector("#skip-tutorial"),
   frameSelect: document.querySelector("#frame-select"),
   materialSelect: document.querySelector("#material-select"),
   edgeSelect: document.querySelector("#edge-select"),
   weaponName: document.querySelector("#weapon-name"),
-  lengthRange: document.querySelector("#length-range"),
-  balanceRange: document.querySelector("#balance-range"),
-  temperRange: document.querySelector("#temper-range"),
-  lengthValue: document.querySelector("#length-value"),
-  balanceValue: document.querySelector("#balance-value"),
-  temperValue: document.querySelector("#temper-value"),
+  heatRange: document.querySelector("#heat-range"),
+  heatValue: document.querySelector("#heat-value"),
   forgePreview: document.querySelector("#forge-preview"),
   weaponTitle: document.querySelector("#weapon-title"),
   weaponLore: document.querySelector("#weapon-lore"),
@@ -299,6 +317,7 @@ const ui = {
   matchMode: document.querySelector("#match-mode"),
   roundsToWin: document.querySelector("#rounds-to-win"),
   roundsToWinValue: document.querySelector("#rounds-to-win-value"),
+  toggleScreenFocus: document.querySelector("#toggle-screen-focus"),
   startMatch: document.querySelector("#start-match"),
   battlefield: document.querySelector("#battlefield"),
   hudPlayerWeapon: document.querySelector("#hud-player-weapon"),
@@ -324,6 +343,11 @@ const ui = {
   battlefieldLoadout: document.querySelector("#battlefield-loadout"),
   fightFeed: document.querySelector("#fight-feed"),
   setStats: document.querySelector("#set-stats"),
+  tutorialPanel: document.querySelector("#tutorial-panel"),
+  tutorialTitle: document.querySelector("#tutorial-title"),
+  tutorialCopy: document.querySelector("#tutorial-copy"),
+  tutorialChecklist: document.querySelector("#tutorial-checklist"),
+  closeTutorial: document.querySelector("#close-tutorial"),
   setRecap: document.querySelector("#set-recap"),
   setRecapTitle: document.querySelector("#set-recap-title"),
   setRecapMode: document.querySelector("#set-recap-mode"),
@@ -368,9 +392,7 @@ const state = {
     frame: "saber",
     material: "sunsteel",
     edge: "crescent",
-    length: 62,
-    balance: 4,
-    temper: 76
+    heat: 58
   },
   armory: [],
   activeWeaponId: null,
@@ -423,6 +445,24 @@ const state = {
   reviews: {
     selectedChoice: "",
     entries: []
+  },
+  flow: {
+    introOpen: true,
+    screen: "arena"
+  },
+  tutorial: {
+    offerVisible: false,
+    active: false,
+    completed: false,
+    dismissed: false,
+    stepIndex: 0,
+    progress: {
+      move: false,
+      air: false,
+      attack: false,
+      block: false,
+      mobility: false
+    }
   },
   menu: {
     open: true
@@ -525,6 +565,114 @@ function describeMatchMode(mode) {
 
 function matchModeLabel(mode) {
   return mode === "duel" ? "Local PvP" : "Vs Bot";
+}
+
+function defaultTutorialProgress() {
+  return {
+    move: false,
+    air: false,
+    attack: false,
+    block: false,
+    mobility: false
+  };
+}
+
+function tutorialSteps() {
+  return [
+    {
+      id: "move",
+      title: "Move",
+      copy: "Start simple. Press left or right once so your fighter walks.",
+      hint: "Desktop: A or D. Mobile: Left or Right. Controller: move the left stick."
+    },
+    {
+      id: "air",
+      title: "Jump Or Crouch",
+      copy: "Now try going up or down once. You can jump, or you can crouch low.",
+      hint: "Desktop: W or S. Mobile: Jump or Down. Controller: A to jump, or push down."
+    },
+    {
+      id: "attack",
+      title: "Attack",
+      copy: "Try one attack. This is your basic way to hit the other fighter.",
+      hint: "Desktop: left click. Mobile: Strike. Controller: RT or X."
+    },
+    {
+      id: "block",
+      title: "Block",
+      copy: "Hold block for a moment. Blocking helps keep you safe when a hit is coming.",
+      hint: "Desktop: right click. Mobile: Block. Controller: LT or LB."
+    },
+    {
+      id: "mobility",
+      title: "Quick Move",
+      copy: "Finish by trying one quick movement button. One moves you away fast, and one rushes you forward fast.",
+      hint: "Desktop: Q or E. Mobile: Backstep or Lunge. Controller: B or Y."
+    }
+  ];
+}
+
+function syncRoundsOutput() {
+  ui.roundsToWinValue.textContent = ui.roundsToWin.value;
+}
+
+function setIntroOpen(open) {
+  state.flow.introOpen = open;
+  ui.introScreen.classList.toggle("hidden", !open);
+}
+
+function setScreenFocus(screen) {
+  state.flow.screen = screen;
+  document.body.classList.toggle("arena-focus", screen === "arena");
+  document.body.classList.toggle("forge-focus", screen === "forge");
+
+  if (ui.toggleScreenFocus) {
+    ui.toggleScreenFocus.textContent = screen === "forge" ? "Arena View" : "Forge Screen";
+  }
+}
+
+function renderTutorialOffer() {
+  const visible = state.menu.open && !state.flow.introOpen && state.tutorial.offerVisible;
+  ui.tutorialOffer.classList.toggle("hidden", !visible);
+}
+
+function renderTutorialPanel() {
+  const tutorial = state.tutorial;
+  const visible = tutorial.active;
+  ui.tutorialPanel.classList.toggle("hidden", !visible);
+
+  if (!visible) {
+    return;
+  }
+
+  const entries = tutorialSteps();
+  const completedCount = entries.filter((entry) => tutorial.progress[entry.id]).length;
+  const allDone = tutorial.completed || completedCount === entries.length;
+  const currentStep = allDone ? null : entries[tutorial.stepIndex] || entries[0];
+
+  ui.tutorialTitle.textContent = allDone
+    ? "Tutorial Complete"
+    : `Step ${tutorial.stepIndex + 1} of ${entries.length}: ${currentStep.title}`;
+  ui.tutorialCopy.textContent = allDone
+    ? "You cleared the basics. The bot can stay as a safe practice dummy while you keep experimenting."
+    : `Do this now: ${currentStep.copy} ${currentStep.hint}`;
+  ui.tutorialChecklist.innerHTML = entries
+    .map(
+      (entry, index) => `
+        <article class="tutorial-check ${tutorial.progress[entry.id] ? "done" : ""} ${!allDone && index === tutorial.stepIndex ? "current" : ""}">
+          <span>${tutorial.progress[entry.id] ? "Done" : !allDone && index === tutorial.stepIndex ? "Now" : "Later"}</span>
+          <strong>${entry.title}</strong>
+          <p>${tutorial.progress[entry.id] ? "Complete." : !allDone && index === tutorial.stepIndex ? entry.hint : "We will explain this step later."}</p>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function dismissTutorial() {
+  state.tutorial.active = false;
+  state.tutorial.dismissed = false;
+  renderTutorialPanel();
 }
 
 function hasCoarsePointer() {
@@ -835,11 +983,10 @@ function activeMenuRivalWeapon() {
 }
 
 function renderMenuSummary() {
-  const playerWeapon = activeMenuWeapon();
-  const rivalWeapon = activeMenuRivalWeapon();
   const stageConfig = currentStageConfig();
   const account = currentAccount();
   const accountMeta = accountSummaryMeta(account);
+  const armoryCount = state.armory.length;
 
   ui.menuSummary.innerHTML = `
     <article class="menu-summary-card">
@@ -852,21 +999,20 @@ function renderMenuSummary() {
       </div>
     </article>
     <article class="menu-summary-card">
-      <span class="menu-summary-kicker">Player Loadout</span>
-      <strong>${playerWeapon.name}</strong>
-      <p>${playerWeapon.frame} using ${playerWeapon.material} tuned for ${playerWeapon.styleText}.</p>
+      <span class="menu-summary-kicker">Arena Start</span>
+      <strong>Fight First</strong>
+      <p>Bot matches, PvP sets, and the tutorial all start straight in the arena now.</p>
       <div class="menu-summary-meta">
-        <span>${weaponRoleTag(playerWeapon)}</span>
-        <span>${playerWeapon.edge}</span>
-        <span>${playerWeapon.reach} reach</span>
+        <span>${matchModeLabel(ui.matchMode.value)}</span>
+        <span>${Number(ui.roundsToWin.value)} rounds to win</span>
       </div>
     </article>
     <article class="menu-summary-card">
-      <span class="menu-summary-kicker">Tonight's Matchup</span>
-      <strong>${stageConfig.label}</strong>
-      <p>${stageConfig.tagline}. ${rivalWeapon ? `${rivalWeapon.name} waits as the rival loadout.` : "An auto-forged rival will spawn for the set."}</p>
+      <span class="menu-summary-kicker">Forge Screen</span>
+      <strong>${armoryCount} Saved Loadout${armoryCount === 1 ? "" : "s"}</strong>
+      <p>Open the forge screen when you want to rebuild weapons, armory picks, or the stage rules.</p>
       <div class="menu-summary-meta">
-        <span>${matchModeLabel(ui.matchMode.value)}</span>
+        <span>${stageConfig.label}</span>
         <span>${stageConfig.specialty}</span>
       </div>
     </article>
@@ -875,7 +1021,7 @@ function renderMenuSummary() {
 
 function battlefieldPhaseText() {
   if (!state.match) {
-    return "Awaiting next set. Forge a weapon, lock a stage, and start the duel feed.";
+    return "Awaiting next set. Start a fight, jump into the tutorial, or open the forge screen when you want to rebuild.";
   }
 
   const match = state.match;
@@ -1110,6 +1256,7 @@ function setMenuOpen(open) {
   state.menu.open = open;
   ui.mainMenu.classList.toggle("hidden", !open);
   renderMenuSummary();
+  renderTutorialOffer();
 }
 
 function saveReviewState() {
@@ -1185,10 +1332,99 @@ function submitReview() {
   renderAccountPanel(`${account.name}'s review was saved locally.`);
 }
 
+function openForgeScreen() {
+  setScreenFocus("forge");
+  setMenuOpen(false);
+  setMatchSummary("Forge screen open. Rebuild your weapon, armory picks, or stage settings here.");
+}
+
+function clearTutorialState() {
+  state.tutorial.active = false;
+  state.tutorial.completed = false;
+  state.tutorial.dismissed = false;
+  state.tutorial.offerVisible = false;
+  state.tutorial.stepIndex = 0;
+  state.tutorial.progress = defaultTutorialProgress();
+  renderTutorialOffer();
+  renderTutorialPanel();
+}
+
 function launchMatchFromMenu(mode) {
   ui.matchMode.value = mode;
+  clearTutorialState();
   setMatchSummary(describeMatchMode(mode));
   startMatch();
+}
+
+function startTutorial() {
+  state.tutorial.offerVisible = false;
+  state.tutorial.active = true;
+  state.tutorial.completed = false;
+  state.tutorial.dismissed = false;
+  state.tutorial.stepIndex = 0;
+  state.tutorial.progress = defaultTutorialProgress();
+  ui.matchMode.value = "solo";
+  ui.roundsToWin.value = "1";
+  syncRoundsOutput();
+  state.stage.id = "ring";
+  state.stage.hazard = false;
+  state.stage.pillars = true;
+  state.stage.lights = true;
+  renderStageSummary();
+  updateHudLabels();
+  startMatch({ tutorial: true });
+  setMatchSummary("Tutorial live. Do the highlighted step only. The practice bot will stay still and will not attack.");
+  pushFightEvent(
+    state.match,
+    "Tutorial",
+    "This tutorial is calm on purpose. You do not need to win. Just follow the highlighted step.",
+    "control"
+  );
+  renderTutorialPanel();
+}
+
+function updateTutorialProgress(input, match) {
+  if (!state.tutorial.active) {
+    return;
+  }
+
+  const progress = state.tutorial.progress;
+  const steps = tutorialSteps();
+  const currentStep = steps[state.tutorial.stepIndex];
+
+  if (!currentStep) {
+    return;
+  }
+
+  let completedStep = false;
+  if (currentStep.id === "move") {
+    completedStep = input.left || input.right;
+  } else if (currentStep.id === "air") {
+    completedStep = input.jumpPressed || input.crouch;
+  } else if (currentStep.id === "attack") {
+    completedStep = input.attackPressed;
+  } else if (currentStep.id === "block") {
+    completedStep = input.block;
+  } else if (currentStep.id === "mobility") {
+    completedStep = input.dodgePressed || input.slidePressed;
+  }
+
+  if (completedStep) {
+    progress[currentStep.id] = true;
+    state.tutorial.stepIndex += 1;
+
+    if (state.tutorial.stepIndex >= steps.length) {
+      state.tutorial.completed = true;
+      setMatchSummary("Tutorial complete. Keep practicing here or open the forge screen when you're ready.");
+      pushFightEvent(match, "Tutorial Clear", "You cleared the basics. The arena is yours now.", "impact");
+    } else {
+      const nextStep = steps[state.tutorial.stepIndex];
+      setMatchSummary(`${currentStep.title} complete. Next: ${nextStep.title}.`);
+      pushFightEvent(match, "Tutorial Step", `${currentStep.title} complete. Follow the new highlighted step: ${nextStep.title.toLowerCase()}.`, "control");
+    }
+  }
+
+  renderTutorialPanel();
 }
 
 function saveAuthState() {
@@ -1472,53 +1708,65 @@ function buildWeaponFromForge(forge) {
   const frame = frameCatalog[forge.frame];
   const material = materialCatalog[forge.material];
   const edge = edgeCatalog[forge.edge];
-  const lengthBias = (forge.length - 60) / 8;
-  const balanceBias = forge.balance / 12;
-  const temperBias = (forge.temper - 60) / 14;
+  const heat = clamp(Number(forge.heat ?? forge.temper ?? 58), 0, 100);
+  const heatScale = heat / 100;
+  const weight = clamp(
+    Number((frame.weight + material.weight + edge.weight + heatScale * 6).toFixed(1)),
+    5,
+    32
+  );
+  const weightLoad = Math.max(0, weight - 10);
 
   const damage = clamp(
-    Math.round(frame.damage + material.damage + edge.damage + temperBias * 1.4 + Math.abs(balanceBias) * 0.5),
+    Math.round(frame.damage + material.damage + edge.damage + heatScale * 4),
     10,
-    34
+    36
   );
   const reach = clamp(
-    Math.round(frame.reach + material.reach + edge.reach + lengthBias * 4),
+    Math.round(frame.reach + material.reach + edge.reach),
     54,
     132
   );
   const speed = clamp(
-    Number((frame.speed + material.speed + edge.speed - Math.abs(balanceBias) * 0.015).toFixed(2)),
-    0.7,
-    1.35
+    Number((frame.speed + material.speed + edge.speed - weightLoad * 0.012).toFixed(2)),
+    0.66,
+    1.32
   );
   const cooldown = clamp(
-    Number((frame.cooldown + material.cooldown + edge.cooldown - temperBias * 0.01).toFixed(2)),
-    0.34,
-    1.1
+    Number((frame.cooldown + material.cooldown + edge.cooldown + weightLoad * 0.008).toFixed(2)),
+    0.36,
+    1.14
   );
   const knockback = clamp(
-    Number((frame.knockback + material.knockback + edge.knockback + temperBias * 0.025).toFixed(2)),
-    0.8,
-    1.65
+    Number((frame.knockback + material.knockback + edge.knockback + weight * 0.01).toFixed(2)),
+    0.82,
+    1.72
   );
   const arc = clamp(
-    Number((frame.arc + edge.arc + (20 - Math.abs(forge.balance)) * 0.008).toFixed(2)),
+    Number((frame.arc + edge.arc).toFixed(2)),
     0.74,
     1.72
   );
   const moveScale = clamp(
-    Number((frame.moveScale + material.moveScale - Math.max(0, damage - 20) * 0.012).toFixed(2)),
-    0.74,
+    Number((frame.moveScale + material.moveScale - weightLoad * 0.008).toFixed(2)),
+    0.72,
     1.12
   );
 
   let styleText = "balanced duel control";
-  if (damage >= 25) {
+  if (damage >= 28 || weight >= 22) {
     styleText = "heavy pressure and guard breaks";
   } else if (speed >= 1.12) {
     styleText = "quick rush pressure";
   } else if (reach >= 102) {
     styleText = "long-range control";
+  }
+
+  let heatSummary = "Low heat keeps the weapon lighter and easier to control.";
+  if (heat >= 70) {
+    heatSummary = "High heat makes the weapon heavier and stronger, so hits hurt more but handling gets slower.";
+  } else if (heat >= 40) {
+    heatSummary = "Mid heat adds extra damage without pushing the weight too far.";
   }
 
   return {
@@ -1530,9 +1778,8 @@ function buildWeaponFromForge(forge) {
     material: material.label,
     edgeId: forge.edge,
     edge: edge.label,
-    length: Number(forge.length),
-    balance: Number(forge.balance),
-    temper: Number(forge.temper),
+    heat,
+    weight,
     damage,
     reach,
     speed,
@@ -1545,8 +1792,9 @@ function buildWeaponFromForge(forge) {
     frameDesign: frame.design,
     materialSummary: material.summary,
     edgeSummary: edge.summary,
+    heatSummary,
     styleText,
-    lore: `${frame.label} with ${material.label.toLowerCase()} and ${edge.label.toLowerCase()} built for ${styleText}.`
+    lore: `${frame.label} with ${material.label.toLowerCase()} and ${edge.label.toLowerCase()} at ${heat}% heat, built for ${styleText}.`
   };
 }
 
@@ -1559,9 +1807,7 @@ function createRandomEnemyWeapon() {
     frame: randomChoice(Object.keys(frameCatalog)),
     material: randomChoice(Object.keys(materialCatalog)),
     edge: randomChoice(Object.keys(edgeCatalog)),
-    length: Math.round(randomRange(38, 90)),
-    balance: Math.round(randomRange(-24, 24)),
-    temper: Math.round(randomRange(30, 98))
+    heat: Math.round(randomRange(20, 92))
   };
 
   return buildWeaponFromForge(forge);
@@ -1575,15 +1821,14 @@ function currentBlueprint() {
 }
 
 function syncForgeOutputs() {
-  ui.lengthValue.textContent = `${ui.lengthRange.value}`;
-  ui.balanceValue.textContent = `${ui.balanceRange.value}`;
-  ui.temperValue.textContent = `${ui.temperRange.value}`;
+  ui.heatValue.textContent = `${ui.heatRange.value}%`;
 }
 
 function renderForgeBadges(weapon) {
   ui.forgeBadges.innerHTML = `
     <span class="menu-status alt">${weapon.frameDesign}</span>
-    <span class="menu-status alt">${weapon.styleText}</span>
+    <span class="menu-status alt">${weapon.edge}</span>
+    <span class="menu-status alt">${weapon.weight.toFixed(1)} wt</span>
     <span class="menu-status alt">${weapon.reach} reach</span>
   `;
 }
@@ -1654,24 +1899,16 @@ function weaponPreviewMarkup(weapon) {
 }
 
 function renderForgeDetails(weapon) {
-  const balanceNote =
-    weapon.balance <= -12
-      ? "handle-heavy for safer recovery"
-      : weapon.balance >= 12
-        ? "front-heavy for stronger hits"
-        : "balanced between speed and power";
-  const temperNote =
-    weapon.temper >= 80
-      ? "high temper for sharper damage"
-      : weapon.temper <= 40
-        ? "softer temper for steadier control"
-        : "mid temper for even handling";
-
   ui.forgeDetails.innerHTML = `
     <article class="forge-detail-card">
-      <span>Frame</span>
+      <span>Weapon Type</span>
       <strong>${weapon.frame}</strong>
       <p>${weapon.frameSummary}</p>
+    </article>
+    <article class="forge-detail-card">
+      <span>Sub Weapon Type</span>
+      <strong>${weapon.edge}</strong>
+      <p>${weapon.edgeSummary}</p>
     </article>
     <article class="forge-detail-card">
       <span>Material</span>
@@ -1679,26 +1916,57 @@ function renderForgeDetails(weapon) {
       <p>${weapon.materialSummary}</p>
     </article>
     <article class="forge-detail-card">
-      <span>Edge</span>
-      <strong>${weapon.edge}</strong>
-      <p>${weapon.edgeSummary}</p>
-    </article>
-    <article class="forge-detail-card">
-      <span>Build Feel</span>
-      <strong>${weapon.styleText}</strong>
-      <p>${weapon.frameDesign}. This build is ${balanceNote} with ${temperNote}.</p>
+      <span>Heat</span>
+      <strong>${weapon.heat}% forge heat</strong>
+      <p>${weapon.heatSummary}</p>
     </article>
   `;
 }
 
 function renderForgeStats(weapon) {
   const stats = [
-    { label: "Damage", value: weapon.damage, max: 34 },
-    { label: "Reach", value: weapon.reach, max: 132 },
-    { label: "Tempo", value: Math.round(weapon.speed * 100), max: 135 },
-    { label: "Recovery", value: Math.round((1.16 - weapon.cooldown) * 100), max: 82 },
-    { label: "Drive", value: Math.round(weapon.knockback * 100), max: 165 },
-    { label: "Arc", value: Math.round(weapon.arc * 100), max: 172 }
+    {
+      label: "Damage",
+      value: weapon.damage,
+      display: `${weapon.damage}`,
+      max: 36,
+      detail: "Higher damage removes more health on a clean hit."
+    },
+    {
+      label: "Weight",
+      value: weapon.weight,
+      display: weapon.weight.toFixed(1),
+      max: 32,
+      detail: "More weight hits harder, but it also slows movement and recovery."
+    },
+    {
+      label: "Reach",
+      value: weapon.reach,
+      display: `${weapon.reach}`,
+      max: 132,
+      detail: "Higher reach lets you touch the rival from farther away."
+    },
+    {
+      label: "Speed",
+      value: Math.round(weapon.speed * 100),
+      display: `${Math.round(weapon.speed * 100)}`,
+      max: 132,
+      detail: "Higher speed makes the attack start faster."
+    },
+    {
+      label: "Recovery",
+      value: Math.round((1.18 - weapon.cooldown) * 100),
+      display: `${Math.round((1.18 - weapon.cooldown) * 100)}`,
+      max: 82,
+      detail: "Higher recovery means you can move again sooner after swinging."
+    },
+    {
+      label: "Push",
+      value: Math.round(weapon.knockback * 100),
+      display: `${Math.round(weapon.knockback * 100)}`,
+      max: 172,
+      detail: "Higher push shoves rivals farther and strains their block more."
+    }
   ];
 
   ui.forgeStats.innerHTML = "";
@@ -1707,10 +1975,11 @@ function renderForgeStats(weapon) {
     card.className = "stat-card";
     card.innerHTML = `
       <span>${stat.label}</span>
-      <strong>${stat.value}</strong>
+      <strong>${stat.display}</strong>
       <div class="bar-track">
         <div class="bar-fill" style="width: ${Math.round((stat.value / stat.max) * 100)}%"></div>
       </div>
+      <p>${stat.detail}</p>
     `;
     ui.forgeStats.append(card);
   });
@@ -1872,18 +2141,14 @@ function loadWeaponIntoForge(weapon) {
     frame: weapon.frameId,
     material: weapon.materialId,
     edge: weapon.edgeId,
-    length: weapon.length,
-    balance: weapon.balance,
-    temper: weapon.temper
+    heat: clamp(Number(weapon.heat ?? weapon.temper ?? 58), 0, 100)
   };
 
   ui.weaponName.value = state.forge.name;
   ui.frameSelect.value = state.forge.frame;
   ui.materialSelect.value = state.forge.material;
   ui.edgeSelect.value = state.forge.edge;
-  ui.lengthRange.value = `${state.forge.length}`;
-  ui.balanceRange.value = `${state.forge.balance}`;
-  ui.temperRange.value = `${state.forge.temper}`;
+  ui.heatRange.value = `${state.forge.heat}`;
   renderForge();
 }
 
@@ -1944,7 +2209,7 @@ function renderArmory() {
     meta.innerHTML = `
       <span class="pill">${weapon.material}</span>
       <span class="pill">${weapon.edge}</span>
-      <span class="pill">${weapon.damage} dmg</span>
+      <span class="pill">${weapon.heat}% heat</span>
       <span class="pill">${weapon.reach} reach</span>
     `;
 
@@ -1952,16 +2217,16 @@ function renderArmory() {
     statRow.className = "armory-stat-row";
     statRow.innerHTML = `
       <div class="armory-stat">
-        <span>Tempo</span>
+        <span>Speed</span>
         <strong>${Math.round(weapon.speed * 100)}</strong>
       </div>
       <div class="armory-stat">
-        <span>Drive</span>
+        <span>Push</span>
         <strong>${Math.round(weapon.knockback * 100)}</strong>
       </div>
       <div class="armory-stat">
-        <span>Arc</span>
-        <strong>${Math.round(weapon.arc * 100)}</strong>
+        <span>Weight</span>
+        <strong>${weapon.weight.toFixed(1)}</strong>
       </div>
     `;
 
@@ -2067,7 +2332,7 @@ function fighterProfileForWeapon(weapon) {
     active: clamp(0.07 + weapon.arc * 0.03, 0.08, 0.16),
     recover: clamp(0.15 + weapon.cooldown * 0.2, 0.14, 0.36),
     knockback: clamp(180 + weapon.knockback * 70, 190, 320),
-    blockDrain: clamp(Math.round(10 + weapon.damage * 0.45), 10, 22),
+    blockDrain: clamp(Math.round(8 + weapon.damage * 0.35 + weapon.weight * 0.35), 10, 24),
     lunge: clamp(48 + weapon.reach * 0.18, 52, 84)
   };
 }
@@ -2099,7 +2364,7 @@ function spawnFighter({ team, control, weapon, x, name, color }) {
     crouchHeight: 86,
     slideHeight: 54,
     gravity: 1680,
-    walkSpeed: clamp(150 + weapon.speed * 36 + weapon.moveScale * 28, 136, 220),
+    walkSpeed: clamp(168 + weapon.speed * 32 + weapon.moveScale * 18 - weapon.weight * 1.2, 132, 220),
     onGround: true,
     health: 100,
     maxHealth: 100,
@@ -2650,6 +2915,18 @@ function applyHumanControl(fighter, input, match) {
 }
 
 function applyAiControl(fighter, opponent, match, dt) {
+  if (match.tutorial) {
+    fighter.moveIntent = 0;
+    fighter.aiDecisionTimer = 0;
+    fighter.aiIntent.left = false;
+    fighter.aiIntent.right = false;
+    fighter.aiIntent.block = false;
+    fighter.aiIntent.crouch = false;
+    fighter.blocking = false;
+    fighter.crouching = false;
+    return;
+  }
+
   fighter.moveIntent = 0;
   fighter.aiDecisionTimer -= dt;
 
@@ -2878,7 +3155,7 @@ function resetRound(match) {
   updateHudLabels();
 }
 
-function createMatch() {
+function createMatch({ tutorial = false } = {}) {
   const playerWeapon = weaponById(state.activeWeaponId) || currentBlueprint();
   let rivalWeapon = weaponById(state.rivalWeaponId);
 
@@ -2906,6 +3183,7 @@ function createMatch() {
     setWinner: null,
     finished: false,
     accountRecorded: false,
+    tutorial,
     shake: 0,
     hazardTick: 0,
     events: [],
@@ -2918,13 +3196,17 @@ function createMatch() {
   };
 }
 
-function startMatch() {
+function startMatch({ tutorial = false } = {}) {
+  if (!tutorial) {
+    clearTutorialState();
+  }
   state.feedback.shown = false;
   closeFeedbackPanel();
   primeAudio();
   playSoundEffect("menu-accept");
   state.uiPulse = 0;
-  state.match = createMatch();
+  setScreenFocus("arena");
+  state.match = createMatch({ tutorial });
   primeInputMemory();
   resetRound(state.match);
   pushFightEvent(
@@ -2936,6 +3218,7 @@ function startMatch() {
   updateHudLabels();
   setMenuOpen(false);
   scheduleFeedbackPrompt();
+  renderTutorialPanel();
 }
 
 function updateSparks(match, dt) {
@@ -3030,6 +3313,7 @@ function updateMatch(dt) {
     match.timer = Math.max(0, match.timer - dt);
 
     applyHumanControl(player, p1Input, match);
+    updateTutorialProgress(p1Input, match);
     if (match.mode === "duel") {
       applyHumanControl(enemy, p2Input, match);
     } else {
@@ -3592,7 +3876,7 @@ function renderIdleStage() {
 
   ctx.fillStyle = "rgba(0,0,0,0.34)";
   ctx.fillRect(140, 176, canvas.width - 280, 132);
-  drawBanner("ROUND SET FIGHTER", "Open the menu for bot or PvP, or forge in the workshop.");
+  drawBanner("ROUND SET FIGHTER", "Press Play, choose tutorial or a mode, then jump straight into the arena.");
 
   ctx.fillStyle = "rgba(255,255,255,0.7)";
   ctx.font = "600 16px 'Trebuchet MS', sans-serif";
@@ -3670,9 +3954,7 @@ function handleForgeChange() {
   state.forge.frame = ui.frameSelect.value;
   state.forge.material = ui.materialSelect.value;
   state.forge.edge = ui.edgeSelect.value;
-  state.forge.length = Number(ui.lengthRange.value);
-  state.forge.balance = Number(ui.balanceRange.value);
-  state.forge.temper = Number(ui.temperRange.value);
+  state.forge.heat = Number(ui.heatRange.value);
   renderForge();
   updateHudLabels();
 }
@@ -3694,6 +3976,29 @@ function bindTouchControls() {
     button.addEventListener("pointerup", (event) => setPressed(false, event));
     button.addEventListener("pointerleave", (event) => setPressed(false, event));
     button.addEventListener("pointercancel", (event) => setPressed(false, event));
+  });
+
+  ui.touchControls.querySelectorAll("[data-touch-ui]").forEach((button) => {
+    button.addEventListener("pointerdown", (event) => {
+      event.preventDefault();
+      state.inputProfile.lastSource = "touch";
+      primeAudio();
+    });
+
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      const action = button.dataset.touchUi;
+
+      if (action === "play-bot") {
+        launchMatchFromMenu("solo");
+      } else if (action === "play-pvp") {
+        launchMatchFromMenu("duel");
+      } else if (action === "start-match") {
+        startMatch();
+      } else if (action === "menu") {
+        setMenuOpen(true);
+      }
+    });
   });
 }
 
@@ -3743,9 +4048,7 @@ function bindEvents() {
     ui.frameSelect,
     ui.materialSelect,
     ui.edgeSelect,
-    ui.lengthRange,
-    ui.balanceRange,
-    ui.temperRange
+    ui.heatRange
   ].forEach((element) => {
     element.addEventListener("input", handleForgeChange);
     element.addEventListener("change", handleForgeChange);
@@ -3814,14 +4117,39 @@ function bindEvents() {
 
   ui.openMenu.addEventListener("click", () => setMenuOpen(true));
   ui.closeMenu.addEventListener("click", () => setMenuOpen(false));
+  ui.introPlay.addEventListener("click", () => {
+    primeAudio();
+    playSoundEffect("menu-accept");
+    setIntroOpen(false);
+    state.tutorial.offerVisible = true;
+    setMenuOpen(true);
+    setMatchSummary("Choose tutorial, bot, PvP, or open the forge screen.");
+  });
   ui.menuOpenWorkshop.addEventListener("click", () => {
     primeAudio();
     playSoundEffect("menu-accept");
-    setMenuOpen(false);
-    setMatchSummary("Workshop open. Forge a weapon, set a stage, or start a new set.");
+    openForgeScreen();
+  });
+  ui.startTutorial.addEventListener("click", startTutorial);
+  ui.skipTutorial.addEventListener("click", () => {
+    state.tutorial.offerVisible = false;
+    renderTutorialOffer();
+    setMatchSummary("Tutorial skipped. Pick a mode or open the forge screen whenever you want.");
   });
   ui.menuPlayBot.addEventListener("click", () => launchMatchFromMenu("solo"));
   ui.menuPlayPvp.addEventListener("click", () => launchMatchFromMenu("duel"));
+  ui.toggleScreenFocus.addEventListener("click", () => {
+    if (state.flow.screen === "forge") {
+      setScreenFocus("arena");
+      setMatchSummary("Arena view active.");
+    } else {
+      openForgeScreen();
+    }
+  });
+  ui.closeTutorial.addEventListener("click", () => {
+    dismissTutorial();
+    setMatchSummary("Tutorial panel closed. Keep fighting.");
+  });
   ui.recapRematch.addEventListener("click", startMatch);
   ui.recapMenu.addEventListener("click", () => {
     primeAudio();
@@ -3932,9 +4260,7 @@ function init() {
   ui.materialSelect.value = state.forge.material;
   ui.edgeSelect.value = state.forge.edge;
   ui.weaponName.value = state.forge.name;
-  ui.lengthRange.value = `${state.forge.length}`;
-  ui.balanceRange.value = `${state.forge.balance}`;
-  ui.temperRange.value = `${state.forge.temper}`;
+  ui.heatRange.value = `${state.forge.heat}`;
   ui.roundsToWinValue.textContent = ui.roundsToWin.value;
 
   try {
@@ -3989,13 +4315,17 @@ function init() {
   renderStageSummary();
   updateHudLabels();
   setStatus("Waiting");
-  setMatchSummary("Open the menu, pick bot or PvP, then launch a proper round set.");
+  setMatchSummary("Press Play on the intro screen, then choose tutorial, bot, PvP, or the forge screen.");
   bindEvents();
   renderSoundButtons();
   renderAccountPanel();
   renderReviewList();
   renderFeedbackPanel();
-  setMenuOpen(!window.location.hash.includes("autostart"));
+  setScreenFocus("arena");
+  setIntroOpen(!window.location.hash.includes("autostart"));
+  setMenuOpen(false);
+  renderTutorialOffer();
+  renderTutorialPanel();
   renderBattlefield();
 
   if (window.location.hash.includes("autostart")) {

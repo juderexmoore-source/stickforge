@@ -10,6 +10,22 @@
     <div class="backdrop backdrop-one"></div>
     <div class="backdrop backdrop-two"></div>
 
+    <section class="intro-screen" id="intro-screen" aria-label="Intro screen">
+      <div class="intro-shell panel">
+        <div class="intro-copy">
+          <p class="eyebrow">Arena Entry</p>
+          <h1>Stickforge Arena</h1>
+          <p class="subtitle">
+            Enter the arena first. Then choose whether you want a fast tutorial,
+            bot fight, local PvP set, or a trip to the forge screen.
+          </p>
+        </div>
+        <div class="intro-actions">
+          <button id="intro-play" class="primary-button" type="button">Play</button>
+        </div>
+      </div>
+    </section>
+
     <section class="main-menu" id="main-menu" aria-label="Main menu">
       <div class="main-menu-shell panel">
         <div class="main-menu-hero">
@@ -22,26 +38,26 @@
             <p class="eyebrow">Main Menu</p>
             <h2>Stickforge Arena</h2>
             <p class="subtitle">
-              Sign in, pick a fight, and leave quick local reviews before you
-              jump into the duel.
+              Choose a mode, jump straight into the arena, or open the forge
+              screen when you want to rebuild your loadout.
             </p>
           </div>
           <div class="menu-action-row">
             <button id="menu-play-bot" class="primary-button" type="button">Play Vs Bot</button>
             <button id="menu-play-pvp" class="ghost-button" type="button">Local PvP</button>
-            <button id="menu-open-workshop" class="ghost-button" type="button">Open Workshop</button>
+            <button id="menu-open-workshop" class="ghost-button" type="button">Forge Screen</button>
           </div>
           <div class="menu-summary" id="menu-summary"></div>
           <div class="menu-feature-grid">
             <article class="menu-feature-card">
-              <span>Forge</span>
-              <strong>8 weapon frames</strong>
-              <p>Build quick daggers, long halberds, heavy war hammers, and more.</p>
+              <span>Arena</span>
+              <strong>Jump in fast</strong>
+              <p>Bot fights, local PvP, and tutorial starts now throw you straight into the duel feed.</p>
             </article>
             <article class="menu-feature-card">
-              <span>Duel</span>
-              <strong>Bot or local PvP</strong>
-              <p>Jump into a proper round set against AI or a second local fighter.</p>
+              <span>Forge</span>
+              <strong>Separate build screen</strong>
+              <p>Open the forge screen only when you want to tune weapons, armory picks, and stage rules.</p>
             </article>
             <article class="menu-feature-card">
               <span>Feedback</span>
@@ -50,6 +66,21 @@
             </article>
           </div>
         </div>
+
+        <section class="tutorial-offer hidden" id="tutorial-offer" aria-live="polite">
+          <div>
+            <p class="eyebrow">First Match</p>
+            <h3>Do You Want The Tutorial?</h3>
+            <p class="arena-hint" id="tutorial-offer-copy">
+              The tutorial starts immediately in the arena, teaches one button group
+              at a time, and uses a calm practice bot that does not attack you.
+            </p>
+          </div>
+          <div class="action-row">
+            <button id="start-tutorial" class="primary-button" type="button">Start Tutorial</button>
+            <button id="skip-tutorial" class="ghost-button" type="button">Skip For Now</button>
+          </div>
+        </section>
 
         <div class="main-menu-grid">
           <section class="menu-card">
@@ -147,7 +178,7 @@
             <button id="close-menu" class="ghost-button" type="button">Close Menu</button>
           </div>
           <p class="arena-hint">
-            Bot and PvP both use your current forged weapon, rival loadout, and stage setup.
+            Tutorial, bot, and PvP all start directly in the arena. Open the forge screen only when you want to rebuild.
           </p>
         </div>
       </div>
@@ -174,9 +205,9 @@
           <div class="section-head">
             <div>
               <p class="eyebrow">Weapon Forge</p>
-              <h2>Blueprint Bench</h2>
+              <h2>Simple Forge</h2>
             </div>
-            <span class="section-tag">Main feature</span>
+            <span class="section-tag">Core build</span>
           </div>
 
           <div class="forge-grid">
@@ -186,7 +217,7 @@
             </label>
 
             <label>
-              <span>Frame</span>
+              <span>Weapon Type</span>
               <select id="frame-select"></select>
             </label>
 
@@ -196,28 +227,21 @@
             </label>
 
             <label>
-              <span>Edge Style</span>
+              <span>Sub Weapon Type</span>
               <select id="edge-select"></select>
             </label>
 
             <label>
-              <span>Length</span>
-              <input id="length-range" type="range" min="28" max="92" value="62" />
-              <output id="length-value">62</output>
-            </label>
-
-            <label>
-              <span>Balance</span>
-              <input id="balance-range" type="range" min="-30" max="30" value="4" />
-              <output id="balance-value">4</output>
-            </label>
-
-            <label>
-              <span>Temper</span>
-              <input id="temper-range" type="range" min="20" max="100" value="76" />
-              <output id="temper-value">76</output>
+              <span>Heat</span>
+              <input id="heat-range" type="range" min="0" max="100" value="58" />
+              <output id="heat-value">58%</output>
             </label>
           </div>
+
+          <p class="arena-hint forge-note">
+            Only four build settings change gameplay here. Heat raises both
+            damage and weight.
+          </p>
 
           <div class="preview-card">
             <canvas id="forge-preview" width="360" height="150"></canvas>
@@ -301,6 +325,7 @@
             </label>
 
             <button id="toggle-sound" class="ghost-button" type="button">Sound: On</button>
+            <button id="toggle-screen-focus" class="ghost-button" type="button">Forge Screen</button>
             <button id="open-menu" class="ghost-button" type="button">Main Menu</button>
             <button id="start-match" class="primary-button" type="button">Start Set</button>
           </div>
@@ -406,6 +431,20 @@
             </article>
           </div>
 
+          <section class="tutorial-panel hidden" id="tutorial-panel" aria-live="polite">
+            <div class="tutorial-panel-head">
+              <div>
+                <p class="eyebrow">Tutorial</p>
+                <h3 id="tutorial-title">Arena Basics</h3>
+              </div>
+              <button id="close-tutorial" class="ghost-button" type="button">Close</button>
+            </div>
+            <p id="tutorial-copy" class="arena-hint">
+              Move through the checklist while the bot stays active so you can learn the flow in a real round.
+            </p>
+            <div id="tutorial-checklist" class="tutorial-checklist"></div>
+          </section>
+
           <section class="set-recap hidden" id="set-recap" aria-live="polite">
             <div class="set-recap-head">
               <div>
@@ -465,17 +504,25 @@
         </aside>
 
         <div class="touch-controls" id="touch-controls">
-          <div class="touch-pad">
-            <button data-touch="left">Left</button>
-            <button data-touch="up">Jump</button>
-            <button data-touch="down">Down</button>
-            <button data-touch="right">Right</button>
+          <div class="touch-quickbar">
+            <button data-touch-ui="play-bot" type="button">Play Bot</button>
+            <button data-touch-ui="play-pvp" type="button">PvP</button>
+            <button data-touch-ui="start-match" type="button">Start</button>
+            <button data-touch-ui="menu" type="button">Menu</button>
           </div>
-          <div class="touch-actions">
-            <button data-touch="attack">Strike</button>
-            <button data-touch="block">Block</button>
-            <button data-touch="dodge">Backstep</button>
-            <button data-touch="slide">Lunge</button>
+          <div class="touch-control-grid">
+            <div class="touch-pad">
+              <button data-touch="left" type="button">Left</button>
+              <button data-touch="up" type="button">Jump</button>
+              <button data-touch="down" type="button">Down</button>
+              <button data-touch="right" type="button">Right</button>
+            </div>
+            <div class="touch-actions">
+              <button data-touch="attack" type="button">Strike</button>
+              <button data-touch="block" type="button">Block</button>
+              <button data-touch="dodge" type="button">Backstep</button>
+              <button data-touch="slide" type="button">Lunge</button>
+            </div>
           </div>
         </div>
 
@@ -484,7 +531,7 @@
             <h3>Controls</h3>
             <p><strong>Player 1:</strong> A/D move, W jump, S crouch, move the mouse to aim the weapon, left click strike, right click block.</p>
             <p><strong>Abilities:</strong> Q backstep, E lunge, and fast mouse swings deal light bonus clip damage.</p>
-            <p><strong>Mobile:</strong> Use the touch deck for movement and actions. Mobile aim now auto-locks toward the rival so attacks stay usable on phones.</p>
+            <p><strong>Mobile:</strong> Use the touch deck for movement and actions. The new quickbar has Play Bot, PvP, Start, and Menu buttons, and mobile aim auto-locks toward the rival.</p>
             <p><strong>Controller:</strong> Left stick or D-pad moves, right stick aims, A jumps, RT or X attacks, LT or LB blocks, B dodges, Y or RB lunges, and Start opens the menu.</p>
             <p><strong>Local PvP:</strong> Player 2 uses J/L move, I jump, K crouch, O strike, U block, P backstep, and ; lunge.</p>
           </div>

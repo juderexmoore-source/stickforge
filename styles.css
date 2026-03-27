@@ -111,6 +111,59 @@ body::before {
   z-index: 1;
 }
 
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 11;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top, rgba(232, 107, 58, 0.18), transparent 28%),
+    rgba(7, 6, 10, 0.8);
+  backdrop-filter: blur(18px);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 180ms ease,
+    visibility 180ms ease;
+}
+
+.intro-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.intro-shell {
+  width: min(760px, 100%);
+  display: grid;
+  gap: 24px;
+  padding: 34px;
+  text-align: center;
+  background:
+    radial-gradient(circle at top, rgba(111, 210, 198, 0.12), transparent 32%),
+    radial-gradient(circle at bottom, rgba(232, 107, 58, 0.16), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.14)),
+    var(--panel-strong);
+}
+
+.intro-copy {
+  display: grid;
+  gap: 14px;
+}
+
+.intro-copy h1 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.6rem, 5vw, 4.6rem);
+}
+
+.intro-actions {
+  display: flex;
+  justify-content: center;
+}
+
 .main-menu {
   position: fixed;
   inset: 0;
@@ -204,6 +257,22 @@ body::before {
   display: grid;
   grid-template-columns: minmax(320px, 0.9fr) minmax(340px, 1.1fr);
   gap: 20px;
+}
+
+.tutorial-offer {
+  display: grid;
+  gap: 16px;
+  padding: 18px 20px;
+  border-radius: 22px;
+  border: 1px solid rgba(111, 210, 198, 0.2);
+  background:
+    radial-gradient(circle at top left, rgba(111, 210, 198, 0.14), transparent 32%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.12)),
+    rgba(255, 255, 255, 0.04);
+}
+
+.tutorial-offer.hidden {
+  display: none;
 }
 
 .menu-card {
@@ -382,6 +451,23 @@ body::before {
   align-content: start;
 }
 
+body.arena-focus .app-shell {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+body.arena-focus .sidebar-stack {
+  display: none;
+}
+
+body.arena-focus .stage-panel {
+  width: min(1240px, 100%);
+  margin-inline: auto;
+}
+
+body.forge-focus .sidebar-stack {
+  display: grid;
+}
+
 .panel {
   border: 1px solid var(--panel-border);
   border-radius: 26px;
@@ -434,6 +520,10 @@ body::before {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
   margin-top: 18px;
+}
+
+.forge-note {
+  margin: 14px 0 0;
 }
 
 label {
@@ -577,6 +667,20 @@ output {
   display: block;
   font-size: 1.25rem;
   margin: 6px 0 8px;
+}
+
+.stat-card span {
+  color: var(--gold);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.stat-card p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.4;
+  font-size: 0.88rem;
 }
 
 .bar-track {
@@ -1240,6 +1344,79 @@ button:active {
     rgba(255, 255, 255, 0.03);
 }
 
+.tutorial-panel {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 22px;
+  border: 1px solid rgba(111, 210, 198, 0.18);
+  background:
+    radial-gradient(circle at top left, rgba(111, 210, 198, 0.12), transparent 36%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.12)),
+    rgba(255, 255, 255, 0.03);
+}
+
+.tutorial-panel.hidden {
+  display: none;
+}
+
+.tutorial-panel-head {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tutorial-panel-head h3 {
+  margin: 0;
+}
+
+.tutorial-checklist {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.tutorial-check {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.tutorial-check span {
+  color: var(--gold);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.tutorial-check strong,
+.tutorial-check p {
+  margin: 0;
+}
+
+.tutorial-check p {
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.tutorial-check.done {
+  border-color: rgba(111, 210, 198, 0.28);
+  background:
+    linear-gradient(180deg, rgba(111, 210, 198, 0.12), rgba(0, 0, 0, 0.1)),
+    rgba(255, 255, 255, 0.04);
+}
+
+.tutorial-check.current {
+  border-color: rgba(232, 107, 58, 0.28);
+  background:
+    linear-gradient(180deg, rgba(232, 107, 58, 0.14), rgba(0, 0, 0, 0.1)),
+    rgba(255, 255, 255, 0.04);
+}
+
 .set-recap.hidden {
   display: none;
 }
@@ -1437,7 +1614,7 @@ button:active {
 
 .touch-controls {
   display: none;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 18px;
 }
 
@@ -1449,10 +1626,20 @@ button:active {
   user-select: none;
 }
 
+.touch-quickbar,
+.touch-control-grid,
 .touch-pad,
 .touch-actions {
   display: grid;
   gap: 10px;
+}
+
+.touch-quickbar {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.touch-control-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .touch-pad {
@@ -1463,6 +1650,7 @@ button:active {
   grid-template-columns: repeat(2, minmax(72px, 1fr));
 }
 
+.touch-quickbar button,
 .touch-actions button,
 .touch-pad button {
   min-height: 56px;
@@ -1500,11 +1688,17 @@ body.touch-device .touch-controls {
   backdrop-filter: blur(18px);
 }
 
+body.touch-device .touch-quickbar,
+body.touch-device .touch-control-grid {
+  width: 100%;
+}
+
 body.touch-device .touch-pad,
 body.touch-device .touch-actions {
   flex: 1;
 }
 
+body.touch-device .touch-quickbar button,
 body.touch-device .touch-pad button,
 body.touch-device .touch-actions button {
   min-height: 68px;
@@ -1549,7 +1743,8 @@ body.touch-device .touch-actions button {
   .set-recap-grid,
   .broadcast-deck,
   .broadcast-grid,
-  .set-stats {
+  .set-stats,
+  .tutorial-checklist {
     grid-template-columns: 1fr;
   }
 }
@@ -1595,9 +1790,14 @@ body.touch-device .touch-actions button {
     padding: 16px;
   }
 
+  .intro-screen {
+    padding: 16px;
+  }
+
   .main-menu-shell,
   .menu-card,
-  .main-menu-hero {
+  .main-menu-hero,
+  .intro-shell {
     padding: 18px;
   }
 
@@ -1614,6 +1814,12 @@ body.touch-device .touch-actions button {
     padding: 10px;
   }
 
+  .touch-quickbar,
+  .touch-control-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body.touch-device .touch-quickbar button,
   body.touch-device .touch-pad button,
   body.touch-device .touch-actions button {
     min-height: 60px;
