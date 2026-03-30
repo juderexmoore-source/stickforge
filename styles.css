@@ -1094,6 +1094,10 @@ button:active {
   pointer-events: none;
 }
 
+.arena-screen {
+  position: relative;
+}
+
 .battlefield-marquee,
 .battlefield-footer {
   display: flex;
@@ -1728,7 +1732,7 @@ body.touch-device .stage-panel {
 }
 
 body.touch-device .battlefield-shell {
-  padding-bottom: 244px;
+  padding-bottom: 14px;
 }
 
 body.touch-device .feedback-panel {

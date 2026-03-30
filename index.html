@@ -425,7 +425,30 @@
             </article>
           </div>
 
-          <canvas id="battlefield" width="960" height="540" aria-label="Battlefield"></canvas>
+          <div class="arena-screen">
+            <canvas id="battlefield" width="960" height="540" aria-label="Battlefield"></canvas>
+
+            <div class="touch-controls" id="touch-controls">
+              <div class="touch-quickbar">
+                <button data-touch-ui="tutorial" type="button">Tutorial</button>
+                <button data-touch-ui="pause" type="button">Pause</button>
+              </div>
+              <div class="touch-control-grid">
+                <div class="touch-pad">
+                  <button data-touch="left" type="button">Left</button>
+                  <button data-touch="up" type="button">Jump</button>
+                  <button data-touch="down" type="button">Down</button>
+                  <button data-touch="right" type="button">Right</button>
+                </div>
+                <div class="touch-actions">
+                  <button data-touch="attack" type="button">Strike</button>
+                  <button data-touch="block" type="button">Block</button>
+                  <button data-touch="dodge" type="button">Backstep</button>
+                  <button data-touch="slide" type="button">Lunge</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div class="battlefield-footer">
             <div class="battlefield-stat">
@@ -477,27 +500,6 @@
             </p>
             <div id="tutorial-checklist" class="tutorial-checklist"></div>
           </section>
-
-          <div class="touch-controls" id="touch-controls">
-            <div class="touch-quickbar">
-              <button data-touch-ui="tutorial" type="button">Tutorial</button>
-              <button data-touch-ui="pause" type="button">Pause</button>
-            </div>
-            <div class="touch-control-grid">
-              <div class="touch-pad">
-                <button data-touch="left" type="button">Left</button>
-                <button data-touch="up" type="button">Jump</button>
-                <button data-touch="down" type="button">Down</button>
-                <button data-touch="right" type="button">Right</button>
-              </div>
-              <div class="touch-actions">
-                <button data-touch="attack" type="button">Strike</button>
-                <button data-touch="block" type="button">Block</button>
-                <button data-touch="dodge" type="button">Backstep</button>
-                <button data-touch="slide" type="button">Lunge</button>
-              </div>
-            </div>
-          </div>
 
           <section class="set-recap hidden" id="set-recap" aria-live="polite">
             <div class="set-recap-head">
