@@ -250,7 +250,12 @@
             </label>
 
             <label>
-              <span>Weapon Type</span>
+              <span>Blade Type</span>
+              <select id="class-select"></select>
+            </label>
+
+            <label>
+              <span>Sub-Type</span>
               <select id="frame-select"></select>
             </label>
 
@@ -260,7 +265,7 @@
             </label>
 
             <label>
-              <span>Sub Weapon Type</span>
+              <span>Style</span>
               <select id="edge-select"></select>
             </label>
 
@@ -272,8 +277,8 @@
           </div>
 
           <p class="arena-hint forge-note">
-            Only four build settings change gameplay here. Heat raises both
-            damage and weight.
+            Pick a blade type first, then the weapon sub-type. Only medium blades
+            use styles. Heat still raises both damage and weight.
           </p>
 
           <div class="preview-card">
@@ -285,6 +290,39 @@
                 finishers.
               </p>
               <div class="forge-badges" id="forge-badges"></div>
+              <div class="forge-minigame" id="forge-minigame">
+                <div class="forge-minigame-head">
+                  <div>
+                    <p class="eyebrow" id="forge-minigame-title">Forge Drill</p>
+                    <p id="forge-minigame-copy">Start the forge drill to tune this blade.</p>
+                  </div>
+                  <span class="menu-status alt" id="forge-minigame-rating">Field Ready</span>
+                </div>
+                <div class="forge-minigame-bar" id="forge-minigame-bar">
+                  <div class="forge-minigame-target" id="forge-minigame-target"></div>
+                  <div class="forge-minigame-indicator" id="forge-minigame-indicator"></div>
+                  <div class="forge-minigame-pips" id="forge-minigame-pips"></div>
+                </div>
+                <div class="forge-minigame-meta" id="forge-minigame-meta">
+                  <div class="forge-minigame-chip">
+                    <span>Progress</span>
+                    <strong id="forge-minigame-progress">0%</strong>
+                  </div>
+                  <div class="forge-minigame-chip">
+                    <span>Time</span>
+                    <strong id="forge-minigame-time">Ready</strong>
+                  </div>
+                  <div class="forge-minigame-chip">
+                    <span>Streak</span>
+                    <strong id="forge-minigame-streak">x0</strong>
+                  </div>
+                </div>
+                <p class="arena-hint" id="forge-minigame-status">No forging run yet. This weapon is using a balanced default finish.</p>
+                <div class="action-row forge-minigame-actions">
+                  <button id="forge-start" class="ghost-button" type="button">Start Forge Drill</button>
+                  <button id="forge-action" class="primary-button" type="button">Strike</button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -444,7 +482,7 @@
                 <button data-touch="attack" type="button">Strike</button>
                 <button data-touch="block" type="button">Block</button>
                 <button data-touch="dodge" type="button">Backstep</button>
-                <button data-touch="slide" type="button">Lunge</button>
+                <button data-touch="slide" type="button">Dash</button>
               </div>
             </div>
           </div>
@@ -562,7 +600,7 @@
           <div class="controls-card">
             <h3>Controls</h3>
             <div id="control-guide" class="control-guide"></div>
-            <p><strong>Local PvP:</strong> Player 2 uses J/L move, I jump, K crouch, O strike, U block, P backstep, and ; lunge.</p>
+              <p><strong>Local PvP:</strong> Player 2 uses J/L move, I jump, K crouch, O strike, U block, P backstep, and ; dash.</p>
           </div>
           <div class="controls-card">
             <h3>Fight Feed</h3>

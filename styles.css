@@ -502,10 +502,21 @@ body.forge-focus .sidebar-stack {
   padding: 20px;
 }
 
+.forge-panel {
+  background:
+    radial-gradient(circle at top left, rgba(232, 107, 58, 0.14), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(0, 0, 0, 0.15)),
+    var(--panel);
+}
+
 .stage-panel {
   position: relative;
   display: grid;
   gap: 18px;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.05), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.14)),
+    var(--panel);
 }
 
 .section-head,
@@ -581,6 +592,11 @@ select {
   color: var(--text);
 }
 
+select:disabled {
+  opacity: 0.64;
+  cursor: not-allowed;
+}
+
 input[type="range"] {
   width: 100%;
   accent-color: var(--accent);
@@ -608,15 +624,126 @@ output {
 #forge-preview {
   width: 100%;
   border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent),
     radial-gradient(circle at left, rgba(232, 107, 58, 0.18), transparent 42%),
     rgba(10, 10, 15, 0.48);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 18px 34px rgba(0, 0, 0, 0.24);
 }
 
 .preview-card h3 {
   margin: 0;
   font-size: 1.25rem;
+}
+
+.forge-minigame {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.12)),
+    rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.forge-minigame-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: start;
+}
+
+.forge-minigame-head p {
+  margin: 4px 0 0;
+}
+
+.forge-minigame-bar {
+  position: relative;
+  height: 34px;
+  border-radius: 999px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.18)),
+    rgba(8, 8, 14, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.forge-minigame-target,
+.forge-minigame-indicator,
+.forge-minigame-pips {
+  position: absolute;
+  inset: 0;
+}
+
+.forge-minigame-target {
+  background: linear-gradient(90deg, transparent var(--target-start, 38%), rgba(255, 208, 124, 0.44) var(--target-start, 38%), rgba(255, 208, 124, 0.7) var(--target-end, 62%), transparent var(--target-end, 62%));
+}
+
+.forge-minigame-indicator::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: calc(var(--indicator, 50%) - 8px);
+  width: 16px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(137, 230, 220, 0.96), rgba(97, 197, 188, 0.94));
+  box-shadow: 0 0 18px rgba(137, 230, 220, 0.42);
+}
+
+.forge-minigame-pips {
+  pointer-events: none;
+}
+
+.forge-pip {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  border: 2px solid rgba(255, 255, 255, 0.46);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.forge-pip.hit {
+  background: rgba(137, 230, 220, 0.72);
+  border-color: rgba(137, 230, 220, 0.92);
+}
+
+.forge-minigame-actions {
+  margin-top: 0;
+}
+
+.forge-minigame-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.forge-minigame-chip {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.forge-minigame-chip span {
+  color: var(--muted);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.forge-minigame-chip strong {
+  font-size: 1rem;
 }
 
 .preview-card p,
@@ -1076,12 +1203,13 @@ button:active {
   padding: 14px;
   border-radius: 28px;
   background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.06), transparent 32%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.18)),
     rgba(0, 0, 0, 0.22);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    0 26px 60px rgba(0, 0, 0, 0.3);
+    0 30px 68px rgba(0, 0, 0, 0.34);
   animation: rise-in 280ms ease both;
 }
 
@@ -1142,10 +1270,13 @@ button:active {
   gap: 10px;
   padding: 14px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.14)),
     rgba(255, 255, 255, 0.03);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 16px 30px rgba(0, 0, 0, 0.18);
 }
 
 .player-side {
@@ -1679,8 +1810,7 @@ button:active {
 
 .touch-controls {
   display: none;
-  flex-direction: column;
-  gap: 18px;
+  gap: 16px;
 }
 
 #battlefield,
@@ -1718,10 +1848,39 @@ button:active {
 .touch-quickbar button,
 .touch-actions button,
 .touch-pad button {
-  min-height: 56px;
+  min-height: 64px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 18px;
   background: rgba(255, 255, 255, 0.07);
   color: var(--text);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.touch-pad,
+.touch-actions {
+  padding: 12px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.14)),
+    rgba(255, 255, 255, 0.03);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 12px 24px rgba(0, 0, 0, 0.14);
+}
+
+.touch-pad button[data-touch="up"],
+.touch-actions button[data-touch="attack"] {
+  background:
+    radial-gradient(circle at top, rgba(232, 107, 58, 0.22), transparent 58%),
+    rgba(255, 255, 255, 0.08);
+}
+
+.touch-actions button[data-touch="block"] {
+  background:
+    radial-gradient(circle at top, rgba(111, 210, 198, 0.2), transparent 58%),
+    rgba(255, 255, 255, 0.08);
 }
 
 body.touch-device {
@@ -1745,12 +1904,16 @@ body.touch-device .feedback-panel {
 }
 
 body.touch-device .touch-controls {
+  position: sticky;
+  bottom: max(8px, env(safe-area-inset-bottom, 0px));
+  z-index: 5;
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
   width: 100%;
   margin-top: 10px;
-  padding: 0;
+  padding: 12px 0 0;
+  background: linear-gradient(180deg, rgba(10, 10, 15, 0), rgba(10, 10, 15, 0.86) 32%);
 }
 
 body.touch-device .stage-topbar .mode-row label,
@@ -1815,7 +1978,7 @@ body.touch-device .touch-quickbar {
 body.touch-device .touch-quickbar button,
 body.touch-device .touch-pad button,
 body.touch-device .touch-actions button {
-  min-height: 68px;
+  min-height: 72px;
   font-weight: 700;
   letter-spacing: 0.02em;
   border-radius: 18px;
@@ -1926,7 +2089,7 @@ body.touch-device .touch-actions button {
   body.touch-device .touch-controls {
     display: grid;
     gap: 10px;
-    padding: 0;
+    padding: 10px 0 0;
     grid-template-columns: 1fr;
   }
 
@@ -1942,6 +2105,6 @@ body.touch-device .touch-actions button {
   body.touch-device .touch-quickbar button,
   body.touch-device .touch-pad button,
   body.touch-device .touch-actions button {
-    min-height: 60px;
+    min-height: 68px;
   }
 }
