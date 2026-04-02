@@ -230,7 +230,7 @@
                 </article>
                 <article class="style-pill-card">
                   <span>Mastery</span>
-                  <strong id="style-mastery-points">0 / 100000</strong>
+              <strong id="style-mastery-points">0 / 250</strong>
                 </article>
                 <article class="style-pill-card">
                   <span>Mastery Weapon</span>
@@ -244,19 +244,19 @@
             <div class="style-path-grid" id="style-path-grid">
               <article class="style-path-card">
                 <span>Agility</span>
-                <strong id="style-agility-level">0 / 5</strong>
+              <strong id="style-agility-level">0 / 50</strong>
                 <p id="style-agility-copy">Train movement and evasive control.</p>
                 <button id="train-agility" class="ghost-button" type="button">Train Agility</button>
               </article>
               <article class="style-path-card">
                 <span>Strength</span>
-                <strong id="style-strength-level">0 / 5</strong>
+              <strong id="style-strength-level">0 / 50</strong>
                 <p id="style-strength-copy">Train power and hit finishers.</p>
                 <button id="train-strength" class="ghost-button" type="button">Train Strength</button>
               </article>
               <article class="style-path-card">
                 <span>Defense</span>
-                <strong id="style-defense-level">0 / 5</strong>
+              <strong id="style-defense-level">0 / 50</strong>
                 <p id="style-defense-copy">Train guard and survival tools.</p>
                 <button id="train-defense" class="ghost-button" type="button">Train Defense</button>
               </article>
@@ -354,7 +354,12 @@
             </label>
 
             <label>
-              <span>Blade Type</span>
+              <span>Combat Type</span>
+              <select id="family-select"></select>
+            </label>
+
+            <label>
+              <span>Weapon Class</span>
               <select id="class-select"></select>
             </label>
 
@@ -368,7 +373,7 @@
               <select id="material-select"></select>
             </label>
 
-            <label>
+            <label id="style-label">
               <span>Style</span>
               <select id="edge-select"></select>
             </label>
@@ -381,8 +386,7 @@
           </div>
 
           <p class="arena-hint forge-note">
-            Pick a blade type first, then the weapon sub-type. Only medium blades
-            use styles. Heat still raises both damage and weight.
+            Pick melee or ranged first, then the class and sub-type. Melee weapons now use built-in weapon traits only, while ranged weapons build ammo through chambers, launch powder, mid-flight mods, and tip tuning. Heat still raises both damage and weight.
           </p>
 
           <div class="preview-card">
@@ -432,6 +436,93 @@
 
           <div class="stats-grid" id="forge-stats"></div>
           <div class="forge-details" id="forge-details"></div>
+
+          <section class="ammo-workshop" id="ammo-workshop">
+            <div class="section-head compact">
+              <div>
+                <p class="eyebrow">Ammo Workshop</p>
+                <h3>Craft Rounds</h3>
+              </div>
+              <span class="section-tag" id="ammo-workshop-family">Bullet Work</span>
+            </div>
+            <p class="arena-hint" id="ammo-workshop-note">
+              Craft ammo separately, then stack it into the case in the exact order the gun will load it.
+            </p>
+            <div class="ammo-workshop-grid">
+              <div class="ammo-card">
+                <label id="impact-chambers-label">
+                  <span>Impact Chambers</span>
+                  <select id="impact-chambers"></select>
+                </label>
+
+                <label id="impact-mount-label">
+                  <span>Chamber Layout</span>
+                  <select id="impact-mount"></select>
+                </label>
+
+                <div class="ammo-stack-field" id="impact-type-label">
+                  <span>Per-Chamber Impacts</span>
+                  <div class="impact-chamber-list" id="impact-chamber-list"></div>
+                </div>
+
+                <label id="launch-type-label">
+                  <span>Launch</span>
+                  <select id="launch-type"></select>
+                </label>
+
+                <div class="ammo-stack-field" id="mid-air-type-label">
+                  <span>Mid Air Add-Ons</span>
+                  <div class="inline-select-row">
+                    <select id="mid-air-type"></select>
+                    <button id="add-mid-air-addon" class="ghost-button" type="button">Add</button>
+                  </div>
+                  <div class="token-list" id="mid-air-addon-list"></div>
+                </div>
+
+                <label id="tip-type-label">
+                  <span>Tip</span>
+                  <select id="tip-type"></select>
+                </label>
+
+                <label id="preload-ammo-label">
+                  <span>Preload Ammo</span>
+                  <select id="preload-ammo"></select>
+                </label>
+              </div>
+
+              <div class="ammo-card">
+                <canvas id="ammo-preview" width="360" height="150"></canvas>
+                <div class="ammo-summary" id="ammo-summary"></div>
+                <div class="action-row">
+                  <button id="save-ammo" class="primary-button" type="button">Craft Ammo</button>
+                  <button id="add-ammo-to-case" class="ghost-button" type="button">Load Into Case</button>
+                  <button id="clear-ammo-case" class="ghost-button" type="button">Clear Case</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="ammo-storage-grid">
+              <div class="ammo-card">
+                <div class="section-head compact">
+                  <div>
+                    <p class="eyebrow">Stored Rounds</p>
+                    <h3>Ammo Rack</h3>
+                  </div>
+                </div>
+                <div class="ammo-rack" id="ammo-rack"></div>
+              </div>
+
+              <div class="ammo-card">
+                <div class="section-head compact">
+                  <div>
+                    <p class="eyebrow">Loaded Order</p>
+                    <h3>Ammo Case</h3>
+                  </div>
+                </div>
+                <div class="ammo-case-list" id="ammo-case-list"></div>
+              </div>
+            </div>
+          </section>
 
           <div class="action-row">
             <button id="save-weapon" class="primary-button">Save To Armory</button>
@@ -574,6 +665,7 @@
           <div class="touch-controls" id="touch-controls">
             <div class="touch-quickbar">
               <button data-touch-ui="pause" type="button">Pause</button>
+              <button data-touch="reload" type="button">Reload</button>
             </div>
             <div class="touch-control-grid">
               <div class="touch-pad">

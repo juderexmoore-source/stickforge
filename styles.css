@@ -825,6 +825,194 @@ output {
   margin-top: 16px;
 }
 
+.ammo-workshop {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at top right, rgba(111, 210, 198, 0.12), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.12)),
+    rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ammo-workshop-grid,
+.ammo-storage-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.ammo-card {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.08)),
+    rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ammo-stack-field {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.ammo-stack-field > span {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.inline-select-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+
+.impact-chamber-list,
+.ammo-rack,
+.ammo-case-list,
+.token-list {
+  display: grid;
+  gap: 10px;
+}
+
+.chamber-row,
+.ammo-rack-item,
+.ammo-case-slot,
+.token-item {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.chamber-row header,
+.ammo-rack-item header,
+.ammo-case-slot header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.chamber-row strong,
+.ammo-rack-item strong,
+.ammo-case-slot strong,
+.token-item strong,
+.ammo-summary strong {
+  font-size: 0.96rem;
+}
+
+.chamber-row p,
+.ammo-rack-item p,
+.ammo-case-slot p,
+.token-item p,
+.ammo-summary p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.token-list {
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
+
+.token-item {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.token-item button,
+.ammo-case-actions button,
+.ammo-rack-item button {
+  min-height: 0;
+}
+
+.ammo-rack-item.active {
+  border-color: rgba(242, 220, 170, 0.4);
+  box-shadow: 0 0 0 1px rgba(242, 220, 170, 0.24) inset;
+}
+
+.ammo-case-slot {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.ammo-case-slot-index {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(232, 107, 58, 0.18);
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.ammo-case-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.ammo-case-actions {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 8px;
+}
+
+#ammo-preview {
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at right, rgba(111, 210, 198, 0.18), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent),
+    rgba(10, 10, 15, 0.48);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 18px 34px rgba(0, 0, 0, 0.24);
+}
+
+.ammo-summary {
+  display: grid;
+  gap: 8px;
+}
+
+.ammo-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.ammo-summary-chip {
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ammo-summary-chip span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.ammo-summary-chip strong {
+  display: block;
+  margin-top: 4px;
+}
+
 .forge-detail-card {
   display: grid;
   gap: 8px;
@@ -1886,7 +2074,7 @@ button:active {
 }
 
 .touch-quickbar {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .touch-control-grid {
@@ -1930,6 +2118,12 @@ button:active {
 .touch-actions button[data-touch="attack"] {
   background:
     radial-gradient(circle at top, rgba(232, 107, 58, 0.22), transparent 58%),
+    rgba(255, 255, 255, 0.08);
+}
+
+.touch-quickbar button[data-touch="reload"] {
+  background:
+    radial-gradient(circle at top, rgba(242, 220, 170, 0.22), transparent 58%),
     rgba(255, 255, 255, 0.08);
 }
 
@@ -1977,6 +2171,22 @@ body.touch-device #toggle-screen-focus,
 body.touch-device #open-menu,
 body.touch-device #start-match {
   display: none;
+}
+
+@media (max-width: 820px) {
+  .ammo-workshop-grid,
+  .ammo-storage-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ammo-case-slot {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .ammo-case-actions {
+    grid-column: 1 / -1;
+    justify-content: start;
+  }
 }
 
 body.arena-fullscreen {

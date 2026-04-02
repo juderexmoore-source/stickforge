@@ -418,6 +418,422 @@ const frameCatalog = {
       summary: "Dash becomes a rushing baton flurry that keeps pressure close."
     }
   },
+  revolver: {
+    label: "Revolver",
+    classLabel: "Sidearm",
+    kind: "sidearm",
+    family: "ranged",
+    ammoType: "bullet",
+    clipSize: 6,
+    chamberMax: 1,
+    projectileSpeed: 780,
+    reload: 0.92,
+    range: 420,
+    summary: "A quick sidearm with steady bullet pressure. It fits small chamber rounds and reloads fast.",
+    design: "Quick-draw cylinder pistol",
+    damage: 15,
+    reach: 112,
+    cooldown: 0.34,
+    knockback: 0.88,
+    arc: 0.86,
+    speed: 1.18,
+    moveScale: 1.08,
+    weight: 7,
+    special: {
+      type: "ranged-sidearm",
+      summary: "Fast draw pistol built for light rounds and quick reloads."
+    }
+  },
+  handcannon: {
+    label: "Hand Cannon",
+    classLabel: "Sidearm",
+    kind: "sidearm",
+    family: "ranged",
+    ammoType: "bullet",
+    clipSize: 4,
+    chamberMax: 2,
+    projectileSpeed: 740,
+    reload: 1.08,
+    range: 400,
+    summary: "A heavy sidearm that can carry thicker rounds and hit much harder than a standard pistol.",
+    design: "Heavy frame pistol",
+    damage: 20,
+    reach: 104,
+    cooldown: 0.42,
+    knockback: 1.08,
+    arc: 0.82,
+    speed: 1.02,
+    moveScale: 1.02,
+    weight: 10,
+    special: {
+      type: "ranged-sidearm",
+      summary: "Heavy pistol built for chambered specialty shots."
+    }
+  },
+  machinepistol: {
+    label: "Machine Pistol",
+    classLabel: "Sidearm",
+    kind: "sidearm",
+    family: "ranged",
+    ammoType: "bullet",
+    clipSize: 9,
+    chamberMax: 1,
+    projectileSpeed: 820,
+    reload: 0.82,
+    range: 390,
+    summary: "A tiny bullet hose built for fast close pressure. It cannot carry big chamber rounds, but it floods the lane with quick fire.",
+    design: "Compact burst sidearm",
+    damage: 11,
+    reach: 102,
+    cooldown: 0.18,
+    knockback: 0.76,
+    arc: 0.78,
+    speed: 1.24,
+    moveScale: 1.12,
+    weight: 6,
+    special: {
+      type: "burst-sidearm",
+      summary: "Fires short double taps instead of a single sidearm shot."
+    }
+  },
+  ak47: {
+    label: "AK-47",
+    classLabel: "Assault",
+    kind: "assault",
+    family: "ranged",
+    ammoType: "bullet",
+    clipSize: 12,
+    chamberMax: 2,
+    projectileSpeed: 840,
+    reload: 1.22,
+    range: 460,
+    summary: "A medium assault rifle with balanced recoil, reliable fire, and enough room for upgraded impact setups.",
+    design: "Stamped assault rifle",
+    damage: 16,
+    reach: 122,
+    cooldown: 0.26,
+    knockback: 0.92,
+    arc: 0.84,
+    speed: 1.1,
+    moveScale: 1.02,
+    weight: 12,
+    special: {
+      type: "ranged-assault",
+      summary: "Full-size rifle built for sustained fire and upgraded rounds."
+    }
+  },
+  burstcarbine: {
+    label: "Burst Carbine",
+    classLabel: "Assault",
+    kind: "assault",
+    family: "ranged",
+    ammoType: "bullet",
+    clipSize: 10,
+    chamberMax: 2,
+    projectileSpeed: 860,
+    reload: 1.16,
+    range: 470,
+    summary: "A tighter medium rifle that fires sharp, stable bursts and keeps strong mid-range pressure.",
+    design: "Compact burst rifle",
+    damage: 15,
+    reach: 120,
+    cooldown: 0.24,
+    knockback: 0.9,
+    arc: 0.82,
+    speed: 1.14,
+    moveScale: 1.04,
+    weight: 11,
+    special: {
+      type: "ranged-assault",
+      summary: "Burst rifle with quick follow-up shots and strong projectile control."
+    }
+  },
+  marksman: {
+    label: "Marksman Rifle",
+    classLabel: "Assault",
+    kind: "assault",
+    family: "ranged",
+    ammoType: "bullet",
+    clipSize: 7,
+    chamberMax: 2,
+    projectileSpeed: 930,
+    reload: 1.18,
+    range: 560,
+    summary: "A precise long rifle that shoots slower than an assault weapon but carries harder, cleaner rounds through the lane.",
+    design: "Long receiver rifle",
+    damage: 19,
+    reach: 142,
+    cooldown: 0.34,
+    knockback: 1,
+    arc: 0.76,
+    speed: 1.02,
+    moveScale: 0.96,
+    weight: 13,
+    special: {
+      type: "pierce-rifle",
+      summary: "Precise rifle shots punch farther and pierce more cleanly."
+    }
+  },
+  sniper: {
+    label: "Sniper",
+    classLabel: "Assault",
+    kind: "assault",
+    family: "ranged",
+    ammoType: "bullet",
+    clipSize: 3,
+    chamberMax: 2,
+    projectileSpeed: 1040,
+    reload: 1.34,
+    range: 640,
+    summary: "A long-lane rifle built for hard single shots. It fires slowly, but it owns the far end of the arena.",
+    design: "Long scope rifle",
+    damage: 28,
+    reach: 158,
+    cooldown: 0.66,
+    knockback: 1.28,
+    arc: 0.7,
+    speed: 0.92,
+    moveScale: 0.82,
+    weight: 16,
+    special: {
+      type: "scope-shot",
+      summary: "Single heavy shots fly fast, hit hard, and pierce deep through the lane."
+    }
+  },
+  siegecannon: {
+    label: "Siege Cannon",
+    classLabel: "Heavy",
+    kind: "heavy",
+    family: "ranged",
+    ammoType: "bullet",
+    clipSize: 3,
+    chamberMax: 3,
+    projectileSpeed: 720,
+    reload: 1.56,
+    range: 500,
+    summary: "A huge heavy firearm built for thick impact chambers, brutal knockback, and crushing single-shot hits.",
+    design: "Oversized siege rifle",
+    damage: 26,
+    reach: 136,
+    cooldown: 0.58,
+    knockback: 1.36,
+    arc: 0.8,
+    speed: 0.9,
+    moveScale: 0.84,
+    weight: 22,
+    special: {
+      type: "ranged-heavy",
+      summary: "Heavy cannon that carries the largest chamber rounds."
+    }
+  },
+  ironhowl: {
+    label: "Iron Howl",
+    classLabel: "Heavy",
+    kind: "heavy",
+    family: "ranged",
+    ammoType: "bullet",
+    clipSize: 5,
+    chamberMax: 3,
+    projectileSpeed: 760,
+    reload: 1.42,
+    range: 490,
+    summary: "A strong heavy rifle with a little more room to fire repeatedly before reloading.",
+    design: "Heavy breaker rifle",
+    damage: 22,
+    reach: 130,
+    cooldown: 0.46,
+    knockback: 1.22,
+    arc: 0.82,
+    speed: 0.96,
+    moveScale: 0.9,
+    weight: 18,
+    special: {
+      type: "ranged-heavy",
+      summary: "Heavy rifle tuned for stronger knockback and larger payloads."
+    }
+  },
+  flakcannon: {
+    label: "Flak Cannon",
+    classLabel: "Heavy",
+    kind: "heavy",
+    family: "ranged",
+    ammoType: "bullet",
+    clipSize: 2,
+    chamberMax: 3,
+    projectileSpeed: 690,
+    reload: 1.62,
+    range: 450,
+    summary: "A brutal heavy gun that fires a fan of payload shards. It owns mid range and loves explosive or scatter chamber work.",
+    design: "Wide-mouth flak gun",
+    damage: 24,
+    reach: 138,
+    cooldown: 0.62,
+    knockback: 1.28,
+    arc: 0.82,
+    speed: 0.86,
+    moveScale: 0.8,
+    weight: 24,
+    special: {
+      type: "flak-cannon",
+      summary: "Each shot spreads into a short flak fan instead of a single heavy slug."
+    }
+  },
+  minigun: {
+    label: "Minigun",
+    classLabel: "Heavy",
+    kind: "heavy",
+    family: "ranged",
+    ammoType: "bullet",
+    clipSize: 18,
+    chamberMax: 2,
+    projectileSpeed: 800,
+    reload: 1.86,
+    range: 500,
+    summary: "A spinning heavy stream gun built for relentless pressure. It chews through ammo fast and loves sustained fire.",
+    design: "Rotary barrel gun",
+    damage: 12,
+    reach: 132,
+    cooldown: 0.1,
+    knockback: 0.82,
+    arc: 0.8,
+    speed: 0.92,
+    moveScale: 0.76,
+    weight: 26,
+    special: {
+      type: "spin-stream",
+      summary: "Spools into a dense stream of shots when you keep firing."
+    }
+  },
+  longbow: {
+    label: "Longbow",
+    classLabel: "Special Gun",
+    kind: "gun-special",
+    family: "ranged",
+    ammoType: "bolt",
+    clipSize: 1,
+    chamberMax: 2,
+    projectileSpeed: 700,
+    reload: 0.74,
+    range: 520,
+    summary: "A special bow that fires bolts instead of bullets. It reloads one powerful arrow at a time.",
+    design: "Drawn recurve bow",
+    damage: 19,
+    reach: 140,
+    cooldown: 0.44,
+    knockback: 1.04,
+    arc: 0.9,
+    speed: 1.02,
+    moveScale: 1,
+    weight: 8,
+    special: {
+      type: "bolt-shot",
+      summary: "Fires single loaded bolts with strong flight control."
+    }
+  },
+  crossbow: {
+    label: "Crossbow",
+    classLabel: "Special Gun",
+    kind: "gun-special",
+    family: "ranged",
+    ammoType: "bolt",
+    clipSize: 1,
+    chamberMax: 2,
+    projectileSpeed: 820,
+    reload: 0.88,
+    range: 500,
+    summary: "A special crossbow that fires fast bolts and hits harder than a bow at point-blank range.",
+    design: "Cranked heavy crossbow",
+    damage: 21,
+    reach: 134,
+    cooldown: 0.48,
+    knockback: 1.12,
+    arc: 0.84,
+    speed: 0.98,
+    moveScale: 0.96,
+    weight: 11,
+    special: {
+      type: "bolt-shot",
+      summary: "Cranked bolt launcher with harder direct hits."
+    }
+  },
+  warbow: {
+    label: "Warbow",
+    classLabel: "Special Gun",
+    kind: "gun-special",
+    family: "ranged",
+    ammoType: "bolt",
+    clipSize: 1,
+    chamberMax: 2,
+    projectileSpeed: 760,
+    reload: 0.84,
+    range: 560,
+    summary: "A heavier bow with longer lane control. Each bolt lands harder and loves deep pierce or delayed tip builds.",
+    design: "Heavy war bow",
+    damage: 23,
+    reach: 148,
+    cooldown: 0.52,
+    knockback: 1.18,
+    arc: 0.88,
+    speed: 0.96,
+    moveScale: 0.94,
+    weight: 10,
+    special: {
+      type: "deep-pierce",
+      summary: "Heavy bow bolts push through targets and keep stronger knockback."
+    }
+  },
+  railgun: {
+    label: "Railgun",
+    classLabel: "Special Gun",
+    kind: "gun-special",
+    family: "ranged",
+    ammoType: "rail",
+    clipSize: 3,
+    chamberMax: 3,
+    projectileSpeed: 980,
+    reload: 1.38,
+    range: 580,
+    summary: "A special rail weapon that fires rails instead of bullets. It works best with shock or poison emitters.",
+    design: "Charged rail launcher",
+    damage: 24,
+    reach: 150,
+    cooldown: 0.52,
+    knockback: 1.2,
+    arc: 0.72,
+    speed: 0.94,
+    moveScale: 0.9,
+    weight: 17,
+    special: {
+      type: "rail-shot",
+      summary: "Rail launcher that favors emitter rounds like shock and poison."
+    }
+  },
+  coillance: {
+    label: "Coil Lance",
+    classLabel: "Special Gun",
+    kind: "gun-special",
+    family: "ranged",
+    ammoType: "rail",
+    clipSize: 2,
+    chamberMax: 3,
+    projectileSpeed: 1040,
+    reload: 1.44,
+    range: 620,
+    summary: "A piercing rail lance built around sharp emitter rails. It fires fewer shots, but they tear straight through the lane.",
+    design: "Lance rail driver",
+    damage: 26,
+    reach: 156,
+    cooldown: 0.58,
+    knockback: 1.26,
+    arc: 0.68,
+    speed: 0.9,
+    moveScale: 0.86,
+    weight: 19,
+    special: {
+      type: "rail-lance",
+      summary: "Charge rails punch through more targets and carry stronger emitter effects."
+    }
+  },
   "tempest-edge": {
     label: "Tempest Edge",
     classLabel: "Special",
@@ -590,7 +1006,7 @@ const bladeTypeCatalog = {
   },
   medium: {
     label: "Medium",
-    summary: "Balanced blades. Only medium weapons use styles, and their dash becomes a pass-through slash."
+    summary: "Balanced blades with pass-through dash slashes and built-in weapon traits."
   },
   short: {
     label: "Short",
@@ -599,7 +1015,117 @@ const bladeTypeCatalog = {
   special: {
     label: "Special",
     summary: "Unique weapons with custom abilities and custom forge drills."
+  },
+  sidearm: {
+    label: "Sidearm",
+    summary: "Quick secondary-feel guns with light ammo, fast reloads, and smaller chamber limits."
+  },
+  assault: {
+    label: "Assault",
+    summary: "Medium rifles like an AK-47. They handle upgraded rounds well and keep steady fire."
+  },
+  heavy: {
+    label: "Heavy",
+    summary: "Large heavy guns built for huge payloads, strong knockback, and slower reloads."
+  },
+  "gun-special": {
+    label: "Special Gun",
+    summary: "Bows, crossbows, and railguns. They use bolts or rails instead of normal bullets."
   }
+};
+
+const weaponFamilyCatalog = {
+  melee: {
+    label: "Melee",
+    summary: "Close-range weapons with built-in weapon traits."
+  },
+  ranged: {
+    label: "Ranged",
+    summary: "Projectile weapons with ammo setup, reloads, and shot behavior."
+  }
+};
+
+const impactMountCatalog = {
+  core: { label: "Core Chamber", summary: "A straight chamber stack for simple rounds." },
+  ring: { label: "Ring Chamber", summary: "A wrapped chamber layout used for portal or emitter rounds." },
+  split: { label: "Split Chamber", summary: "A split payload shell used for shrapnel and mixed impacts." }
+};
+
+const impactTypeCatalog = {
+  standard: {
+    label: "Standard",
+    summary: "A clean direct hit with no extra payload behavior.",
+    minChambers: 1,
+    allowedMounts: ["core", "ring", "split"]
+  },
+  explosive: {
+    label: "Explosive",
+    summary: "Detonates on impact and damages a small area around the hit.",
+    minChambers: 2,
+    allowedMounts: ["core", "split"]
+  },
+  shrapnel: {
+    label: "Shrapnel",
+    summary: "Bursts into fragments on impact and scatters extra damage.",
+    minChambers: 2,
+    allowedMounts: ["split"]
+  },
+  scatter: {
+    label: "Scatter",
+    summary: "Breaks into a short-range pellet bloom that is brutal up close and rough on guard.",
+    minChambers: 2,
+    allowedMounts: ["split"],
+    ammoFamilies: ["bullet"]
+  },
+  portal: {
+    label: "Portal",
+    summary: "Creates a brief portal pulse that shifts the rival's position on impact.",
+    minChambers: 3,
+    allowedMounts: ["ring", "split"]
+  },
+  imploder: {
+    label: "Imploder",
+    summary: "Pulls the rival back toward the shot line instead of only blowing them away.",
+    minChambers: 2,
+    allowedMounts: ["ring", "split"]
+  },
+  shock: {
+    label: "Shock",
+    summary: "Charges the payload and adds stun on impact. Railguns love this.",
+    minChambers: 2,
+    allowedMounts: ["ring", "core"],
+    ammoFamilies: ["rail"]
+  },
+  poison: {
+    label: "Poison",
+    summary: "Leaves the hit target poisoned for damage over time.",
+    minChambers: 2,
+    allowedMounts: ["ring", "split"],
+    ammoFamilies: ["rail", "bolt"]
+  }
+};
+
+const launchTypeCatalog = {
+  standard: { label: "Standard Powder", summary: "Normal launch smoke and steady shot speed.", speed: 0, damage: 0 },
+  blizzard: { label: "Blizzard Powder", summary: "Launch smoke turns into a freezing trail that slows rivals.", speed: -20, damage: 0 },
+  overdrive: { label: "Overdrive Powder", summary: "Punches the round out faster for sharper travel.", speed: 110, damage: 1 },
+  ember: { label: "Ember Powder", summary: "Leaves a hot flare behind the muzzle and adds burn pressure.", speed: 40, damage: 2 },
+  storm: { label: "Storm Powder", summary: "Cracks with charged smoke and boosts shock or heavy impact pressure.", speed: 55, damage: 1 }
+};
+
+const midAirTypeCatalog = {
+  none: { label: "None", summary: "The shot flies straight with no extra mid-flight tech." },
+  magnetized: { label: "Magnetized", summary: "Pulls harder toward the rival and accelerates mid-air." },
+  redirect: { label: "Redirect", summary: "Mid-flight the round snaps once toward the opponent." },
+  stabilizer: { label: "Stabilizer", summary: "Keeps the shot truer and faster across the lane." },
+  spiral: { label: "Spiral", summary: "Makes the round weave through the lane and become harder to read." }
+};
+
+const tipTypeCatalog = {
+  blunt: { label: "Blunt", summary: "Breaks blocks harder and launches rivals farther.", damage: 0, knockback: 0.22, blockDrain: 8 },
+  sharp: { label: "Sharp", summary: "Pierces through the target and can keep flying.", damage: 2, knockback: 0.04, blockDrain: 2 },
+  spiked: { label: "Spiked", summary: "Sticks in the rival and triggers a delayed extra burst.", damage: 1, knockback: 0.1, blockDrain: 4 },
+  drill: { label: "Drill", summary: "Drills through blocks and boosts piercing pressure.", damage: 1, knockback: 0.08, blockDrain: 7 }
 };
 
 const stylePathCatalog = {
@@ -759,7 +1285,8 @@ const keyBindings = {
     jump: "KeyW",
     crouch: "KeyS",
     dodge: "KeyQ",
-    slide: "KeyE"
+    slide: "KeyE",
+    reload: "KeyR"
   },
   p2: {
     left: "KeyJ",
@@ -791,10 +1318,38 @@ const ui = {
   deviceChoiceButtons: Array.from(document.querySelectorAll(".device-choice-button")),
   startTutorial: document.querySelector("#start-tutorial"),
   skipTutorial: document.querySelector("#skip-tutorial"),
+  familySelect: document.querySelector("#family-select"),
   classSelect: document.querySelector("#class-select"),
   frameSelect: document.querySelector("#frame-select"),
   materialSelect: document.querySelector("#material-select"),
   edgeSelect: document.querySelector("#edge-select"),
+  styleLabel: document.querySelector("#style-label"),
+  ammoWorkshop: document.querySelector("#ammo-workshop"),
+  ammoWorkshopFamily: document.querySelector("#ammo-workshop-family"),
+  ammoWorkshopNote: document.querySelector("#ammo-workshop-note"),
+  impactChambersLabel: document.querySelector("#impact-chambers-label"),
+  impactChambers: document.querySelector("#impact-chambers"),
+  impactMountLabel: document.querySelector("#impact-mount-label"),
+  impactMount: document.querySelector("#impact-mount"),
+  impactTypeLabel: document.querySelector("#impact-type-label"),
+  impactChamberList: document.querySelector("#impact-chamber-list"),
+  launchTypeLabel: document.querySelector("#launch-type-label"),
+  launchType: document.querySelector("#launch-type"),
+  midAirTypeLabel: document.querySelector("#mid-air-type-label"),
+  midAirType: document.querySelector("#mid-air-type"),
+  addMidAirAddon: document.querySelector("#add-mid-air-addon"),
+  midAirAddonList: document.querySelector("#mid-air-addon-list"),
+  tipTypeLabel: document.querySelector("#tip-type-label"),
+  tipType: document.querySelector("#tip-type"),
+  preloadAmmoLabel: document.querySelector("#preload-ammo-label"),
+  preloadAmmo: document.querySelector("#preload-ammo"),
+  ammoPreview: document.querySelector("#ammo-preview"),
+  ammoSummary: document.querySelector("#ammo-summary"),
+  saveAmmo: document.querySelector("#save-ammo"),
+  addAmmoToCase: document.querySelector("#add-ammo-to-case"),
+  clearAmmoCase: document.querySelector("#clear-ammo-case"),
+  ammoRack: document.querySelector("#ammo-rack"),
+  ammoCaseList: document.querySelector("#ammo-case-list"),
   forgeNote: document.querySelector(".forge-note"),
   forgeMinigame: document.querySelector("#forge-minigame"),
   forgeMinigameTitle: document.querySelector("#forge-minigame-title"),
@@ -873,6 +1428,10 @@ const ui = {
   matchSummary: document.querySelector("#match-summary"),
   controlGuide: document.querySelector("#control-guide"),
   touchControls: document.querySelector("#touch-controls"),
+  touchReload: document.querySelector('[data-touch="reload"]'),
+  touchAttack: document.querySelector('[data-touch="attack"]'),
+  touchBlock: document.querySelector('[data-touch="block"]'),
+  touchSlide: document.querySelector('[data-touch="slide"]'),
   accountName: document.querySelector("#account-name"),
   accountPasscode: document.querySelector("#account-passcode"),
   accountStatus: document.querySelector("#account-status"),
@@ -936,10 +1495,21 @@ const state = {
   forge: {
     id: "weapon-player",
     name: "Ashbite",
+    family: "melee",
     kind: "medium",
     frame: "saber",
     material: "sunsteel",
     edge: "duelist",
+    impactChambers: 1,
+    impactMount: "core",
+    impactType: "standard",
+    chamberImpacts: ["standard"],
+    launchType: "standard",
+    midAirType: "none",
+    midAirAddons: [],
+    tipType: "sharp",
+    preloadAmmo: 6,
+    ammoCase: [],
     heat: 58,
     forgeQuality: 0.5
   },
@@ -972,6 +1542,7 @@ const state = {
     hits: 0,
     pips: []
   },
+  ammoRack: [],
   armory: [],
   activeWeaponId: null,
   rivalWeaponId: null,
@@ -997,7 +1568,8 @@ const state = {
     attack: false,
     block: false,
     dodge: false,
-    slide: false
+    slide: false,
+    reload: false
   },
   previousInputs: {
     p1: {},
@@ -1071,6 +1643,7 @@ const state = {
       block: false,
       dodge: false,
       slide: false,
+      reload: false,
       menu: false,
       confirm: false
     }
@@ -1108,6 +1681,250 @@ function randomChoice(items) {
 
 function makeId(prefix) {
   return `${prefix}-${Math.random().toString(36).slice(2, 9)}`;
+}
+
+function stringArray(value) {
+  if (Array.isArray(value)) {
+    return value.map((entry) => String(entry || "").trim()).filter(Boolean);
+  }
+  if (typeof value === "string" && value.trim()) {
+    return [value.trim()];
+  }
+  return [];
+}
+
+function countMatches(list, id) {
+  return stringArray(list).filter((entry) => entry === id).length;
+}
+
+function validImpactIdsForFrame(frame, chambers, mount) {
+  return Object.entries(impactTypeCatalog)
+    .filter(([, impact]) =>
+      chambers >= impact.minChambers &&
+      impact.allowedMounts.includes(mount) &&
+      (!impact.ammoFamilies || impact.ammoFamilies.includes(ammoFamilyForFrame(frame)))
+    )
+    .map(([id]) => id);
+}
+
+function normalizeChamberImpacts(frame, chambers, mount, requested) {
+  const valid = validImpactIdsForFrame(frame, chambers, mount);
+  const fallback = valid[0] || "standard";
+  const source = stringArray(requested);
+  return Array.from({ length: chambers }, (_, index) => {
+    const requestedId = source[index] || source[source.length - 1] || fallback;
+    return valid.includes(requestedId) ? requestedId : fallback;
+  });
+}
+
+function normalizeMidAirAddons(requested) {
+  return stringArray(requested).filter((addon) => addon !== "none" && midAirTypeCatalog[addon]);
+}
+
+function impactLabelForChambers(chamberImpacts) {
+  const unique = [...new Set(stringArray(chamberImpacts))];
+  if (!unique.length) {
+    return "Standard";
+  }
+  return unique.map((id) => impactTypeCatalog[id]?.label || id).join(" + ");
+}
+
+function midAirLabelForAddons(addons) {
+  const list = stringArray(addons);
+  if (!list.length) {
+    return "No Add-Ons";
+  }
+  return list.map((id) => midAirTypeCatalog[id]?.label || id).join(" + ");
+}
+
+function ammoRecipeNameFromParts(chamberImpacts, tipType, launchType) {
+  const impacts = [...new Set(stringArray(chamberImpacts))]
+    .map((id) => impactTypeCatalog[id]?.label.split(" ")[0] || id)
+    .slice(0, 2)
+    .join("-");
+  const tip = tipTypeCatalog[tipType]?.label || "Tip";
+  const launch = launchTypeCatalog[launchType]?.label.split(" ")[0] || "Std";
+  return `${impacts || "Standard"} ${tip} ${launch}`.slice(0, 28);
+}
+
+function ammoRecipeCompatibleWithFrame(recipe, frame) {
+  if (!recipe || !frame || frame.family !== "ranged") {
+    return false;
+  }
+  const requestedChambers = Number(recipe.impactChambers || 1);
+  if (requestedChambers > Math.max(1, frame.chamberMax || 1)) {
+    return false;
+  }
+  const chambers = clamp(requestedChambers, 1, Math.max(1, frame.chamberMax || 1));
+  const mount = compatibleImpactMount(frame, recipe.impactMount);
+  const impacts = normalizeChamberImpacts(frame, chambers, mount, recipe.chamberImpacts || recipe.impactType);
+  return recipe.ammoFamily === ammoFamilyForFrame(frame) && impacts.length === chambers;
+}
+
+function ammoCaseCapacityForFrame(frame, recipes, requestedAmmo) {
+  const fallback = Math.max(1, Number(frame?.clipSize || 1));
+  const capacity = (recipes || []).reduce((lowest, recipe) => {
+    return Math.min(lowest, effectivePreloadAmmo(frame, recipe.impactChambers || 1, frame?.clipSize || 1));
+  }, fallback);
+  return clamp(Number(requestedAmmo || fallback), 1, Math.max(1, capacity));
+}
+
+function buildAmmoRecipeFromForge(forge, frame = frameCatalog[forge?.frame] || frameCatalog.longbow) {
+  const normalized = normalizeForgeState(forge);
+  const chambers = clamp(Number(normalized.impactChambers || 1), 1, Math.max(1, frame.chamberMax || 1));
+  const mount = compatibleImpactMount(frame, normalized.impactMount);
+  const chamberImpacts = normalizeChamberImpacts(frame, chambers, mount, normalized.chamberImpacts || normalized.impactType);
+  const uniqueImpacts = [...new Set(chamberImpacts)];
+  const launchType = launchTypeCatalog[normalized.launchType] ? normalized.launchType : "standard";
+  const tipType = tipTypeCatalog[normalized.tipType] ? normalized.tipType : "sharp";
+  const midAirAddons = normalizeMidAirAddons(normalized.midAirAddons || normalized.midAirType);
+  const quality = clamp(Number(normalized.forgeQuality ?? 0.5), 0.2, 1);
+  const magnetCount = countMatches(midAirAddons, "magnetized");
+  const redirectCount = countMatches(midAirAddons, "redirect");
+  const spiralCount = countMatches(midAirAddons, "spiral");
+  const stabilizerCount = countMatches(midAirAddons, "stabilizer");
+  const explosiveCount = countMatches(chamberImpacts, "explosive");
+  const shrapnelCount = countMatches(chamberImpacts, "shrapnel");
+  const scatterCount = countMatches(chamberImpacts, "scatter");
+  const imploderCount = countMatches(chamberImpacts, "imploder");
+  const shockCount = countMatches(chamberImpacts, "shock");
+  const poisonCount = countMatches(chamberImpacts, "poison");
+  const portalCount = countMatches(chamberImpacts, "portal");
+  const standardCount = countMatches(chamberImpacts, "standard");
+  const tip = tipTypeCatalog[tipType];
+  const launch = launchTypeCatalog[launchType];
+  const summaryBits = [
+    `${chambers} chamber${chambers === 1 ? "" : "s"}`,
+    impactLabelForChambers(chamberImpacts),
+    launch.label,
+    midAirAddons.length ? midAirLabelForAddons(midAirAddons) : null,
+    `${tip.label} tip`
+  ].filter(Boolean);
+
+  const recipe = {
+    id: forge?.ammoRecipeId || makeId("ammo"),
+    name: ammoRecipeNameFromParts(chamberImpacts, tipType, launchType),
+    ammoFamily: ammoFamilyForFrame(frame),
+    impactChambers: chambers,
+    impactMount: mount,
+    impactMountLabel: impactMountCatalog[mount]?.label || mount,
+    chamberImpacts,
+    impactTypes: uniqueImpacts,
+    impactLabel: impactLabelForChambers(chamberImpacts),
+    launchType,
+    launchLabel: launch.label,
+    midAirAddons,
+    midAirLabel: midAirLabelForAddons(midAirAddons),
+    tipType,
+    tipLabel: tip.label,
+    quality,
+    qualityLabel: forgeRatingLabel(quality),
+    damageBonus:
+      chambers * 2 +
+      explosiveCount * 2 +
+      shrapnelCount +
+      shockCount +
+      poisonCount +
+      portalCount +
+      scatterCount +
+      (launch.damage || 0) +
+      (tip.damage || 0),
+    speedBonus:
+      (launch.speed || 0) +
+      stabilizerCount * 55 +
+      magnetCount * 28 +
+      spiralCount * 12 +
+      quality * 24,
+    knockbackBonus:
+      chambers * 0.06 +
+      explosiveCount * 0.08 +
+      scatterCount * 0.06 +
+      imploderCount * 0.04 +
+      (tip.knockback || 0),
+    blockBreakBonus:
+      (tip.blockDrain || 0) +
+      scatterCount * 3 +
+      explosiveCount * 2 +
+      shrapnelCount * 2 +
+      standardCount,
+    projectilePierceBonus:
+      (tipType === "sharp" ? 1 : 0) +
+      (tipType === "drill" ? 2 : 0) +
+      countMatches(chamberImpacts, "standard") * 0 +
+      countMatches(chamberImpacts, "shock") * 0,
+    delayedImpact: tipType === "spiked",
+    homingStrength: magnetCount * 0.5,
+    redirectCharges: redirectCount,
+    blizzardTrail: launchType === "blizzard",
+    emberTrail: launchType === "ember",
+    stormTrail: launchType === "storm",
+    spiralCount,
+    scatterImpact: scatterCount > 0,
+    pullImpact: imploderCount > 0,
+    explosiveBoost: explosiveCount * 0.12,
+    shockCount,
+    poisonCount,
+    portalCount,
+    summary: `${summaryBits.join(" | ")}.`
+  };
+  recipe.signature = ammoRecipeSignature(recipe);
+  return recipe;
+}
+
+function ammoRoundListForWeapon(weapon) {
+  if (!isRangedWeapon(weapon)) {
+    return [];
+  }
+  const fallbackRound =
+    weapon.ammoPrototype ||
+    buildAmmoRecipeFromForge(
+      {
+        frame: weapon.frameId,
+        impactChambers: weapon.impactChambers || 1,
+        impactMount: weapon.impactMount || "core",
+        chamberImpacts: weapon.chamberImpacts || [weapon.impactType || "standard"],
+        launchType: weapon.launchType || "standard",
+        midAirAddons: weapon.midAirAddons || [],
+        tipType: weapon.tipType || "sharp",
+        forgeQuality: weapon.forgeQuality || 0.5
+      },
+      frameCatalog[weapon.frameId] || frameCatalog.longbow
+    );
+  const rounds = Array.isArray(weapon.ammoCaseRounds) && weapon.ammoCaseRounds.length
+    ? weapon.ammoCaseRounds
+    : [fallbackRound].filter(Boolean);
+  const desiredCount = clamp(Number(weapon.preloadAmmo || weapon.clipSize || rounds.length || 1), 1, 24);
+  const list = [];
+  for (let index = 0; index < desiredCount; index += 1) {
+    list.push(rounds[index % rounds.length]);
+  }
+  return list;
+}
+
+function impactAccentColor(impactId) {
+  const palette = {
+    standard: "#f1e7d6",
+    explosive: "#ffb16b",
+    shrapnel: "#f5f5f5",
+    scatter: "#ffe49a",
+    portal: "#b596ff",
+    imploder: "#9eb7ff",
+    shock: "#9fe8ff",
+    poison: "#9ef58c"
+  };
+  return palette[impactId] || "#f1e7d6";
+}
+
+function ammoRecipeSignature(recipe) {
+  return JSON.stringify({
+    ammoFamily: recipe?.ammoFamily || "bullet",
+    impactChambers: recipe?.impactChambers || 1,
+    impactMount: recipe?.impactMount || "core",
+    chamberImpacts: stringArray(recipe?.chamberImpacts),
+    launchType: recipe?.launchType || "standard",
+    midAirAddons: stringArray(recipe?.midAirAddons),
+    tipType: recipe?.tipType || "sharp"
+  });
 }
 
 function stageOffsetX() {
@@ -1155,22 +1972,124 @@ function frameCatalogForKind(kind) {
   );
 }
 
+function forgeFamilyForKind(kind) {
+  return isRangedKind(kind) ? "ranged" : "melee";
+}
+
+function firstKindForFamily(family) {
+  return family === "ranged" ? "sidearm" : "medium";
+}
+
+function kindCatalogForFamily(family) {
+  return Object.fromEntries(
+    Object.entries(bladeTypeCatalog).filter(([kind]) => forgeFamilyForKind(kind) === family)
+  );
+}
+
+function isRangedKind(kind) {
+  return ["sidearm", "assault", "heavy", "gun-special"].includes(kind);
+}
+
+function isRangedWeapon(weapon) {
+  return Boolean(weapon && (weapon.family === "ranged" || isRangedKind(weapon.kind)));
+}
+
+function ammoFamilyForFrame(frame) {
+  return frame?.ammoType || "bullet";
+}
+
+function compatibleImpactMount(frame, requestedMount = "core") {
+  const requested = impactMountCatalog[requestedMount] ? requestedMount : "core";
+  const allowedMounts = requested === "split" && frame?.chamberMax < 2 ? ["core"] : Object.keys(impactMountCatalog);
+  return allowedMounts.includes(requested) ? requested : allowedMounts[0];
+}
+
+function compatibleImpactType(frame, chambers, mount, requestedImpact = "standard") {
+  const ammoFamily = ammoFamilyForFrame(frame);
+  const requested = impactTypeCatalog[requestedImpact] ? requestedImpact : "standard";
+  const valid = Object.entries(impactTypeCatalog)
+    .filter(([, impact]) =>
+      chambers >= impact.minChambers &&
+      impact.allowedMounts.includes(mount) &&
+      (!impact.ammoFamilies || impact.ammoFamilies.includes(ammoFamily))
+    )
+    .map(([id]) => id);
+  return valid.includes(requested) ? requested : (valid[0] || "standard");
+}
+
+function effectivePreloadAmmo(frame, chambers, requestedAmmo) {
+  const clipSize = Math.max(1, Number(frame?.clipSize || 1));
+  const penalty = Math.max(0, chambers - 1) * (frame?.kind === "heavy" ? 1 : frame?.kind === "sidearm" ? 2 : 1);
+  const maxLoaded = Math.max(1, clipSize - penalty);
+  return clamp(Number(requestedAmmo || maxLoaded), 1, maxLoaded);
+}
+
 function normalizeForgeState(forge = state.forge) {
   const inferredKind = forge.kind || frameCatalog[forge.frame]?.kind || "medium";
-  const kind = bladeTypeCatalog[inferredKind] ? inferredKind : "medium";
+  const inferredFamily = forge.family || forgeFamilyForKind(inferredKind);
+  const family = weaponFamilyCatalog[inferredFamily] ? inferredFamily : "melee";
+  const requestedKind = bladeTypeCatalog[inferredKind] ? inferredKind : firstKindForFamily(family);
+  const kind = forgeFamilyForKind(requestedKind) === family ? requestedKind : firstKindForFamily(family);
   const frameId = frameIdsForKind(kind).includes(forge.frame) ? forge.frame : firstFrameIdForKind(kind);
+  const frame = frameCatalog[frameId] || frameCatalog.saber;
   const materialId = materialCatalog[forge.material] ? forge.material : "sunsteel";
   const edgeId = edgeCatalog[forge.edge] ? forge.edge : "duelist";
+  const impactChambers = clamp(Number(forge.impactChambers ?? 1), 1, Math.max(1, frame.chamberMax || 1));
+  const impactMount = compatibleImpactMount(frame, forge.impactMount);
+  const chamberImpacts = normalizeChamberImpacts(
+    frame,
+    impactChambers,
+    impactMount,
+    forge.chamberImpacts || forge.impactType
+  );
+  const impactType = chamberImpacts[0] || compatibleImpactType(frame, impactChambers, impactMount, forge.impactType);
+  const launchType = launchTypeCatalog[forge.launchType] ? forge.launchType : "standard";
+  const midAirAddons = normalizeMidAirAddons(forge.midAirAddons || forge.midAirType);
+  const midAirType = midAirAddons[0] || "none";
+  const tipType = tipTypeCatalog[forge.tipType] ? forge.tipType : "sharp";
+  const preloadAmmo = effectivePreloadAmmo(frame, impactChambers, forge.preloadAmmo);
   return {
     ...forge,
+    family,
     kind,
     frame: frameId,
     material: materialId,
     edge: edgeId,
+    impactChambers,
+    impactMount,
+    chamberImpacts,
+    impactType,
+    launchType,
+    midAirAddons,
+    midAirType,
+    tipType,
+    preloadAmmo,
+    ammoCase: Array.isArray(forge.ammoCase) ? forge.ammoCase.filter(Boolean).slice(0, preloadAmmo) : [],
     heat: clamp(Number(forge.heat ?? forge.temper ?? 58), 0, 100),
     forgeQuality: clamp(Number(forge.forgeQuality ?? 0.5), 0.2, 1),
     name: String(forge.name || "Ashbite").trim().slice(0, 12) || "Ashbite"
   };
+}
+
+function reconcileAmmoCaseForForge(forge = state.forge) {
+  const normalized = normalizeForgeState(forge);
+  const frame = frameCatalog[normalized.frame] || frameCatalog.saber;
+  if (!isRangedWeapon(frame)) {
+    return normalized;
+  }
+  const recipePool = normalized.ammoCase
+    .map((id) => state.ammoRack.find((recipe) => recipe.id === id))
+    .filter((recipe) => ammoRecipeCompatibleWithFrame(recipe, frame));
+  const prototype = buildAmmoRecipeFromForge(normalized, frame);
+  const caseCapacity = ammoCaseCapacityForFrame(frame, recipePool.length ? recipePool : [prototype], normalized.preloadAmmo);
+  if (caseCapacity === normalized.preloadAmmo && recipePool.length === normalized.ammoCase.length) {
+    return normalized;
+  }
+  return normalizeForgeState({
+    ...normalized,
+    preloadAmmo: caseCapacity,
+    ammoCase: normalized.ammoCase.filter((id) => recipePool.some((recipe) => recipe.id === id)).slice(0, caseCapacity)
+  });
 }
 
 function forgeGameModeForWeapon(source) {
@@ -1181,6 +2100,21 @@ function forgeGameModeForWeapon(source) {
   if (!frame) {
     return "medium";
   }
+  if (frame.family === "ranged") {
+    if (frame.ammoType === "bolt") {
+      return frame.frameId === "crossbow" || frame.label === "Crossbow" ? "bolt-latch" : "bow-string";
+    }
+    if (frame.ammoType === "rail") {
+      return frame.frameId === "coillance" || frame.label === "Coil Lance" ? "rail-bore" : "rail-align";
+    }
+    if (frame.kind === "sidearm") {
+      return "short";
+    }
+    if (frame.kind === "heavy") {
+      return "long";
+    }
+    return "medium";
+  }
   if (frame.kind === "special") {
     return frame.special?.type || "special";
   }
@@ -1188,7 +2122,59 @@ function forgeGameModeForWeapon(source) {
 }
 
 function forgeModeMeta(kind) {
+  const frame = typeof kind === "string" ? frameCatalog[kind] : kind;
   const mode = typeof kind === "string" && bladeTypeCatalog[kind] ? kind : forgeGameModeForWeapon(kind);
+  if (frame?.family === "ranged") {
+    if (mode === "bow-string") {
+      return {
+        title: "Bow String Set",
+        copy: "Bows want a clean draw and release. Let the draw marker settle inside the narrow gold lane, then snap the string.",
+        action: "Snap String"
+      };
+    }
+    if (mode === "bolt-latch") {
+      return {
+        title: "Crossbow Latch Lock",
+        copy: "Crossbows need crisp latch timing. Hit the alternating latch lanes cleanly to lock each bolt into place.",
+        action: "Latch Bolt"
+      };
+    }
+    if (mode === "rail-align") {
+      return {
+        title: "Rail Emitter Alignment",
+        copy: "Railguns want exact emitter timing. Hit each rail marker in order so the charge lanes stay true.",
+        action: "Align Rail"
+      };
+    }
+    if (mode === "rail-bore") {
+      return {
+        title: "Coil Bore Tuning",
+        copy: "Coil rails need moving bore catches. Catch each drifting alignment point as it sweeps through the lane.",
+        action: "Tune Coil"
+      };
+    }
+    if (frame.kind === "sidearm") {
+      return {
+        title: "Sidearm Chamber Cycling",
+        copy: "Light guns want quick chamber work. Pop the fast targets cleanly so the cylinder or sidearm feed stays tight.",
+        action: "Cycle Round"
+      };
+    }
+    if (frame.kind === "heavy") {
+      return {
+        title: "Heavy Payload Seating",
+        copy: "Heavy guns want slow, deliberate shell seating. Hit the large timing zone cleanly to lock the chamber.",
+        action: "Seat Shell"
+      };
+    }
+    return {
+      title: frame.kind === "gun-special" ? "Special Shot Alignment" : "Assault Feed Tuning",
+      copy: frame.kind === "gun-special"
+        ? "Special ranged frames want steady alignment. Time each feed marker to keep bolts or rails tracking true."
+        : "Assault weapons want steady burst timing. Hit each feed marker in rhythm to smooth the action.",
+      action: frame.kind === "gun-special" ? "Align Shot" : "Feed Burst"
+    };
+  }
   if (mode === "long") {
     return {
       title: "Long Blade Heat Control",
@@ -1262,7 +2248,7 @@ function createForgeGame(kind) {
     finished: false,
     progress: 0,
     rating: 0.5,
-    indicator: mode === "short" ? 0 : mode === "shockwave-slam" ? 0.05 : 0.18,
+    indicator: mode === "short" ? 0 : mode === "shockwave-slam" ? 0.05 : mode === "bow-string" ? 0.08 : 0.18,
     direction: 1,
     hits: 0,
     misses: 0,
@@ -1272,6 +2258,14 @@ function createForgeGame(kind) {
     timeLimit:
       mode === "short"
         ? 4.2
+        : mode === "bow-string"
+          ? 5.6
+          : mode === "bolt-latch"
+            ? 5.8
+            : mode === "rail-align"
+              ? 6.1
+              : mode === "rail-bore"
+                ? 6.3
         : mode === "combo-barrage"
           ? 5.4
           : mode === "shockwave-slam"
@@ -1294,6 +2288,12 @@ function createForgeGame(kind) {
       velocity: index % 2 === 0 ? 0.16 : -0.18,
       hit: false
     }));
+  } else if (mode === "rail-align") {
+    game.pips = [0.18, 0.39, 0.62, 0.82].map((position, index) => ({
+      id: index,
+      position,
+      hit: false
+    }));
   } else if (mode === "medium") {
     game.pips = [0.24, 0.5, 0.76].map((position, index) => ({
       id: index,
@@ -1311,6 +2311,13 @@ function createForgeGame(kind) {
       id: index,
       position,
       phase: index * 1.4,
+      hit: false
+    }));
+  } else if (mode === "rail-bore") {
+    game.pips = [0.22, 0.46, 0.74].map((position, index) => ({
+      id: index,
+      position,
+      phase: index * 1.1,
       hit: false
     }));
   }
@@ -1395,6 +2402,32 @@ function handleForgeMinigameAction() {
     return;
   }
 
+  if (game.mode === "rail-align") {
+    const target = game.pips.find((pip) => !pip.hit);
+    if (!target) {
+      finishForgeMinigame();
+      return;
+    }
+    const error = Math.abs(game.indicator - target.position);
+    if (error <= 0.07) {
+      target.hit = true;
+      game.hits += 1;
+      game.streak += 1;
+      game.bestStreak = Math.max(game.bestStreak, game.streak);
+      game.progress = game.hits / game.pips.length;
+      game.rating = clamp(0.56 + game.progress * 0.32 + game.streak * 0.018 - error * 0.5, 0.2, 1);
+      if (game.hits >= game.pips.length) {
+        finishForgeMinigame();
+      }
+    } else {
+      game.misses += 1;
+      game.streak = 0;
+      game.rating = clamp(game.rating - 0.05, 0.2, 1);
+    }
+    renderForge();
+    return;
+  }
+
   if (game.mode === "combo-barrage") {
     const target = game.pips.find((pip) => !pip.hit);
     if (!target) {
@@ -1443,6 +2476,28 @@ function handleForgeMinigameAction() {
     return;
   }
 
+  if (game.mode === "bow-string") {
+    const inZone = game.indicator >= 0.46 && game.indicator <= 0.54;
+    const distanceFromCenter = Math.abs(game.indicator - 0.5);
+    if (inZone) {
+      game.hits += 1;
+      game.streak += 1;
+      game.bestStreak = Math.max(game.bestStreak, game.streak);
+      game.progress = game.hits / 4;
+      game.rating = clamp(0.58 + game.progress * 0.26 + game.streak * 0.02 - distanceFromCenter * 0.58, 0.2, 1);
+      game.indicator = 0.08;
+      if (game.hits >= 4) {
+        finishForgeMinigame();
+      }
+    } else {
+      game.misses += 1;
+      game.streak = 0;
+      game.rating = clamp(game.rating - 0.06, 0.2, 1);
+    }
+    renderForge();
+    return;
+  }
+
   if (game.mode === "reaper-hook") {
     const target = game.pips.find((pip) => !pip.hit && Math.abs(game.indicator - pip.position) <= 0.08);
     if (target) {
@@ -1464,23 +2519,45 @@ function handleForgeMinigameAction() {
     return;
   }
 
-  if (game.mode === "axe-throw") {
+  if (game.mode === "rail-bore") {
+    const target = game.pips.find((pip) => !pip.hit && Math.abs(game.indicator - pip.position) <= 0.07);
+    if (target) {
+      target.hit = true;
+      game.hits += 1;
+      game.streak += 1;
+      game.bestStreak = Math.max(game.bestStreak, game.streak);
+      game.progress = game.hits / game.pips.length;
+      game.rating = clamp(0.54 + game.progress * 0.34 + game.streak * 0.02, 0.2, 1);
+      if (game.hits >= game.pips.length) {
+        finishForgeMinigame();
+      }
+    } else {
+      game.misses += 1;
+      game.streak = 0;
+      game.rating = clamp(game.rating - 0.05, 0.2, 1);
+    }
+    renderForge();
+    return;
+  }
+
+  if (game.mode === "axe-throw" || game.mode === "bolt-latch") {
     const lanes = [
       { start: 0.1, end: 0.22 },
       { start: 0.78, end: 0.9 },
       { start: 0.14, end: 0.26 },
       { start: 0.74, end: 0.86 }
     ];
-    const lane = lanes[Math.min(game.laneIndex, lanes.length - 1)];
+    const activeLanes = game.mode === "bolt-latch" ? lanes.slice(0, 3) : lanes;
+    const lane = activeLanes[Math.min(game.laneIndex, activeLanes.length - 1)];
     const inLane = game.indicator >= lane.start && game.indicator <= lane.end;
     if (inLane) {
       game.hits += 1;
       game.streak += 1;
       game.bestStreak = Math.max(game.bestStreak, game.streak);
       game.laneIndex += 1;
-      game.progress = game.hits / lanes.length;
+      game.progress = game.hits / activeLanes.length;
       game.rating = clamp(0.5 + game.progress * 0.34 + game.streak * 0.018, 0.2, 1);
-      if (game.hits >= lanes.length) {
+      if (game.hits >= activeLanes.length) {
         finishForgeMinigame();
       }
     } else {
@@ -1523,8 +2600,18 @@ function updateForgeMinigame(dt) {
       game.direction *= -1;
       game.indicator = clamp(game.indicator, 0.06, 0.94);
     }
+  } else if (game.mode === "bow-string") {
+    game.indicator += dt * (0.28 + game.elapsed * 0.06);
+    if (game.indicator > 0.92) {
+      game.indicator = 0.08;
+    }
   } else if (game.mode === "medium") {
     game.indicator += dt * 0.72;
+    if (game.indicator > 1.04) {
+      game.indicator = -0.04;
+    }
+  } else if (game.mode === "rail-align") {
+    game.indicator += dt * 0.84;
     if (game.indicator > 1.04) {
       game.indicator = -0.04;
     }
@@ -1550,7 +2637,18 @@ function updateForgeMinigame(dt) {
       }
       pip.position = clamp(0.5 + Math.sin(game.elapsed * 2.8 + pip.phase) * 0.28, 0.14, 0.86);
     });
-  } else if (game.mode === "axe-throw") {
+  } else if (game.mode === "rail-bore") {
+    game.indicator += dt * 0.66;
+    if (game.indicator > 1.04) {
+      game.indicator = -0.04;
+    }
+    game.pips.forEach((pip) => {
+      if (pip.hit) {
+        return;
+      }
+      pip.position = clamp(0.5 + Math.sin(game.elapsed * 3.4 + pip.phase) * 0.24, 0.18, 0.82);
+    });
+  } else if (game.mode === "axe-throw" || game.mode === "bolt-latch") {
     game.indicator += dt * 1.08 * game.direction;
     if (game.indicator >= 0.94 || game.indicator <= 0.06) {
       game.direction *= -1;
@@ -1586,25 +2684,69 @@ function updateForgeMinigame(dt) {
 
 function syncForgeSelectors() {
   state.forge = normalizeForgeState(state.forge);
+  populateSelect(ui.familySelect, weaponFamilyCatalog);
+  ui.familySelect.value = state.forge.family;
+  populateSelect(ui.classSelect, kindCatalogForFamily(state.forge.family));
   ui.classSelect.value = state.forge.kind;
   populateSelect(ui.frameSelect, frameCatalogForKind(state.forge.kind));
   ui.frameSelect.value = state.forge.frame;
   populateSelect(ui.materialSelect, materialCatalog);
   ui.materialSelect.value = state.forge.material;
+  ui.edgeSelect.innerHTML = `<option value="class-special">Built-In Weapon Trait</option>`;
+  ui.edgeSelect.disabled = true;
+  ui.edgeSelect.value = "class-special";
 
-  if (state.forge.kind === "medium") {
-    populateSelect(ui.edgeSelect, edgeCatalog);
-    ui.edgeSelect.disabled = false;
-    ui.edgeSelect.value = state.forge.edge;
-  } else {
-    ui.edgeSelect.innerHTML = `<option value="class-special">Built-In Class Special</option>`;
-    ui.edgeSelect.disabled = true;
-    ui.edgeSelect.value = "class-special";
+  const frame = frameCatalog[state.forge.frame] || frameCatalog.saber;
+  const ranged = isRangedWeapon(frame);
+  if (ui.ammoWorkshop) {
+    ui.ammoWorkshop.hidden = !ranged;
   }
+  ui.styleLabel.hidden = true;
+  ui.impactChambersLabel.hidden = !ranged;
+  ui.impactMountLabel.hidden = !ranged;
+  ui.impactTypeLabel.hidden = !ranged;
+  ui.launchTypeLabel.hidden = !ranged;
+  ui.midAirTypeLabel.hidden = !ranged;
+  ui.tipTypeLabel.hidden = !ranged;
+  ui.preloadAmmoLabel.hidden = !ranged;
 
-  const styleLabel = ui.edgeSelect.closest("label")?.querySelector("span");
-  if (styleLabel) {
-    styleLabel.textContent = state.forge.kind === "medium" ? "Style" : "Style (Medium Only)";
+  if (ranged) {
+    populateSelect(
+      ui.impactChambers,
+      Object.fromEntries(Array.from({ length: Math.max(1, frame.chamberMax || 1) }, (_, index) => {
+        const value = `${index + 1}`;
+        return [value, { label: `${value}` }];
+      }))
+    );
+    ui.impactChambers.value = `${state.forge.impactChambers}`;
+
+    populateSelect(ui.impactMount, impactMountCatalog);
+    ui.impactMount.value = state.forge.impactMount;
+
+    const compatibleImpacts = Object.fromEntries(
+      validImpactIdsForFrame(frame, state.forge.impactChambers, state.forge.impactMount)
+        .map((id) => [id, impactTypeCatalog[id]])
+    );
+
+    populateSelect(ui.launchType, launchTypeCatalog);
+    ui.launchType.value = state.forge.launchType;
+    populateSelect(
+      ui.midAirType,
+      Object.fromEntries(Object.entries(midAirTypeCatalog).filter(([id]) => id !== "none"))
+    );
+    ui.midAirType.value = state.forge.midAirAddons[0] || "magnetized";
+    populateSelect(ui.tipType, tipTypeCatalog);
+    ui.tipType.value = state.forge.tipType;
+
+    const maxLoaded = effectivePreloadAmmo(frame, state.forge.impactChambers, frame.clipSize);
+    populateSelect(
+      ui.preloadAmmo,
+      Object.fromEntries(Array.from({ length: maxLoaded }, (_, index) => {
+        const value = `${index + 1}`;
+        return [value, { label: `${value} ${frame.ammoType}` }];
+      }))
+    );
+    ui.preloadAmmo.value = `${Math.min(state.forge.preloadAmmo, maxLoaded)}`;
   }
 
   ui.weaponName.value = state.forge.name;
@@ -1692,6 +2834,8 @@ function selectedRivalName() {
 function renderControlGuide() {
   const mode = preferredInputMode();
   const rivalName = selectedRivalName();
+  const activeWeapon = state.match?.playerWeapon || weaponById(state.activeWeaponId) || currentBlueprint();
+  const ranged = isRangedWeapon(activeWeapon);
   let cards = [];
 
   if (mode === "mobile") {
@@ -1699,12 +2843,16 @@ function renderControlGuide() {
       {
         kicker: "Selected Device",
         title: "Mobile Fight Deck",
-        body: "Use the on-screen buttons under the arena. Left and Right move, Jump hops, Down crouches, Strike attacks, Block defends or parries if timed right, Backstep or Dash are your quick moves, and Pause opens the menu."
+        body: ranged
+          ? "Use the on-screen buttons under the arena. Left and Right move, Jump hops, Down crouches, Fire shoots, Block guards or parries on timing, Backstep and Dash are your quick moves, Reload tops off the weapon, and Pause opens the menu."
+          : "Use the on-screen buttons under the arena. Left and Right move, Jump hops, Down crouches, Strike attacks, Block defends or parries if timed right, Backstep or Dash are your quick moves, and Pause opens the menu."
       },
       {
         kicker: "Arena Tip",
-        title: "Touch play is aim-assisted",
-        body: `Mobile aim leans toward ${rivalName}, so focus on spacing and timing instead of dragging the weapon by hand.`
+        title: ranged ? "Touch fire is assisted" : "Touch play is aim-assisted",
+        body: ranged
+          ? `Mobile ranged aim leans toward ${rivalName}. Hold Fire to keep shooting and use Reload whenever the weapon runs dry.`
+          : `Mobile aim leans toward ${rivalName}, so focus on spacing and timing instead of dragging the weapon by hand.`
       }
     ];
   } else if (mode === "controller") {
@@ -1712,12 +2860,16 @@ function renderControlGuide() {
       {
         kicker: "Selected Device",
         title: "Controller Layout",
-        body: "Move with left stick or D-pad, aim with right stick, A jumps, RT or X attacks, LT or LB blocks or parries on timing, B dodges, and Y or RB dashes."
+        body: ranged
+          ? "Move with left stick or D-pad, aim with right stick, A jumps, RT or X fires, LT or LB blocks or parries on timing, B dodges, Y or RB dashes, and click the left stick to reload."
+          : "Move with left stick or D-pad, aim with right stick, A jumps, RT or X attacks, LT or LB blocks or parries on timing, B dodges, and Y or RB dashes."
       },
       {
         kicker: "Arena Tip",
-        title: "Use both sticks",
-        body: `The left stick moves your fighter while the right stick points your weapon toward ${rivalName}.`
+        title: ranged ? "Use both sticks and reload" : "Use both sticks",
+        body: ranged
+          ? `The left stick moves your fighter while the right stick points shots toward ${rivalName}. If you stop aiming, ranged assist still leans your fire toward the rival.`
+          : `The left stick moves your fighter while the right stick points your weapon toward ${rivalName}.`
       }
     ];
   } else {
@@ -1725,12 +2877,16 @@ function renderControlGuide() {
       {
         kicker: "Selected Device",
         title: "PC Mouse And Keys",
-        body: "A and D move, W jumps, S crouches, left click throws a jab, right click blocks or parries, Q backsteps, and E dashes."
+        body: ranged
+          ? "A and D move, W jumps, S crouches, hold left click to fire, right click blocks or parries, Q backsteps, E dashes, and R reloads."
+          : "A and D move, W jumps, S crouches, left click throws a jab, right click blocks or parries, Q backsteps, and E dashes."
       },
       {
         kicker: "Arena Tip",
-        title: "Mouse controls the weapon",
-        body: `Keep the mouse pointed at ${rivalName} while you move so your jab line and freeform weapon drags stay on target.`
+        title: ranged ? "Mouse points the barrel" : "Mouse controls the weapon",
+        body: ranged
+          ? `Keep the mouse on ${rivalName}, hold fire for steady shots, and tap R before the magazine empties if you want cleaner pressure.`
+          : `Keep the mouse pointed at ${rivalName} while you move so your jab line and freeform weapon drags stay on target.`
       }
     ];
   }
@@ -1856,6 +3012,19 @@ function setScreenFocus(screen) {
   if (ui.toggleScreenFocus) {
     ui.toggleScreenFocus.textContent = screen === "forge" ? "Arena View" : "Forge Screen";
   }
+  if (ui.startMatch) {
+    ui.startMatch.disabled = screen === "forge";
+    ui.startMatch.textContent = screen === "forge" ? "Arena Only" : "Start Set";
+  }
+  if (ui.touchControls) {
+    ui.touchControls.querySelectorAll("button").forEach((button) => {
+      if (button.dataset.touchUi === "pause") {
+        button.disabled = false;
+      } else {
+        button.disabled = screen === "forge";
+      }
+    });
+  }
 }
 
 function renderTutorialOffer() {
@@ -1957,19 +3126,20 @@ function pollGamepadState() {
   const leftY = applyDeadzone(pad.axes[1] || 0, 0.28);
   const rightX = applyDeadzone(pad.axes[2] || 0, 0.2);
   const rightY = applyDeadzone(pad.axes[3] || 0, 0.2);
-  const nextButtons = {
-    left: leftX <= -0.4 || gamepadButtonPressed(pad, 14),
-    right: leftX >= 0.4 || gamepadButtonPressed(pad, 15),
-    up: leftY <= -0.58 || gamepadButtonPressed(pad, 12),
-    down: leftY >= 0.4 || gamepadButtonPressed(pad, 13),
-    jump: gamepadButtonPressed(pad, 0),
-    attack: gamepadButtonPressed(pad, 7) || gamepadButtonPressed(pad, 2),
-    block: gamepadButtonPressed(pad, 6) || gamepadButtonPressed(pad, 4),
-    dodge: gamepadButtonPressed(pad, 1),
-    slide: gamepadButtonPressed(pad, 3) || gamepadButtonPressed(pad, 5),
-    menu: gamepadButtonPressed(pad, 9),
-    confirm: gamepadButtonPressed(pad, 0)
-  };
+    const nextButtons = {
+      left: leftX <= -0.4 || gamepadButtonPressed(pad, 14),
+      right: leftX >= 0.4 || gamepadButtonPressed(pad, 15),
+      up: leftY <= -0.58 || gamepadButtonPressed(pad, 12),
+      down: leftY >= 0.4 || gamepadButtonPressed(pad, 13),
+      jump: gamepadButtonPressed(pad, 0),
+      attack: gamepadButtonPressed(pad, 7) || gamepadButtonPressed(pad, 2),
+      block: gamepadButtonPressed(pad, 6) || gamepadButtonPressed(pad, 4),
+      dodge: gamepadButtonPressed(pad, 1),
+      slide: gamepadButtonPressed(pad, 3) || gamepadButtonPressed(pad, 5),
+      reload: gamepadButtonPressed(pad, 10),
+      menu: gamepadButtonPressed(pad, 9),
+      confirm: gamepadButtonPressed(pad, 0)
+    };
 
   state.gamepad.connected = true;
   state.gamepad.index = pad.index;
@@ -3677,26 +4847,255 @@ function buildWeaponFromForge(forge) {
   const safeForge = normalizeForgeState(forge);
   const frame = frameCatalog[safeForge.frame] || frameCatalog.katana;
   const material = materialCatalog[safeForge.material] || materialCatalog.sunsteel;
-  const usesStyle = frame.kind === "medium";
+  const isRanged = frame.family === "ranged";
+  const usesStyle = false;
   const edge =
-    usesStyle
-      ? edgeCatalog[safeForge.edge] || edgeCatalog.duelist
-      : {
-          label: "Class Ability",
-          summary: "This class uses its own built-in special instead of a medium style.",
-          damage: 0,
-          reach: 0,
-          speed: 0,
-          cooldown: 0,
-          knockback: 0,
-          arc: 0,
-          weight: 0,
-          ability: "Style slot only opens for medium blades."
-        };
+    {
+      label: "Built-In Weapon Trait",
+      summary: "This weapon uses its own built-in class trait.",
+      damage: 0,
+      reach: 0,
+      speed: 0,
+      cooldown: 0,
+      knockback: 0,
+      arc: 0,
+      weight: 0,
+      ability: "This weapon uses its own built-in class trait."
+    };
   const heat = clamp(Number(safeForge.heat ?? safeForge.temper ?? 58), 0, 100);
   const forgeQuality = clamp(Number(safeForge.forgeQuality ?? 0.5), 0.2, 1);
   const forgeDelta = forgeQuality - 0.5;
   const heatScale = heat / 100;
+
+  if (isRanged) {
+    const ammoPrototype = buildAmmoRecipeFromForge(safeForge, frame);
+    const rackRounds = (safeForge.ammoCase || [])
+      .map((recipeId) => state.ammoRack.find((recipe) => recipe.id === recipeId))
+      .filter((recipe) => ammoRecipeCompatibleWithFrame(recipe, frame))
+      .map((recipe) => ({ ...recipe, chamberImpacts: [...recipe.chamberImpacts], impactTypes: [...recipe.impactTypes], midAirAddons: [...recipe.midAirAddons] }));
+    const activeRounds = rackRounds.length ? rackRounds : [ammoPrototype];
+    const dominantRound = activeRounds[0] || ammoPrototype;
+    const payloadLoad = Math.max(0, dominantRound.impactChambers - 1);
+    const caseCapacity = ammoCaseCapacityForFrame(frame, activeRounds, safeForge.preloadAmmo || frame.clipSize);
+    const clipSize = Math.max(1, Number(frame.clipSize || 1));
+    const preloadAmmo = clamp(Number(safeForge.preloadAmmo || clipSize), 1, caseCapacity);
+    const ammoCaseRounds = activeRounds.slice(0, preloadAmmo);
+    const ammoCaseSummary = ammoCaseRounds.map((round, index) => `${index + 1}. ${round.name}`).join(" -> ");
+    let damage = clamp(
+      Math.round(frame.damage + material.damage + heatScale * 4 + forgeDelta * 5 + dominantRound.damageBonus * 0.35),
+      11,
+      48
+    );
+    const reach = clamp(Math.round(frame.range + material.reach * 8 + payloadLoad * 14), 280, 660);
+    let projectileSpeed = clamp(
+      Math.round(frame.projectileSpeed + dominantRound.speedBonus + forgeDelta * 120),
+      560,
+      1320
+    );
+    let cooldown = clamp(Number((frame.cooldown + payloadLoad * 0.04 - forgeDelta * 0.05).toFixed(2)), 0.1, 0.86);
+    let reloadTime = clamp(Number((frame.reload + payloadLoad * 0.12 - forgeDelta * 0.08).toFixed(2)), 0.54, 1.92);
+    let knockback = clamp(Number((frame.knockback + material.knockback + dominantRound.knockbackBonus + forgeDelta * 0.08).toFixed(2)), 0.84, 1.9);
+    let weight = clamp(Number((frame.weight + material.weight + payloadLoad * 1.8 + heatScale * 3 - forgeDelta * 2.2).toFixed(1)), 5, 32);
+    let moveScale = clamp(Number((frame.moveScale + material.moveScale - payloadLoad * 0.04).toFixed(2)), 0.68, 1.16);
+    let speed = clamp(Number((frame.speed + material.speed - payloadLoad * 0.02 + forgeDelta * 0.06).toFixed(2)), 0.72, 1.28);
+    const ammoLabel = `${preloadAmmo}/${caseCapacity} ${frame.ammoType}`;
+    const chamberSummary =
+      `${dominantRound.impactChambers} impact chamber${dominantRound.impactChambers === 1 ? "" : "s"} in a ` +
+      `${dominantRound.impactMountLabel.toLowerCase()} setup. Bigger rounds shrink the case size but carry more effect space.`;
+    const classText =
+      frame.kind === "sidearm"
+        ? "quick sidearm pressure with fast reloads"
+        : frame.kind === "assault"
+          ? "steady rifle fire with customizable ammo"
+          : frame.kind === "heavy"
+            ? "heavy ranged punishment with brutal payloads"
+            : "special ranged shots using bolts or rails";
+    let fireModeLabel = "Single Shot";
+    let burstCount = 1;
+    let burstSpread = 0;
+    let burstDamageScale = 1;
+    let extraPierce = dominantRound.projectilePierceBonus || 0;
+    let explosiveBoost = 0;
+    let scatterImpact = dominantRound.scatterImpact;
+    let pullImpact = dominantRound.pullImpact;
+    let stormTrail = dominantRound.stormTrail;
+    let spiralFlight = dominantRound.spiralCount > 0;
+    let projectileGlow = material.color;
+
+    switch (safeForge.frame) {
+      case "machinepistol":
+        fireModeLabel = "Twin Tap";
+        burstCount = 2;
+        burstSpread = 0.028;
+        burstDamageScale = 0.7;
+        cooldown = clamp(cooldown - 0.02, 0.1, 0.86);
+        break;
+      case "burstcarbine":
+        fireModeLabel = "3-Round Burst";
+        burstCount = 3;
+        burstSpread = 0.024;
+        burstDamageScale = 0.54;
+        break;
+      case "marksman":
+        fireModeLabel = "Pierce Line";
+        extraPierce += 1;
+        projectileSpeed = clamp(projectileSpeed + 40, 560, 1320);
+        break;
+      case "sniper":
+        fireModeLabel = "Scope Shot";
+        extraPierce += 2;
+        projectileSpeed = clamp(projectileSpeed + 80, 560, 1320);
+        damage = clamp(damage + 3, 11, 48);
+        moveScale = clamp(moveScale - 0.06, 0.68, 1.16);
+        break;
+      case "flakcannon":
+        fireModeLabel = "Flak Fan";
+        burstCount = 5;
+        burstSpread = 0.09;
+        burstDamageScale = 0.34;
+        scatterImpact = true;
+        explosiveBoost = 0.2;
+        break;
+      case "minigun":
+        fireModeLabel = "Spin Stream";
+        burstCount = 2;
+        burstSpread = 0.038;
+        burstDamageScale = 0.56;
+        cooldown = clamp(cooldown - 0.03, 0.1, 0.86);
+        reloadTime = clamp(reloadTime + 0.08, 0.54, 1.92);
+        moveScale = clamp(moveScale - 0.04, 0.68, 1.16);
+        break;
+      case "warbow":
+        fireModeLabel = "Deep Draw";
+        extraPierce += 1;
+        knockback = clamp(knockback + 0.08, 0.84, 1.9);
+        break;
+      case "railgun":
+        fireModeLabel = "Emitter Rail";
+        projectileGlow = "#d1f7ff";
+        if (dominantRound.shockCount || dominantRound.poisonCount) {
+          damage = clamp(damage + 2, 11, 48);
+        }
+        break;
+      case "coillance":
+        fireModeLabel = "Lance Rail";
+        extraPierce += 2;
+        projectileGlow = "#d1f7ff";
+        projectileSpeed = clamp(projectileSpeed + 40, 560, 1320);
+        break;
+      default:
+        break;
+    }
+
+    const abilitySummary = `${frame.special?.summary || ""} ${dominantRound.summary} Load order: ${ammoCaseSummary || dominantRound.name}.`.trim();
+    const heatSummary =
+      heat >= 70
+        ? "High forge heat hardens the barrel and round body, raising shot damage but making the build heavier."
+        : heat >= 40
+          ? "Mid forge heat keeps the gun stable while still boosting shot damage."
+          : "Lower forge heat keeps the weapon lighter and easier to handle.";
+    const forgeSummary =
+      forgeQuality >= 0.9
+        ? "Masterforged ranged finish: cleaner cycling, stronger launch, and tighter shots."
+        : forgeQuality >= 0.76
+          ? "Tempered ranged finish: stable ammo handling and reliable shot behavior."
+          : forgeQuality >= 0.58
+            ? "Field-ready ranged finish: solid enough for live fights."
+            : forgeQuality >= 0.42
+              ? "Rough ranged finish: usable, but the ammo handling is loose."
+              : "Crude ranged finish: the loading system feels unstable and slow.";
+
+    return {
+      id: safeForge.id || makeId("weapon"),
+      name: safeForge.name.trim().slice(0, 12) || "Ashbite",
+      frameId: safeForge.frame,
+      frame: frame.label,
+      classLabel: frame.classLabel,
+      kind: frame.kind,
+      family: "ranged",
+      materialId: safeForge.material,
+      material: material.label,
+      edgeId: dominantRound.impactTypes[0] || "standard",
+      edge: `${dominantRound.impactLabel} Round`,
+      usesStyle: false,
+      heat,
+      forgeQuality,
+      forgeQualityLabel: forgeRatingLabel(forgeQuality),
+      weight,
+      damage,
+      reach,
+      speed,
+      cooldown,
+      knockback,
+      arc: frame.arc,
+      moveScale,
+      color: material.color,
+      frameSummary: frame.summary,
+      frameDesign: frame.design,
+      materialSummary: material.summary,
+      edgeSummary: chamberSummary,
+      heatSummary,
+      forgeSummary,
+      styleText: `${frame.classLabel} ranged build | ${fireModeLabel} | ${dominantRound.impactLabel} | ${dominantRound.tipLabel} tip`,
+      abilitySummary,
+      specialType: frame.special?.type || "ranged-shot",
+      fireModeLabel,
+      executeThreshold: 0,
+      backstabBonus: 1,
+      stealthOpacity: 1,
+      ammoType: frame.ammoType,
+      clipSize,
+      preloadAmmo,
+      impactChambers: dominantRound.impactChambers,
+      impactMount: dominantRound.impactMount,
+      impactMountLabel: dominantRound.impactMountLabel,
+      chamberImpacts: [...dominantRound.chamberImpacts],
+      impactType: dominantRound.impactTypes[0] || "standard",
+      impactTypes: [...dominantRound.impactTypes],
+      impactLabel: dominantRound.impactLabel,
+      launchType: dominantRound.launchType,
+      launchLabel: dominantRound.launchLabel,
+      midAirType: dominantRound.midAirAddons[0] || "none",
+      midAirAddons: [...dominantRound.midAirAddons],
+      midAirLabel: dominantRound.midAirLabel,
+      tipType: dominantRound.tipType,
+      tipLabel: dominantRound.tipLabel,
+      projectileSpeed,
+      reloadTime,
+      projectileRange: reach,
+      ammoLabel,
+      ammoPrototype,
+      ammoCaseRounds,
+      ammoCaseIds: [...safeForge.ammoCase],
+      ammoCaseSummary: ammoCaseSummary || dominantRound.name,
+      blockBreak: dominantRound.blockBreakBonus,
+      projectilePierce: extraPierce,
+      delayedImpact: dominantRound.delayedImpact,
+      homingStrength: dominantRound.homingStrength,
+      redirectShot: dominantRound.redirectCharges > 0,
+      redirectCharges: dominantRound.redirectCharges,
+      blizzardTrail: dominantRound.blizzardTrail,
+      emberTrail: dominantRound.emberTrail,
+      stormTrail,
+      spiralFlight: dominantRound.spiralCount > 0,
+      spiralCount: dominantRound.spiralCount,
+      scatterImpact,
+      pullImpact,
+      explosiveBoost: dominantRound.explosiveBoost,
+      shockCount: dominantRound.shockCount,
+      poisonCount: dominantRound.poisonCount,
+      portalCount: dominantRound.portalCount,
+      burstCount,
+      burstSpread,
+      burstDamageScale,
+      projectileGlow,
+      lore:
+        `${frame.label} built from ${material.label.toLowerCase()} with ${dominantRound.impactLabel.toLowerCase()} ammo, ` +
+        `${dominantRound.launchLabel.toLowerCase()}, ${dominantRound.midAirLabel.toLowerCase()} flight, and a ${dominantRound.tipLabel.toLowerCase()} tip. ` +
+        `${frame.special?.summary || ""} ${chamberSummary} Case order: ${ammoCaseSummary || dominantRound.name}. ${forgeSummary}`.trim()
+    };
+  }
+
   const classWeightBias = frame.kind === "long" ? 3 : frame.kind === "short" ? -1.4 : frame.kind === "special" ? 0.8 : 0;
   const weight = clamp(
     Number((frame.weight + material.weight + edge.weight + classWeightBias + heatScale * 6 - forgeDelta * 2.6).toFixed(1)),
@@ -3745,7 +5144,7 @@ function buildWeaponFromForge(forge) {
   if (frame.kind === "long") {
     classText = "long-range parry control and delayed heavy punishment";
   } else if (frame.kind === "medium") {
-    classText = "solid slash pressure with style-driven specials";
+    classText = "solid slash pressure with built-in weapon traits";
   } else if (frame.kind === "short") {
     classText = "ambush pressure with back-hit damage and stealthy crouches";
   } else if (frame.kind === "special") {
@@ -3790,8 +5189,8 @@ function buildWeaponFromForge(forge) {
     kind: frame.kind,
     materialId: safeForge.material,
     material: material.label,
-    edgeId: safeForge.edge,
-    edge: edge.label,
+    edgeId: frame.special?.type || safeForge.edge,
+    edge: `${frame.classLabel} Trait`,
     usesStyle,
     heat,
     forgeQuality,
@@ -3808,7 +5207,7 @@ function buildWeaponFromForge(forge) {
     frameSummary: frame.summary,
     frameDesign: frame.design,
     materialSummary: material.summary,
-    edgeSummary: edge.summary,
+    edgeSummary: `${frame.classLabel} weapons carry built-in class traits tuned to their class.`,
     heatSummary,
     forgeSummary,
     styleText: classText,
@@ -3825,13 +5224,37 @@ function createRandomEnemyWeapon() {
   const prefixes = ["Iron", "Dread", "Night", "Ash", "War", "Storm", "Cinder", "Ruin"];
   const suffixes = ["fang", "bite", "lance", "edge", "hook", "brand", "talon", "reaver"];
   const frameId = randomChoice(Object.keys(frameCatalog).filter((id) => !frameCatalog[id].masteryStyle));
+  const frame = frameCatalog[frameId];
+  const randomChambers = randomRange(1, (frame?.chamberMax || 1) + 0.9);
+  const impactChambers = clamp(Math.floor(randomChambers), 1, Math.max(1, frame?.chamberMax || 1));
+  const impactMount = compatibleImpactMount(frame, randomChoice(Object.keys(impactMountCatalog)));
+  const chamberImpacts = Array.from({ length: impactChambers }, () =>
+    compatibleImpactType(frame, impactChambers, impactMount, randomChoice(Object.keys(impactTypeCatalog)))
+  );
+  const impactType = chamberImpacts[0] || "standard";
+  const midAirAddons = isRangedWeapon(frame)
+    ? Array.from(
+        { length: Math.floor(randomRange(0, frame.kind === "heavy" ? 2.8 : 2.2)) },
+        () => randomChoice(Object.keys(midAirTypeCatalog).filter((id) => id !== "none"))
+      )
+    : [];
   const forge = {
     id: makeId("rival"),
     name: `${randomChoice(prefixes)}${randomChoice(suffixes)}`,
-    kind: frameCatalog[frameId]?.kind || "medium",
+    family: forgeFamilyForKind(frame?.kind || "medium"),
+    kind: frame?.kind || "medium",
     frame: frameId,
     material: randomChoice(Object.keys(materialCatalog)),
     edge: randomChoice(Object.keys(edgeCatalog)),
+    impactChambers,
+    impactMount,
+    impactType,
+    chamberImpacts,
+    launchType: randomChoice(Object.keys(launchTypeCatalog)),
+    midAirType: midAirAddons[0] || "none",
+    midAirAddons,
+    tipType: randomChoice(Object.keys(tipTypeCatalog)),
+    preloadAmmo: effectivePreloadAmmo(frame, impactChambers, Math.ceil((frame?.clipSize || 1) * randomRange(0.5, 1))),
     heat: Math.round(randomRange(20, 92)),
     forgeQuality: randomRange(0.42, 0.92)
   };
@@ -3850,19 +5273,488 @@ function syncForgeOutputs() {
   ui.heatValue.textContent = `${ui.heatRange.value}%`;
 }
 
-function renderForgeBadges(weapon) {
-  ui.forgeBadges.innerHTML = `
-    <span class="menu-status alt">${weapon.classLabel} Class</span>
-    <span class="menu-status alt">${weapon.frameDesign}</span>
-    <span class="menu-status alt">${weapon.edge}</span>
-    <span class="menu-status alt">${weapon.forgeQualityLabel}</span>
-    <span class="menu-status alt">${weapon.weight.toFixed(1)} wt</span>
-    <span class="menu-status alt">${weapon.reach} reach</span>
-    <span class="menu-status alt">${weapon.specialType.replaceAll("-", " ")}</span>
+function currentAmmoRecipe() {
+  const frame = frameCatalog[state.forge.frame] || frameCatalog.longbow;
+  return buildAmmoRecipeFromForge(state.forge, frame);
+}
+
+function saveCurrentAmmoRecipe() {
+  const frame = frameCatalog[state.forge.frame] || frameCatalog.longbow;
+  if (!isRangedWeapon(frame)) {
+    return;
+  }
+  const recipe = currentAmmoRecipe();
+  const existingIndex = state.ammoRack.findIndex((entry) => entry.signature === recipe.signature);
+  if (existingIndex >= 0) {
+    recipe.id = state.ammoRack[existingIndex].id;
+    state.ammoRack.splice(existingIndex, 1, recipe);
+  } else {
+    state.ammoRack.unshift(recipe);
+  }
+  renderForge();
+  setMatchSummary(`${recipe.name} crafted and stored in the ammo rack.`);
+}
+
+function addCurrentAmmoToCase() {
+  const frame = frameCatalog[state.forge.frame] || frameCatalog.longbow;
+  if (!isRangedWeapon(frame)) {
+    return;
+  }
+  const recipe = currentAmmoRecipe();
+  let rackEntry = state.ammoRack.find((entry) => entry.signature === recipe.signature);
+  if (!rackEntry) {
+    rackEntry = recipe;
+    state.ammoRack.unshift(rackEntry);
+  }
+  const maxSlots = Math.max(1, Number(state.forge.preloadAmmo || 1));
+  const nextCase = [...(state.forge.ammoCase || [])];
+  if (nextCase.length >= maxSlots) {
+    nextCase.shift();
+  }
+  nextCase.push(rackEntry.id);
+  state.forge = normalizeForgeState({
+    ...state.forge,
+    ammoCase: nextCase
+  });
+  state.forge = reconcileAmmoCaseForForge(state.forge);
+  renderForge();
+  setMatchSummary(`${rackEntry.name} loaded into slot ${state.forge.ammoCase.length}.`);
+}
+
+function clearAmmoCase() {
+  state.forge = normalizeForgeState({
+    ...state.forge,
+    ammoCase: []
+  });
+  state.forge = reconcileAmmoCaseForForge(state.forge);
+  renderForge();
+  setMatchSummary("Ammo case cleared.");
+}
+
+function renderImpactChamberList(frame) {
+  if (!ui.impactChamberList) {
+    return;
+  }
+  ui.impactChamberList.innerHTML = "";
+  const validImpacts = validImpactIdsForFrame(frame, state.forge.impactChambers, state.forge.impactMount);
+  state.forge.chamberImpacts.forEach((impactId, index) => {
+    const row = document.createElement("div");
+    row.className = "chamber-row";
+
+    const header = document.createElement("header");
+    const title = document.createElement("strong");
+    title.textContent = `Chamber ${index + 1}`;
+    const tag = document.createElement("span");
+    tag.className = "pill";
+    tag.textContent = index === 0 ? "Front" : index === state.forge.chamberImpacts.length - 1 ? "Rear" : "Core";
+    header.append(title, tag);
+
+    const select = document.createElement("select");
+    validImpacts.forEach((validId) => {
+      const option = document.createElement("option");
+      option.value = validId;
+      option.textContent = impactTypeCatalog[validId].label;
+      if (validId === impactId) {
+        option.selected = true;
+      }
+      select.append(option);
+    });
+    select.addEventListener("change", () => {
+      const chamberImpacts = [...state.forge.chamberImpacts];
+      chamberImpacts[index] = select.value;
+      state.forge = normalizeForgeState({
+        ...state.forge,
+        chamberImpacts
+      });
+      state.forge = reconcileAmmoCaseForForge(state.forge);
+      resetForgeMinigame(state.forge.frame, false);
+      renderForge();
+    });
+
+    const copy = document.createElement("p");
+    copy.textContent = impactTypeCatalog[impactId]?.summary || "";
+    row.append(header, select, copy);
+    ui.impactChamberList.append(row);
+  });
+}
+
+function renderMidAirAddonList() {
+  if (!ui.midAirAddonList) {
+    return;
+  }
+  ui.midAirAddonList.innerHTML = "";
+  if (!state.forge.midAirAddons.length) {
+    const empty = document.createElement("p");
+    empty.className = "arena-hint";
+    empty.textContent = "No mid-air add-ons loaded. Add as many as you want to stack flight behavior.";
+    ui.midAirAddonList.append(empty);
+    return;
+  }
+  state.forge.midAirAddons.forEach((addonId, index) => {
+    const item = document.createElement("div");
+    item.className = "token-item";
+    const copy = document.createElement("div");
+    copy.innerHTML = `
+      <strong>${midAirTypeCatalog[addonId]?.label || addonId}</strong>
+      <p>${midAirTypeCatalog[addonId]?.summary || ""}</p>
+    `;
+    const button = document.createElement("button");
+    button.className = "ghost-button";
+    button.type = "button";
+    button.textContent = "Remove";
+    button.addEventListener("click", () => {
+      const nextAddons = [...state.forge.midAirAddons];
+      nextAddons.splice(index, 1);
+      state.forge = normalizeForgeState({
+        ...state.forge,
+        midAirAddons: nextAddons
+      });
+      state.forge = reconcileAmmoCaseForForge(state.forge);
+      renderForge();
+    });
+    item.append(copy, button);
+    ui.midAirAddonList.append(item);
+  });
+}
+
+function renderAmmoPreview(weapon) {
+  if (!ui.ammoPreview) {
+    return;
+  }
+  const recipe = weapon?.ammoPrototype || currentAmmoRecipe();
+  const frame = frameCatalog[state.forge.frame] || frameCatalog.longbow;
+  const ctx = ui.ammoPreview.getContext("2d");
+  ctx.clearRect(0, 0, ui.ammoPreview.width, ui.ammoPreview.height);
+
+  const bodyY = ui.ammoPreview.height * 0.5;
+  const left = 46;
+  const bodyWidth = frame.ammoType === "rail" ? 214 : frame.ammoType === "bolt" ? 196 : 208;
+  const chamberWidth = bodyWidth / Math.max(1, recipe.impactChambers);
+  const bodyHeight = frame.ammoType === "rail" ? 22 : frame.ammoType === "bolt" ? 18 : 26;
+
+  ctx.fillStyle = "rgba(255,255,255,0.04)";
+  ctx.fillRect(0, 0, ui.ammoPreview.width, ui.ammoPreview.height);
+
+  if (frame.ammoType === "bolt") {
+    ctx.fillStyle = "#f0d8a8";
+    ctx.fillRect(left, bodyY - 4, bodyWidth + 28, 8);
+    ctx.fillStyle = recipe.tipType === "spiked" ? impactAccentColor(recipe.chamberImpacts[0]) : "#f3f6fb";
+    ctx.beginPath();
+    ctx.moveTo(left + bodyWidth + 28, bodyY);
+    ctx.lineTo(left + bodyWidth + 4, bodyY - 14);
+    ctx.lineTo(left + bodyWidth - 2, bodyY);
+    ctx.lineTo(left + bodyWidth + 4, bodyY + 14);
+    ctx.closePath();
+    ctx.fill();
+    ["#89e6dc", "#f0d48b", "#90a2ff"].forEach((color, index) => {
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.moveTo(left - 16, bodyY);
+      ctx.lineTo(left - 36, bodyY - 12 + index * 12);
+      ctx.lineTo(left - 10, bodyY - 4 + index * 4);
+      ctx.closePath();
+      ctx.fill();
+    });
+  } else {
+    ctx.fillStyle = frame.ammoType === "rail" ? "#d4f7ff" : "#e1c48d";
+    ctx.beginPath();
+    ctx.roundRect(left - 30, bodyY - bodyHeight * 0.5, 32, bodyHeight, 8);
+    ctx.fill();
+
+    ctx.fillStyle = "#f6ead2";
+    ctx.beginPath();
+    if (recipe.tipType === "blunt") {
+      ctx.roundRect(left + bodyWidth, bodyY - bodyHeight * 0.5, 20, bodyHeight, 6);
+    } else {
+      ctx.moveTo(left + bodyWidth + 22, bodyY);
+      ctx.lineTo(left + bodyWidth, bodyY - bodyHeight * 0.52);
+      ctx.lineTo(left + bodyWidth - 2, bodyY + bodyHeight * 0.52);
+      ctx.closePath();
+    }
+    ctx.fill();
+
+    if (frame.ammoType === "rail") {
+      ctx.strokeStyle = "#d4f7ff";
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.moveTo(left - 6, bodyY);
+      ctx.lineTo(left + bodyWidth + 10, bodyY);
+      ctx.stroke();
+    }
+  }
+
+  recipe.chamberImpacts.forEach((impactId, index) => {
+    ctx.fillStyle = impactAccentColor(impactId);
+    const slotLeft = left + index * chamberWidth;
+    ctx.beginPath();
+    if (frame.ammoType === "rail") {
+      ctx.roundRect(slotLeft, bodyY - bodyHeight * 0.46, chamberWidth - 4, bodyHeight * 0.92, 6);
+    } else {
+      ctx.roundRect(slotLeft, bodyY - bodyHeight * 0.5, chamberWidth - 4, bodyHeight, 8);
+    }
+    ctx.fill();
+  });
+
+  ctx.globalAlpha = 0.34;
+  recipe.midAirAddons.forEach((addonId, index) => {
+    ctx.fillStyle = addonId === "magnetized" ? "#9fe8ff" : addonId === "redirect" ? "#ffffff" : addonId === "spiral" ? "#f0d48b" : "#9ef58c";
+    ctx.beginPath();
+    ctx.arc(left + 36 + (index % 6) * 34, bodyY + 36 + Math.floor(index / 6) * 18, 7, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+
+  const launchGlow = recipe.launchType === "blizzard" ? "rgba(202,236,255,0.4)" : recipe.launchType === "ember" ? "rgba(255,183,106,0.4)" : recipe.launchType === "storm" ? "rgba(200,232,255,0.4)" : "rgba(255,255,255,0.16)";
+  ctx.fillStyle = launchGlow;
+  ctx.beginPath();
+  ctx.arc(left - 18, bodyY, 24, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "rgba(255,255,255,0.78)";
+  ctx.font = "600 12px 'Trebuchet MS', sans-serif";
+  ctx.fillText(recipe.name, 18, 24);
+  ctx.fillText(`${recipe.impactLabel} | ${recipe.tipLabel} | ${recipe.launchLabel}`, 18, ui.ammoPreview.height - 16);
+}
+
+function renderAmmoRack() {
+  if (!ui.ammoRack) {
+    return;
+  }
+  ui.ammoRack.innerHTML = "";
+  const frame = frameCatalog[state.forge.frame] || frameCatalog.longbow;
+  if (!state.ammoRack.length) {
+    const empty = document.createElement("p");
+    empty.className = "arena-hint";
+    empty.textContent = "No crafted rounds yet. Build one from the chamber editor and press Craft Ammo.";
+    ui.ammoRack.append(empty);
+    return;
+  }
+  const currentSignature = currentAmmoRecipe().signature;
+  state.ammoRack.forEach((recipe) => {
+    const compatible = ammoRecipeCompatibleWithFrame(recipe, frame);
+    const item = document.createElement("article");
+    item.className = "ammo-rack-item";
+    if (recipe.signature === currentSignature) {
+      item.classList.add("active");
+    }
+    item.innerHTML = `
+      <header>
+        <strong>${recipe.name}</strong>
+        <span class="pill">${recipe.qualityLabel}</span>
+      </header>
+      <p>${recipe.summary}</p>
+    `;
+    const actions = document.createElement("div");
+    actions.className = "ammo-case-actions";
+
+    const loadButton = document.createElement("button");
+    loadButton.className = "ghost-button";
+    loadButton.type = "button";
+    loadButton.textContent = "Load";
+    loadButton.disabled = !compatible;
+    loadButton.addEventListener("click", () => {
+      state.forge = normalizeForgeState({
+        ...state.forge,
+        impactChambers: recipe.impactChambers,
+        impactMount: recipe.impactMount,
+        chamberImpacts: [...recipe.chamberImpacts],
+        impactType: recipe.impactTypes[0] || "standard",
+        launchType: recipe.launchType,
+        midAirAddons: [...recipe.midAirAddons],
+        midAirType: recipe.midAirAddons[0] || "none",
+        tipType: recipe.tipType
+      });
+      state.forge = reconcileAmmoCaseForForge(state.forge);
+      resetForgeMinigame(state.forge.frame, false);
+      renderForge();
+      setMatchSummary(`${recipe.name} loaded back into the ammo workshop.`);
+    });
+
+    const caseButton = document.createElement("button");
+    caseButton.className = "ghost-button";
+    caseButton.type = "button";
+    caseButton.textContent = "To Case";
+    caseButton.disabled = !compatible;
+    caseButton.addEventListener("click", () => {
+      const maxSlots = Math.max(1, Number(state.forge.preloadAmmo || 1));
+      const nextCase = [...(state.forge.ammoCase || [])];
+      if (nextCase.length >= maxSlots) {
+        nextCase.shift();
+      }
+      nextCase.push(recipe.id);
+      state.forge = normalizeForgeState({
+        ...state.forge,
+        ammoCase: nextCase
+      });
+      state.forge = reconcileAmmoCaseForForge(state.forge);
+      renderForge();
+      setMatchSummary(`${recipe.name} added to the ammo case.`);
+    });
+
+    actions.append(loadButton, caseButton);
+    item.append(actions);
+    ui.ammoRack.append(item);
+  });
+}
+
+function renderAmmoCase(weapon) {
+  if (!ui.ammoCaseList) {
+    return;
+  }
+  ui.ammoCaseList.innerHTML = "";
+  const frame = frameCatalog[state.forge.frame] || frameCatalog.longbow;
+  const rounds = (state.forge.ammoCase || [])
+    .map((id) => state.ammoRack.find((recipe) => recipe.id === id))
+    .filter((recipe) => ammoRecipeCompatibleWithFrame(recipe, frame));
+  if (!rounds.length) {
+    const empty = document.createElement("p");
+    empty.className = "arena-hint";
+    empty.textContent = "The case is empty. Crafted rounds added here define the exact firing order.";
+    ui.ammoCaseList.append(empty);
+    return;
+  }
+
+  rounds.forEach((recipe, index) => {
+    const slot = document.createElement("article");
+    slot.className = "ammo-case-slot";
+    slot.innerHTML = `
+      <div class="ammo-case-slot-index">${index + 1}</div>
+      <div class="ammo-case-copy">
+        <strong>${recipe.name}</strong>
+        <p>${recipe.summary}</p>
+      </div>
+    `;
+    const actions = document.createElement("div");
+    actions.className = "ammo-case-actions";
+
+    const upButton = document.createElement("button");
+    upButton.className = "ghost-button";
+    upButton.type = "button";
+    upButton.textContent = "Up";
+    upButton.disabled = index === 0;
+    upButton.addEventListener("click", () => {
+      const ammoCase = [...state.forge.ammoCase];
+      [ammoCase[index - 1], ammoCase[index]] = [ammoCase[index], ammoCase[index - 1]];
+      state.forge = normalizeForgeState({ ...state.forge, ammoCase });
+      state.forge = reconcileAmmoCaseForForge(state.forge);
+      renderForge();
+    });
+
+    const downButton = document.createElement("button");
+    downButton.className = "ghost-button";
+    downButton.type = "button";
+    downButton.textContent = "Down";
+    downButton.disabled = index === rounds.length - 1;
+    downButton.addEventListener("click", () => {
+      const ammoCase = [...state.forge.ammoCase];
+      [ammoCase[index + 1], ammoCase[index]] = [ammoCase[index], ammoCase[index + 1]];
+      state.forge = normalizeForgeState({ ...state.forge, ammoCase });
+      state.forge = reconcileAmmoCaseForForge(state.forge);
+      renderForge();
+    });
+
+    const removeButton = document.createElement("button");
+    removeButton.className = "ghost-button";
+    removeButton.type = "button";
+    removeButton.textContent = "Remove";
+    removeButton.addEventListener("click", () => {
+      const ammoCase = [...state.forge.ammoCase];
+      ammoCase.splice(index, 1);
+      state.forge = normalizeForgeState({ ...state.forge, ammoCase });
+      state.forge = reconcileAmmoCaseForForge(state.forge);
+      renderForge();
+    });
+
+    actions.append(upButton, downButton, removeButton);
+    slot.append(actions);
+    ui.ammoCaseList.append(slot);
+  });
+}
+
+function renderAmmoWorkshop(weapon) {
+  const frame = frameCatalog[state.forge.frame] || frameCatalog.longbow;
+  if (!isRangedWeapon(frame)) {
+    return;
+  }
+  const recipe = weapon?.ammoPrototype || currentAmmoRecipe();
+  const rackRounds = (state.forge.ammoCase || [])
+    .map((id) => state.ammoRack.find((entry) => entry.id === id))
+    .filter((entry) => ammoRecipeCompatibleWithFrame(entry, frame));
+  const caseCapacity = ammoCaseCapacityForFrame(frame, rackRounds.length ? rackRounds : [recipe], state.forge.preloadAmmo || frame.clipSize);
+  const loadedRounds = rackRounds.slice(0, caseCapacity);
+
+  ui.ammoWorkshopFamily.textContent =
+    frame.ammoType === "rail" ? "Rail Work" : frame.ammoType === "bolt" ? "Bolt Work" : "Bullet Work";
+  ui.ammoWorkshopNote.textContent =
+    `Craft ${frame.ammoType}s separately, then load them into the case in order. ` +
+    `${frame.label} can hold up to ${caseCapacity} round${caseCapacity === 1 ? "" : "s"} with this payload size.`;
+  ui.preloadAmmo.value = `${Math.min(Number(state.forge.preloadAmmo || 1), caseCapacity)}`;
+
+  renderImpactChamberList(frame);
+  renderMidAirAddonList();
+  renderAmmoPreview(weapon);
+  renderAmmoRack();
+  renderAmmoCase(weapon);
+
+  ui.ammoSummary.innerHTML = `
+    <div class="ammo-summary-grid">
+      <div class="ammo-summary-chip">
+        <span>Recipe</span>
+        <strong>${recipe.name}</strong>
+      </div>
+      <div class="ammo-summary-chip">
+        <span>Case</span>
+        <strong>${loadedRounds.length}/${caseCapacity}</strong>
+      </div>
+      <div class="ammo-summary-chip">
+        <span>Impacts</span>
+        <strong>${recipe.impactLabel}</strong>
+      </div>
+      <div class="ammo-summary-chip">
+        <span>Mid Air</span>
+        <strong>${recipe.midAirAddons.length || 0} add-on${recipe.midAirAddons.length === 1 ? "" : "s"}</strong>
+      </div>
+    </div>
+    <p>${recipe.summary}</p>
   `;
 }
 
+function renderForgeBadges(weapon) {
+  ui.forgeBadges.innerHTML = isRangedWeapon(weapon)
+    ? `
+      <span class="menu-status alt">${weapon.classLabel}</span>
+      <span class="menu-status alt">${weapon.fireModeLabel || "Single Shot"}</span>
+      <span class="menu-status alt">${weapon.ammoLabel}</span>
+      <span class="menu-status alt">${weapon.impactLabel}</span>
+      <span class="menu-status alt">${weapon.tipLabel}</span>
+      <span class="menu-status alt">${weapon.launchLabel}</span>
+      <span class="menu-status alt">${weapon.midAirAddons?.length || 0} add-ons</span>
+      <span class="menu-status alt">${weapon.forgeQualityLabel}</span>
+    `
+    : `
+      <span class="menu-status alt">${weapon.classLabel} Class</span>
+      <span class="menu-status alt">${weapon.frameDesign}</span>
+      <span class="menu-status alt">${weapon.edge}</span>
+      <span class="menu-status alt">${weapon.forgeQualityLabel}</span>
+      <span class="menu-status alt">${weapon.weight.toFixed(1)} wt</span>
+      <span class="menu-status alt">${weapon.reach} reach</span>
+      <span class="menu-status alt">${weapon.specialType.replaceAll("-", " ")}</span>
+    `;
+}
+
 function weaponRoleTag(weapon) {
+  if (weapon.kind === "sidearm") {
+    return "Sidearm";
+  }
+  if (weapon.kind === "assault") {
+    return "Assault";
+  }
+  if (weapon.kind === "heavy") {
+    return "Heavy";
+  }
+  if (weapon.kind === "gun-special") {
+    return "Special Gun";
+  }
   if (weapon.kind === "long") {
     return "Long";
   }
@@ -3924,9 +5816,12 @@ function weaponPreviewMarkup(weapon) {
     headMarkup = `
       <path d="M ${shaft - 4} ${36 - bladeSize * 0.58} Q ${shaft + bladeSize * 0.84} ${36 - bladeSize * 0.46} ${shaft + bladeSize * 0.48} 36 Q ${shaft + bladeSize * 0.74} ${36 + bladeSize * 0.28} ${shaft - 2} ${36 + bladeSize * 0.14} Z" fill="${color}" />
     `;
-  } else if (weapon.frameId === "chainwhip") {
+  } else if (isRangedWeapon(weapon)) {
     headMarkup = `
-      <circle cx="${shaft + bladeSize * 0.58}" cy="36" r="${Math.max(7, bladeSize * 0.28)}" fill="${color}" />
+      <rect x="${shaft - 18}" y="28" width="${Math.max(32, bladeSize * 1.3)}" height="16" rx="6" fill="${handle}" />
+      <rect x="${shaft - 4}" y="24" width="${Math.max(38, bladeSize * 1.7)}" height="10" rx="4" fill="${color}" />
+      <rect x="${shaft + bladeSize * 0.9}" y="28" width="${Math.max(12, bladeSize * 0.5)}" height="4" rx="2" fill="${color}" />
+      <rect x="${shaft + bladeSize * 0.28}" y="38" width="10" height="14" rx="4" fill="${handle}" />
     `;
   }
 
@@ -3948,11 +5843,62 @@ function weaponPreviewMarkup(weapon) {
 }
 
 function renderForgeDetails(weapon) {
-  const styleTitle = weapon.usesStyle ? "Style" : "Class Special";
-  const styleName = weapon.usesStyle ? weapon.edge : `${weapon.classLabel} Built-In`;
+  if (isRangedWeapon(weapon)) {
+    ui.forgeDetails.innerHTML = `
+      <article class="forge-detail-card">
+        <span>Weapon Type</span>
+        <strong>${weapon.frame} | ${weapon.classLabel}</strong>
+        <p>${weapon.frameSummary}</p>
+      </article>
+      <article class="forge-detail-card">
+        <span>Fire Mode</span>
+        <strong>${weapon.fireModeLabel || "Single Shot"}</strong>
+        <p>${weapon.abilitySummary}</p>
+      </article>
+      <article class="forge-detail-card">
+        <span>Impact Chamber</span>
+        <strong>${weapon.impactChambers} | ${weapon.impactMountLabel}</strong>
+        <p>${weapon.edgeSummary}</p>
+      </article>
+      <article class="forge-detail-card">
+        <span>Chamber Stack</span>
+        <strong>${weapon.chamberImpacts.map((impactId, index) => `C${index + 1}:${impactTypeCatalog[impactId]?.label || impactId}`).join(" | ")}</strong>
+        <p>Each chamber can carry its own impact. Mixed rounds fire exactly in the order shown in the ammo workshop.</p>
+      </article>
+      <article class="forge-detail-card">
+        <span>Launch</span>
+        <strong>${weapon.launchLabel}</strong>
+        <p>${launchTypeCatalog[weapon.launchType]?.summary || ""}</p>
+      </article>
+      <article class="forge-detail-card">
+        <span>Mid Flight Stack</span>
+        <strong>${weapon.midAirLabel}</strong>
+        <p>Mid-air add-ons stack without a set limit. Each extra module can make the round track, redirect, stabilize, or weave harder.</p>
+      </article>
+      <article class="forge-detail-card">
+        <span>Tip</span>
+        <strong>${weapon.tipLabel}</strong>
+        <p>${tipTypeCatalog[weapon.tipType]?.summary || ""}</p>
+      </article>
+      <article class="forge-detail-card">
+        <span>Ammo Case</span>
+        <strong>${weapon.ammoLabel}</strong>
+        <p>${weapon.ammoCaseSummary || "Prototype rounds fill the case when you have not loaded crafted ammo yet."}</p>
+      </article>
+      <article class="forge-detail-card">
+        <span>Forge Finish</span>
+        <strong>${weapon.forgeQualityLabel}</strong>
+        <p>${weapon.forgeSummary}</p>
+      </article>
+    `;
+    return;
+  }
+
+  const styleTitle = weapon.usesStyle ? "Style" : "Class Trait";
+  const styleName = weapon.usesStyle ? weapon.edge : `${weapon.frame} Trait`;
   const styleCopy = weapon.usesStyle
     ? `${weapon.edgeSummary} ${weapon.abilitySummary}`
-    : `${weapon.classLabel} weapons do not equip styles. ${weapon.abilitySummary}`;
+    : `${weapon.edgeSummary} ${weapon.abilitySummary}`.trim();
   ui.forgeDetails.innerHTML = `
     <article class="forge-detail-card">
       <span>Weapon Type</span>
@@ -3988,6 +5934,82 @@ function renderForgeDetails(weapon) {
 }
 
 function renderForgeStats(weapon) {
+  if (isRangedWeapon(weapon)) {
+    const stats = [
+      {
+        label: "Shot Damage",
+        value: weapon.damage,
+        display: `${weapon.damage}`,
+        max: 44,
+        detail: "Higher shot damage makes each round hit much harder."
+      },
+      {
+        label: "Load",
+        value: weapon.preloadAmmo,
+        display: `${weapon.preloadAmmo}/${weapon.clipSize}`,
+        max: Math.max(weapon.clipSize, 12),
+        detail: "Preload ammo is how many rounds start in the gun before you need a reload."
+      },
+      {
+        label: "Range",
+        value: weapon.projectileRange,
+        display: `${weapon.projectileRange}`,
+        max: 620,
+        detail: "Range controls how far the round can travel before it dies."
+      },
+      {
+        label: "Velocity",
+        value: weapon.projectileSpeed,
+        display: `${weapon.projectileSpeed}`,
+        max: 1240,
+        detail: "Higher velocity makes the round get to the rival faster."
+      },
+      {
+        label: "Reload",
+        value: Math.round((2 - weapon.reloadTime) * 100),
+        display: `${weapon.reloadTime.toFixed(2)}s`,
+        max: 150,
+        detail: "Lower reload time means the gun gets back to loaded fire more quickly."
+      },
+      {
+        label: "Break",
+        value: weapon.blockBreak,
+        display: `${weapon.blockBreak}`,
+        max: 14,
+        detail: "Block break shows how much the tip and payload chew through guard."
+      },
+      {
+        label: "Weight",
+        value: weapon.weight,
+        display: weapon.weight.toFixed(1),
+        max: 30,
+        detail: "Heavier guns hit harder but slow movement and recovery."
+      },
+      {
+        label: "Move",
+        value: Math.round(weapon.moveScale * 100),
+        display: `${Math.round(weapon.moveScale * 100)}`,
+        max: 114,
+        detail: "Move keeps track of how much the gun slows or frees your movement."
+      }
+    ];
+    ui.forgeStats.innerHTML = stats
+      .map((stat) => `
+        <article class="forge-stat-card">
+          <div class="forge-stat-top">
+            <span>${stat.label}</span>
+            <strong>${stat.display}</strong>
+          </div>
+          <div class="forge-stat-bar">
+            <div class="forge-stat-fill" style="width:${clamp((stat.value / stat.max) * 100, 8, 100)}%"></div>
+          </div>
+          <p>${stat.detail}</p>
+        </article>
+      `)
+      .join("");
+    return;
+  }
+
   const stats = [
     {
       label: "Damage",
@@ -4039,7 +6061,7 @@ function renderForgeStats(weapon) {
       detail: weapon.kind === "long"
         ? "Long parries are easier and use slower heavy attacks with built-in weapon specials."
         : weapon.kind === "medium"
-          ? "Medium stays balanced, uses styles, and turns dash into a pass-through slash."
+          ? "Medium stays balanced, keeps built-in weapon traits, and turns dash into a pass-through slash."
           : weapon.kind === "short"
             ? "Short gains back-hit damage, stealthier crouches, and close-range rush specials."
             : "Special weapons ignore styles and instead bring a unique signature move."
@@ -4089,6 +6111,123 @@ function renderForgePreview(weapon) {
     previewCtx.moveTo(i * 44, -50);
     previewCtx.lineTo(i * 44 + 8, 46);
     previewCtx.stroke();
+  }
+
+  if (isRangedWeapon(weapon)) {
+    const bodyLength =
+      weapon.kind === "sidearm"
+        ? 78
+        : weapon.kind === "assault"
+          ? 116
+          : weapon.kind === "heavy"
+            ? 134
+            : weapon.frameId === "longbow"
+              ? 110
+              : weapon.frameId === "crossbow"
+                ? 118
+                : 128;
+    const barrelLength = weapon.kind === "heavy" ? 64 : weapon.kind === "sidearm" ? 34 : 48;
+    const bodyHeight = weapon.kind === "heavy" ? 22 : weapon.kind === "sidearm" ? 16 : 18;
+    const stockDrop = weapon.kind === "sidearm" ? 22 : 18;
+    const chamberGlow = 10 + weapon.impactChambers * 7;
+
+    previewCtx.strokeStyle = "#e9dfd2";
+    previewCtx.lineWidth = 8;
+    previewCtx.beginPath();
+    previewCtx.moveTo(-14, 0);
+    previewCtx.lineTo(bodyLength + barrelLength + 12, 0);
+    previewCtx.stroke();
+
+    previewCtx.fillStyle = "rgba(0,0,0,0.18)";
+    previewCtx.beginPath();
+    previewCtx.roundRect(-16, -6, bodyLength + barrelLength + 18, bodyHeight + 12, 14);
+    previewCtx.fill();
+
+    previewCtx.fillStyle = weapon.color;
+    previewCtx.beginPath();
+    if (weapon.frameId === "longbow") {
+      previewCtx.moveTo(10, -34);
+      previewCtx.quadraticCurveTo(-18, 0, 10, 34);
+      previewCtx.lineTo(18, 26);
+      previewCtx.quadraticCurveTo(-6, 0, 18, -26);
+      previewCtx.closePath();
+      previewCtx.fill();
+      previewCtx.strokeStyle = "#f3ead8";
+      previewCtx.lineWidth = 3;
+      previewCtx.beginPath();
+      previewCtx.moveTo(10, -34);
+      previewCtx.lineTo(10, 34);
+      previewCtx.stroke();
+      previewCtx.strokeStyle = weapon.color;
+      previewCtx.lineWidth = 8;
+      previewCtx.beginPath();
+      previewCtx.moveTo(18, 0);
+      previewCtx.lineTo(106, 0);
+      previewCtx.stroke();
+    } else if (weapon.frameId === "crossbow") {
+      previewCtx.beginPath();
+      previewCtx.roundRect(10, -8, 86, 16, 8);
+      previewCtx.fill();
+      previewCtx.beginPath();
+      previewCtx.moveTo(12, -28);
+      previewCtx.lineTo(44, 0);
+      previewCtx.lineTo(12, 28);
+      previewCtx.lineTo(22, 22);
+      previewCtx.lineTo(50, 0);
+      previewCtx.lineTo(22, -22);
+      previewCtx.closePath();
+      previewCtx.fill();
+      previewCtx.strokeStyle = "#f3ead8";
+      previewCtx.lineWidth = 3;
+      previewCtx.beginPath();
+      previewCtx.moveTo(14, -22);
+      previewCtx.lineTo(14, 22);
+      previewCtx.stroke();
+      previewCtx.strokeStyle = weapon.color;
+      previewCtx.lineWidth = 7;
+      previewCtx.beginPath();
+      previewCtx.moveTo(42, 0);
+      previewCtx.lineTo(124, 0);
+      previewCtx.stroke();
+    } else {
+      previewCtx.beginPath();
+      previewCtx.roundRect(8, -bodyHeight / 2, bodyLength, bodyHeight, 10);
+      previewCtx.fill();
+      previewCtx.fillStyle = "#f3ead8";
+      previewCtx.beginPath();
+      previewCtx.roundRect(18, -6, 22, 12, 6);
+      previewCtx.fill();
+      previewCtx.fillStyle = weapon.color;
+      previewCtx.beginPath();
+      previewCtx.moveTo(24, bodyHeight / 2 - 1);
+      previewCtx.lineTo(12, bodyHeight / 2 + stockDrop);
+      previewCtx.lineTo(30, bodyHeight / 2 + 14);
+      previewCtx.lineTo(44, bodyHeight / 2 - 1);
+      previewCtx.closePath();
+      previewCtx.fill();
+      previewCtx.beginPath();
+      previewCtx.roundRect(bodyLength - 4, -5, barrelLength, 10, 5);
+      previewCtx.fill();
+      if (weapon.frameId === "railgun") {
+        previewCtx.fillStyle = "#d7f7ff";
+        previewCtx.beginPath();
+        previewCtx.roundRect(bodyLength - 2, -3, barrelLength + 10, 6, 3);
+        previewCtx.fill();
+      }
+    }
+
+    previewCtx.globalAlpha = 0.26;
+    previewCtx.fillStyle = weapon.color;
+    previewCtx.beginPath();
+    previewCtx.arc(bodyLength * 0.42, 0, chamberGlow, 0, Math.PI * 2);
+    previewCtx.fill();
+
+    previewCtx.globalAlpha = 1;
+    previewCtx.fillStyle = "rgba(255, 255, 255, 0.78)";
+    previewCtx.font = "600 12px 'Trebuchet MS', sans-serif";
+    previewCtx.fillText(`${weapon.impactLabel} | ${weapon.tipLabel} | ${weapon.ammoLabel}`, -12, 58);
+    previewCtx.restore();
+    return;
   }
 
   const shaft = clamp(weapon.reach * 0.8, 48, 128);
@@ -4151,8 +6290,6 @@ function renderForgePreview(weapon) {
     previewCtx.moveTo(shaft - 4, -bladeSize * 0.56);
     previewCtx.quadraticCurveTo(shaft + bladeSize * 0.84, -bladeSize * 0.42, shaft + bladeSize * 0.46, 0);
     previewCtx.quadraticCurveTo(shaft + bladeSize * 0.68, bladeSize * 0.24, shaft - 3, bladeSize * 0.14);
-  } else if (weapon.frameId === "chainwhip") {
-    previewCtx.arc(shaft + bladeSize * 0.54, 0, Math.max(8, bladeSize * 0.26), 0, Math.PI * 2);
   } else {
     previewCtx.moveTo(shaft, -bladeSize * 0.48);
     previewCtx.lineTo(shaft + bladeSize * 0.82, 0);
@@ -4177,6 +6314,7 @@ function renderForgePreview(weapon) {
 function renderForgeMinigame(weapon) {
   const game = state.forgeGame;
   const meta = forgeModeMeta(frameCatalog[weapon.frameId] || weapon);
+  const rangedWeapon = isRangedWeapon(weapon);
   ui.forgeMinigameTitle.textContent = meta.title;
   ui.forgeMinigameCopy.textContent = meta.copy;
   ui.forgeAction.textContent = meta.action;
@@ -4192,26 +6330,60 @@ function renderForgeMinigame(weapon) {
     ui.forgeMinigameBar.style.setProperty("--target-start", "38%");
     ui.forgeMinigameBar.style.setProperty("--target-end", "62%");
     ui.forgeMinigameStatus.textContent = game.active
-      ? `Hit the gold temper band 3 times. Successes: ${game.hits}/3.`
+      ? rangedWeapon
+        ? `Seat the heavy chamber in the gold lane 3 times. Successes: ${game.hits}/3.`
+        : `Hit the gold temper band 3 times. Successes: ${game.hits}/3.`
       : game.finished
-        ? `Long forge finished at ${weapon.forgeQualityLabel}. Heavy timing was ${Math.round(weapon.forgeQuality * 100)}% clean.`
-        : "No long-blade run yet. Start the drill to temper the heavy edge.";
+        ? rangedWeapon
+          ? `Heavy ranged tuning finished at ${weapon.forgeQualityLabel}. Chamber seating was ${Math.round(weapon.forgeQuality * 100)}% clean.`
+          : `Long forge finished at ${weapon.forgeQualityLabel}. Heavy timing was ${Math.round(weapon.forgeQuality * 100)}% clean.`
+        : rangedWeapon
+          ? "No heavy-gun run yet. Start the drill to seat the large payload cleanly."
+          : "No long-blade run yet. Start the drill to temper the heavy edge.";
+  } else if (game.mode === "bow-string") {
+    ui.forgeMinigameBar.style.setProperty("--target-start", "46%");
+    ui.forgeMinigameBar.style.setProperty("--target-end", "54%");
+    ui.forgeMinigameStatus.textContent = game.active
+      ? `Snap the string in the gold lane 4 times. Clean releases: ${game.hits}/4.`
+      : game.finished
+        ? `Bow ammo tuning finished at ${weapon.forgeQualityLabel}. String control landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
+        : "No bow-string run yet. Start the drill to tune the draw and release.";
   } else if (game.mode === "medium") {
     ui.forgeMinigameBar.style.setProperty("--target-start", "0%");
     ui.forgeMinigameBar.style.setProperty("--target-end", "0%");
     ui.forgeMinigameStatus.textContent = game.active
-      ? `Strike the three rhythm markers in order. Landed: ${game.hits}/${Math.max(game.pips.length, 3)}.`
+      ? rangedWeapon
+        ? `Hit the three feed markers in order. Landed: ${game.hits}/${Math.max(game.pips.length, 3)}.`
+        : `Strike the three rhythm markers in order. Landed: ${game.hits}/${Math.max(game.pips.length, 3)}.`
       : game.finished
-        ? `Medium forge finished at ${weapon.forgeQualityLabel}. Slash rhythm landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
-        : "No medium-blade run yet. Start the drill to tune the slash rhythm.";
+        ? rangedWeapon
+          ? `Ranged feed tuning finished at ${weapon.forgeQualityLabel}. Shot timing landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
+          : `Medium forge finished at ${weapon.forgeQualityLabel}. Slash rhythm landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
+        : rangedWeapon
+          ? "No assault or special-gun run yet. Start the drill to smooth the feed rhythm."
+          : "No medium-blade run yet. Start the drill to tune the slash rhythm.";
+  } else if (game.mode === "rail-align") {
+    ui.forgeMinigameBar.style.setProperty("--target-start", "0%");
+    ui.forgeMinigameBar.style.setProperty("--target-end", "0%");
+    ui.forgeMinigameStatus.textContent = game.active
+      ? `Hit the 4 rail markers in order. Aligned rails: ${game.hits}/${Math.max(game.pips.length, 4)}.`
+      : game.finished
+        ? `Rail alignment finished at ${weapon.forgeQualityLabel}. Charge timing landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
+        : "No rail alignment run yet. Start the drill to line up the emitter rail.";
   } else if (game.mode === "short") {
     ui.forgeMinigameBar.style.setProperty("--target-start", "0%");
     ui.forgeMinigameBar.style.setProperty("--target-end", "0%");
     ui.forgeMinigameStatus.textContent = game.active
-      ? `Pop every spark before time expires. Sparks hit: ${game.hits}/${Math.max(game.pips.length, 5)}.`
+      ? rangedWeapon
+        ? `Cycle every light round before time expires. Chambers hit: ${game.hits}/${Math.max(game.pips.length, 5)}.`
+        : `Pop every spark before time expires. Sparks hit: ${game.hits}/${Math.max(game.pips.length, 5)}.`
       : game.finished
-        ? `Short forge finished at ${weapon.forgeQualityLabel}. Spark work landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
-        : "No short-blade run yet. Start the drill to sharpen the close-range edge.";
+        ? rangedWeapon
+          ? `Sidearm tuning finished at ${weapon.forgeQualityLabel}. Chamber cycling landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
+          : `Short forge finished at ${weapon.forgeQualityLabel}. Spark work landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
+        : rangedWeapon
+          ? "No sidearm run yet. Start the drill to tighten the light feed cycle."
+          : "No short-blade run yet. Start the drill to sharpen the close-range edge.";
   } else if (game.mode === "combo-barrage") {
     ui.forgeMinigameBar.style.setProperty("--target-start", "0%");
     ui.forgeMinigameBar.style.setProperty("--target-end", "0%");
@@ -4236,6 +6408,28 @@ function renderForgeMinigame(weapon) {
       : game.finished
         ? `Scythe hook forge finished at ${weapon.forgeQualityLabel}. Hook control landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
         : "No scythe hook run yet. Start the drill to tune the pull arc.";
+  } else if (game.mode === "rail-bore") {
+    ui.forgeMinigameBar.style.setProperty("--target-start", "0%");
+    ui.forgeMinigameBar.style.setProperty("--target-end", "0%");
+    ui.forgeMinigameStatus.textContent = game.active
+      ? `Catch each drifting bore point. Coil catches: ${game.hits}/${Math.max(game.pips.length, 3)}.`
+      : game.finished
+        ? `Coil bore tuning finished at ${weapon.forgeQualityLabel}. Bore control landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
+        : "No coil-bore run yet. Start the drill to tune the rail lane.";
+  } else if (game.mode === "bolt-latch") {
+    const lanes = [
+      ["10%", "22%"],
+      ["78%", "90%"],
+      ["14%", "26%"]
+    ];
+    const lane = lanes[Math.min(game.laneIndex, lanes.length - 1)];
+    ui.forgeMinigameBar.style.setProperty("--target-start", lane[0]);
+    ui.forgeMinigameBar.style.setProperty("--target-end", lane[1]);
+    ui.forgeMinigameStatus.textContent = game.active
+      ? `Hit the 3 latch lanes. Locked bolts: ${game.hits}/3.`
+      : game.finished
+        ? `Crossbow latch tuning finished at ${weapon.forgeQualityLabel}. Bolt seating landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
+        : "No crossbow latch run yet. Start the drill to seat each bolt cleanly.";
   } else if (game.mode === "axe-throw") {
     const lanes = [
       ["10%", "22%"],
@@ -4274,9 +6468,15 @@ function renderForge() {
   syncForgeOutputs();
   const weapon = currentBlueprint();
   if (ui.forgeNote) {
-    ui.forgeNote.textContent = weapon.usesStyle
-      ? `${weapon.classLabel} blades use styles. ${weapon.edge} gives: ${weapon.abilitySummary}`
-      : `${weapon.classLabel} blades do not use styles. ${weapon.frame} special: ${weapon.abilitySummary}`;
+    if (isRangedWeapon(weapon)) {
+      ui.forgeNote.textContent =
+        `${weapon.classLabel} ranged builds now split weapon body and ammo crafting. ` +
+        `Build rounds in the ammo workshop, stack them into the case, and every shot will fire in that exact order.`;
+    } else {
+      ui.forgeNote.textContent =
+        `${weapon.classLabel} blades now use built-in class traits only. ` +
+        `${weapon.frame} trait: ${weapon.abilitySummary}`;
+    }
   }
   ui.weaponTitle.textContent = weapon.name;
   ui.weaponLore.textContent = weapon.lore;
@@ -4285,6 +6485,9 @@ function renderForge() {
   renderForgeDetails(weapon);
   renderForgePreview(weapon);
   renderForgeMinigame(weapon);
+  if (isRangedWeapon(weapon)) {
+    renderAmmoWorkshop(weapon);
+  }
   renderMenuSummary();
 }
 
@@ -4306,6 +6509,14 @@ function updateHudLabels() {
   ui.battlefieldStyle.textContent = activeWeapon?.styleText || "Balanced duel control";
   ui.battlefieldStage.textContent = currentStageConfig(stageState.id).label;
   ui.battlefieldLoadout.textContent = activeWeapon?.name || "Unarmed";
+  if (ui.touchAttack) {
+    ui.touchAttack.textContent = isRangedWeapon(activeWeapon) ? "Fire" : "Strike";
+  }
+  if (ui.touchReload) {
+    const showReload = isRangedWeapon(activeWeapon);
+    ui.touchReload.hidden = !showReload;
+    ui.touchReload.textContent = "Reload";
+  }
   renderSetRecap();
   renderBroadcastPanels();
   renderMenuSummary();
@@ -4335,16 +6546,41 @@ function saveCurrentWeapon({ equip = true } = {}) {
 }
 
 function loadWeaponIntoForge(weapon) {
+  const ammoCaseIds = Array.isArray(weapon.ammoCaseIds) ? [...weapon.ammoCaseIds] : [];
+  if (!ammoCaseIds.length && Array.isArray(weapon.ammoCaseRounds)) {
+    weapon.ammoCaseRounds.forEach((recipe) => {
+      const signature = recipe.signature || ammoRecipeSignature(recipe);
+      const existing = state.ammoRack.find((entry) => entry.signature === signature);
+      const rackEntry = existing || { ...recipe, signature, chamberImpacts: [...recipe.chamberImpacts], impactTypes: [...recipe.impactTypes], midAirAddons: [...recipe.midAirAddons] };
+      if (!existing) {
+        state.ammoRack.unshift(rackEntry);
+      }
+      ammoCaseIds.push(rackEntry.id);
+    });
+  }
+  const ammoPrototype = weapon.ammoPrototype || null;
   state.forge = {
     id: weapon.id,
     name: weapon.name,
+    family: isRangedWeapon(weapon) ? "ranged" : "melee",
     kind: frameCatalog[weapon.frameId]?.kind || weapon.kind || "medium",
     frame: weapon.frameId,
     material: weapon.materialId,
     edge: weapon.edgeId,
+    impactChambers: weapon.impactChambers || 1,
+    impactMount: weapon.impactMount || "core",
+    impactType: weapon.impactType || "standard",
+    chamberImpacts: ammoPrototype?.chamberImpacts || weapon.chamberImpacts || [weapon.impactType || "standard"],
+    launchType: weapon.launchType || "standard",
+    midAirType: weapon.midAirType || "none",
+    midAirAddons: ammoPrototype?.midAirAddons || weapon.midAirAddons || [],
+    tipType: weapon.tipType || "sharp",
+    preloadAmmo: weapon.preloadAmmo || weapon.clipSize || 1,
+    ammoCase: ammoCaseIds,
     heat: clamp(Number(weapon.heat ?? weapon.temper ?? 58), 0, 100),
     forgeQuality: clamp(Number(weapon.forgeQuality ?? 0.5), 0.2, 1)
   };
+  state.forge = reconcileAmmoCaseForForge(state.forge);
 
   syncForgeSelectors();
   resetForgeMinigame(state.forge.frame, true);
@@ -4375,6 +6611,7 @@ function renderArmory() {
   }
 
   state.armory.forEach((weapon) => {
+    const rangedWeapon = isRangedWeapon(weapon);
     const card = document.createElement("article");
     card.className = "armory-card";
     if (weapon.id === state.activeWeaponId) {
@@ -4408,28 +6645,43 @@ function renderArmory() {
     meta.innerHTML = `
       <span class="pill">${weapon.classLabel}</span>
       <span class="pill">${weapon.material}</span>
-      <span class="pill">${weapon.edge}</span>
+      <span class="pill">${rangedWeapon ? (weapon.fireModeLabel || weapon.edge) : weapon.edge}</span>
       <span class="pill">${weapon.forgeQualityLabel}</span>
       <span class="pill">${weapon.heat}% heat</span>
-      <span class="pill">${weapon.reach} reach</span>
+      <span class="pill">${rangedWeapon ? weapon.ammoLabel : `${weapon.reach} reach`}</span>
     `;
 
     const statRow = document.createElement("div");
     statRow.className = "armory-stat-row";
-    statRow.innerHTML = `
-      <div class="armory-stat">
-        <span>Speed</span>
-        <strong>${Math.round(weapon.speed * 100)}</strong>
-      </div>
-      <div class="armory-stat">
-        <span>Push</span>
-        <strong>${Math.round(weapon.knockback * 100)}</strong>
-      </div>
-      <div class="armory-stat">
-        <span>Weight</span>
-        <strong>${weapon.weight.toFixed(1)}</strong>
-      </div>
-    `;
+    statRow.innerHTML = rangedWeapon
+      ? `
+        <div class="armory-stat">
+          <span>Shot Speed</span>
+          <strong>${weapon.projectileSpeed}</strong>
+        </div>
+        <div class="armory-stat">
+          <span>Reload</span>
+          <strong>${weapon.reloadTime.toFixed(2)}s</strong>
+        </div>
+        <div class="armory-stat">
+          <span>Weight</span>
+          <strong>${weapon.weight.toFixed(1)}</strong>
+        </div>
+      `
+      : `
+        <div class="armory-stat">
+          <span>Speed</span>
+          <strong>${Math.round(weapon.speed * 100)}</strong>
+        </div>
+        <div class="armory-stat">
+          <span>Push</span>
+          <strong>${Math.round(weapon.knockback * 100)}</strong>
+        </div>
+        <div class="armory-stat">
+          <span>Weight</span>
+          <strong>${weapon.weight.toFixed(1)}</strong>
+        </div>
+      `;
 
     const actions = document.createElement("div");
     actions.className = "armory-actions";
@@ -4530,6 +6782,25 @@ function renderStageSummary() {
 }
 
 function fighterProfileForWeapon(weapon) {
+  if (isRangedWeapon(weapon)) {
+    const heavyGun = weapon.kind === "heavy";
+    const sidearm = weapon.kind === "sidearm";
+    return {
+      damage: clamp(Math.round(weapon.damage * 0.88 + weapon.impactChambers * 1.5), 10, 42),
+      reach: clamp(Math.round(58 + weapon.weight * 1.1 + (heavyGun ? 8 : sidearm ? -4 : 0)), 52, 92),
+      windup: clamp(0.05 + weapon.cooldown * 0.18 + (heavyGun ? 0.02 : 0), 0.06, 0.18),
+      active: 0.04,
+      recover: clamp(0.12 + weapon.cooldown * 0.22 + (heavyGun ? 0.03 : 0), 0.14, 0.3),
+      knockback: clamp(170 + weapon.knockback * 88, 200, 350),
+      blockDrain: clamp(Math.round(6 + weapon.blockBreak + weapon.impactChambers * 2), 8, 22),
+      lunge: clamp(14 + weapon.speed * 8 - weapon.weight * 0.1, 10, 22),
+      parryWindow: heavyGun ? 0.12 : 0.14,
+      slideDamage: 0,
+      slideHits: 0,
+      shotDrain: clamp(6 + weapon.impactChambers * 2 + (heavyGun ? 3 : 0), 7, 16)
+    };
+  }
+
   const longClass = weapon.kind === "long";
   const shortClass = weapon.kind === "short";
   const mediumClass = weapon.kind === "medium";
@@ -4565,7 +6836,7 @@ function fighterProfileForWeapon(weapon) {
     knockback: clamp(180 + weapon.knockback * 70 + (longClass ? 18 : 0), 190, 340),
     blockDrain: clamp(Math.round(8 + weapon.damage * 0.35 + weapon.weight * 0.35 + (longClass ? 2 : specialClass ? 1 : 0)), 10, 28),
     lunge: clamp(48 + weapon.reach * 0.18 + (mediumClass ? 10 : shortClass ? 14 : specialClass ? 8 : -4), 48, 96),
-    parryWindow: longClass ? 0.22 : weapon.edgeId === "duelist" ? 0.16 : 0.14,
+    parryWindow: longClass ? 0.22 : mediumClass ? 0.16 : 0.14,
     slideDamage: clamp(Math.round(weapon.damage * slideDamageScale), 6, 22),
     slideHits
   };
@@ -4580,6 +6851,8 @@ function stageBounds(stageState) {
 }
 
 function spawnFighter({ team, control, weapon, x, name, color }) {
+  const isRanged = isRangedWeapon(weapon);
+  const loadedRounds = isRanged ? ammoRoundListForWeapon(weapon) : [];
   const fighter = {
     team,
     control,
@@ -4611,12 +6884,23 @@ function spawnFighter({ team, control, weapon, x, name, color }) {
     invulnerable: 0,
     attack: null,
     attackFlash: 0,
+    muzzleFlash: 0,
     parryWindow: 0,
     parryFlash: 0,
     dodgeCooldown: 0,
     slideCooldown: 0,
     jumpCooldown: 0,
     manualSwingCooldown: 0,
+    ammo: isRanged ? loadedRounds.length : 0,
+    maxAmmo: isRanged ? loadedRounds.length : 0,
+    loadedRounds,
+    roundIndex: 0,
+    reloadTimer: 0,
+    reloadQueued: false,
+    slowTimer: 0,
+    poisonTimer: 0,
+    poisonTickTimer: 0,
+    stuckPayloads: [],
     dodgeTimer: 0,
     slideTimer: 0,
     slideDir: 0,
@@ -4694,7 +6978,8 @@ function readRawInput(slot) {
       attack: state.mouse.left || state.touchState.attack || gamepadButtons.attack,
       block: state.mouse.right || state.touchState.block || gamepadButtons.block,
       dodge: state.keysDown.has(keyBindings.p1.dodge) || state.touchState.dodge || gamepadButtons.dodge,
-      slide: state.keysDown.has(keyBindings.p1.slide) || state.touchState.slide || gamepadButtons.slide
+      slide: state.keysDown.has(keyBindings.p1.slide) || state.touchState.slide || gamepadButtons.slide,
+      reload: state.keysDown.has(keyBindings.p1.reload) || state.touchState.reload || gamepadButtons.reload
     };
   }
 
@@ -4706,7 +6991,8 @@ function readRawInput(slot) {
     attack: state.keysDown.has(keyBindings.p2.attack),
     block: state.keysDown.has(keyBindings.p2.block),
     dodge: state.keysDown.has(keyBindings.p2.dodge),
-    slide: state.keysDown.has(keyBindings.p2.slide)
+    slide: state.keysDown.has(keyBindings.p2.slide),
+    reload: false
   };
 }
 
@@ -4719,7 +7005,8 @@ function inputSnapshot(slot) {
     attackPressed: raw.attack && !previous.attack,
     blockPressed: raw.block && !previous.block,
     dodgePressed: raw.dodge && !previous.dodge,
-    slidePressed: raw.slide && !previous.slide
+    slidePressed: raw.slide && !previous.slide,
+    reloadPressed: raw.reload && !previous.reload
   };
   state.previousInputs[slot] = raw;
   return snapshot;
@@ -4799,7 +7086,7 @@ function lineIntersectsHitbox(x1, y1, x2, y2, box) {
 }
 
 function fighterUsesMouseJab(fighter) {
-  return fighter.control === "p1" && preferredInputMode() === "pc" && fighter.weapon.kind !== "long";
+  return fighter.control === "p1" && preferredInputMode() === "pc" && fighter.weapon.kind !== "long" && !isRangedWeapon(fighter.weapon);
 }
 
 function attackActionProgress(fighter) {
@@ -4815,6 +7102,9 @@ function attackActionProgress(fighter) {
 }
 
 function fighterAttackLabel(fighter) {
+  if (fighter.attack?.style === "shot") {
+    return "shot";
+  }
   return fighter.attack?.style === "jab" ? "jab" : "swing";
 }
 
@@ -4831,15 +7121,32 @@ function weaponPoseForFighter(fighter) {
   const shoulderX = fighter.facing * 11;
   const shoulderY = torsoTop * 0.46;
   let weaponAngle = -0.18;
-  let weaponLength = fighter.profile.reach * 0.78;
+  let weaponLength = isRangedWeapon(fighter.weapon)
+    ? fighter.weapon.kind === "sidearm"
+      ? 42
+      : fighter.weapon.kind === "assault"
+        ? 58
+        : fighter.weapon.kind === "heavy"
+          ? 72
+          : fighter.weapon.frameId === "longbow"
+            ? 62
+            : fighter.weapon.frameId === "crossbow"
+              ? 58
+              : 66
+    : fighter.profile.reach * 0.78;
   let baseX = fighter.x + shoulderX;
   let baseY = fighter.y + shoulderY;
 
   if (fighter.blocking) {
-    weaponAngle = -0.92;
+    weaponAngle = isRangedWeapon(fighter.weapon) ? -0.4 : -0.92;
   } else if (fighter.attack) {
     const actionWindow = attackActionProgress(fighter);
-    if (fighter.attack.style === "jab") {
+    if (fighter.attack.style === "shot") {
+      const recoil = Math.sin(actionWindow * Math.PI);
+      weaponAngle = fighter.mouseWeaponAngle;
+      baseX -= fighter.facing * recoil * 8;
+      baseY += recoil * 2;
+    } else if (fighter.attack.style === "jab") {
       const jabWindow = Math.sin(actionWindow * Math.PI);
       weaponAngle = fighter.mouseWeaponAngle;
       weaponLength += 18 + 34 * jabWindow;
@@ -4851,7 +7158,7 @@ function weaponPoseForFighter(fighter) {
     }
   } else if (fighter.slideTimer > 0) {
     weaponAngle = 0.02;
-  } else if (fighter.control === "p1") {
+  } else if (fighter.control === "p1" || isRangedWeapon(fighter.weapon)) {
     weaponAngle = fighter.mouseWeaponAngle;
   }
 
@@ -4866,7 +7173,7 @@ function weaponPoseForFighter(fighter) {
 }
 
 function updateMouseWeaponControl(fighter, opponent, dt) {
-  if (fighter.control !== "p1") {
+  if (fighter.control !== "p1" && !isRangedWeapon(fighter.weapon)) {
     return;
   }
 
@@ -4875,6 +7182,11 @@ function updateMouseWeaponControl(fighter, opponent, dt) {
   const shoulderX = fighter.x + fighter.facing * 11;
   const shoulderY = fighter.y + torsoTop * 0.46;
   const usingGamepadAim = state.gamepad.connected && Math.hypot(state.gamepad.rightX, state.gamepad.rightY) > 0.24;
+  const usingControllerAssist =
+    preferredInputMode() === "controller" &&
+    !usingGamepadAim &&
+    opponent &&
+    (isRangedWeapon(fighter.weapon) || fighter.control === "p1");
   const usingTouchAssist =
     state.inputProfile.touch &&
     !usingGamepadAim &&
@@ -4882,9 +7194,19 @@ function updateMouseWeaponControl(fighter, opponent, dt) {
   let localX;
   let localY;
 
-  if (usingGamepadAim) {
+  if (fighter.control !== "p1" && isRangedWeapon(fighter.weapon) && opponent) {
+    const opponentHeight = currentFighterHeight(opponent);
+    localX = (opponent.x - shoulderX) * fighter.facing;
+    localY = opponent.y - opponentHeight * 0.58 - shoulderY;
+  } else if (usingGamepadAim) {
     localX = state.gamepad.rightX * 140;
     localY = state.gamepad.rightY * 94;
+  } else if (usingControllerAssist) {
+    const opponentHeight = currentFighterHeight(opponent);
+    const targetX = opponent.x + opponent.vx * 0.08;
+    const targetY = opponent.y - opponentHeight * 0.58;
+    localX = (targetX - shoulderX) * fighter.facing;
+    localY = targetY - shoulderY;
   } else if (usingTouchAssist && opponent) {
     const opponentHeight = currentFighterHeight(opponent);
     const targetX = opponent.x + opponent.vx * 0.06;
@@ -4918,6 +7240,25 @@ function addSpark(match, x, y, color, amount = 8) {
     });
     state.sparkId += 1;
   }
+}
+
+function startReload(fighter, match, manual = false) {
+  if (!isRangedWeapon(fighter.weapon) || fighter.reloadTimer > 0 || fighter.ammo >= fighter.maxAmmo || !fighter.alive) {
+    return false;
+  }
+
+  fighter.reloadTimer = fighter.weapon.reloadTime || 0.9;
+  fighter.reloadQueued = false;
+  fighter.attack = null;
+  fighter.blocking = false;
+  fighter.crouching = false;
+  addSpark(match, fighter.x + fighter.facing * 10, fighter.y - currentFighterHeight(fighter) * 0.56, "rgba(255,255,255,0.8)", 5);
+  playSoundEffect("block");
+  if (manual) {
+    setMatchSummary(`${fighter.name} started reloading ${fighter.weapon.name}.`);
+    pushFightEvent(match, "Reload", `${fighter.name} is reloading ${fighter.weapon.name}.`, "control");
+  }
+  return true;
 }
 
 function performJump(fighter, match) {
@@ -4965,9 +7306,9 @@ function performLunge(fighter, match) {
   fighter.blocking = false;
   fighter.crouching = false;
   const mediumStyleBoost =
-    fighter.weapon.kind === "medium" && fighter.weapon.edgeId === "shadow"
+    fighter.weapon.specialType === "feint-thrust"
       ? 0.03
-      : fighter.weapon.kind === "medium" && fighter.weapon.edgeId === "cyclone"
+      : fighter.weapon.specialType === "crescent-sweep" || fighter.weapon.specialType === "dash-spin"
         ? 0.02
         : 0;
   fighter.slideTimer = fighter.weapon.kind === "short" ? 0.28 : fighter.weapon.kind === "medium" ? 0.22 + mediumStyleBoost : 0.2;
@@ -4981,7 +7322,7 @@ function performLunge(fighter, match) {
       ? 24
       : fighter.weapon.specialType === "triple-rush"
         ? 30
-        : fighter.weapon.edgeId === "shadow"
+        : fighter.weapon.specialType === "feint-thrust"
           ? 18
           : 0;
   fighter.dashSpeed += slideSpeedBonus + (fighter.styleBonuses?.styleId === "tempest" && fighter.styleBonuses.abilityAgility ? 32 : 0);
@@ -5043,7 +7384,381 @@ function emitGroundShockwave(attacker, defender, match) {
   );
 }
 
-function startAttack(fighter) {
+function projectileTargetPoint(fighter) {
+  return {
+    x: fighter.x,
+    y: fighter.y - currentFighterHeight(fighter) * 0.58
+  };
+}
+
+function projectileImpactCount(projectile, impactId) {
+  return countMatches(projectile.chamberImpacts || projectile.impactTypes || [projectile.impactType], impactId);
+}
+
+function projectileHasImpact(projectile, impactId) {
+  return projectileImpactCount(projectile, impactId) > 0;
+}
+
+function spawnZone(match, type, x, y, radius, life, color, power = 0) {
+  match.zones.push({
+    id: makeId(type),
+    type,
+    x,
+    y,
+    radius,
+    life,
+    maxLife: life,
+    color,
+    power
+  });
+}
+
+function spawnProjectile(attacker, opponent, match, options = {}) {
+  const pose = weaponPoseForFighter(attacker);
+  const ammoRound = options.ammoRound || attacker.weapon.ammoPrototype || null;
+  const prototypeRound = attacker.weapon.ammoPrototype || ammoRound;
+  const targetPoint = opponent ? projectileTargetPoint(opponent) : null;
+  let dx = pose.tipX - pose.baseX;
+  let dy = pose.tipY - pose.baseY;
+  if (Math.abs(dx) < 4 && targetPoint) {
+    dx = targetPoint.x - pose.baseX;
+    dy = targetPoint.y - pose.baseY;
+  }
+  const baseAngle = Math.atan2(dy, dx);
+  const shotAngle = baseAngle + (options.angleOffset || 0);
+  const speedDelta = (ammoRound?.speedBonus || 0) - (prototypeRound?.speedBonus || 0);
+  const damageDelta = Math.round(((ammoRound?.damageBonus || 0) - (prototypeRound?.damageBonus || 0)) * 0.65);
+  const knockbackDelta = (ammoRound?.knockbackBonus || 0) - (prototypeRound?.knockbackBonus || 0);
+  const blockBreakDelta = (ammoRound?.blockBreakBonus || 0) - (prototypeRound?.blockBreakBonus || 0);
+  const pierceDelta = (ammoRound?.projectilePierceBonus || 0) - (prototypeRound?.projectilePierceBonus || 0);
+  const speed = ((attacker.weapon.projectileSpeed || 760) + speedDelta) * (options.speedScale || 1);
+  const projectile = {
+    id: makeId("projectile"),
+    ownerTeam: attacker.team,
+    x: pose.tipX,
+    y: pose.tipY,
+    prevX: pose.tipX,
+    prevY: pose.tipY,
+    vx: Math.cos(shotAngle) * speed,
+    vy: Math.sin(shotAngle) * speed,
+    gravity: attacker.weapon.ammoType === "bolt" ? 80 : attacker.weapon.ammoType === "rail" ? 0 : 24,
+    speed,
+    life: (attacker.weapon.projectileRange || 420) / Math.max(speed, 1) + 0.22,
+    age: 0,
+    attackerId: attacker.team,
+    attackerName: attacker.name,
+    weaponId: attacker.weapon.id,
+    weaponName: attacker.weapon.name,
+    color: attacker.weapon.color,
+    ammoType: attacker.weapon.ammoType,
+    impactType: ammoRound?.impactTypes?.[0] || attacker.weapon.impactType,
+    impactTypes: ammoRound?.impactTypes ? [...ammoRound.impactTypes] : [attacker.weapon.impactType],
+    chamberImpacts: ammoRound?.chamberImpacts ? [...ammoRound.chamberImpacts] : [...(attacker.weapon.chamberImpacts || [attacker.weapon.impactType])],
+    impactLabel: ammoRound?.impactLabel || attacker.weapon.impactLabel,
+    impactChambers: ammoRound?.impactChambers || attacker.weapon.impactChambers,
+    launchType: ammoRound?.launchType || attacker.weapon.launchType,
+    midAirType: ammoRound?.midAirAddons?.[0] || attacker.weapon.midAirType,
+    midAirAddons: ammoRound?.midAirAddons ? [...ammoRound.midAirAddons] : [...(attacker.weapon.midAirAddons || [])],
+    tipType: ammoRound?.tipType || attacker.weapon.tipType,
+    damage: Math.max(3, Math.round(attacker.profile.damage * (options.damageScale || 1) + damageDelta)),
+    knockback: attacker.profile.knockback + knockbackDelta * 90,
+    blockBreak: Math.max(0, Math.round(((attacker.weapon.blockBreak || 0) + blockBreakDelta) * (options.blockScale || 1))),
+    pierce: Math.max(0, (attacker.weapon.projectilePierce || 0) + pierceDelta),
+    delayedImpact: Boolean(ammoRound?.delayedImpact ?? attacker.weapon.delayedImpact),
+    homingStrength: ammoRound?.homingStrength ?? attacker.weapon.homingStrength ?? 0,
+    redirectShot: Boolean((ammoRound?.redirectCharges ?? attacker.weapon.redirectCharges ?? 0) > 0),
+    redirectCharges: ammoRound?.redirectCharges ?? attacker.weapon.redirectCharges ?? 0,
+    redirectedCount: 0,
+    blizzardTrail: Boolean(ammoRound?.blizzardTrail ?? attacker.weapon.blizzardTrail),
+    emberTrail: Boolean(ammoRound?.emberTrail ?? attacker.weapon.emberTrail),
+    stormTrail: Boolean(ammoRound?.stormTrail ?? attacker.weapon.stormTrail),
+    spiralFlight: Boolean((ammoRound?.spiralCount ?? attacker.weapon.spiralCount ?? 0) > 0),
+    spiralCount: ammoRound?.spiralCount ?? attacker.weapon.spiralCount ?? 0,
+    pullImpact: Boolean(ammoRound?.pullImpact ?? attacker.weapon.pullImpact),
+    scatterImpact: Boolean(ammoRound?.scatterImpact ?? attacker.weapon.scatterImpact),
+    explosiveBoost: ammoRound?.explosiveBoost ?? attacker.weapon.explosiveBoost ?? 0,
+    shockCount: ammoRound?.shockCount ?? attacker.weapon.shockCount ?? 0,
+    poisonCount: ammoRound?.poisonCount ?? attacker.weapon.poisonCount ?? 0,
+    portalCount: ammoRound?.portalCount ?? attacker.weapon.portalCount ?? 0,
+    glow: attacker.weapon.projectileGlow || impactAccentColor(ammoRound?.impactTypes?.[0] || attacker.weapon.impactType) || attacker.weapon.color,
+    waveSeed: Math.random() * Math.PI * 2,
+    trailTimer: 0
+  };
+  match.projectiles.push(projectile);
+  addSpark(match, projectile.x, projectile.y, attacker.weapon.color, attacker.weapon.ammoType === "rail" ? 10 : 6);
+  if (projectile.launchType === "blizzard") {
+    spawnZone(match, "blizzard", projectile.x, projectile.y, 42, 0.45, "rgba(202,236,255,0.38)", 0.26);
+  }
+  if (projectile.launchType === "ember") {
+    addSpark(match, projectile.x, projectile.y, "#ffc27a", 8);
+  }
+}
+
+function applyProjectileSplash(attacker, defender, projectile, match, contactX, contactY) {
+  const explosiveCount = projectileImpactCount(projectile, "explosive");
+  const scatterCount = projectileImpactCount(projectile, "scatter");
+  const shrapnelCount = projectileImpactCount(projectile, "shrapnel");
+  const imploderCount = projectileImpactCount(projectile, "imploder");
+  const portalCount = projectileImpactCount(projectile, "portal");
+
+  if (explosiveCount) {
+    const splashDamage = clamp(
+      Math.round(projectile.damage * (0.26 + projectile.impactChambers * 0.05 + projectile.explosiveBoost + explosiveCount * 0.08)),
+      4,
+      20
+    );
+    defender.health = clamp(defender.health - splashDamage, 0, defender.maxHealth);
+    defender.vx += Math.sign(projectile.vx || attacker.facing) * (36 + splashDamage * 6);
+    defender.alive = defender.health > 0;
+    addSpark(match, contactX, contactY, "#ffd37a", 16);
+    triggerImpact(match, { shake: 7, flash: 0.08, hitstop: 0.03 });
+  }
+  if (scatterCount || projectile.scatterImpact) {
+    const fragmentDamage = clamp(Math.round(projectile.damage * (0.14 + scatterCount * 0.05)), 2, 9);
+    defender.health = clamp(defender.health - fragmentDamage, 0, defender.maxHealth);
+    defender.vx += Math.sign(projectile.vx || attacker.facing) * (20 + fragmentDamage * 4);
+    defender.alive = defender.health > 0;
+    addSpark(match, contactX, contactY, "#f8f3eb", 20);
+  }
+  if (shrapnelCount) {
+    const fragmentDamage = clamp(Math.round(projectile.damage * (0.2 + shrapnelCount * 0.04)), 3, 10);
+    defender.health = clamp(defender.health - fragmentDamage, 0, defender.maxHealth);
+    defender.vx += Math.sign(projectile.vx || attacker.facing) * (28 + fragmentDamage * 5);
+    defender.alive = defender.health > 0;
+    addSpark(match, contactX, contactY, "#f8f3eb", 18);
+  }
+  if (imploderCount || projectile.pullImpact) {
+    const pullDir = Math.sign(projectile.vx || attacker.facing) || attacker.facing;
+    defender.vx = -pullDir * (90 + projectile.impactChambers * 24);
+    defender.x = clamp(defender.x - pullDir * (18 + projectile.impactChambers * 8), stageBounds(match.stage).left, stageBounds(match.stage).right);
+    defender.hitstun = Math.max(defender.hitstun, 0.18);
+    addSpark(match, contactX, contactY, "#d9cbff", 14);
+  }
+  if (portalCount) {
+    const shiftDir = Math.sign(projectile.vx || attacker.facing) || attacker.facing;
+    defender.x = clamp(defender.x + shiftDir * (54 + projectile.impactChambers * 16), stageBounds(match.stage).left, stageBounds(match.stage).right);
+    spawnZone(match, "portal", contactX, contactY, 34, 0.28, "rgba(140,118,255,0.34)", 0);
+    addSpark(match, contactX, contactY, "#bcaeff", 14);
+  }
+}
+
+function resolveProjectileHit(projectile, attacker, defender, match) {
+  if (!defender.alive || defender.invulnerable > 0) {
+    return true;
+  }
+
+  const attackerStats = statsForTeam(match, attacker.team);
+  const defenderStats = statsForTeam(match, defender.team);
+  const contactX = projectile.x;
+  const contactY = projectile.y;
+
+  if (defender.blocking && defender.onGround && onFrontSide(defender, attacker)) {
+    if (attemptParry(defender, attacker, match, contactX, contactY)) {
+      return true;
+    }
+
+    defender.stamina = clamp(defender.stamina - (attacker.profile.blockDrain + projectile.blockBreak), 0, defender.maxStamina);
+    defender.hitstun = Math.max(defender.hitstun, 0.06);
+    defender.vx += Math.sign(projectile.vx || attacker.facing) * (40 + projectile.blockBreak * 3);
+    defenderStats.blocks += 1;
+    addSpark(match, contactX, contactY, "#ffffff", 8);
+    playSoundEffect("block");
+
+    if (defender.stamina <= 0) {
+      const guardBreakDamage = clamp(Math.round(projectile.damage * 0.44), 6, 18);
+      defender.blocking = false;
+      defender.health = clamp(defender.health - guardBreakDamage, 0, defender.maxHealth);
+      defender.hitstun = Math.max(defender.hitstun, 0.22);
+      defender.vx = Math.sign(projectile.vx || attacker.facing) * (110 + projectile.blockBreak * 6);
+      defender.attackFlash = 0.16;
+      defender.alive = defender.health > 0;
+      applyStun(defender, 0.16);
+      triggerImpact(match, { shake: 8, flash: 0.12, hitstop: 0.05 });
+      attackerStats.guardBreaks += 1;
+      attackerStats.hits += 1;
+      attackerStats.damage += guardBreakDamage;
+      pushFightEvent(match, "Shot Break", `${attacker.name} broke ${defender.name}'s guard with ${attacker.weapon.name}.`, "impact");
+      setMatchSummary(`${attacker.name}'s shot broke ${defender.name}'s guard.`);
+    } else {
+      triggerImpact(match, { shake: 4, flash: 0.05, hitstop: 0.02 });
+      pushFightEvent(match, "Shot Block", `${defender.name} blocked ${attacker.name}'s ${attacker.weapon.name} shot.`, "control");
+      setMatchSummary(`${defender.name} blocked the shot.`);
+    }
+    return true;
+  }
+
+  let damage = projectile.damage;
+  damage += projectileImpactCount(projectile, "shock") * 2;
+  damage += projectileImpactCount(projectile, "poison");
+  damage += projectileImpactCount(projectile, "imploder");
+
+  defender.health = clamp(defender.health - damage, 0, defender.maxHealth);
+  defender.hitstun = Math.max(defender.hitstun, 0.12 + damage * 0.004);
+  defender.vx = Math.sign(projectile.vx || attacker.facing) * (projectile.knockback + projectile.blockBreak * 3);
+  defender.attackFlash = 0.14;
+  defender.blocking = false;
+  defender.crouching = false;
+  defender.alive = defender.health > 0;
+  attackerStats.hits += 1;
+  attackerStats.damage += damage;
+
+  if (projectile.shockCount || projectileHasImpact(projectile, "shock")) {
+    applyStun(defender, 0.18 + projectile.impactChambers * 0.02 + projectileImpactCount(projectile, "shock") * 0.03 + (projectile.stormTrail ? 0.04 : 0));
+    attackerStats.stuns += 1;
+  }
+  if (projectile.poisonCount || projectileHasImpact(projectile, "poison")) {
+    defender.poisonTimer = Math.max(defender.poisonTimer, 2.8 + projectile.impactChambers * 0.4 + projectileImpactCount(projectile, "poison") * 0.5);
+    defender.poisonTickTimer = Math.min(defender.poisonTickTimer || 0.45, 0.45);
+  }
+  if (projectile.tipType === "spiked") {
+    defender.stuckPayloads.push({
+      timer: 0.24,
+      damage: clamp(Math.round(projectile.damage * 0.26), 3, 9),
+      color: projectile.color,
+      knockback: 28 + projectile.impactChambers * 10
+    });
+  }
+
+  applyProjectileSplash(attacker, defender, projectile, match, contactX, contactY);
+  addSpark(match, contactX, contactY, projectile.color, projectile.ammoType === "rail" ? 14 : 11);
+  triggerImpact(match, { shake: 6 + projectile.impactChambers, flash: 0.09, hitstop: 0.04 });
+  playSoundEffect("hit");
+  setMatchSummary(`${attacker.name} landed a ${projectile.impactLabel.toLowerCase()} ${attacker.weapon.name} shot for ${damage}.`);
+  pushFightEvent(match, "Shot Hit", `${attacker.name} landed ${damage} with ${projectile.impactLabel.toLowerCase()} ${attacker.weapon.name} ammo.`, "impact");
+
+  if (projectile.pierce > 0) {
+    projectile.pierce -= 1;
+    projectile.damage = Math.max(4, Math.round(projectile.damage * 0.72));
+    projectile.x += Math.sign(projectile.vx || attacker.facing) * 12;
+    return false;
+  }
+
+  return true;
+}
+
+function updateZones(match, dt) {
+  match.zones = match.zones.filter((zone) => {
+    zone.life -= dt;
+    if (zone.type === "blizzard") {
+      match.fighters.forEach((fighter) => {
+        const targetPoint = projectileTargetPoint(fighter);
+        if (Math.hypot(targetPoint.x - zone.x, targetPoint.y - zone.y) <= zone.radius) {
+          fighter.slowTimer = Math.max(fighter.slowTimer, zone.power || 0.22);
+        }
+      });
+    }
+    return zone.life > 0;
+  });
+}
+
+function updateProjectiles(match, dt) {
+  updateZones(match, dt);
+  match.projectiles = match.projectiles.filter((projectile) => {
+    const attacker = match.fighters.find((fighter) => fighter.team === projectile.ownerTeam);
+    const defender = match.fighters.find((fighter) => fighter.team !== projectile.ownerTeam);
+    if (!attacker || !defender) {
+      return false;
+    }
+
+    projectile.age += dt;
+    projectile.life -= dt;
+    projectile.prevX = projectile.x;
+    projectile.prevY = projectile.y;
+
+    if (projectile.homingStrength > 0 && defender.alive) {
+      const targetPoint = projectileTargetPoint(defender);
+      const targetDx = targetPoint.x - projectile.x;
+      const targetDy = targetPoint.y - projectile.y;
+      const targetLength = Math.max(1, Math.hypot(targetDx, targetDy));
+      const currentSpeed = Math.max(1, Math.hypot(projectile.vx, projectile.vy));
+      const steer = clamp(dt * (2.4 + projectile.homingStrength * 1.8), 0, 0.35);
+      projectile.vx = lerp(projectile.vx, (targetDx / targetLength) * currentSpeed * 1.08, steer);
+      projectile.vy = lerp(projectile.vy, (targetDy / targetLength) * currentSpeed * 1.08, steer);
+    }
+
+    if (
+      projectile.redirectShot &&
+      (projectile.redirectCharges || 1) > (projectile.redirectedCount || 0) &&
+      projectile.age >= 0.14 * ((projectile.redirectedCount || 0) + 1) &&
+      defender.alive
+    ) {
+      const targetPoint = projectileTargetPoint(defender);
+      const targetDx = targetPoint.x - projectile.x;
+      const targetDy = targetPoint.y - projectile.y;
+      const targetLength = Math.max(1, Math.hypot(targetDx, targetDy));
+      const currentSpeed = Math.max(1, Math.hypot(projectile.vx, projectile.vy)) * 1.12;
+      projectile.vx = (targetDx / targetLength) * currentSpeed;
+      projectile.vy = (targetDy / targetLength) * currentSpeed;
+      projectile.redirectedCount = (projectile.redirectedCount || 0) + 1;
+      addSpark(match, projectile.x, projectile.y, "#ffffff", 6);
+    }
+
+    if (projectile.spiralFlight) {
+      projectile.vy += Math.sin(projectile.age * 24 + projectile.waveSeed) * (180 + (projectile.spiralCount || 1) * 26) * dt;
+    }
+
+    projectile.vy += projectile.gravity * dt;
+    projectile.x += projectile.vx * dt;
+    projectile.y += projectile.vy * dt;
+    projectile.trailTimer += dt;
+
+    if (projectile.blizzardTrail && projectile.trailTimer >= 0.12) {
+      projectile.trailTimer = 0;
+      spawnZone(match, "blizzard", projectile.x, projectile.y, 34, 0.34, "rgba(202,236,255,0.34)", 0.18);
+    } else if (projectile.stormTrail && projectile.trailTimer >= 0.1) {
+      projectile.trailTimer = 0;
+      addSpark(match, projectile.x, projectile.y, "#c8e8ff", 4);
+    } else if (projectile.emberTrail && projectile.trailTimer >= 0.08) {
+      projectile.trailTimer = 0;
+      addSpark(match, projectile.x, projectile.y, "#ffb76a", 3);
+    }
+
+    const defenderBox = expandHitbox(fighterHitbox(defender), 6);
+    if (lineIntersectsHitbox(projectile.prevX, projectile.prevY, projectile.x, projectile.y, defenderBox)) {
+      return !resolveProjectileHit(projectile, attacker, defender, match);
+    }
+
+    const outOfBounds =
+      projectile.x < stageBounds(match.stage).left - 40 ||
+      projectile.x > stageBounds(match.stage).right + 40 ||
+      projectile.y < -24 ||
+      projectile.y > GROUND_Y + 42;
+    if (outOfBounds || projectile.life <= 0) {
+      if (projectileHasImpact(projectile, "explosive") && projectile.y >= GROUND_Y - 8) {
+        addSpark(match, projectile.x, GROUND_Y, "#ffd37a", 10);
+        spawnZone(match, "blast", projectile.x, GROUND_Y - 10, 42, 0.18, "rgba(255,187,102,0.28)", 0);
+      }
+      return false;
+    }
+
+    return true;
+  });
+}
+
+function shotPatternForWeapon(weapon) {
+  const count = weapon.burstCount || 1;
+  if (count <= 1) {
+    return [{ angleOffset: 0, damageScale: 1, speedScale: 1, blockScale: 1 }];
+  }
+  const spread = weapon.burstSpread || 0.02;
+  if (weapon.frameId === "flakcannon") {
+    return [-2, -1, 0, 1, 2].map((index) => ({
+      angleOffset: index * spread,
+      damageScale: weapon.burstDamageScale || 0.34,
+      speedScale: 0.94 + Math.abs(index) * 0.02,
+      blockScale: 0.9
+    }));
+  }
+  return Array.from({ length: count }, (_, index) => ({
+    angleOffset: (index - (count - 1) / 2) * spread,
+    damageScale: weapon.burstDamageScale || 1,
+    speedScale: 1,
+    blockScale: 1
+  }));
+}
+
+function startAttack(fighter, opponent = null, match = state.match) {
+  const staminaCost = isRangedWeapon(fighter.weapon) ? fighter.profile.shotDrain || 8 : 8;
   if (
     !fighter.alive ||
     fighter.hitstun > 0 ||
@@ -5052,9 +7767,55 @@ function startAttack(fighter) {
     fighter.blocking ||
     fighter.dodgeTimer > 0 ||
     fighter.slideTimer > 0 ||
-    fighter.stamina < 8
+    fighter.stamina < staminaCost
   ) {
     return false;
+  }
+
+  if (isRangedWeapon(fighter.weapon)) {
+    if (fighter.reloadTimer > 0) {
+      return false;
+    }
+    if (fighter.ammo <= 0) {
+      return startReload(fighter, match, true);
+    }
+
+    fighter.attack = {
+      timer: 0,
+      connected: true,
+      style: "shot"
+    };
+    fighter.attackFlash = 0.18;
+    fighter.muzzleFlash = fighter.weapon.frameId === "railgun" || fighter.weapon.frameId === "coillance" ? 0.12 : 0.08;
+    fighter.stamina = clamp(fighter.stamina - staminaCost, 0, fighter.maxStamina);
+    fighter.ammo = Math.max(0, fighter.ammo - 1);
+    const ammoRound =
+      fighter.loadedRounds[fighter.roundIndex] ||
+      fighter.weapon.ammoCaseRounds?.[fighter.roundIndex] ||
+      fighter.weapon.ammoPrototype ||
+      buildAmmoRecipeFromForge(
+        {
+          frame: fighter.weapon.frameId,
+          impactChambers: fighter.weapon.impactChambers || 1,
+          impactMount: fighter.weapon.impactMount || "core",
+          chamberImpacts: fighter.weapon.chamberImpacts || [fighter.weapon.impactType || "standard"],
+          launchType: fighter.weapon.launchType || "standard",
+          midAirAddons: fighter.weapon.midAirAddons || [],
+          tipType: fighter.weapon.tipType || "sharp",
+          forgeQuality: fighter.weapon.forgeQuality || 0.5
+        },
+        frameCatalog[fighter.weapon.frameId] || frameCatalog.longbow
+      );
+    fighter.roundIndex += 1;
+    fighter.reloadQueued = fighter.ammo <= 0;
+    fighter.vx -= fighter.facing * clamp(fighter.weapon.weight * 2.4, 8, 44);
+    const target = opponent || match?.fighters?.find((candidate) => candidate.team !== fighter.team) || null;
+    shotPatternForWeapon(fighter.weapon).forEach((shot) => {
+      spawnProjectile(fighter, target, match, { ...shot, ammoRound });
+    });
+    addSpark(match, fighter.x + fighter.facing * 22, fighter.y - currentFighterHeight(fighter) * 0.56, fighter.weapon.projectileGlow || fighter.weapon.color, fighter.weapon.burstCount > 1 ? 8 : 5);
+    playSoundEffect(fighter.weapon.ammoType === "rail" ? "guard-break" : "attack");
+    return true;
   }
 
   const comboSegments = comboSegmentsForWeapon(fighter.weapon);
@@ -5359,6 +8120,7 @@ function attemptComboAttackHit(attacker, defender, match, segment, index) {
 function attemptMouseSwingHit(attacker, defender, match, dt) {
   if (
     attacker.control !== "p1" ||
+    isRangedWeapon(attacker.weapon) ||
     !attacker.alive ||
     !defender.alive ||
     attacker.hitstun > 0 ||
@@ -5451,7 +8213,7 @@ function attemptSlideSpecialHit(attacker, defender, match) {
     fighterHitbox(attacker),
     attacker.weapon.kind === "short"
       ? 26
-      : attacker.weapon.specialType === "dash-spin" || attacker.weapon.specialType === "axe-throw" || attacker.weapon.edgeId === "cyclone"
+      : attacker.weapon.specialType === "dash-spin" || attacker.weapon.specialType === "axe-throw" || attacker.weapon.specialType === "crescent-sweep"
         ? 26
         : 18
   );
@@ -5490,7 +8252,7 @@ function attemptSlideSpecialHit(attacker, defender, match) {
     }
 
     const guardDrainScale =
-      attacker.weapon.specialType === "cross-cut" || attacker.weapon.edgeId === "breaker"
+      attacker.weapon.specialType === "cross-cut"
         ? 0.9
         : 0.7;
     defender.stamina = clamp(defender.stamina - Math.round(attacker.profile.blockDrain * guardDrainScale), 0, defender.maxStamina);
@@ -5532,7 +8294,6 @@ function attemptSlideSpecialHit(attacker, defender, match) {
 
   const baseDamage =
     attacker.profile.slideDamage +
-    (attacker.weapon.edgeId === "breaker" ? 2 : 0) +
     (attacker.weapon.specialType === "cross-cut" ? 1 : 0);
   const damage = clamp(
     Math.round(baseDamage * (attacker.weapon.kind === "short" && !onFrontSide(defender, attacker) ? attacker.weapon.backstabBonus : 1)),
@@ -5584,6 +8345,15 @@ function updateAttackState(fighter, opponent, match, dt) {
   }
 
   fighter.attack.timer += dt;
+  if (fighter.attack.style === "shot") {
+    if (fighter.attack.timer >= fighter.profile.recover * 0.78) {
+      fighter.attack = null;
+      if (fighter.reloadQueued && fighter.reloadTimer <= 0 && fighter.ammo <= 0) {
+        startReload(fighter, match);
+      }
+    }
+    return;
+  }
   if (fighter.attack.style === "combo" && fighter.attack.comboSegments) {
     const lastSegment = fighter.attack.comboSegments[fighter.attack.comboSegments.length - 1];
     fighter.attack.comboSegments.forEach((segment, index) => {
@@ -5650,8 +8420,11 @@ function applyHumanControl(fighter, input, match) {
   if (input.slidePressed) {
     performLunge(fighter, match);
   }
-  if (input.attackPressed) {
-    startAttack(fighter);
+  if (input.reloadPressed) {
+    startReload(fighter, match, true);
+  }
+  if (input.attackPressed || (isRangedWeapon(fighter.weapon) && input.attack)) {
+    startAttack(fighter, match.fighters.find((candidate) => candidate.team !== fighter.team), match);
   }
   if (
     input.blockPressed &&
@@ -5696,6 +8469,8 @@ function applyAiControl(fighter, opponent, match, dt) {
 
   const gap = opponent.x - fighter.x;
   const absGap = Math.abs(gap);
+  const rangedFighter = isRangedWeapon(fighter.weapon);
+  const preferredGap = rangedFighter ? clamp((fighter.weapon.projectileRange || 420) * 0.45, 180, 320) : fighter.profile.reach + 42;
 
   if (fighter.aiDecisionTimer <= 0) {
     fighter.aiDecisionTimer = randomRange(0.08, 0.22);
@@ -5710,14 +8485,26 @@ function applyAiControl(fighter, opponent, match, dt) {
       } else {
         performBackstep(fighter, match);
       }
-    } else if (absGap > fighter.profile.reach + 42) {
+    } else if (rangedFighter && fighter.reloadTimer > 0) {
+      fighter.aiIntent.left = gap > 0;
+      fighter.aiIntent.right = gap < 0;
+      if (absGap < 120 && Math.random() < 0.44) {
+        performBackstep(fighter, match);
+      }
+    } else if (rangedFighter && absGap < 112) {
+      fighter.aiIntent.left = gap > 0;
+      fighter.aiIntent.right = gap < 0;
+      if (Math.random() < 0.42) {
+        performBackstep(fighter, match);
+      }
+    } else if (absGap > preferredGap) {
       fighter.aiIntent.right = gap > 0;
       fighter.aiIntent.left = gap < 0;
-    } else if (absGap < fighter.profile.reach * 0.7 && Math.random() < 0.26) {
+    } else if (!rangedFighter && absGap < fighter.profile.reach * 0.7 && Math.random() < 0.26) {
       performBackstep(fighter, match);
-    } else if (Math.random() < 0.55) {
-      startAttack(fighter);
-    } else if (Math.random() < 0.22) {
+    } else if (Math.random() < (rangedFighter ? 0.68 : 0.55)) {
+      startAttack(fighter, opponent, match);
+    } else if (Math.random() < (rangedFighter ? 0.16 : 0.22)) {
       performLunge(fighter, match);
     } else if (Math.random() < 0.14) {
       performJump(fighter, match);
@@ -5755,20 +8542,63 @@ function applyAiControl(fighter, opponent, match, dt) {
 function updateFighter(fighter, opponent, match, dt) {
   fighter.prevX = fighter.x;
   const wasOnGround = fighter.onGround;
+  const wasReloading = fighter.reloadTimer > 0;
   fighter.hitstun = Math.max(0, fighter.hitstun - dt);
   fighter.stunTimer = Math.max(0, fighter.stunTimer - dt);
   fighter.invulnerable = Math.max(0, fighter.invulnerable - dt);
   fighter.attackFlash = Math.max(0, fighter.attackFlash - dt);
+  fighter.muzzleFlash = Math.max(0, fighter.muzzleFlash - dt);
   fighter.parryWindow = Math.max(0, fighter.parryWindow - dt);
   fighter.parryFlash = Math.max(0, fighter.parryFlash - dt);
   fighter.dodgeCooldown = Math.max(0, fighter.dodgeCooldown - dt);
   fighter.slideCooldown = Math.max(0, fighter.slideCooldown - dt);
   fighter.jumpCooldown = Math.max(0, fighter.jumpCooldown - dt);
   fighter.manualSwingCooldown = Math.max(0, fighter.manualSwingCooldown - dt);
+  fighter.reloadTimer = Math.max(0, fighter.reloadTimer - dt);
+  fighter.slowTimer = Math.max(0, fighter.slowTimer - dt);
+  fighter.poisonTimer = Math.max(0, fighter.poisonTimer - dt);
+  fighter.poisonTickTimer = Math.max(0, fighter.poisonTickTimer - dt);
   fighter.dodgeTimer = Math.max(0, fighter.dodgeTimer - dt);
   fighter.slideTimer = Math.max(0, fighter.slideTimer - dt);
   fighter.dashSpeed = Math.max(0, fighter.dashSpeed - dt * 1180);
   fighter.slideHitCooldown = Math.max(0, fighter.slideHitCooldown - dt);
+
+  if (wasReloading && fighter.reloadTimer <= 0 && isRangedWeapon(fighter.weapon)) {
+    fighter.loadedRounds = ammoRoundListForWeapon(fighter.weapon);
+    fighter.maxAmmo = fighter.loadedRounds.length;
+    fighter.ammo = fighter.maxAmmo;
+    fighter.roundIndex = 0;
+    addSpark(match, fighter.x + fighter.facing * 8, fighter.y - currentFighterHeight(fighter) * 0.54, "rgba(255,255,255,0.85)", 8);
+    if (fighter.team === PLAYER_TEAM) {
+      setMatchSummary(`${fighter.weapon.name} reloaded.`);
+      pushFightEvent(match, "Reload Ready", `${fighter.name} reloaded ${fighter.weapon.name}.`, "control");
+    }
+  }
+
+  if (fighter.poisonTimer > 0 && fighter.poisonTickTimer <= 0) {
+    fighter.poisonTickTimer = 0.42;
+    fighter.health = clamp(fighter.health - 1, 0, fighter.maxHealth);
+    fighter.attackFlash = 0.08;
+    fighter.alive = fighter.health > 0;
+    addSpark(match, fighter.x + randomRange(-10, 10), fighter.y - currentFighterHeight(fighter) * 0.58, "#9ef58c", 4);
+  }
+
+  if (fighter.stuckPayloads.length) {
+    fighter.stuckPayloads = fighter.stuckPayloads.filter((payload) => {
+      payload.timer -= dt;
+      if (payload.timer > 0) {
+        return true;
+      }
+      fighter.health = clamp(fighter.health - payload.damage, 0, fighter.maxHealth);
+      fighter.vx += fighter.facing * -payload.knockback;
+      fighter.hitstun = Math.max(fighter.hitstun, 0.1);
+      fighter.attackFlash = 0.12;
+      fighter.alive = fighter.health > 0;
+      addSpark(match, fighter.x, fighter.y - currentFighterHeight(fighter) * 0.6, payload.color, 10);
+      triggerImpact(match, { shake: 4, flash: 0.05, hitstop: 0.02 });
+      return false;
+    });
+  }
 
   if (!fighter.onGround) {
     fighter.blocking = false;
@@ -5786,7 +8616,8 @@ function updateFighter(fighter, opponent, match, dt) {
     const controlScale = fighter.blocking ? 0.24 : fighter.attack ? 0.38 : 1;
     const crouchScale = fighter.crouching ? 0.46 : 1;
     const airScale = fighter.onGround ? 1 : 0.66;
-    const targetSpeed = fighter.moveIntent * fighter.walkSpeed * controlScale * crouchScale * airScale;
+    const slowScale = fighter.slowTimer > 0 ? 0.72 : 1;
+    const targetSpeed = fighter.moveIntent * fighter.walkSpeed * controlScale * crouchScale * airScale * slowScale;
     const acceleration = fighter.onGround ? 2200 : 1100;
     fighter.vx = approach(fighter.vx, targetSpeed, acceleration * dt);
   } else {
@@ -5840,6 +8671,9 @@ function updateFighter(fighter, opponent, match, dt) {
   updateAttackState(fighter, opponent, match, dt);
   attemptMouseSwingHit(fighter, opponent, match, dt);
   attemptSlideSpecialHit(fighter, opponent, match);
+  if (fighter.reloadQueued && !fighter.attack && fighter.reloadTimer <= 0 && fighter.ammo <= 0) {
+    startReload(fighter, match);
+  }
 }
 
 function resolveFighterSpacing(leftFighter, rightFighter, match) {
@@ -5925,6 +8759,8 @@ function resetRound(match) {
   match.phaseTimer = 2.1;
   match.roundWinner = null;
   match.sparks = [];
+  match.projectiles = [];
+  match.zones = [];
   match.fighters = createRoundFighters(match);
   match.hitstop = 0;
   match.flash = 0;
@@ -5958,6 +8794,8 @@ function createMatch({ tutorial = false } = {}) {
     },
     fighters: [],
     sparks: [],
+    projectiles: [],
+    zones: [],
     phase: "intro",
     phaseTimer: 0,
     roundWinner: null,
@@ -6068,6 +8906,10 @@ function updateMatch(dt) {
   if (match.hitstop > 0) {
     match.hitstop = Math.max(0, match.hitstop - dt);
     return;
+  }
+
+  if (match.phase === "fight" || match.projectiles.length || match.zones.length) {
+    updateProjectiles(match, dt);
   }
 
   if (match.phase === "intro") {
@@ -6576,31 +9418,124 @@ function drawFighter(fighter) {
     }
   }
 
-  ctx.strokeStyle = "rgba(0,0,0,0.3)";
-  ctx.lineWidth = 10;
-  ctx.beginPath();
-  ctx.moveTo(weaponRenderBaseX, weaponRenderBaseY);
-  ctx.lineTo(weaponTipX, weaponTipY);
-  ctx.stroke();
+  if (isRangedWeapon(fighter.weapon)) {
+    const dx = weaponTipX - weaponRenderBaseX;
+    const dy = weaponTipY - weaponRenderBaseY;
+    const length = Math.max(1, Math.hypot(dx, dy));
+    const ux = dx / length;
+    const uy = dy / length;
+    const px = -uy;
+    const py = ux;
+    const stockLength = fighter.weapon.kind === "sidearm" ? 10 : fighter.weapon.kind === "heavy" ? 20 : 16;
+    const bodyLength = fighter.weapon.kind === "sidearm" ? 18 : fighter.weapon.kind === "heavy" ? 26 : 22;
+    const bodyWidth = fighter.weapon.kind === "sidearm" ? 4.5 : 6;
+    const barrelLength = Math.max(10, length - bodyLength + 4);
 
-  ctx.strokeStyle = fighter.weapon.color;
-  ctx.lineWidth = 7;
-  ctx.beginPath();
-  ctx.moveTo(weaponRenderBaseX, weaponRenderBaseY);
-  ctx.lineTo(weaponTipX, weaponTipY);
-  ctx.stroke();
+    const strokeSegment = (sx, sy, ex, ey, shadowWidth, coreWidth, coreColor) => {
+      ctx.strokeStyle = "rgba(0,0,0,0.3)";
+      ctx.lineWidth = shadowWidth;
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.lineTo(ex, ey);
+      ctx.stroke();
+      ctx.strokeStyle = coreColor;
+      ctx.lineWidth = coreWidth;
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.lineTo(ex, ey);
+      ctx.stroke();
+    };
 
-  const tipRadius = fighter.weapon.kind === "long" ? 10 : fighter.weapon.kind === "short" ? 7 : 8;
-  const tipCoreRadius = fighter.weapon.kind === "long" ? 6 : fighter.weapon.kind === "short" ? 4 : 5;
-  ctx.fillStyle = `${fighter.weapon.color}44`;
-  ctx.beginPath();
-  ctx.arc(weaponTipX, weaponTipY, tipRadius, 0, Math.PI * 2);
-  ctx.fill();
+    if (fighter.weapon.frameId === "longbow" || fighter.weapon.frameId === "crossbow") {
+      const bowArm = fighter.weapon.frameId === "crossbow" ? 14 : 20;
+      strokeSegment(
+        weaponRenderBaseX - px * bowArm,
+        weaponRenderBaseY - py * bowArm,
+        weaponRenderBaseX + px * bowArm,
+        weaponRenderBaseY + py * bowArm,
+        8,
+        5,
+        fighter.weapon.color
+      );
+      ctx.strokeStyle = "rgba(255,255,255,0.68)";
+      ctx.lineWidth = 1.8;
+      ctx.beginPath();
+      ctx.moveTo(weaponRenderBaseX - px * bowArm, weaponRenderBaseY - py * bowArm);
+      ctx.lineTo(weaponRenderBaseX + px * bowArm, weaponRenderBaseY + py * bowArm);
+      ctx.stroke();
+    } else {
+      strokeSegment(
+        weaponRenderBaseX - ux * stockLength,
+        weaponRenderBaseY - uy * stockLength,
+        weaponRenderBaseX + ux * bodyLength,
+        weaponRenderBaseY + uy * bodyLength,
+        bodyWidth + 4,
+        bodyWidth,
+        fighter.weapon.color
+      );
+      strokeSegment(
+        weaponRenderBaseX + ux * (bodyLength - 2),
+        weaponRenderBaseY + uy * (bodyLength - 2),
+        weaponRenderBaseX + ux * (bodyLength + barrelLength),
+        weaponRenderBaseY + uy * (bodyLength + barrelLength),
+        5,
+        fighter.weapon.frameId === "railgun" ? 3.8 : 3,
+        fighter.weapon.frameId === "railgun" ? "#d1f7ff" : "#f3ead8"
+      );
+      strokeSegment(
+        weaponRenderBaseX - px * 2,
+        weaponRenderBaseY + py * 2,
+        weaponRenderBaseX - px * 6 - ux * 3,
+        weaponRenderBaseY + py * 6 - uy * 3,
+        5,
+        3,
+        fighter.weapon.color
+      );
+    }
 
-  ctx.fillStyle = fighter.weapon.color;
-  ctx.beginPath();
-  ctx.arc(weaponTipX, weaponTipY, tipCoreRadius, 0, Math.PI * 2);
-  ctx.fill();
+    ctx.fillStyle = fighter.weapon.frameId === "railgun" ? "#d1f7ff" : fighter.weapon.color;
+    ctx.beginPath();
+    ctx.arc(weaponTipX, weaponTipY, fighter.weapon.frameId === "railgun" ? 4 : 3.4, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (fighter.muzzleFlash > 0) {
+      const flashAlpha = fighter.muzzleFlash * 7;
+      ctx.fillStyle = fighter.weapon.frameId === "railgun" || fighter.weapon.frameId === "coillance" ? `rgba(209,247,255,${flashAlpha})` : `rgba(255,219,160,${flashAlpha})`;
+      ctx.beginPath();
+      ctx.moveTo(weaponTipX, weaponTipY);
+      ctx.lineTo(weaponTipX + fighter.facing * 12, weaponTipY - 5);
+      ctx.lineTo(weaponTipX + fighter.facing * 18, weaponTipY);
+      ctx.lineTo(weaponTipX + fighter.facing * 12, weaponTipY + 5);
+      ctx.closePath();
+      ctx.fill();
+    }
+  } else {
+    ctx.strokeStyle = "rgba(0,0,0,0.3)";
+    ctx.lineWidth = 10;
+    ctx.beginPath();
+    ctx.moveTo(weaponRenderBaseX, weaponRenderBaseY);
+    ctx.lineTo(weaponTipX, weaponTipY);
+    ctx.stroke();
+
+    ctx.strokeStyle = fighter.weapon.color;
+    ctx.lineWidth = 7;
+    ctx.beginPath();
+    ctx.moveTo(weaponRenderBaseX, weaponRenderBaseY);
+    ctx.lineTo(weaponTipX, weaponTipY);
+    ctx.stroke();
+
+    const tipRadius = fighter.weapon.kind === "long" ? 10 : fighter.weapon.kind === "short" ? 7 : 8;
+    const tipCoreRadius = fighter.weapon.kind === "long" ? 6 : fighter.weapon.kind === "short" ? 4 : 5;
+    ctx.fillStyle = `${fighter.weapon.color}44`;
+    ctx.beginPath();
+    ctx.arc(weaponTipX, weaponTipY, tipRadius, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = fighter.weapon.color;
+    ctx.beginPath();
+    ctx.arc(weaponTipX, weaponTipY, tipCoreRadius, 0, Math.PI * 2);
+    ctx.fill();
+  }
 
   if (fighter.blocking) {
     ctx.strokeStyle = "rgba(255,255,255,0.28)";
@@ -6611,6 +9546,49 @@ function drawFighter(fighter) {
   }
 
   ctx.restore();
+}
+
+function drawZones(match) {
+  match.zones.forEach((zone) => {
+    const alpha = clamp(zone.life / Math.max(zone.maxLife, 0.01), 0, 1);
+    const x = stageOffsetX() + zone.x;
+    const y = STAGE_TOP + zone.y + 10;
+    const gradient = ctx.createRadialGradient(x, y, 0, x, y, zone.radius);
+    gradient.addColorStop(0, zone.color.replace(/0?\.\d+\)/, `${Math.max(alpha * 0.7, 0.12)})`));
+    gradient.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(x, y, zone.radius, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+function drawProjectiles(match) {
+  match.projectiles.forEach((projectile) => {
+    const startX = stageOffsetX() + projectile.prevX;
+    const startY = STAGE_TOP + projectile.prevY + 10;
+    const endX = stageOffsetX() + projectile.x;
+    const endY = STAGE_TOP + projectile.y + 10;
+    const glow = projectile.glow || (projectile.ammoType === "rail" ? "#d1f7ff" : projectile.color);
+    ctx.strokeStyle = `${glow}55`;
+    ctx.lineWidth = projectile.ammoType === "rail" ? 7 : projectile.ammoType === "bolt" ? 5 : 4;
+    ctx.beginPath();
+    ctx.moveTo(startX, startY);
+    ctx.lineTo(endX, endY);
+    ctx.stroke();
+
+    ctx.strokeStyle = glow;
+    ctx.lineWidth = projectile.ammoType === "rail" ? 3 : projectile.ammoType === "bolt" ? 2.6 : 2.2;
+    ctx.beginPath();
+    ctx.moveTo(startX, startY);
+    ctx.lineTo(endX, endY);
+    ctx.stroke();
+
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(endX, endY, projectile.tipType === "blunt" ? 4.2 : projectile.tipType === "drill" ? 3.6 : 3.2, 0, Math.PI * 2);
+    ctx.fill();
+  });
 }
 
 function drawSparks(match) {
@@ -6629,6 +9607,12 @@ function drawHud(match) {
   const playerLabel = `${player.name.toUpperCase()}  ${match.playerWeapon.name.toUpperCase()}`;
   const enemyLabel = `${enemy.name.toUpperCase()}  ${match.rivalWeapon.name.toUpperCase()}`;
   const timerText = `${Math.ceil(match.timer)}`;
+  const playerAmmo = isRangedWeapon(player.weapon)
+    ? `${player.ammo}/${player.maxAmmo} ${player.weapon.ammoType}${player.reloadTimer > 0 ? " | RELOAD" : ""}`
+    : `${Math.ceil(player.stamina)} stamina`;
+  const enemyAmmo = isRangedWeapon(enemy.weapon)
+    ? `${enemy.ammo}/${enemy.maxAmmo} ${enemy.weapon.ammoType}${enemy.reloadTimer > 0 ? " | RELOAD" : ""}`
+    : `${Math.ceil(enemy.stamina)} stamina`;
 
   fillRoundedRect(ctx, 24, 10, 348, 56, 20, "rgba(0,0,0,0.34)");
   fillRoundedRect(ctx, canvas.width - 372, 10, 348, 56, 20, "rgba(0,0,0,0.34)");
@@ -6642,6 +9626,11 @@ function drawHud(match) {
 
   drawHealthBar(40, 38, 316, player.health / player.maxHealth, "#89e6dc");
   drawHealthBar(canvas.width - 356, 38, 316, enemy.health / enemy.maxHealth, "#f0d48b", true);
+
+  ctx.fillStyle = "#d7c9b7";
+  ctx.font = "600 11px 'Trebuchet MS', sans-serif";
+  ctx.fillText(playerAmmo.toUpperCase(), 42, 44);
+  ctx.fillText(enemyAmmo.toUpperCase(), canvas.width - 42 - ctx.measureText(enemyAmmo.toUpperCase()).width, 44);
 
   ctx.fillStyle = "#d7c9b7";
   ctx.font = "700 28px Georgia, serif";
@@ -6671,12 +9660,24 @@ function drawHud(match) {
     drawStatusPill(40, 80, "PARRY", "#bffcff");
   } else if (player.stunTimer > 0) {
     drawStatusPill(40, 80, "STUN", "#ffd47c");
+  } else if (player.reloadTimer > 0) {
+    drawStatusPill(40, 80, "RELOAD", "#f2dcaa");
+  } else if (player.poisonTimer > 0) {
+    drawStatusPill(40, 80, "POISON", "#9ef58c");
+  } else if (player.slowTimer > 0) {
+    drawStatusPill(40, 80, "CHILL", "#b9ebff");
   }
 
   if (enemy.parryWindow > 0) {
     drawStatusPill(canvas.width - 40, 80, "PARRY", "#bffcff", true);
   } else if (enemy.stunTimer > 0) {
     drawStatusPill(canvas.width - 40, 80, "STUN", "#ffd47c", true);
+  } else if (enemy.reloadTimer > 0) {
+    drawStatusPill(canvas.width - 40, 80, "RELOAD", "#f2dcaa", true);
+  } else if (enemy.poisonTimer > 0) {
+    drawStatusPill(canvas.width - 40, 80, "POISON", "#9ef58c", true);
+  } else if (enemy.slowTimer > 0) {
+    drawStatusPill(canvas.width - 40, 80, "CHILL", "#b9ebff", true);
   }
 }
 
@@ -6752,7 +9753,9 @@ function renderBattlefield() {
     ctx.translate(randomRange(-match.shake, match.shake), randomRange(-match.shake, match.shake));
   }
 
+  drawZones(match);
   match.fighters.forEach((fighter) => drawFighter(fighter));
+  drawProjectiles(match);
   drawSparks(match);
   ctx.restore();
 
@@ -6789,7 +9792,7 @@ function loop(now) {
   pollGamepadState();
   updateForgeMinigame(dt);
   updateStyleTraining(dt);
-  if (!state.menu.open) {
+  if (!state.menu.open && state.flow.screen === "arena") {
     updateMatch(dt);
     state.uiPulse += dt;
     if (state.uiPulse >= 0.12) {
@@ -6803,23 +9806,56 @@ function loop(now) {
 
 function handleForgeChange() {
   const previousForge = { ...state.forge };
+  const previousFamily = state.forge.family || forgeFamilyForKind(state.forge.kind);
   const previousKind = state.forge.kind || frameCatalog[state.forge.frame]?.kind || "medium";
-  const requestedKind = ui.classSelect.value || previousKind;
+  const previousFrame = frameCatalog[state.forge.frame] || null;
+  const requestedFamily = ui.familySelect.value || previousFamily;
+  const requestedKind =
+    requestedFamily === previousFamily
+      ? (ui.classSelect.value || previousKind)
+      : firstKindForFamily(requestedFamily);
   const requestedFrame = requestedKind === previousKind ? ui.frameSelect.value : firstFrameIdForKind(requestedKind);
+  const nextFrame = frameCatalog[requestedFrame] || previousFrame;
+  const preserveAmmoCase =
+    previousFrame &&
+    nextFrame &&
+    ammoFamilyForFrame(previousFrame) === ammoFamilyForFrame(nextFrame) &&
+    previousFrame.family === nextFrame.family;
   state.forge = normalizeForgeState({
     ...state.forge,
     name: ui.weaponName.value.trim().slice(0, 12),
+    family: requestedFamily,
     kind: requestedKind,
     frame: requestedFrame,
     material: ui.materialSelect.value,
-    edge: ui.edgeSelect.disabled ? state.forge.edge : ui.edgeSelect.value,
+    edge: state.forge.edge,
+    impactChambers: ui.impactChambers.value || state.forge.impactChambers,
+    impactMount: ui.impactMount.value || state.forge.impactMount,
+    chamberImpacts: state.forge.chamberImpacts,
+    impactType: state.forge.chamberImpacts[0] || state.forge.impactType,
+    launchType: ui.launchType.value || state.forge.launchType,
+    midAirType: state.forge.midAirAddons[0] || state.forge.midAirType,
+    midAirAddons: state.forge.midAirAddons,
+    tipType: ui.tipType.value || state.forge.tipType,
+    preloadAmmo: ui.preloadAmmo.value || state.forge.preloadAmmo,
+    ammoCase: preserveAmmoCase ? state.forge.ammoCase : [],
     heat: Number(ui.heatRange.value)
   });
+  state.forge = reconcileAmmoCaseForForge(state.forge);
   const blueprintChanged =
+    previousForge.family !== state.forge.family ||
     previousForge.kind !== state.forge.kind ||
     previousForge.frame !== state.forge.frame ||
     previousForge.material !== state.forge.material ||
     previousForge.edge !== state.forge.edge ||
+    previousForge.impactChambers !== state.forge.impactChambers ||
+    previousForge.impactMount !== state.forge.impactMount ||
+    JSON.stringify(previousForge.chamberImpacts || []) !== JSON.stringify(state.forge.chamberImpacts || []) ||
+    previousForge.launchType !== state.forge.launchType ||
+    JSON.stringify(previousForge.midAirAddons || []) !== JSON.stringify(state.forge.midAirAddons || []) ||
+    previousForge.tipType !== state.forge.tipType ||
+    previousForge.preloadAmmo !== state.forge.preloadAmmo ||
+    JSON.stringify(previousForge.ammoCase || []) !== JSON.stringify(state.forge.ammoCase || []) ||
     previousForge.heat !== state.forge.heat;
   if (blueprintChanged) {
     resetForgeMinigame(state.forge.frame, false);
@@ -6833,7 +9869,7 @@ function bindTouchControls() {
   const buttons = ui.touchControls.querySelectorAll("[data-touch]");
   buttons.forEach((button) => {
     const action = button.dataset.touch;
-    const tapFriendly = new Set(["attack", "up", "dodge", "slide"]);
+    const tapFriendly = new Set(["attack", "up", "dodge", "slide", "reload"]);
     let releaseTimer = 0;
     const clearReleaseTimer = () => {
       if (releaseTimer) {
@@ -6939,15 +9975,40 @@ function bindPointerInput() {
 function bindEvents() {
   [
     ui.weaponName,
+    ui.familySelect,
     ui.classSelect,
     ui.frameSelect,
     ui.materialSelect,
     ui.edgeSelect,
+    ui.impactChambers,
+    ui.impactMount,
+    ui.launchType,
+    ui.tipType,
+    ui.preloadAmmo,
     ui.heatRange
-  ].forEach((element) => {
+  ].filter(Boolean).forEach((element) => {
     element.addEventListener("input", handleForgeChange);
     element.addEventListener("change", handleForgeChange);
   });
+
+  ui.addMidAirAddon.addEventListener("click", () => {
+    const addonId = ui.midAirType.value;
+    if (!addonId) {
+      return;
+    }
+    state.forge = normalizeForgeState({
+      ...state.forge,
+      midAirAddons: [...state.forge.midAirAddons, addonId]
+    });
+    state.forge = reconcileAmmoCaseForForge(state.forge);
+    resetForgeMinigame(state.forge.frame, false);
+    renderForge();
+    setMatchSummary(`${midAirTypeCatalog[addonId].label} added to the mid-air stack.`);
+  });
+
+  ui.saveAmmo.addEventListener("click", saveCurrentAmmoRecipe);
+  ui.addAmmoToCase.addEventListener("click", addCurrentAmmoToCase);
+  ui.clearAmmoCase.addEventListener("click", clearAmmoCase);
 
   ui.saveWeapon.addEventListener("click", () => {
     saveCurrentWeapon({ equip: false });
@@ -6961,7 +10022,7 @@ function bindEvents() {
 
   ui.forgeStart.addEventListener("click", () => {
     startForgeMinigame();
-    setMatchSummary(`Forge drill started for ${state.forge.kind} blades.`);
+    setMatchSummary(`Forge drill started for ${currentBlueprint().classLabel.toLowerCase()} ${isRangedWeapon(currentBlueprint()) ? "ammo tuning" : "weapon work"}.`);
   });
 
   ui.forgeAction.addEventListener("click", () => {
@@ -7210,6 +10271,7 @@ function seedArmory() {
 
 function init() {
   refreshInputProfile();
+  populateSelect(ui.familySelect, weaponFamilyCatalog);
   populateSelect(ui.classSelect, bladeTypeCatalog);
   syncForgeSelectors();
   resetForgeMinigame(state.forge.frame, true);
