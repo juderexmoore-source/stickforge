@@ -4485,8 +4485,8 @@ function renderControlGuide() {
         kicker: "Arena Tip",
         title: ranged ? "Touch fire is controller-like" : "Touch play is controller-like",
         body: ranged
-          ? `Mobile ranged aim still leans toward ${rivalName}, so focus on spacing while the A button keeps pressure on. Use R1 whenever the magazine runs dry.`
-          : `Mobile aim still leans toward ${rivalName}, so focus on spacing, guarding, and timing instead of dragging the weapon by hand.`
+          ? `Mobile ranged aim still leans toward ${rivalName}, so focus on spacing while the A button keeps pressure on. Use R1 whenever the magazine runs dry, and remember that shots can now clash or get cut.`
+          : `Mobile aim still leans toward ${rivalName}, so focus on spacing, guarding, and timing instead of dragging the weapon by hand. Clean melee lines now cut shots into weak bursts.`
       }
     ];
   } else if (mode === "controller") {
@@ -4502,8 +4502,8 @@ function renderControlGuide() {
         kicker: "Arena Tip",
         title: ranged ? "Use both sticks and reload" : "Use both sticks",
         body: ranged
-          ? `The left stick moves your fighter while the right stick points shots toward ${rivalName}. If you stop aiming, ranged assist still leans your fire toward the rival.`
-          : `The left stick moves your fighter while the right stick points your weapon toward ${rivalName}.`
+          ? `The left stick moves your fighter while the right stick points shots toward ${rivalName}. If you stop aiming, ranged assist still leans your fire toward the rival, but shots can now clash or get cut by a strong parry lane.`
+          : `The left stick moves your fighter while the right stick points your weapon toward ${rivalName}. You can now cut incoming shots with a clean swing or parry line.`
       }
     ];
   } else {
@@ -4519,8 +4519,8 @@ function renderControlGuide() {
         kicker: "Arena Tip",
         title: ranged ? "Mouse points the barrel" : "Mouse controls the weapon",
         body: ranged
-          ? `Keep the mouse on ${rivalName}, hold fire for steady shots, and tap R before the magazine empties if you want cleaner pressure.`
-          : `Keep the mouse pointed at ${rivalName} while you move so your jab line and freeform weapon drags stay on target.`
+          ? `Keep the mouse on ${rivalName}, hold fire for steady shots, and tap R before the magazine empties if you want cleaner pressure. Mid-air shot clashes and blade cuts now punish lazy spam.`
+          : `Keep the mouse pointed at ${rivalName} while you move so your jab line and freeform weapon drags stay on target. Clean swings and parry timing now cut shots into weak bursts.`
       }
     ];
   }
@@ -9395,6 +9395,31 @@ function lineIntersectsHitbox(x1, y1, x2, y2, box) {
   );
 }
 
+function pointToSegmentDistance(px, py, x1, y1, x2, y2) {
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  const lengthSquared = dx * dx + dy * dy;
+  if (lengthSquared <= 0.0001) {
+    return Math.hypot(px - x1, py - y1);
+  }
+  const projection = clamp(((px - x1) * dx + (py - y1) * dy) / lengthSquared, 0, 1);
+  const closestX = x1 + dx * projection;
+  const closestY = y1 + dy * projection;
+  return Math.hypot(px - closestX, py - closestY);
+}
+
+function segmentDistance(ax, ay, bx, by, cx, cy, dx, dy) {
+  if (segmentsIntersect(ax, ay, bx, by, cx, cy, dx, dy)) {
+    return 0;
+  }
+  return Math.min(
+    pointToSegmentDistance(ax, ay, cx, cy, dx, dy),
+    pointToSegmentDistance(bx, by, cx, cy, dx, dy),
+    pointToSegmentDistance(cx, cy, ax, ay, bx, by),
+    pointToSegmentDistance(dx, dy, ax, ay, bx, by)
+  );
+}
+
 function fighterUsesMouseJab(fighter) {
   return fighter.control === "p1" && preferredInputMode() === "pc" && fighter.weapon.kind !== "long" && !isRangedWeapon(fighter.weapon);
 }
@@ -9416,6 +9441,96 @@ function fighterAttackLabel(fighter) {
     return "shot";
   }
   return fighter.attack?.style === "jab" ? "jab" : "swing";
+}
+
+function fighterProjectileCounterSegment(fighter) {
+  if (
+    !fighter.alive ||
+    isRangedWeapon(fighter.weapon) ||
+    fighter.hitstun > 0 ||
+    fighter.stunTimer > 0
+  ) {
+    return null;
+  }
+
+  const pose = weaponPoseForFighter(fighter);
+  const basePadding = fighter.weapon.kind === "long" ? 18 : fighter.weapon.kind === "medium" ? 14 : 11;
+
+  if (fighter.parryWindow > 0 && fighter.onGround) {
+    return {
+      x1: pose.baseX,
+      y1: pose.baseY,
+      x2: pose.tipX,
+      y2: pose.tipY,
+      padding: basePadding + (fighter.weapon.kind === "long" ? 14 : 9),
+      mode: "parry"
+    };
+  }
+
+  if (fighter.blocking && fighter.onGround) {
+    return {
+      x1: pose.baseX,
+      y1: pose.baseY,
+      x2: pose.tipX,
+      y2: pose.tipY,
+      padding: basePadding + (fighter.weapon.kind === "long" ? 10 : fighter.weapon.kind === "medium" ? 6 : 3),
+      mode: "guard"
+    };
+  }
+
+  if (fighter.attack && fighter.attack.style !== "shot") {
+    if (fighter.attack.style === "combo") {
+      const comboActive = (fighter.attack.comboSegments || []).some(
+        (segment) =>
+          fighter.attack.timer >= segment.start - 0.02 &&
+          fighter.attack.timer <= segment.end + 0.03
+      );
+      if (!comboActive) {
+        return null;
+      }
+    } else {
+      const windupEnd = fighter.profile.windup;
+      const activeEnd = windupEnd + fighter.profile.active;
+      if (
+        fighter.attack.timer < windupEnd * 0.55 ||
+        fighter.attack.timer > activeEnd + fighter.profile.recover * 0.18
+      ) {
+        return null;
+      }
+    }
+
+    return {
+      x1: pose.baseX,
+      y1: pose.baseY,
+      x2: pose.tipX,
+      y2: pose.tipY,
+      padding: basePadding + (fighter.attack.style === "jab" ? 9 : 6),
+      mode: "slice"
+    };
+  }
+
+  if (
+    fighter.control === "p1" &&
+    fighter.weaponTip &&
+    !fighter.attack &&
+    !fighter.blocking &&
+    fighter.slideTimer <= 0 &&
+    fighter.dodgeTimer <= 0
+  ) {
+    const tipTravel = Math.hypot(pose.tipX - fighter.weaponTip.x, pose.tipY - fighter.weaponTip.y);
+    if (tipTravel >= 12) {
+      return {
+        x1: fighter.weaponTip.x,
+        y1: fighter.weaponTip.y,
+        x2: pose.tipX,
+        y2: pose.tipY,
+        padding: Math.max(8, basePadding - 2),
+        mode: "slice"
+      };
+    }
+  }
+
+  return null;
 }
 
 function applyStun(fighter, duration) {
@@ -9743,6 +9858,273 @@ function projectileHasImpact(projectile, impactId) {
   return projectileImpactCount(projectile, impactId) > 0;
 }
 
+function projectileRadius(projectile) {
+  const base =
+    projectile.ammoType === "rail"
+      ? 6.8
+      : projectile.ammoType === "bolt"
+        ? 5.6
+        : 4.8;
+  const chamberBonus = Math.max(0, (projectile.impactChambers || 1) - 1) * 0.7;
+  const weakenedPenalty = projectile.weakened ? 1.1 : 0;
+  return Math.max(2.6, base + chamberBonus - weakenedPenalty);
+}
+
+function projectileCounterPower(projectile) {
+  return (
+    projectile.damage +
+    projectile.blockBreak * 0.34 +
+    projectile.pierce * 3 +
+    (projectile.impactChambers || 1) * 1.5 +
+    Math.hypot(projectile.vx || 0, projectile.vy || 0) / 240 +
+    (projectile.ammoType === "rail" ? 4 : projectile.ammoType === "bolt" ? 2 : 0) +
+    (projectile.shockCount || 0) +
+    (projectile.portalCount || 0) +
+    (projectile.slowCount || 0) * 0.4 +
+    (projectile.ruptureCount || 0) * 0.5 +
+    (projectile.explosiveBoost || 0) * 10
+  );
+}
+
+function weakenProjectile(projectile, factor = 0.62) {
+  projectile.weakened = true;
+  projectile.damage = Math.max(2, Math.round(projectile.damage * factor));
+  projectile.blockBreak = Math.max(0, Math.round(projectile.blockBreak * Math.max(0.36, factor * 0.82)));
+  projectile.knockback *= Math.max(0.4, factor * 0.9);
+  projectile.vx *= Math.max(0.68, factor * 1.08);
+  projectile.vy *= Math.max(0.68, factor * 1.08);
+  projectile.speed = Math.hypot(projectile.vx || 0, projectile.vy || 0);
+  projectile.life *= Math.max(0.52, factor * 1.08);
+  projectile.pierce = Math.max(0, projectile.pierce - 1);
+  projectile.homingStrength *= factor;
+  projectile.redirectCharges = Math.max(0, Math.round((projectile.redirectCharges || 0) * factor) - 1);
+  projectile.explosiveBoost *= factor;
+  projectile.shockCount = Math.round((projectile.shockCount || 0) * factor);
+  projectile.poisonCount = Math.round((projectile.poisonCount || 0) * factor);
+  projectile.portalCount = Math.round((projectile.portalCount || 0) * factor);
+  projectile.slowCount = Math.round((projectile.slowCount || 0) * factor);
+  projectile.ruptureCount = Math.round((projectile.ruptureCount || 0) * factor);
+  projectile.impactChambers = Math.max(1, Math.round((projectile.impactChambers || 1) * Math.max(0.5, factor)));
+}
+
+function projectileCounterNeedsCallout(projectile, fighter = null) {
+  return projectile.ownerTeam === PLAYER_TEAM || fighter?.team === PLAYER_TEAM;
+}
+
+function projectileIntersectsCounter(projectile, counter) {
+  const distance = segmentDistance(
+    projectile.prevX,
+    projectile.prevY,
+    projectile.x,
+    projectile.y,
+    counter.x1,
+    counter.y1,
+    counter.x2,
+    counter.y2
+  );
+  return distance <= projectileRadius(projectile) + counter.padding;
+}
+
+function applyWeakenedProjectileBurst(projectile, match, x, y, counterFighter = null) {
+  const burstRadius = 24 + (projectile.impactChambers || 1) * 6 + (projectile.ammoType === "rail" ? 6 : 0);
+  const baseDamage = clamp(
+    Math.round(
+      projectile.damage * 0.24 +
+      (projectile.impactChambers || 1) * 0.6 +
+      (projectileHasImpact(projectile, "explosive") ? 1 : 0) +
+      (projectileHasImpact(projectile, "scatter") || projectileHasImpact(projectile, "shrapnel") ? 1 : 0)
+    ),
+    1,
+    8
+  );
+  const pushDir = Math.sign(projectile.vx || (counterFighter ? counterFighter.facing : 1)) || 1;
+
+  addSpark(match, x, y, projectile.glow || projectile.color, projectile.ammoType === "rail" ? 14 : 10);
+
+  if (
+    projectileHasImpact(projectile, "explosive") ||
+    projectileHasImpact(projectile, "scatter") ||
+    projectileHasImpact(projectile, "shrapnel")
+  ) {
+    spawnZone(match, "blast", x, y, 16 + (projectile.impactChambers || 1) * 4, 0.14, "rgba(255,187,102,0.18)", 0);
+  }
+  if (projectile.portalCount > 0 || projectileHasImpact(projectile, "portal")) {
+    spawnZone(match, "portal", x, y, 20 + (projectile.portalCount || 0) * 4, 0.16, "rgba(140,118,255,0.2)", 0);
+  }
+  if (projectile.blizzardTrail || (projectile.slowCount || 0) > 0) {
+    spawnZone(match, "blizzard", x, y, 18 + (projectile.slowCount || 0) * 4, 0.14, "rgba(202,236,255,0.22)", 0.12);
+  }
+
+  match.fighters.forEach((fighter) => {
+    if (!fighter.alive) {
+      return;
+    }
+    const targetPoint = projectileTargetPoint(fighter);
+    const distance = Math.hypot(targetPoint.x - x, targetPoint.y - y);
+    if (distance > burstRadius) {
+      return;
+    }
+
+    const falloff = 1 - distance / Math.max(burstRadius, 1);
+    let chipDamage = clamp(Math.round(baseDamage * (0.45 + falloff * 0.55)), 1, baseDamage);
+    if (counterFighter && fighter.team === counterFighter.team) {
+      chipDamage = Math.max(1, Math.round(chipDamage * 0.7));
+    }
+
+    if (fighter.blocking && fighter.onGround) {
+      fighter.stamina = clamp(
+        fighter.stamina - Math.max(1, Math.round(chipDamage + (projectile.blockBreak || 0) * 0.16)),
+        0,
+        fighter.maxStamina
+      );
+      fighter.hitstun = Math.max(fighter.hitstun, 0.04);
+      addSpark(match, targetPoint.x, targetPoint.y, "#ffffff", 4);
+      return;
+    }
+
+    fighter.health = clamp(fighter.health - chipDamage, 0, fighter.maxHealth);
+    fighter.vx += pushDir * (18 + chipDamage * 8) * (0.5 + falloff * 0.5);
+    fighter.hitstun = Math.max(fighter.hitstun, 0.05 + chipDamage * 0.006);
+    fighter.attackFlash = 0.08;
+    fighter.alive = fighter.health > 0;
+
+    if ((projectile.slowCount || 0) > 0 || projectile.blizzardTrail) {
+      fighter.slowTimer = Math.max(fighter.slowTimer, 0.08 + (projectile.slowCount || 0) * 0.02);
+    }
+    if ((projectile.shockCount || 0) > 0 && !fighter.blocking) {
+      applyStun(fighter, 0.05 + (projectile.shockCount || 0) * 0.01);
+    }
+    if ((projectile.poisonCount || 0) > 0 && !fighter.blocking) {
+      fighter.poisonTimer = Math.max(fighter.poisonTimer, 0.7 + (projectile.poisonCount || 0) * 0.2);
+      fighter.poisonTickTimer = Math.min(fighter.poisonTickTimer || 0.45, 0.45);
+    }
+  });
+
+  triggerImpact(match, { shake: 3 + Math.min(3, projectile.impactChambers || 1), flash: 0.05, hitstop: 0.02 });
+}
+
+function resolveProjectileCounter(match, projectile, fighter, counter) {
+  const contactX = (projectile.x + counter.x2) * 0.5;
+  const contactY = (projectile.y + counter.y2) * 0.5;
+  const fighterStats = statsForTeam(match, fighter.team);
+
+  projectile.spent = true;
+  applyWeakenedProjectileBurst(projectile, match, contactX, contactY, fighter);
+  fighter.attackFlash = Math.max(fighter.attackFlash, 0.1);
+
+  if (counter.mode === "parry") {
+    fighter.parryFlash = Math.max(fighter.parryFlash, 0.24);
+    fighter.stamina = clamp(fighter.stamina + 5, 0, fighter.maxStamina);
+    fighterStats.parries += 1;
+    fighterStats.blocks += 1;
+    playSoundEffect("block");
+  } else if (counter.mode === "guard") {
+    fighter.stamina = clamp(fighter.stamina - Math.max(1, Math.round(projectile.blockBreak * 0.18 + 2)), 0, fighter.maxStamina);
+    fighterStats.blocks += 1;
+    playSoundEffect("block");
+  } else {
+    fighter.stamina = clamp(fighter.stamina - 1, 0, fighter.maxStamina);
+    playSoundEffect("hit");
+  }
+
+  if (projectileCounterNeedsCallout(projectile, fighter)) {
+    const actionLabel =
+      counter.mode === "parry"
+        ? "parried"
+        : counter.mode === "guard"
+          ? "checked"
+          : "cut";
+    setMatchSummary(`${fighter.name} ${actionLabel} ${projectile.attackerName}'s shot out of the air.`);
+    pushFightEvent(
+      match,
+      counter.mode === "parry" ? "Projectile Parry" : "Air Cut",
+      `${fighter.name} ${actionLabel} ${projectile.attackerName}'s ${projectile.weaponName} shot and forced a weak burst.`,
+      "control"
+    );
+  }
+}
+
+function resolveProjectileClash(match, first, second) {
+  const contactX = (first.x + second.x) * 0.5;
+  const contactY = (first.y + second.y) * 0.5;
+  const firstPower = projectileCounterPower(first);
+  const secondPower = projectileCounterPower(second);
+
+  addSpark(match, contactX, contactY, first.glow || first.color, first.ammoType === "rail" ? 10 : 6);
+  addSpark(match, contactX, contactY, second.glow || second.color, second.ammoType === "rail" ? 10 : 6);
+
+  if (Math.abs(firstPower - secondPower) <= 3.6) {
+    first.spent = true;
+    second.spent = true;
+    applyWeakenedProjectileBurst(firstPower >= secondPower ? first : second, match, contactX, contactY);
+  } else {
+    const winner = firstPower > secondPower ? first : second;
+    const loser = winner === first ? second : first;
+    loser.spent = true;
+    weakenProjectile(winner, 0.58);
+    winner.x = contactX;
+    winner.y = contactY;
+    winner.prevX = contactX - winner.vx * 0.02;
+    winner.prevY = contactY - winner.vy * 0.02;
+  }
+
+  triggerImpact(match, { shake: 3, flash: 0.04, hitstop: 0.015 });
+
+  if (projectileCounterNeedsCallout(first) || projectileCounterNeedsCallout(second)) {
+    setMatchSummary("Shots clashed in mid-air and burst apart.");
+    pushFightEvent(match, "Shot Clash", "Two projectiles collided in the lane and lost most of their force.", "control");
+  }
+}
+
+function resolveProjectileCounterplay(match) {
+  if (!match?.projectiles?.length) {
+    return;
+  }
+
+  for (let index = 0; index < match.projectiles.length; index += 1) {
+    const projectile = match.projectiles[index];
+    if (projectile.spent) {
+      continue;
+    }
+    for (let otherIndex = index + 1; otherIndex < match.projectiles.length; otherIndex += 1) {
+      const other = match.projectiles[otherIndex];
+      if (other.spent || projectile.ownerTeam === other.ownerTeam) {
+        continue;
+      }
+      const collisionDistance = segmentDistance(
+        projectile.prevX,
+        projectile.prevY,
+        projectile.x,
+        projectile.y,
+        other.prevX,
+        other.prevY,
+        other.x,
+        other.y
+      );
+      if (collisionDistance <= projectileRadius(projectile) + projectileRadius(other)) {
+        resolveProjectileClash(match, projectile, other);
+        break;
+      }
+    }
+  }
+
+  match.projectiles.forEach((projectile) => {
+    if (projectile.spent) {
+      return;
+    }
+    const counterFighter = match.fighters.find((fighter) => fighter.team !== projectile.ownerTeam && fighterProjectileCounterSegment(fighter));
+    if (!counterFighter) {
+      return;
+    }
+    const counter = fighterProjectileCounterSegment(counterFighter);
+    if (counter && projectileIntersectsCounter(projectile, counter)) {
+      resolveProjectileCounter(match, projectile, counterFighter, counter);
+    }
+  });
+
+  match.projectiles = match.projectiles.filter((projectile) => !projectile.spent);
+}
+
 function spawnZone(match, type, x, y, radius, life, color, power = 0) {
   match.zones.push({
     id: makeId(type),
@@ -9828,7 +10210,9 @@ function spawnProjectile(attacker, opponent, match, options = {}) {
     ruptureCount: ammoRound?.ruptureCount ?? attacker.weapon.ruptureCount ?? 0,
     glow: attacker.weapon.projectileGlow || impactAccentColor(ammoRound?.impactTypes?.[0] || attacker.weapon.impactType) || attacker.weapon.color,
     waveSeed: Math.random() * Math.PI * 2,
-    trailTimer: 0
+    trailTimer: 0,
+    weakened: false,
+    spent: false
   };
   match.projectiles.push(projectile);
   addSpark(match, projectile.x, projectile.y, attacker.weapon.color, attacker.weapon.ammoType === "rail" ? 10 : 6);
@@ -10126,6 +10510,7 @@ function updateProjectiles(match, dt) {
 
     return true;
   });
+  resolveProjectileCounterplay(match);
 }
 
 function shotPatternForWeapon(weapon) {
@@ -11435,6 +11820,7 @@ function updateMatch(dt) {
 
     updateFighter(player, enemy, match, dt);
     updateFighter(enemy, player, match, dt);
+    resolveProjectileCounterplay(match);
     resolveFighterSpacing(player, enemy, match);
     applyStageHazard(match, dt);
 
@@ -12218,24 +12604,33 @@ function drawProjectiles(match) {
     const endX = stageOffsetX() + projectile.x;
     const endY = STAGE_TOP + projectile.y + 10;
     const glow = projectile.glow || (projectile.ammoType === "rail" ? "#d1f7ff" : projectile.color);
+    const outerWidth = projectile.ammoType === "rail" ? 7 : projectile.ammoType === "bolt" ? 5 : 4;
+    const innerWidth = projectile.ammoType === "rail" ? 3 : projectile.ammoType === "bolt" ? 2.6 : 2.2;
+    const tipRadius = projectile.tipType === "blunt" ? 4.2 : projectile.tipType === "drill" ? 3.6 : 3.2;
+
+    ctx.save();
+    ctx.globalAlpha = projectile.weakened ? 0.58 : 1;
+    ctx.setLineDash(projectile.weakened ? [5, 4] : []);
     ctx.strokeStyle = `${glow}55`;
-    ctx.lineWidth = projectile.ammoType === "rail" ? 7 : projectile.ammoType === "bolt" ? 5 : 4;
+    ctx.lineWidth = projectile.weakened ? outerWidth * 0.78 : outerWidth;
     ctx.beginPath();
     ctx.moveTo(startX, startY);
     ctx.lineTo(endX, endY);
     ctx.stroke();
 
     ctx.strokeStyle = glow;
-    ctx.lineWidth = projectile.ammoType === "rail" ? 3 : projectile.ammoType === "bolt" ? 2.6 : 2.2;
+    ctx.lineWidth = projectile.weakened ? innerWidth * 0.8 : innerWidth;
     ctx.beginPath();
     ctx.moveTo(startX, startY);
     ctx.lineTo(endX, endY);
     ctx.stroke();
+    ctx.setLineDash([]);
 
     ctx.fillStyle = glow;
     ctx.beginPath();
-    ctx.arc(endX, endY, projectile.tipType === "blunt" ? 4.2 : projectile.tipType === "drill" ? 3.6 : 3.2, 0, Math.PI * 2);
+    ctx.arc(endX, endY, projectile.weakened ? tipRadius * 0.82 : tipRadius, 0, Math.PI * 2);
     ctx.fill();
+    ctx.restore();
   });
 }
 
