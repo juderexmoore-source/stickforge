@@ -10,6 +10,7 @@ const STAGE_TOP = 28;
 const GROUND_Y = 320;
 const FLOOR_THICKNESS = 66;
 const ROUND_TIME = 60;
+const FORGE_LEVEL_MAX = 8;
 
 const frameCatalog = {
   executioner: {
@@ -687,6 +688,246 @@ const frameCatalog = {
       type: "veil-rush",
       backstabBonus: 1.36,
       summary: "Dash slips cleanly through pressure, and rear hits punish much harder."
+    }
+  },
+  emberwand: {
+    label: "Ember Wand",
+    classLabel: "Wand",
+    kind: "wand",
+    family: "magic",
+    unlockLevel: 4,
+    summary: "Fast rune wand. Clicking while tracing points builds ember glyph chains that burst on cast.",
+    design: "Ashwood ember wand",
+    damage: 15,
+    reach: 78,
+    cooldown: 0.4,
+    knockback: 0.86,
+    arc: 0.9,
+    speed: 1.12,
+    moveScale: 1.08,
+    weight: 5,
+    manaMax: 7,
+    projectileSpeed: 760,
+    range: 430,
+    special: {
+      type: "wand-glyph",
+      summary: "Clicking with the mouse records rune points. Completed ember routes burst harder."
+    }
+  },
+  riftwand: {
+    label: "Rift Wand",
+    classLabel: "Wand",
+    kind: "wand",
+    family: "magic",
+    unlockLevel: 4,
+    summary: "Void wand tuned for phase lines, redirects, and portal-heavy gesture casts.",
+    design: "Split crystal wand",
+    damage: 14,
+    reach: 80,
+    cooldown: 0.38,
+    knockback: 0.82,
+    arc: 0.92,
+    speed: 1.14,
+    moveScale: 1.1,
+    weight: 5,
+    manaMax: 8,
+    projectileSpeed: 790,
+    range: 450,
+    special: {
+      type: "wand-glyph",
+      summary: "Rift routes lean into portal cuts, redirects, and harder-to-read glyph spells."
+    }
+  },
+  tempestwand: {
+    label: "Tempest Wand",
+    classLabel: "Wand",
+    kind: "wand",
+    family: "magic",
+    unlockLevel: 5,
+    summary: "Storm wand built for fast glyphs and easier high-class page-assisted spells.",
+    design: "Stormglass wand",
+    damage: 15,
+    reach: 82,
+    cooldown: 0.36,
+    knockback: 0.84,
+    arc: 0.94,
+    speed: 1.18,
+    moveScale: 1.12,
+    weight: 4,
+    manaMax: 8,
+    projectileSpeed: 820,
+    range: 470,
+    special: {
+      type: "wand-glyph",
+      summary: "Storm glyph routes cast faster, and bound spellbooks make high-class combos easier."
+    }
+  },
+  sunstaff: {
+    label: "Sun Staff",
+    classLabel: "Staff",
+    kind: "staff",
+    family: "magic",
+    unlockLevel: 5,
+    summary: "Channel staff that throws stable magic lances and burning rings from a safer range.",
+    design: "Solar ring staff",
+    damage: 18,
+    reach: 92,
+    cooldown: 0.5,
+    knockback: 1,
+    arc: 1,
+    speed: 1,
+    moveScale: 0.98,
+    weight: 8,
+    manaMax: 5,
+    projectileSpeed: 760,
+    range: 500,
+    special: {
+      type: "staff-channel",
+      summary: "Staff channels can fire lances, novas, or field spells based on their bound route."
+    }
+  },
+  stormstaff: {
+    label: "Storm Staff",
+    classLabel: "Staff",
+    kind: "staff",
+    family: "magic",
+    unlockLevel: 5,
+    summary: "A heavier staff that can anchor tornado and lightning field spells with strong crowd control.",
+    design: "Coil-tipped storm staff",
+    damage: 19,
+    reach: 96,
+    cooldown: 0.56,
+    knockback: 1.08,
+    arc: 1.04,
+    speed: 0.96,
+    moveScale: 0.96,
+    weight: 9,
+    manaMax: 5,
+    projectileSpeed: 740,
+    range: 520,
+    special: {
+      type: "staff-channel",
+      summary: "Storm staffs excel at field spells like tornadoes, shock lances, and pressure waves."
+    }
+  },
+  gravegrimoire: {
+    label: "Grave Grimoire",
+    classLabel: "Spellbook",
+    kind: "spellbook",
+    family: "magic",
+    unlockLevel: 5,
+    summary: "Page-casting book. Attack casts the current page, and block flips to the next bound spell.",
+    design: "Necrotic ironbound tome",
+    damage: 17,
+    reach: 78,
+    cooldown: 0.46,
+    knockback: 0.9,
+    arc: 0.92,
+    speed: 1.02,
+    moveScale: 1,
+    weight: 7,
+    manaMax: 6,
+    projectileSpeed: 740,
+    range: 460,
+    special: {
+      type: "spellbook-page",
+      summary: "Attack casts the current page. Block flips the page instead of raising a normal guard."
+    }
+  },
+  cyclonetome: {
+    label: "Cyclone Tome",
+    classLabel: "Spellbook",
+    kind: "spellbook",
+    family: "magic",
+    unlockLevel: 5,
+    summary: "A high-speed weather codex that swaps pages quickly and amplifies bound wand combos into storm-class casts.",
+    design: "Windbound page codex",
+    damage: 16,
+    reach: 80,
+    cooldown: 0.42,
+    knockback: 0.88,
+    arc: 0.94,
+    speed: 1.06,
+    moveScale: 1.04,
+    weight: 6,
+    manaMax: 6,
+    projectileSpeed: 780,
+    range: 470,
+    special: {
+      type: "spellbook-page",
+      summary: "Fast page flips and strong storm pages make it the cleanest support book for wand casting."
+    }
+  },
+  necroidol: {
+    label: "Necro Idol",
+    classLabel: "Artifact",
+    kind: "artifact",
+    family: "magic",
+    unlockLevel: 6,
+    summary: "A grave artifact that raises shambling spirit-zombies to pressure the rival lane.",
+    design: "Bone-lit idol core",
+    damage: 18,
+    reach: 74,
+    cooldown: 0.62,
+    knockback: 0.92,
+    arc: 0.96,
+    speed: 0.94,
+    moveScale: 0.98,
+    weight: 9,
+    manaMax: 4,
+    projectileSpeed: 540,
+    range: 420,
+    special: {
+      type: "artifact-raise",
+      summary: "Artifacts can summon cursed pressure like zombies, hex fields, and lingering seals."
+    }
+  },
+  hexrelic: {
+    label: "Hex Relic",
+    classLabel: "Artifact",
+    kind: "artifact",
+    family: "magic",
+    unlockLevel: 6,
+    summary: "A curse artifact built to slow, drain, and poison rivals through ugly lingering seals.",
+    design: "Void-etched curse relic",
+    damage: 17,
+    reach: 72,
+    cooldown: 0.58,
+    knockback: 0.86,
+    arc: 0.92,
+    speed: 0.98,
+    moveScale: 1,
+    weight: 8,
+    manaMax: 4,
+    projectileSpeed: 620,
+    range: 440,
+    special: {
+      type: "artifact-curse",
+      summary: "Curses apply slows, poison, and field pressure instead of simple direct damage."
+    }
+  },
+  sunshard: {
+    label: "Sun Shard",
+    classLabel: "Artifact",
+    kind: "artifact",
+    family: "magic",
+    unlockLevel: 6,
+    summary: "A radiant artifact that detonates wards and pulsing sanctified blasts around the rival.",
+    design: "Haloed relic shard",
+    damage: 19,
+    reach: 76,
+    cooldown: 0.6,
+    knockback: 0.98,
+    arc: 0.98,
+    speed: 0.96,
+    moveScale: 0.98,
+    weight: 8,
+    manaMax: 4,
+    projectileSpeed: 660,
+    range: 460,
+    special: {
+      type: "artifact-ward",
+      summary: "Ward artifacts cast pulsing sanctified rings, burst seals, and area denial."
     }
   },
   revolver: {
@@ -1762,6 +2003,30 @@ const materialCatalog = {
     moveScale: -0.04,
     weight: 3,
     color: "#ff8752"
+  },
+  moonthread: {
+    label: "Moonthread",
+    summary: "Arcane weave with lighter recovery, stronger spell flow, and smoother movement.",
+    damage: 2,
+    reach: 3,
+    speed: 0.08,
+    cooldown: -0.08,
+    knockback: -0.02,
+    moveScale: 0.05,
+    weight: -1.8,
+    color: "#c8cbff"
+  },
+  runestone: {
+    label: "Runestone Alloy",
+    summary: "Dense rune-laced core that hits harder and boosts spell stability at the cost of weight.",
+    damage: 6,
+    reach: 1,
+    speed: -0.04,
+    cooldown: 0.05,
+    knockback: 0.16,
+    moveScale: -0.03,
+    weight: 3.8,
+    color: "#89c7ff"
   }
 };
 
@@ -1848,6 +2113,22 @@ const bladeTypeCatalog = {
   "gun-special": {
     label: "Special Gun",
     summary: "Bows, crossbows, and railguns. They use bolts or rails instead of normal bullets."
+  },
+  wand: {
+    label: "Wand",
+    summary: "Freehand magic focus. Clicking while moving the wand records rune points that combine into spells."
+  },
+  staff: {
+    label: "Staff",
+    summary: "Long magic focus built for stable channels, field spells, and heavier elemental casts."
+  },
+  spellbook: {
+    label: "Spellbook",
+    summary: "Page-casting grimoires. Attack casts the current page and block flips to the next spell."
+  },
+  artifact: {
+    label: "Artifact",
+    summary: "Relics that cast curses, wards, undead pressure, and other strange magic instead of normal strikes."
   }
 };
 
@@ -1859,6 +2140,199 @@ const weaponFamilyCatalog = {
   ranged: {
     label: "Ranged",
     summary: "Projectile weapons with ammo setup, reloads, and shot behavior."
+  },
+  magic: {
+    label: "Magic",
+    summary: "Arcane weapons with spell routes, bound pages, relic effects, and magical forge stations."
+  }
+};
+
+const enchantCatalog = {
+  none: {
+    label: "No Enchant",
+    summary: "Pure steel or powder work with no arcane effect."
+  },
+  ember: {
+    label: "Ember Enchant",
+    summary: "Adds extra burn bite and hotter impact flashes."
+  },
+  frost: {
+    label: "Frost Enchant",
+    summary: "Adds chill, slow, and colder pressure on impact."
+  },
+  storm: {
+    label: "Storm Enchant",
+    summary: "Adds shock pressure and stronger stun flashes."
+  },
+  hex: {
+    label: "Hex Enchant",
+    summary: "Adds curse pressure that weakens and poisons over time."
+  },
+  astral: {
+    label: "Astral Enchant",
+    summary: "Adds portal drift, phase pressure, and brighter spell trails."
+  }
+};
+
+const magicElementCatalog = {
+  ember: {
+    label: "Ember",
+    color: "#ff9c63",
+    summary: "Explosive fire magic with burst pressure and hotter finishers."
+  },
+  frost: {
+    label: "Frost",
+    color: "#bdefff",
+    summary: "Cold magic with slow fields, chill shots, and cleaner control."
+  },
+  storm: {
+    label: "Storm",
+    color: "#9be9ff",
+    summary: "Lightning and wind pressure with stun, tornadoes, and quick casts."
+  },
+  void: {
+    label: "Void",
+    color: "#c6a9ff",
+    summary: "Phase magic with portal drifts, redirects, and unstable cuts."
+  },
+  grave: {
+    label: "Grave",
+    color: "#9ff0a8",
+    summary: "Necrotic magic with poison, curses, and undead pressure."
+  },
+  radiance: {
+    label: "Radiance",
+    color: "#ffe08f",
+    summary: "Sanctified magic with wards, ring bursts, and cleaner knockback."
+  }
+};
+
+const magicPatternCatalog = {
+  lance: {
+    label: "Lance",
+    kinds: ["wand", "staff"],
+    summary: "Stable straight cast with solid damage and reach."
+  },
+  nova: {
+    label: "Nova",
+    kinds: ["staff", "artifact"],
+    summary: "Short-range burst that detonates around the caster or the seal point."
+  },
+  cyclone: {
+    label: "Cyclone",
+    kinds: ["wand", "staff", "spellbook"],
+    summary: "Storm route that can spin into tornado fields or sweeping wind cuts."
+  },
+  rift: {
+    label: "Rift",
+    kinds: ["wand", "spellbook"],
+    summary: "Phase route for redirects, portals, and space-tearing pressure."
+  },
+  grave: {
+    label: "Gravebind",
+    kinds: ["spellbook", "artifact"],
+    summary: "Necrotic route for zombie pressure, poison, and curse fields."
+  },
+  ward: {
+    label: "Ward",
+    kinds: ["spellbook", "artifact", "staff"],
+    summary: "Protective or sanctified route that bursts outward in rings."
+  }
+};
+
+const magicFocusCatalog = {
+  freehand: {
+    label: "Freehand Focus",
+    summary: "Pure casting with no helper item. Wand routes need the full gesture."
+  },
+  spellbook: {
+    label: "Bound Spellbook",
+    summary: "A bound spellbook feeds guide points into the cast and makes high-class wand routes easier."
+  },
+  artifact: {
+    label: "Artifact Link",
+    summary: "An anchored relic biases the cast toward seals, curses, and field spells."
+  }
+};
+
+const magicPageCatalog = {
+  ember: {
+    label: "Ember Page",
+    summary: "A direct page that bursts on impact."
+  },
+  frost: {
+    label: "Frost Page",
+    summary: "A slow page that leaves cold pressure and chill fields."
+  },
+  cyclone: {
+    label: "Cyclone Page",
+    summary: "A storm page that can become tornado magic."
+  },
+  grave: {
+    label: "Grave Page",
+    summary: "A necrotic page for curses and undead seals."
+  },
+  ward: {
+    label: "Ward Page",
+    summary: "A radiant page for rings, pushes, and protective bursts."
+  }
+};
+
+const forgeStationCatalog = {
+  anvil: {
+    label: "Anvil Station",
+    family: "melee",
+    copy: "Use the anvil for core weapon bodies, blade shaping, and most non-magical frame work."
+  },
+  ammo: {
+    label: "Ammo Rack",
+    family: "ranged",
+    copy: "Use the ammo rack for chambers, cases, bolts, rails, and powder-heavy ranged work."
+  },
+  arcane: {
+    label: "Arcane Loom",
+    family: "magic",
+    copy: "Use the arcane loom for staffs, wands, spellbooks, artifacts, and rune binding."
+  },
+  enchant: {
+    label: "Enchant Font",
+    family: "enchant",
+    copy: "Use the enchant font to bind magic into a forged weapon and improve advanced forge quality."
+  }
+};
+
+const forgeProgressionCatalog = {
+  1: {
+    name: "Cinder Bench",
+    unlocks: ["Short and medium melee", "Sidearms", "Ironwood and Sunsteel"]
+  },
+  2: {
+    name: "Steel Hall",
+    unlocks: ["Long melee", "Assault weapons", "Embersteel", "2 impact chambers"]
+  },
+  3: {
+    name: "War Foundry",
+    unlocks: ["Special melee", "Heavy and special guns", "Voidglass", "Better forge timing"]
+  },
+  4: {
+    name: "Arcane Annex",
+    unlocks: ["Wands", "Moonthread", "Magic family access"]
+  },
+  5: {
+    name: "Spell Hall",
+    unlocks: ["Staffs and spellbooks", "Enchanting", "3 impact chambers"]
+  },
+  6: {
+    name: "Relic Vault",
+    unlocks: ["Artifacts", "Runestone alloy", "Stronger forge quality floor"]
+  },
+  7: {
+    name: "Grand Crucible",
+    unlocks: ["Faster forge drills", "Higher magic pressure", "Lighter advanced handling"]
+  },
+  8: {
+    name: "Master Hall",
+    unlocks: ["Peak forge ease", "Top-tier enchanting", "Full forge access"]
   }
 };
 
@@ -2583,8 +3057,20 @@ const ui = {
   classSelect: document.querySelector("#class-select"),
   frameSelect: document.querySelector("#frame-select"),
   materialSelect: document.querySelector("#material-select"),
+  enchantSelect: document.querySelector("#enchant-select"),
+  enchantLabel: document.querySelector("#enchant-label"),
   edgeSelect: document.querySelector("#edge-select"),
   styleLabel: document.querySelector("#style-label"),
+  magicWorkshop: document.querySelector("#magic-workshop"),
+  magicWorkshopFamily: document.querySelector("#magic-workshop-family"),
+  magicWorkshopNote: document.querySelector("#magic-workshop-note"),
+  magicElement: document.querySelector("#magic-element"),
+  magicPattern: document.querySelector("#magic-pattern"),
+  magicFocus: document.querySelector("#magic-focus"),
+  magicPage: document.querySelector("#magic-page"),
+  magicPreview: document.querySelector("#magic-preview"),
+  magicSummary: document.querySelector("#magic-summary"),
+  magicSpellList: document.querySelector("#magic-spell-list"),
   ammoWorkshop: document.querySelector("#ammo-workshop"),
   ammoWorkshopFamily: document.querySelector("#ammo-workshop-family"),
   ammoWorkshopNote: document.querySelector("#ammo-workshop-note"),
@@ -2635,6 +3121,18 @@ const ui = {
   forgeBadges: document.querySelector("#forge-badges"),
   forgeStats: document.querySelector("#forge-stats"),
   forgeDetails: document.querySelector("#forge-details"),
+  forgeLevelTag: document.querySelector("#forge-level-tag"),
+  forgeUpgradeBonus: document.querySelector("#forge-upgrade-bonus"),
+  forgeXpFill: document.querySelector("#forge-xp-fill"),
+  forgeXpText: document.querySelector("#forge-xp-text"),
+  forgeUpgradeCopy: document.querySelector("#forge-upgrade-copy"),
+  forgeUnlocks: document.querySelector("#forge-unlocks"),
+  forgeRoom: document.querySelector("#forge-room"),
+  forgeRoomStation: document.querySelector("#forge-room-station"),
+  forgeRoomFocus: document.querySelector("#forge-room-focus"),
+  forgeRoomCopy: document.querySelector("#forge-room-copy"),
+  forgeInteract: document.querySelector("#forge-interact"),
+  forgeCycleStation: document.querySelector("#forge-cycle-station"),
   saveWeapon: document.querySelector("#save-weapon"),
   equipWeapon: document.querySelector("#equip-weapon"),
   armoryList: document.querySelector("#armory-list"),
@@ -2751,6 +3249,8 @@ const ui = {
 const canvas = ui.battlefield;
 const ctx = canvas.getContext("2d");
 const previewCtx = ui.forgePreview.getContext("2d");
+const forgeRoomCtx = ui.forgeRoom?.getContext("2d");
+const magicPreviewCtx = ui.magicPreview?.getContext("2d");
 
 const state = {
   forge: {
@@ -2761,6 +3261,11 @@ const state = {
     frame: "saber",
     material: "sunsteel",
     edge: "duelist",
+    enchant: "none",
+    magicElement: "ember",
+    magicPattern: "lance",
+    magicFocus: "freehand",
+    magicPage: "ember",
     impactChambers: 1,
     impactMount: "core",
     impactType: "standard",
@@ -2807,6 +3312,17 @@ const state = {
   armory: [],
   activeWeaponId: null,
   rivalWeaponId: null,
+  forgeProgress: {
+    level: 1,
+    xp: 0
+  },
+  forgeRoom: {
+    x: 0.18,
+    y: 0.72,
+    activeStationId: "anvil",
+    nearestStationId: "anvil",
+    moveHint: ""
+  },
   stage: {
     id: "foundry",
     hazard: true,
@@ -2916,6 +3432,201 @@ const state = {
     masterGain: null
   }
 };
+
+function isMagicKind(kind) {
+  return ["wand", "staff", "spellbook", "artifact"].includes(kind);
+}
+
+function isMagicWeapon(weapon) {
+  return Boolean(weapon && (weapon.family === "magic" || isMagicKind(weapon.kind)));
+}
+
+function usesProjectileCombat(weapon) {
+  return isRangedWeapon(weapon) || isMagicWeapon(weapon);
+}
+
+function unlockLevelForFamily(family) {
+  if (family === "magic") {
+    return 4;
+  }
+  return 1;
+}
+
+function unlockLevelForKind(kind) {
+  const map = {
+    medium: 1,
+    short: 1,
+    sidearm: 1,
+    long: 2,
+    assault: 2,
+    special: 3,
+    heavy: 3,
+    "gun-special": 3,
+    wand: 4,
+    staff: 5,
+    spellbook: 5,
+    artifact: 6
+  };
+  return map[kind] || 1;
+}
+
+function unlockLevelForMaterial(materialId) {
+  const map = {
+    ironwood: 1,
+    sunsteel: 1,
+    embersteel: 2,
+    voidglass: 3,
+    moonthread: 4,
+    runestone: 6
+  };
+  return map[materialId] || 1;
+}
+
+function unlockLevelForFrame(frameId) {
+  const frame = frameCatalog[frameId];
+  if (!frame) {
+    return 1;
+  }
+  return Math.max(frame.unlockLevel || 1, unlockLevelForKind(frame.kind));
+}
+
+function maxImpactChambersForLevel(level = state.forgeProgress.level) {
+  if (level >= 5) {
+    return 3;
+  }
+  if (level >= 2) {
+    return 2;
+  }
+  return 1;
+}
+
+function enchantUnlocked(level = state.forgeProgress.level) {
+  return level >= 5;
+}
+
+function forgeXpToNextLevel(level = 1) {
+  return 60 + (Math.max(1, level) - 1) * 40;
+}
+
+function ensureForgeProgress(progress = state.forgeProgress) {
+  const safeLevel = clamp(Number(progress?.level || 1), 1, FORGE_LEVEL_MAX);
+  const safeXp = clamp(Number(progress?.xp || 0), 0, forgeXpToNextLevel(safeLevel));
+  return {
+    level: safeLevel,
+    xp: safeXp
+  };
+}
+
+function currentForgeProgress() {
+  state.forgeProgress = ensureForgeProgress(state.forgeProgress);
+  return state.forgeProgress;
+}
+
+function unlockedFamilyCatalog(level = currentForgeProgress().level) {
+  return Object.fromEntries(
+    Object.entries(weaponFamilyCatalog).filter(([family]) => level >= unlockLevelForFamily(family))
+  );
+}
+
+function unlockedMaterialCatalog(level = currentForgeProgress().level) {
+  return Object.fromEntries(
+    Object.entries(materialCatalog).filter(([materialId]) => level >= unlockLevelForMaterial(materialId))
+  );
+}
+
+function kindUnlocked(kind, level = currentForgeProgress().level) {
+  return level >= unlockLevelForKind(kind);
+}
+
+function frameUnlocked(frameId, level = currentForgeProgress().level) {
+  return level >= unlockLevelForFrame(frameId);
+}
+
+function stationRequiredForForge(source = state.forge) {
+  const family = source.family || forgeFamilyForKind(source.kind || frameCatalog[source.frame]?.kind || "medium");
+  if (family === "magic") {
+    return "arcane";
+  }
+  if ((source.enchant && source.enchant !== "none") || (source.enchantType && source.enchantType !== "none")) {
+    return "enchant";
+  }
+  if (family === "ranged") {
+    return "ammo";
+  }
+  return "anvil";
+}
+
+function forgeStationMatchBonus(stationId = state.forgeRoom.activeStationId, source = state.forge) {
+  const required = stationRequiredForForge(source);
+  if (stationId === required) {
+    return 0.08;
+  }
+  if (stationId === "enchant" && source.family === "magic") {
+    return 0.04;
+  }
+  return 0;
+}
+
+function forgeAssistProfile(stationId = state.forgeRoom.activeStationId) {
+  const progress = currentForgeProgress();
+  return {
+    timeBonus: (progress.level - 1) * 0.28 + forgeStationMatchBonus(stationId) * 5,
+    qualityBonus: (progress.level - 1) * 0.018 + forgeStationMatchBonus(stationId),
+    windowBonus: (progress.level - 1) * 0.008 + forgeStationMatchBonus(stationId) * 0.45
+  };
+}
+
+function awardForgeXp(amount, reason = "") {
+  const progress = currentForgeProgress();
+  let remaining = Math.max(0, Math.round(amount));
+  let leveled = false;
+  while (remaining > 0 && progress.level < FORGE_LEVEL_MAX) {
+    const needed = forgeXpToNextLevel(progress.level) - progress.xp;
+    const spend = Math.min(needed, remaining);
+    progress.xp += spend;
+    remaining -= spend;
+    if (progress.xp >= forgeXpToNextLevel(progress.level) && progress.level < FORGE_LEVEL_MAX) {
+      progress.level += 1;
+      progress.xp = 0;
+      leveled = true;
+    }
+  }
+  if (progress.level >= FORGE_LEVEL_MAX) {
+    progress.xp = 0;
+  }
+  state.forgeProgress = progress;
+  if (leveled) {
+    setMatchSummary(`Forge level ${progress.level} unlocked. ${forgeProgressionCatalog[progress.level]?.name || "New forge perks"} is live.`);
+  } else if (reason) {
+    setMatchSummary(`${reason} | Forge XP +${amount}`);
+  }
+  return leveled;
+}
+
+function magicPatternsForKind(kind) {
+  return Object.fromEntries(
+    Object.entries(magicPatternCatalog).filter(([, pattern]) => pattern.kinds.includes(kind))
+  );
+}
+
+function defaultMagicPatternForKind(kind) {
+  return Object.keys(magicPatternsForKind(kind))[0] || "lance";
+}
+
+function defaultMagicPageForKind(kind) {
+  if (kind === "artifact") {
+    return "grave";
+  }
+  if (kind === "spellbook") {
+    return "cyclone";
+  }
+  return "ember";
+}
+
+function magicFocusOptionsForKind(kind) {
+  const ids = kind === "wand" ? ["freehand", "spellbook", "artifact"] : kind === "artifact" ? ["artifact", "freehand"] : ["freehand", "spellbook"];
+  return Object.fromEntries(ids.map((id) => [id, magicFocusCatalog[id]]));
+}
 
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
@@ -3450,7 +4161,7 @@ function buildAmmoRecipeFromForge(forge, frame = frameCatalog[forge?.frame] || f
 }
 
 function ammoRoundListForWeapon(weapon) {
-  if (!isRangedWeapon(weapon)) {
+  if (!usesProjectileCombat(weapon)) {
     return [];
   }
   const frame = frameCatalog[weapon.frameId] || frameCatalog.longbow;
@@ -3475,7 +4186,8 @@ function ammoRoundListForWeapon(weapon) {
   const desiredCount = clamp(Number(weapon.preloadAmmo || weapon.clipSize || rounds.length || 1), 1, 24);
   const list = [];
   for (let index = 0; index < desiredCount; index += 1) {
-    list.push(rounds[index % rounds.length]);
+    const round = rounds[index % rounds.length];
+    list.push(round ? cloneAmmoRecipe(round) || { ...round } : round);
   }
   return list;
 }
@@ -3554,7 +4266,7 @@ function masteryWeaponVisible(frame, account = currentAccount()) {
 
 function frameIdsForKind(kind) {
   return Object.entries(frameCatalog)
-    .filter(([, frame]) => frame.kind === kind && masteryWeaponVisible(frame))
+    .filter(([frameId, frame]) => frame.kind === kind && masteryWeaponVisible(frame) && frameUnlocked(frameId))
     .map(([id]) => id);
 }
 
@@ -3564,21 +4276,33 @@ function firstFrameIdForKind(kind) {
 
 function frameCatalogForKind(kind) {
   return Object.fromEntries(
-    Object.entries(frameCatalog).filter(([, frame]) => frame.kind === kind && masteryWeaponVisible(frame))
+    Object.entries(frameCatalog).filter(([frameId, frame]) => frame.kind === kind && masteryWeaponVisible(frame) && frameUnlocked(frameId))
   );
 }
 
 function forgeFamilyForKind(kind) {
+  if (isMagicKind(kind)) {
+    return "magic";
+  }
   return isRangedKind(kind) ? "ranged" : "melee";
 }
 
 function firstKindForFamily(family) {
-  return family === "ranged" ? "sidearm" : "medium";
+  if (family === "ranged") {
+    return kindUnlocked("sidearm") ? "sidearm" : "medium";
+  }
+  if (family === "magic") {
+    if (kindUnlocked("wand")) {
+      return "wand";
+    }
+    return "medium";
+  }
+  return kindUnlocked("medium") ? "medium" : "short";
 }
 
 function kindCatalogForFamily(family) {
   return Object.fromEntries(
-    Object.entries(bladeTypeCatalog).filter(([kind]) => forgeFamilyForKind(kind) === family)
+    Object.entries(bladeTypeCatalog).filter(([kind]) => forgeFamilyForKind(kind) === family && kindUnlocked(kind))
   );
 }
 
@@ -3630,16 +4354,23 @@ function effectivePreloadAmmo(frame, chambers, requestedAmmo) {
 }
 
 function normalizeForgeState(forge = state.forge) {
+  const forgeLevel = currentForgeProgress().level;
   const inferredKind = forge.kind || frameCatalog[forge.frame]?.kind || "medium";
   const inferredFamily = forge.family || forgeFamilyForKind(inferredKind);
-  const family = weaponFamilyCatalog[inferredFamily] ? inferredFamily : "melee";
+  const familyCatalog = unlockedFamilyCatalog(forgeLevel);
+  const family = familyCatalog[inferredFamily] ? inferredFamily : Object.keys(familyCatalog)[0] || "melee";
   const requestedKind = bladeTypeCatalog[inferredKind] ? inferredKind : firstKindForFamily(family);
-  const kind = forgeFamilyForKind(requestedKind) === family ? requestedKind : firstKindForFamily(family);
+  const familyKinds = Object.keys(kindCatalogForFamily(family));
+  const kind =
+    forgeFamilyForKind(requestedKind) === family && familyKinds.includes(requestedKind)
+      ? requestedKind
+      : familyKinds[0] || firstKindForFamily(family);
   const frameId = frameIdsForKind(kind).includes(forge.frame) ? forge.frame : firstFrameIdForKind(kind);
   const frame = frameCatalog[frameId] || frameCatalog.saber;
-  const materialId = materialCatalog[forge.material] ? forge.material : "sunsteel";
+  const unlockedMaterials = unlockedMaterialCatalog(forgeLevel);
+  const materialId = unlockedMaterials[forge.material] ? forge.material : Object.keys(unlockedMaterials)[0] || "sunsteel";
   const edgeId = edgeCatalog[forge.edge] ? forge.edge : "duelist";
-  const impactChambers = clamp(Number(forge.impactChambers ?? 1), 1, Math.max(1, frame.chamberMax || 1));
+  const impactChambers = clamp(Number(forge.impactChambers ?? 1), 1, Math.min(maxImpactChambersForLevel(forgeLevel), Math.max(1, frame.chamberMax || 1)));
   const impactMount = compatibleImpactMount(frame, forge.impactMount);
   const chamberImpacts = normalizeChamberImpacts(
     frame,
@@ -3655,6 +4386,13 @@ function normalizeForgeState(forge = state.forge) {
   const tipTypeSet = tipCatalogForFrame(frame);
   const tipType = tipTypeSet[forge.tipType] ? forge.tipType : defaultTipTypeForFrame(frame);
   const preloadAmmo = effectivePreloadAmmo(frame, impactChambers, forge.preloadAmmo);
+  const enchant = enchantUnlocked(forgeLevel) && enchantCatalog[forge.enchant] ? forge.enchant : "none";
+  const magicElement = magicElementCatalog[forge.magicElement] ? forge.magicElement : "ember";
+  const magicPatternSet = magicPatternsForKind(kind);
+  const magicPattern = magicPatternSet[forge.magicPattern] ? forge.magicPattern : defaultMagicPatternForKind(kind);
+  const magicFocusSet = magicFocusOptionsForKind(kind);
+  const magicFocus = magicFocusSet[forge.magicFocus] ? forge.magicFocus : Object.keys(magicFocusSet)[0] || "freehand";
+  const magicPage = magicPageCatalog[forge.magicPage] ? forge.magicPage : defaultMagicPageForKind(kind);
   return {
     ...forge,
     family,
@@ -3662,6 +4400,11 @@ function normalizeForgeState(forge = state.forge) {
     frame: frameId,
     material: materialId,
     edge: edgeId,
+    enchant,
+    magicElement,
+    magicPattern,
+    magicFocus,
+    magicPage,
     impactChambers,
     impactMount,
     chamberImpacts,
@@ -3707,6 +4450,18 @@ function forgeGameModeForWeapon(source) {
   if (!frame) {
     return "medium";
   }
+  if (frame.family === "magic") {
+    if (frame.kind === "wand") {
+      return "wand-glyph";
+    }
+    if (frame.kind === "staff") {
+      return "staff-channel";
+    }
+    if (frame.kind === "spellbook") {
+      return "spellbook-bind";
+    }
+    return "artifact-seal";
+  }
   if (frame.family === "ranged") {
     if (frame.ammoType === "bolt") {
       return ["crossbow", "repeater", "harpoon"].includes(frame.frameId || "") || ["Crossbow", "Repeater Crossbow", "Harpoon Launcher"].includes(frame.label)
@@ -3740,6 +4495,34 @@ function forgeGameModeForWeapon(source) {
 function forgeModeMeta(kind) {
   const frame = typeof kind === "string" ? frameCatalog[kind] : kind;
   const mode = typeof kind === "string" && bladeTypeCatalog[kind] ? kind : forgeGameModeForWeapon(kind);
+  if (frame?.family === "magic") {
+    if (mode === "wand-glyph") {
+      return {
+        title: "Wand Rune Trace",
+        copy: "Wands want clean rune points. Catch the drifting sigils in order so the wand reads your gesture chain correctly.",
+        action: "Mark Rune"
+      };
+    }
+    if (mode === "staff-channel") {
+      return {
+        title: "Staff Channel Lock",
+        copy: "Staves need steady channel focus. Hold the current inside the gold lane and lock the cast core cleanly.",
+        action: "Lock Current"
+      };
+    }
+    if (mode === "spellbook-bind") {
+      return {
+        title: "Spellbook Page Bind",
+        copy: "Books want page seams aligned. Hit each page latch in order so the bound spells flip cleanly in combat.",
+        action: "Bind Page"
+      };
+    }
+    return {
+      title: "Artifact Seal Set",
+      copy: "Artifacts need precise seals. Catch the seal points as they orbit to keep curses, wards, and summons stable.",
+      action: "Seal Rune"
+    };
+  }
   if (frame?.family === "ranged") {
     if (mode === "bow-string") {
       return {
@@ -3858,6 +4641,7 @@ function forgeRatingLabel(score) {
 
 function createForgeGame(kind) {
   const mode = forgeGameModeForWeapon(kind) || kind;
+  const assist = forgeAssistProfile();
   const game = {
     mode,
     active: false,
@@ -3874,6 +4658,14 @@ function createForgeGame(kind) {
     timeLimit:
       mode === "short"
         ? 4.2
+        : mode === "wand-glyph"
+          ? 6.2
+          : mode === "staff-channel"
+            ? 6.4
+            : mode === "spellbook-bind"
+              ? 6.3
+              : mode === "artifact-seal"
+                ? 6.5
         : mode === "bow-string"
           ? 5.6
           : mode === "bolt-latch"
@@ -3896,6 +4688,7 @@ function createForgeGame(kind) {
     pips: [],
     laneIndex: 0
   };
+  game.timeLimit += assist.timeBonus;
 
   if (mode === "short") {
     game.pips = [0.18, 0.36, 0.52, 0.68, 0.84].map((position, index) => ({
@@ -3936,6 +4729,26 @@ function createForgeGame(kind) {
       phase: index * 1.1,
       hit: false
     }));
+  } else if (mode === "wand-glyph") {
+    game.pips = [0.18, 0.47, 0.76].map((position, index) => ({
+      id: index,
+      position,
+      phase: index * 1.2,
+      hit: false
+    }));
+  } else if (mode === "spellbook-bind") {
+    game.pips = [0.12, 0.82, 0.24, 0.7].map((position, index) => ({
+      id: index,
+      position,
+      hit: false
+    }));
+  } else if (mode === "artifact-seal") {
+    game.pips = [0.26, 0.5, 0.74].map((position, index) => ({
+      id: index,
+      position,
+      phase: index * 1.6,
+      hit: false
+    }));
   }
 
   return game;
@@ -3952,16 +4765,29 @@ function finishForgeMinigame() {
   const game = state.forgeGame;
   game.active = false;
   game.finished = true;
-  state.forge.forgeQuality = clamp(game.rating, 0.2, 1);
+  const assist = forgeAssistProfile();
+  state.forge.forgeQuality = clamp(game.rating + assist.qualityBonus, 0.2, 1);
+  awardForgeXp(Math.round(8 + state.forge.forgeQuality * 10), "Forge run finished");
   renderForge();
 }
 
 function startForgeMinigame() {
+  const requiredStationId = stationRequiredForForge(state.forge);
+  if (state.forgeRoom.activeStationId !== requiredStationId) {
+    const station = forgeStationCatalog[requiredStationId];
+    setMatchSummary(`Move to the ${station?.label || "right station"} before starting this forge drill.`);
+    renderForge();
+    return;
+  }
   state.forgeGame = createForgeGame(state.forge.frame);
   state.forgeGame.active = true;
   state.forgeGame.finished = false;
   state.forgeGame.rating = clamp(Number(state.forge.forgeQuality ?? 0.5), 0.2, 1);
   renderForge();
+}
+
+function forgeActionWindow(base) {
+  return base + forgeAssistProfile().windowBonus;
 }
 
 function handleForgeMinigameAction() {
@@ -3999,7 +4825,7 @@ function handleForgeMinigameAction() {
       return;
     }
     const error = Math.abs(game.indicator - target.position);
-    if (error <= 0.08) {
+    if (error <= forgeActionWindow(0.08)) {
       target.hit = true;
       game.hits += 1;
       game.streak += 1;
@@ -4025,7 +4851,7 @@ function handleForgeMinigameAction() {
       return;
     }
     const error = Math.abs(game.indicator - target.position);
-    if (error <= 0.07) {
+    if (error <= forgeActionWindow(0.07)) {
       target.hit = true;
       game.hits += 1;
       game.streak += 1;
@@ -4051,7 +4877,7 @@ function handleForgeMinigameAction() {
       return;
     }
     const error = Math.abs(game.indicator - target.position);
-    if (error <= 0.075) {
+    if (error <= forgeActionWindow(0.075)) {
       target.hit = true;
       game.hits += 1;
       game.streak += 1;
@@ -4115,7 +4941,7 @@ function handleForgeMinigameAction() {
   }
 
   if (game.mode === "reaper-hook") {
-    const target = game.pips.find((pip) => !pip.hit && Math.abs(game.indicator - pip.position) <= 0.08);
+    const target = game.pips.find((pip) => !pip.hit && Math.abs(game.indicator - pip.position) <= forgeActionWindow(0.08));
     if (target) {
       target.hit = true;
       game.hits += 1;
@@ -4136,7 +4962,7 @@ function handleForgeMinigameAction() {
   }
 
   if (game.mode === "rail-bore") {
-    const target = game.pips.find((pip) => !pip.hit && Math.abs(game.indicator - pip.position) <= 0.07);
+    const target = game.pips.find((pip) => !pip.hit && Math.abs(game.indicator - pip.position) <= forgeActionWindow(0.07));
     if (target) {
       target.hit = true;
       game.hits += 1;
@@ -4174,6 +5000,75 @@ function handleForgeMinigameAction() {
       game.progress = game.hits / activeLanes.length;
       game.rating = clamp(0.5 + game.progress * 0.34 + game.streak * 0.018, 0.2, 1);
       if (game.hits >= activeLanes.length) {
+        finishForgeMinigame();
+      }
+    } else {
+      game.misses += 1;
+      game.streak = 0;
+      game.rating = clamp(game.rating - 0.05, 0.2, 1);
+    }
+    renderForge();
+    return;
+  }
+
+  if (game.mode === "wand-glyph" || game.mode === "artifact-seal") {
+    const windowSize = game.mode === "wand-glyph" ? forgeActionWindow(0.08) : forgeActionWindow(0.09);
+    const target = game.pips.find((pip) => !pip.hit && Math.abs(game.indicator - pip.position) <= windowSize);
+    if (target) {
+      target.hit = true;
+      game.hits += 1;
+      game.streak += 1;
+      game.bestStreak = Math.max(game.bestStreak, game.streak);
+      game.progress = game.hits / game.pips.length;
+      game.rating = clamp(0.56 + game.progress * 0.32 + game.streak * 0.022, 0.2, 1);
+      if (game.hits >= game.pips.length) {
+        finishForgeMinigame();
+      }
+    } else {
+      game.misses += 1;
+      game.streak = 0;
+      game.rating = clamp(game.rating - 0.05, 0.2, 1);
+    }
+    renderForge();
+    return;
+  }
+
+  if (game.mode === "staff-channel") {
+    const inZone = game.indicator >= 0.42 - forgeActionWindow(0.04) && game.indicator <= 0.58 + forgeActionWindow(0.04);
+    const distanceFromCenter = Math.abs(game.indicator - 0.5);
+    if (inZone) {
+      game.hits += 1;
+      game.streak += 1;
+      game.bestStreak = Math.max(game.bestStreak, game.streak);
+      game.progress = game.hits / 3;
+      game.rating = clamp(0.58 + game.progress * 0.3 + game.streak * 0.02 - distanceFromCenter * 0.5, 0.2, 1);
+      if (game.hits >= 3) {
+        finishForgeMinigame();
+      }
+    } else {
+      game.misses += 1;
+      game.streak = 0;
+      game.rating = clamp(game.rating - 0.06, 0.2, 1);
+    }
+    renderForge();
+    return;
+  }
+
+  if (game.mode === "spellbook-bind") {
+    const target = game.pips.find((pip) => !pip.hit);
+    if (!target) {
+      finishForgeMinigame();
+      return;
+    }
+    const error = Math.abs(game.indicator - target.position);
+    if (error <= forgeActionWindow(0.075)) {
+      target.hit = true;
+      game.hits += 1;
+      game.streak += 1;
+      game.bestStreak = Math.max(game.bestStreak, game.streak);
+      game.progress = game.hits / game.pips.length;
+      game.rating = clamp(0.56 + game.progress * 0.34 + game.streak * 0.02 - error * 0.42, 0.2, 1);
+      if (game.hits >= game.pips.length) {
         finishForgeMinigame();
       }
     } else {
@@ -4270,6 +5165,29 @@ function updateForgeMinigame(dt) {
       game.direction *= -1;
       game.indicator = clamp(game.indicator, 0.06, 0.94);
     }
+  } else if (game.mode === "wand-glyph" || game.mode === "artifact-seal") {
+    game.indicator += dt * 0.7;
+    if (game.indicator > 1.04) {
+      game.indicator = -0.04;
+    }
+    game.pips.forEach((pip) => {
+      if (pip.hit) {
+        return;
+      }
+      pip.position = clamp(0.5 + Math.sin(game.elapsed * (game.mode === "wand-glyph" ? 2.9 : 2.4) + pip.phase) * 0.3, 0.14, 0.86);
+    });
+  } else if (game.mode === "staff-channel") {
+    game.indicator += dt * 0.42 * game.direction;
+    if (game.indicator >= 0.92 || game.indicator <= 0.08) {
+      game.direction *= -1;
+      game.indicator = clamp(game.indicator, 0.08, 0.92);
+    }
+  } else if (game.mode === "spellbook-bind") {
+    game.indicator += dt * 0.94 * game.direction;
+    if (game.indicator >= 0.94 || game.indicator <= 0.06) {
+      game.direction *= -1;
+      game.indicator = clamp(game.indicator, 0.06, 0.94);
+    }
   } else {
     game.pips.forEach((pip) => {
       if (pip.hit) {
@@ -4300,24 +5218,33 @@ function updateForgeMinigame(dt) {
 
 function syncForgeSelectors() {
   state.forge = normalizeForgeState(state.forge);
-  populateSelect(ui.familySelect, weaponFamilyCatalog);
+  const forgeLevel = currentForgeProgress().level;
+  populateSelect(ui.familySelect, unlockedFamilyCatalog(forgeLevel));
   ui.familySelect.value = state.forge.family;
   populateSelect(ui.classSelect, kindCatalogForFamily(state.forge.family));
   ui.classSelect.value = state.forge.kind;
   populateSelect(ui.frameSelect, frameCatalogForKind(state.forge.kind));
   ui.frameSelect.value = state.forge.frame;
-  populateSelect(ui.materialSelect, materialCatalog);
+  populateSelect(ui.materialSelect, unlockedMaterialCatalog(forgeLevel));
   ui.materialSelect.value = state.forge.material;
+  populateSelect(ui.enchantSelect, enchantUnlocked(forgeLevel) ? enchantCatalog : { none: enchantCatalog.none });
+  ui.enchantSelect.value = state.forge.enchant;
+  ui.enchantSelect.disabled = !enchantUnlocked(forgeLevel) || state.forge.family === "magic";
   ui.edgeSelect.innerHTML = `<option value="class-special">Built-In Weapon Trait</option>`;
   ui.edgeSelect.disabled = true;
   ui.edgeSelect.value = "class-special";
 
   const frame = frameCatalog[state.forge.frame] || frameCatalog.saber;
   const ranged = isRangedWeapon(frame);
+  const magic = isMagicWeapon(frame);
   if (ui.ammoWorkshop) {
     ui.ammoWorkshop.hidden = !ranged;
   }
+  if (ui.magicWorkshop) {
+    ui.magicWorkshop.hidden = !magic;
+  }
   ui.styleLabel.hidden = true;
+  ui.enchantLabel.hidden = state.forge.family === "magic";
   ui.impactChambersLabel.hidden = !ranged;
   ui.impactMountLabel.hidden = !ranged;
   ui.impactTypeLabel.hidden = !ranged;
@@ -4335,7 +5262,7 @@ function syncForgeSelectors() {
     const headCatalog = tipCatalogForFrame(frame);
     populateSelect(
       ui.impactChambers,
-      Object.fromEntries(Array.from({ length: Math.max(1, frame.chamberMax || 1) }, (_, index) => {
+      Object.fromEntries(Array.from({ length: Math.min(maxImpactChambersForLevel(forgeLevel), Math.max(1, frame.chamberMax || 1)) }, (_, index) => {
         const value = `${index + 1}`;
         return [value, { label: `${value}` }];
       }))
@@ -4369,6 +5296,17 @@ function syncForgeSelectors() {
       }))
     );
     ui.preloadAmmo.value = `${Math.min(state.forge.preloadAmmo, maxLoaded)}`;
+  }
+
+  if (magic) {
+    populateSelect(ui.magicElement, magicElementCatalog);
+    populateSelect(ui.magicPattern, magicPatternsForKind(frame.kind));
+    populateSelect(ui.magicFocus, magicFocusOptionsForKind(frame.kind));
+    populateSelect(ui.magicPage, magicPageCatalog);
+    ui.magicElement.value = state.forge.magicElement;
+    ui.magicPattern.value = state.forge.magicPattern;
+    ui.magicFocus.value = state.forge.magicFocus;
+    ui.magicPage.value = state.forge.magicPage;
   }
 
   ui.weaponName.value = state.forge.name;
@@ -4470,6 +5408,8 @@ function renderControlGuide() {
   const rivalName = selectedRivalName();
   const activeWeapon = state.match?.playerWeapon || weaponById(state.activeWeaponId) || currentBlueprint();
   const ranged = isRangedWeapon(activeWeapon);
+  const magic = isMagicWeapon(activeWeapon);
+  const projectileWeapon = usesProjectileCombat(activeWeapon);
   let cards = [];
 
   if (mode === "mobile") {
@@ -4477,14 +5417,18 @@ function renderControlGuide() {
       {
         kicker: "Selected Device",
         title: "Mobile Controller Deck",
-        body: ranged
+        body: magic
+          ? "Use the left D-pad cluster to move, jump, and crouch. Use the right face buttons like a controller: A casts, X blocks or flips spellbook pages, B backsteps, Y dashes, R1 refocuses mana, and Start pauses."
+          : ranged
           ? "Use the left D-pad cluster to move, jump, and crouch. Use the right face buttons like a controller: A fires, X blocks or parries on timing, B backsteps, Y dashes, R1 reloads, and Start pauses."
           : "Use the left D-pad cluster to move, jump, and crouch. Use the right face buttons like a controller: A attacks, X blocks or parries on timing, B backsteps, Y dashes, and Start pauses."
       },
       {
         kicker: "Arena Tip",
-        title: ranged ? "Touch fire is controller-like" : "Touch play is controller-like",
-        body: ranged
+        title: magic ? "Touch casting is controller-like" : ranged ? "Touch fire is controller-like" : "Touch play is controller-like",
+        body: magic
+          ? `Mobile magic aim still leans toward ${rivalName}, so focus on spacing and cast timing. Wands stack rune clicks before the spell comes out, spellbooks flip pages with X, and artifacts drop heavier field magic.`
+          : ranged
           ? `Mobile ranged aim still leans toward ${rivalName}, so focus on spacing while the A button keeps pressure on. Use R1 whenever the magazine runs dry, and remember that shots can now clash or get cut.`
           : `Mobile aim still leans toward ${rivalName}, so focus on spacing, guarding, and timing instead of dragging the weapon by hand. Clean melee lines now cut shots into weak bursts.`
       }
@@ -4494,14 +5438,18 @@ function renderControlGuide() {
       {
         kicker: "Selected Device",
         title: "Controller Layout",
-        body: ranged
+        body: magic
+          ? "Move with left stick or D-pad, aim with right stick, A jumps, RT or X casts, LT or LB blocks, B dodges, Y or RB dashes, and click the left stick to refocus mana. Spellbooks swap pages on block taps."
+          : ranged
           ? "Move with left stick or D-pad, aim with right stick, A jumps, RT or X fires, LT or LB blocks or parries on timing, B dodges, Y or RB dashes, and click the left stick to reload."
           : "Move with left stick or D-pad, aim with right stick, A jumps, RT or X attacks, LT or LB blocks or parries on timing, B dodges, and Y or RB dashes."
       },
       {
         kicker: "Arena Tip",
-        title: ranged ? "Use both sticks and reload" : "Use both sticks",
-        body: ranged
+        title: magic ? "Aim and cast rhythm" : ranged ? "Use both sticks and reload" : "Use both sticks",
+        body: magic
+          ? `The left stick moves your fighter while the right stick points casts toward ${rivalName}. Wand routes build rune points before releasing, and spellbooks let you rotate through pages mid-fight.`
+          : ranged
           ? `The left stick moves your fighter while the right stick points shots toward ${rivalName}. If you stop aiming, ranged assist still leans your fire toward the rival, but shots can now clash or get cut by a strong parry lane.`
           : `The left stick moves your fighter while the right stick points your weapon toward ${rivalName}. You can now cut incoming shots with a clean swing or parry line.`
       }
@@ -4511,14 +5459,18 @@ function renderControlGuide() {
       {
         kicker: "Selected Device",
         title: "PC Mouse And Keys",
-        body: ranged
+        body: magic
+          ? "A and D move, W jumps, S crouches, left click casts, right click blocks or flips spellbook pages, Q backsteps, E dashes, and R refocuses mana."
+          : ranged
           ? "A and D move, W jumps, S crouches, hold left click to fire, right click blocks or parries, Q backsteps, E dashes, and R reloads."
           : "A and D move, W jumps, S crouches, left click throws a jab, right click blocks or parries, Q backsteps, and E dashes."
       },
       {
         kicker: "Arena Tip",
-        title: ranged ? "Mouse points the barrel" : "Mouse controls the weapon",
-        body: ranged
+        title: magic ? "Mouse guides the cast" : ranged ? "Mouse points the barrel" : "Mouse controls the weapon",
+        body: magic
+          ? `Keep the mouse pointed at ${rivalName}. Wands place rune points with each click, spellbooks cast the current page and flip on right click, and artifacts lean harder into curses, wards, or undead pressure.`
+          : ranged
           ? `Keep the mouse on ${rivalName}, hold fire for steady shots, and tap R before the magazine empties if you want cleaner pressure. Mid-air shot clashes and blade cuts now punish lazy spam.`
           : `Keep the mouse pointed at ${rivalName} while you move so your jab line and freeform weapon drags stay on target. Clean swings and parry timing now cut shots into weak bursts.`
       }
@@ -5059,11 +6011,16 @@ function forgeBlueprintFromWeapon(weapon) {
   return {
     id: weapon?.id || makeId("weapon"),
     name: String(weapon?.name || "Ashbite").trim().slice(0, 12) || "Ashbite",
-    family: isRangedWeapon(weapon) ? "ranged" : "melee",
+    family: isMagicWeapon(weapon) ? "magic" : isRangedWeapon(weapon) ? "ranged" : "melee",
     kind: frameCatalog[weapon?.frameId]?.kind || weapon?.kind || "medium",
     frame: weapon?.frameId || weapon?.frame || "saber",
     material: weapon?.materialId || weapon?.material || "sunsteel",
     edge: weapon?.edgeId || weapon?.edge || "duelist",
+    enchant: weapon?.enchant || "none",
+    magicElement: weapon?.magicElement || "ember",
+    magicPattern: weapon?.magicPattern || "lance",
+    magicFocus: weapon?.magicFocus || "freehand",
+    magicPage: weapon?.magicPage || "ember",
     impactChambers: weapon?.impactChambers || 1,
     impactMount: weapon?.impactMount || defaultImpactMountForFrame(frame),
     impactType: weapon?.impactType || defaultImpactTypeForFrame(frame),
@@ -5128,6 +6085,8 @@ function saveProgressState() {
       "stickforge-progress",
       JSON.stringify({
         forge: state.forge,
+        forgeProgress: state.forgeProgress,
+        forgeRoom: state.forgeRoom,
         ammoRack: state.ammoRack,
         armory: state.armory,
         activeWeaponId: state.activeWeaponId,
@@ -5149,6 +6108,18 @@ function loadProgressState(savedProgress) {
   }
   if (savedProgress.forge) {
     state.forge = normalizeForgeState(savedProgress.forge);
+  }
+  if (savedProgress.forgeProgress) {
+    state.forgeProgress = ensureForgeProgress(savedProgress.forgeProgress);
+  }
+  if (savedProgress.forgeRoom && typeof savedProgress.forgeRoom === "object") {
+    state.forgeRoom = {
+      ...state.forgeRoom,
+      x: clamp(Number(savedProgress.forgeRoom.x ?? state.forgeRoom.x), 0.08, 0.92),
+      y: clamp(Number(savedProgress.forgeRoom.y ?? state.forgeRoom.y), 0.26, 0.82),
+      activeStationId: forgeStationCatalog[savedProgress.forgeRoom.activeStationId] ? savedProgress.forgeRoom.activeStationId : "anvil",
+      nearestStationId: forgeStationCatalog[savedProgress.forgeRoom.nearestStationId] ? savedProgress.forgeRoom.nearestStationId : "anvil"
+    };
   }
   if (Array.isArray(savedProgress.ammoRack)) {
     state.ammoRack = savedProgress.ammoRack.map(cloneAmmoRecipe).filter(Boolean);
@@ -5810,6 +6781,28 @@ function startTutorial() {
   renderTutorialPanel();
 }
 
+function tutorialStepSatisfied(stepId, input, match) {
+  if (stepId === "move") {
+    return Boolean(input.left || input.right);
+  }
+  if (stepId === "air") {
+    return Boolean(input.jumpPressed || input.crouch);
+  }
+  if (stepId === "attack") {
+    return Boolean(input.attackPressed);
+  }
+  if (stepId === "block") {
+    return Boolean(input.block);
+  }
+  if (stepId === "mobility") {
+    return Boolean(input.dodgePressed || input.slidePressed);
+  }
+  if (stepId === "hit") {
+    return statsForTeam(match, PLAYER_TEAM).hits > 0;
+  }
+  return false;
+}
+
 function updateTutorialProgress(input, match) {
   if (!state.tutorial.active) {
     return;
@@ -5817,41 +6810,38 @@ function updateTutorialProgress(input, match) {
 
   const progress = state.tutorial.progress;
   const steps = tutorialSteps();
-  const currentStep = steps[state.tutorial.stepIndex];
+  const previousCompletedCount = steps.filter((step) => progress[step.id]).length;
+  const previousCurrentStep = steps[state.tutorial.stepIndex] || steps[0];
 
-  if (!currentStep) {
-    return;
-  }
+  steps.forEach((step) => {
+    if (!progress[step.id] && tutorialStepSatisfied(step.id, input, match)) {
+      progress[step.id] = true;
+    }
+  });
 
-  let completedStep = false;
-  if (currentStep.id === "move") {
-    completedStep = input.left || input.right;
-  } else if (currentStep.id === "air") {
-    completedStep = input.jumpPressed || input.crouch;
-  } else if (currentStep.id === "attack") {
-    completedStep = input.attackPressed;
-  } else if (currentStep.id === "block") {
-    completedStep = input.block;
-  } else if (currentStep.id === "mobility") {
-    completedStep = input.dodgePressed || input.slidePressed;
-  } else if (currentStep.id === "hit") {
-    completedStep = statsForTeam(match, PLAYER_TEAM).hits > 0;
-  }
+  const completedCount = steps.filter((step) => progress[step.id]).length;
+  const nextStepIndex = steps.findIndex((step) => !progress[step.id]);
 
-  if (completedStep) {
-    progress[currentStep.id] = true;
-    state.tutorial.stepIndex += 1;
-
-    if (state.tutorial.stepIndex >= steps.length) {
+  if (completedCount >= steps.length) {
+    state.tutorial.stepIndex = steps.length;
+    if (!state.tutorial.completed) {
       state.tutorial.promptSeen = true;
       state.tutorial.completed = true;
       saveSettingsState();
       setMatchSummary("Tutorial complete. Keep practicing here or open the forge screen when you're ready.");
       pushFightEvent(match, "Tutorial Clear", "You cleared the basics. The arena is yours now.", "impact");
-    } else {
+    }
+  } else {
+    state.tutorial.stepIndex = Math.max(0, nextStepIndex);
+    if (completedCount > previousCompletedCount) {
       const nextStep = steps[state.tutorial.stepIndex];
-      setMatchSummary(`${currentStep.title} complete. Next: ${nextStep.title}.`);
-      pushFightEvent(match, "Tutorial Step", `${currentStep.title} complete. Follow the new highlighted step: ${nextStep.title.toLowerCase()}.`, "control");
+      setMatchSummary(`${previousCurrentStep.title} checked off. Next: ${nextStep.title}.`);
+      pushFightEvent(
+        match,
+        "Tutorial Step",
+        `${previousCurrentStep.title} checked off. Follow the highlighted step: ${nextStep.title.toLowerCase()}.`,
+        "control"
+      );
     }
   }
 
@@ -6640,6 +7630,7 @@ function buildWeaponFromForge(forge) {
   const frame = frameCatalog[safeForge.frame] || frameCatalog.katana;
   const material = materialCatalog[safeForge.material] || materialCatalog.sunsteel;
   const isRanged = frame.family === "ranged";
+  const isMagic = frame.family === "magic";
   const usesStyle = false;
   const edge =
     {
@@ -6658,6 +7649,327 @@ function buildWeaponFromForge(forge) {
   const forgeQuality = clamp(Number(safeForge.forgeQuality ?? 0.5), 0.2, 1);
   const forgeDelta = forgeQuality - 0.5;
   const heatScale = heat / 100;
+
+  if (isMagic) {
+    const element = magicElementCatalog[safeForge.magicElement] || magicElementCatalog.ember;
+    const pattern = magicPatternCatalog[safeForge.magicPattern] || magicPatternCatalog[defaultMagicPatternForKind(frame.kind)];
+    const focus = magicFocusCatalog[safeForge.magicFocus] || magicFocusCatalog.freehand;
+    const page = magicPageCatalog[safeForge.magicPage] || magicPageCatalog[defaultMagicPageForKind(frame.kind)];
+    const clipSize = Math.max(3, Number(frame.manaMax || 5));
+    let damage = clamp(Math.round(frame.damage + material.damage + heatScale * 3 + forgeDelta * 5), 11, 42);
+    const reach = clamp(Math.round(frame.range + material.reach * 10), 320, 600);
+    let projectileSpeed = clamp(Math.round(frame.projectileSpeed + material.speed * 120 + forgeDelta * 120), 600, 1180);
+    let cooldown = clamp(Number((frame.cooldown + material.cooldown - forgeDelta * 0.05).toFixed(2)), 0.24, 0.9);
+    let reloadTime = clamp(Number((0.58 + frame.weight * 0.02 - forgeDelta * 0.08).toFixed(2)), 0.38, 1.1);
+    let knockback = clamp(Number((frame.knockback + material.knockback + forgeDelta * 0.08).toFixed(2)), 0.82, 1.8);
+    let weight = clamp(Number((frame.weight + material.weight + heatScale * 2 - forgeDelta * 1.4).toFixed(1)), 3, 18);
+    let moveScale = clamp(Number((frame.moveScale + material.moveScale + forgeDelta * 0.04).toFixed(2)), 0.78, 1.18);
+    let speed = clamp(Number((frame.speed + material.speed + forgeDelta * 0.08).toFixed(2)), 0.78, 1.32);
+    let fireModeLabel = "Arcane Cast";
+    let burstCount = 1;
+    let burstSpread = 0;
+    let burstDamageScale = 1;
+    let blockBreak = 5;
+    let projectilePierce = 0;
+    let homingStrength = 0;
+    let redirectCharges = 0;
+    let blizzardTrail = false;
+    let emberTrail = false;
+    let stormTrail = false;
+    let spiralCount = 0;
+    let pullImpact = false;
+    let scatterImpact = false;
+    let explosiveBoost = 0;
+    let shockCount = 0;
+    let poisonCount = 0;
+    let portalCount = 0;
+    let slowCount = 0;
+    let ruptureCount = 0;
+    let delayedImpact = false;
+    let spellRole = "";
+
+    switch (element.label) {
+      case "Ember":
+        emberTrail = true;
+        explosiveBoost += 0.1;
+        damage = clamp(damage + 2, 11, 42);
+        spellRole = "burn bursts";
+        break;
+      case "Frost":
+        blizzardTrail = true;
+        slowCount += 2;
+        projectileSpeed = clamp(projectileSpeed - 30, 600, 1180);
+        spellRole = "slow pressure";
+        break;
+      case "Storm":
+        stormTrail = true;
+        shockCount += 2;
+        projectileSpeed = clamp(projectileSpeed + 20, 600, 1180);
+        spellRole = "shock control";
+        break;
+      case "Void":
+        portalCount += 2;
+        redirectCharges += 1;
+        spellRole = "phase cuts";
+        break;
+      case "Grave":
+        poisonCount += 2;
+        ruptureCount += 1;
+        spellRole = "curse pressure";
+        break;
+      case "Radiance":
+        blockBreak += 2;
+        knockback = clamp(knockback + 0.08, 0.82, 1.8);
+        spellRole = "ward bursts";
+        break;
+      default:
+        break;
+    }
+
+    switch (safeForge.magicPattern) {
+      case "lance":
+        fireModeLabel = "Spell Lance";
+        projectilePierce += 1;
+        projectileSpeed = clamp(projectileSpeed + 24, 600, 1180);
+        break;
+      case "nova":
+        fireModeLabel = "Nova Cast";
+        scatterImpact = true;
+        explosiveBoost += 0.08;
+        break;
+      case "cyclone":
+        fireModeLabel = "Cyclone Cast";
+        burstCount = frame.kind === "staff" ? 2 : 1;
+        burstSpread = 0.03;
+        burstDamageScale = 0.82;
+        spiralCount += 1;
+        stormTrail = true;
+        break;
+      case "rift":
+        fireModeLabel = "Rift Cast";
+        portalCount += 1;
+        redirectCharges += 1;
+        break;
+      case "grave":
+        fireModeLabel = "Gravebind Cast";
+        poisonCount += 1;
+        ruptureCount += 1;
+        delayedImpact = true;
+        break;
+      case "ward":
+        fireModeLabel = "Ward Cast";
+        blockBreak += 2;
+        knockback = clamp(knockback + 0.06, 0.82, 1.8);
+        break;
+      default:
+        break;
+    }
+
+    if (frame.kind === "wand") {
+      fireModeLabel = "Glyph Cast";
+      speed = clamp(speed + 0.06, 0.78, 1.32);
+      moveScale = clamp(moveScale + 0.04, 0.78, 1.18);
+      if (safeForge.magicFocus === "spellbook") {
+        damage = clamp(damage + 1, 11, 42);
+        stormTrail = stormTrail || safeForge.magicPage === "cyclone";
+      }
+    } else if (frame.kind === "staff") {
+      fireModeLabel = "Channel Cast";
+      blockBreak += 2;
+      knockback = clamp(knockback + 0.08, 0.82, 1.8);
+      projectileSpeed = clamp(projectileSpeed + 12, 600, 1180);
+    } else if (frame.kind === "spellbook") {
+      fireModeLabel = "Page Cast";
+      burstCount = safeForge.magicPage === "cyclone" ? 2 : burstCount;
+      burstSpread = safeForge.magicPage === "cyclone" ? 0.022 : burstSpread;
+      burstDamageScale = safeForge.magicPage === "cyclone" ? 0.78 : burstDamageScale;
+      if (safeForge.magicPage === "grave") {
+        poisonCount += 1;
+      } else if (safeForge.magicPage === "frost") {
+        slowCount += 1;
+      } else if (safeForge.magicPage === "ward") {
+        blockBreak += 2;
+      }
+    } else if (frame.kind === "artifact") {
+      fireModeLabel = "Relic Cast";
+      cooldown = clamp(cooldown + 0.06, 0.24, 0.9);
+      blockBreak += 2;
+      if (safeForge.magicPattern === "grave") {
+        ruptureCount += 2;
+      }
+      if (safeForge.magicPattern === "ward") {
+        portalCount += 1;
+      }
+    }
+
+    const pageCycle = [safeForge.magicPage, ...Object.keys(magicPageCatalog).filter((id) => id !== safeForge.magicPage)].slice(0, 4);
+    const glyphGuide =
+      safeForge.magicFocus === "spellbook"
+        ? "Bound spellbook focus feeds guide points into wand routes, so high-class spells come out from shorter glyph chains."
+        : safeForge.magicFocus === "artifact"
+          ? "Artifact focus skews the cast toward seals, curses, and field pressure."
+          : "Freehand focus keeps the full raw gesture path in your own hand.";
+    const abilitySummary = `${frame.special?.summary || ""} ${pattern.summary} ${glyphGuide}`.trim();
+    const forgeSummary =
+      forgeQuality >= 0.9
+        ? "Masterbound finish: cleaner casts, lighter mana recovery, and stronger spell control."
+        : forgeQuality >= 0.76
+          ? "Tempered arcane finish: stable routes and cleaner spell timing."
+          : forgeQuality >= 0.58
+            ? "Field-ready arcane finish: reliable enough for live spell fights."
+            : forgeQuality >= 0.42
+              ? "Rough arcane finish: the runes are usable, but the spell path feels loose."
+              : "Crude arcane finish: the bound route is unstable and drains too much control.";
+    const heatSummary =
+      heat >= 70
+        ? "High forge heat makes the focus harsher and stronger. Spells hit harder but the tool feels heavier."
+        : heat >= 40
+          ? "Mid forge heat keeps the magic stable while still adding extra spell power."
+          : "Lower forge heat keeps the focus lighter and easier to control.";
+    const impactLabel = `${element.label} ${pattern.label}`;
+    const ammoPrototype = {
+      id: makeId("mana"),
+      name: `${element.label} ${pattern.label}`,
+      ammoFamily: "mana",
+      impactChambers: 1,
+      impactMount: "sigil",
+      impactMountLabel: `${element.label} Sigil`,
+      chamberImpacts: [safeForge.magicElement],
+      impactTypes: [safeForge.magicElement],
+      impactLabel,
+      launchType: safeForge.magicPattern,
+      launchLabel: pattern.label,
+      midAirAddons: [safeForge.magicFocus].filter(Boolean),
+      midAirLabel: focus.label,
+      tipType: safeForge.magicPage,
+      tipLabel: page.label,
+      quality: forgeQuality,
+      qualityLabel: forgeRatingLabel(forgeQuality),
+      damageBonus: 4 + (safeForge.magicFocus === "spellbook" ? 1 : 0),
+      speedBonus: 60,
+      knockbackBonus: 0.08,
+      blockBreakBonus: blockBreak,
+      projectilePierceBonus: projectilePierce,
+      delayedImpact,
+      homingStrength,
+      redirectCharges,
+      blizzardTrail,
+      emberTrail,
+      stormTrail,
+      spiralCount,
+      pullImpact,
+      scatterImpact,
+      explosiveBoost,
+      shockCount,
+      poisonCount,
+      portalCount,
+      slowCount,
+      ruptureCount,
+      summary: `${impactLabel} | ${focus.label} | ${page.label}. ${pattern.summary}`
+    };
+
+    return {
+      id: safeForge.id || makeId("weapon"),
+      name: safeForge.name.trim().slice(0, 12) || "Runebound",
+      frameId: safeForge.frame,
+      frame: frame.label,
+      classLabel: frame.classLabel,
+      kind: frame.kind,
+      family: "magic",
+      materialId: safeForge.material,
+      material: material.label,
+      edgeId: safeForge.magicPattern,
+      edge: pattern.label,
+      usesStyle: false,
+      enchant: "none",
+      heat,
+      forgeQuality,
+      forgeQualityLabel: forgeRatingLabel(forgeQuality),
+      weight,
+      damage,
+      reach,
+      speed,
+      cooldown,
+      knockback,
+      arc: frame.arc,
+      moveScale,
+      color: element.color,
+      frameSummary: frame.summary,
+      frameDesign: frame.design,
+      materialSummary: material.summary,
+      edgeSummary: `${pattern.label} route | ${focus.label} | ${page.label}`,
+      heatSummary,
+      forgeSummary,
+      styleText: `${frame.classLabel} magic | ${element.label} | ${fireModeLabel}`,
+      abilitySummary,
+      specialType: frame.special?.type || "magic-cast",
+      executeThreshold: 0,
+      backstabBonus: 1,
+      stealthOpacity: 1,
+      ammoType: "mana",
+      clipSize,
+      preloadAmmo: clipSize,
+      impactChambers: 1,
+      impactMount: "sigil",
+      impactMountLabel: `${element.label} Sigil`,
+      chamberImpacts: [safeForge.magicElement],
+      impactType: safeForge.magicElement,
+      impactTypes: [safeForge.magicElement],
+      impactLabel,
+      launchType: safeForge.magicPattern,
+      launchLabel: pattern.label,
+      midAirType: safeForge.magicFocus,
+      midAirAddons: [safeForge.magicFocus].filter(Boolean),
+      midAirLabel: focus.label,
+      tipType: safeForge.magicPage,
+      tipLabel: page.label,
+      projectileSpeed,
+      reloadTime,
+      projectileRange: reach,
+      ammoLabel: `${clipSize}/${clipSize} mana`,
+      ammoPrototype,
+      ammoCaseRounds: Array.from({ length: clipSize }, () => ({ ...ammoPrototype, chamberImpacts: [...ammoPrototype.chamberImpacts], impactTypes: [...ammoPrototype.impactTypes], midAirAddons: [...ammoPrototype.midAirAddons] })),
+      ammoCaseIds: [],
+      ammoCaseSummary: `${impactLabel} x${clipSize}`,
+      blockBreak,
+      projectilePierce,
+      delayedImpact,
+      homingStrength,
+      redirectShot: redirectCharges > 0,
+      redirectCharges,
+      blizzardTrail,
+      emberTrail,
+      stormTrail,
+      spiralFlight: spiralCount > 0,
+      spiralCount,
+      scatterImpact,
+      pullImpact,
+      explosiveBoost,
+      shockCount,
+      poisonCount,
+      portalCount,
+      slowCount,
+      ruptureCount,
+      burstCount,
+      burstSpread,
+      burstDamageScale,
+      projectileGlow: element.color,
+      fireModeLabel,
+      magicElement: safeForge.magicElement,
+      magicElementLabel: element.label,
+      magicPattern: safeForge.magicPattern,
+      magicPatternLabel: pattern.label,
+      magicFocus: safeForge.magicFocus,
+      magicFocusLabel: focus.label,
+      magicPage: safeForge.magicPage,
+      magicPageLabel: page.label,
+      glyphAssist: safeForge.magicFocus === "spellbook",
+      spellPages: pageCycle,
+      lore:
+        `${frame.label} bound with ${material.label.toLowerCase()}, ${element.label.toLowerCase()} power, ${pattern.label.toLowerCase()} routing, ` +
+        `${focus.label.toLowerCase()}, and a ${page.label.toLowerCase()} binding. It leans into ${spellRole || "arcane pressure"}. ${forgeSummary}`
+    };
+  }
 
   if (isRanged) {
     const ammoPrototype = buildAmmoRecipeFromForge(safeForge, frame);
@@ -7960,8 +9272,356 @@ function renderAmmoWorkshop(weapon) {
   `;
 }
 
+function renderMagicPreview(weapon) {
+  if (!magicPreviewCtx || !ui.magicPreview) {
+    return;
+  }
+  magicPreviewCtx.clearRect(0, 0, ui.magicPreview.width, ui.magicPreview.height);
+  const element = magicElementCatalog[weapon.magicElement] || magicElementCatalog.ember;
+  const centerX = ui.magicPreview.width * 0.5;
+  const centerY = ui.magicPreview.height * 0.52;
+  const pulse = (Math.sin(performance.now() * 0.0032) + 1) * 0.5;
+
+  magicPreviewCtx.fillStyle = "rgba(255,255,255,0.04)";
+  magicPreviewCtx.fillRect(0, 0, ui.magicPreview.width, ui.magicPreview.height);
+  magicPreviewCtx.fillStyle = `${element.color}22`;
+  magicPreviewCtx.beginPath();
+  magicPreviewCtx.arc(centerX, centerY, 54 + pulse * 10, 0, Math.PI * 2);
+  magicPreviewCtx.fill();
+
+  magicPreviewCtx.strokeStyle = element.color;
+  magicPreviewCtx.lineWidth = 5;
+  if (weapon.kind === "wand") {
+    magicPreviewCtx.beginPath();
+    magicPreviewCtx.moveTo(centerX - 78, centerY + 20);
+    magicPreviewCtx.lineTo(centerX + 16, centerY - 12);
+    magicPreviewCtx.stroke();
+    magicPreviewCtx.beginPath();
+    magicPreviewCtx.arc(centerX + 26, centerY - 16, 14, 0, Math.PI * 2);
+    magicPreviewCtx.stroke();
+  } else if (weapon.kind === "staff") {
+    magicPreviewCtx.beginPath();
+    magicPreviewCtx.moveTo(centerX - 92, centerY + 28);
+    magicPreviewCtx.lineTo(centerX + 90, centerY - 28);
+    magicPreviewCtx.stroke();
+    magicPreviewCtx.beginPath();
+    magicPreviewCtx.arc(centerX + 78, centerY - 36, 12 + pulse * 4, 0, Math.PI * 2);
+    magicPreviewCtx.stroke();
+  } else if (weapon.kind === "spellbook") {
+    magicPreviewCtx.strokeRect(centerX - 56, centerY - 34, 112, 68);
+    magicPreviewCtx.beginPath();
+    magicPreviewCtx.moveTo(centerX, centerY - 34);
+    magicPreviewCtx.lineTo(centerX, centerY + 34);
+    magicPreviewCtx.stroke();
+  } else {
+    magicPreviewCtx.beginPath();
+    magicPreviewCtx.moveTo(centerX - 40, centerY);
+    magicPreviewCtx.lineTo(centerX, centerY - 46);
+    magicPreviewCtx.lineTo(centerX + 40, centerY);
+    magicPreviewCtx.lineTo(centerX, centerY + 46);
+    magicPreviewCtx.closePath();
+    magicPreviewCtx.stroke();
+  }
+
+  magicPreviewCtx.fillStyle = "#f4efe7";
+  magicPreviewCtx.font = "700 12px 'Trebuchet MS', sans-serif";
+  magicPreviewCtx.fillText(`${weapon.magicElementLabel} | ${weapon.magicPatternLabel}`, 18, 24);
+  magicPreviewCtx.fillText(`${weapon.magicFocusLabel} | ${weapon.magicPageLabel}`, 18, ui.magicPreview.height - 18);
+}
+
+function renderMagicWorkshop(weapon) {
+  if (!ui.magicWorkshop || !isMagicWeapon(weapon)) {
+    return;
+  }
+
+  const element = magicElementCatalog[weapon.magicElement] || magicElementCatalog.ember;
+  const pattern = magicPatternCatalog[weapon.magicPattern] || magicPatternCatalog.lance;
+  const focus = magicFocusCatalog[weapon.magicFocus] || magicFocusCatalog.freehand;
+  const page = magicPageCatalog[weapon.magicPage] || magicPageCatalog.ember;
+  const boundBookText =
+    weapon.kind === "wand" && weapon.glyphAssist
+      ? "Bound spellbook focus is active: high-class wand routes need fewer clean points before the strong cast comes out."
+      : weapon.kind === "spellbook"
+        ? "Block flips the bound page in combat, so each page cast changes the spell."
+        : weapon.kind === "artifact"
+          ? "Artifact casts lean harder into seals, curses, and field summons than direct bolts."
+          : "Staff channels hold a cleaner lane and throw heavier elemental control spells.";
+
+  ui.magicWorkshopFamily.textContent = `${weapon.classLabel} Craft`;
+  ui.magicWorkshopNote.textContent =
+    `${weapon.frame} is using ${element.label.toLowerCase()} power through the ${pattern.label.toLowerCase()} route. ${boundBookText}`;
+  renderMagicPreview(weapon);
+  ui.magicSummary.innerHTML = `
+    <div class="ammo-summary-grid">
+      <div class="ammo-summary-chip">
+        <span>Element</span>
+        <strong>${element.label}</strong>
+      </div>
+      <div class="ammo-summary-chip">
+        <span>Route</span>
+        <strong>${pattern.label}</strong>
+      </div>
+      <div class="ammo-summary-chip">
+        <span>Focus</span>
+        <strong>${focus.label}</strong>
+      </div>
+      <div class="ammo-summary-chip">
+        <span>Page</span>
+        <strong>${page.label}</strong>
+      </div>
+    </div>
+    <p>${weapon.abilitySummary}</p>
+  `;
+
+  const featureRows = [
+    {
+      title: "Element Role",
+      copy: element.summary
+    },
+    {
+      title: "Spell Route",
+      copy: pattern.summary
+    },
+    {
+      title: "Focus Rule",
+      copy: focus.summary
+    },
+    {
+      title: "Page Rule",
+      copy: page.summary
+    }
+  ];
+  if (weapon.kind === "wand") {
+    featureRows.push({
+      title: "Gesture Cast",
+      copy: weapon.glyphAssist
+        ? "Move the wand with the mouse and click to place rune points. Bound spellbook focus makes strong routes easier to finish."
+        : "Move the wand with the mouse and click to place rune points. Three clean point chains cast the bound spell."
+    });
+  } else if (weapon.kind === "spellbook") {
+    featureRows.push({
+      title: "Page Switch",
+      copy: "Attack casts the current page. Block flips the book to the next bound page instead of raising a full normal guard."
+    });
+  } else if (weapon.kind === "artifact") {
+    featureRows.push({
+      title: "Relic Effect",
+      copy: "Artifacts summon zones, zombies, curses, or wards instead of fighting like a normal blade."
+    });
+  }
+  ui.magicSpellList.innerHTML = featureRows
+    .map(
+      (row) => `
+        <div class="token-item">
+          <div>
+            <strong>${row.title}</strong>
+            <p>${row.copy}</p>
+          </div>
+        </div>
+      `
+    )
+    .join("");
+}
+
+function forgeRoomStations() {
+  return {
+    anvil: { ...forgeStationCatalog.anvil, x: 0.16, y: 0.68, color: "#ff9c63" },
+    ammo: { ...forgeStationCatalog.ammo, x: 0.41, y: 0.62, color: "#89e6dc" },
+    arcane: { ...forgeStationCatalog.arcane, x: 0.67, y: 0.58, color: "#c6a9ff" },
+    enchant: { ...forgeStationCatalog.enchant, x: 0.84, y: 0.7, color: "#ffe08f" }
+  };
+}
+
+function nearestForgeStationId() {
+  const stations = forgeRoomStations();
+  const room = state.forgeRoom;
+  return Object.entries(stations)
+    .map(([id, station]) => ({
+      id,
+      distance: Math.hypot(room.x - station.x, room.y - station.y)
+    }))
+    .sort((left, right) => left.distance - right.distance)[0]?.id || "anvil";
+}
+
+function useForgeStation(stationId = nearestForgeStationId()) {
+  if (!forgeStationCatalog[stationId]) {
+    return;
+  }
+  state.forgeRoom.activeStationId = stationId;
+  state.forgeRoom.nearestStationId = stationId;
+  renderForge();
+  setMatchSummary(`${forgeStationCatalog[stationId].label} active. ${forgeStationCatalog[stationId].copy}`);
+}
+
+function cycleForgeStation() {
+  const stationIds = Object.keys(forgeStationCatalog);
+  const currentIndex = Math.max(0, stationIds.indexOf(state.forgeRoom.activeStationId));
+  useForgeStation(stationIds[(currentIndex + 1) % stationIds.length]);
+}
+
+function renderForgeProgress(weapon = currentBlueprint()) {
+  const progress = currentForgeProgress();
+  const levelMeta = forgeProgressionCatalog[progress.level] || forgeProgressionCatalog[1];
+  const xpToNext = progress.level >= FORGE_LEVEL_MAX ? 1 : forgeXpToNextLevel(progress.level);
+  const xpRatio = progress.level >= FORGE_LEVEL_MAX ? 1 : progress.xp / xpToNext;
+  const requiredStation = forgeStationCatalog[stationRequiredForForge(state.forge)] || forgeStationCatalog.anvil;
+  const assist = forgeAssistProfile();
+
+  if (ui.forgeLevelTag) {
+    ui.forgeLevelTag.textContent = `Forge Lv ${progress.level}`;
+  }
+  if (ui.forgeUpgradeBonus) {
+    ui.forgeUpgradeBonus.textContent = levelMeta.name;
+  }
+  if (ui.forgeXpFill) {
+    ui.forgeXpFill.style.width = `${Math.round(clamp(xpRatio * 100, 0, 100))}%`;
+  }
+  if (ui.forgeXpText) {
+    ui.forgeXpText.textContent = progress.level >= FORGE_LEVEL_MAX ? "Master Hall" : `${progress.xp} / ${xpToNext} XP`;
+  }
+  if (ui.forgeUpgradeCopy) {
+    ui.forgeUpgradeCopy.textContent =
+      `${levelMeta.name} is active. Current build wants the ${requiredStation.label}. ` +
+      `Forge ease bonus: +${Math.round(assist.windowBonus * 100)} timing and +${Math.round(assist.qualityBonus * 100)} finish.`;
+  }
+  if (ui.forgeUnlocks) {
+    ui.forgeUnlocks.innerHTML = levelMeta.unlocks
+      .map(
+        (unlock) => `
+          <div class="forge-unlock-chip">
+            <span>Unlocked</span>
+            <strong>${unlock}</strong>
+          </div>
+        `
+      )
+      .join("");
+  }
+}
+
+function renderForgeRoom() {
+  if (!forgeRoomCtx || !ui.forgeRoom) {
+    return;
+  }
+  const width = ui.forgeRoom.width;
+  const height = ui.forgeRoom.height;
+  const stations = forgeRoomStations();
+  state.forgeRoom.nearestStationId = nearestForgeStationId();
+  const nearest = stations[state.forgeRoom.nearestStationId];
+  const active = stations[state.forgeRoom.activeStationId] || stations.anvil;
+  const required = stations[stationRequiredForForge(state.forge)] || stations.anvil;
+
+  forgeRoomCtx.clearRect(0, 0, width, height);
+  const bg = forgeRoomCtx.createLinearGradient(0, 0, 0, height);
+  bg.addColorStop(0, "rgba(31,24,20,0.96)");
+  bg.addColorStop(1, "rgba(10,10,14,0.98)");
+  forgeRoomCtx.fillStyle = bg;
+  forgeRoomCtx.fillRect(0, 0, width, height);
+
+  forgeRoomCtx.fillStyle = "rgba(255,255,255,0.04)";
+  forgeRoomCtx.fillRect(0, height * 0.72, width, height * 0.28);
+
+  Object.entries(stations).forEach(([id, station]) => {
+    const x = station.x * width;
+    const y = station.y * height;
+    const activeStation = id === state.forgeRoom.activeStationId;
+    const nearby = id === state.forgeRoom.nearestStationId;
+    forgeRoomCtx.fillStyle = `${station.color}${activeStation ? "55" : "24"}`;
+    forgeRoomCtx.beginPath();
+    forgeRoomCtx.roundRect(x - 34, y - 26, 68, 52, 16);
+    forgeRoomCtx.fill();
+    forgeRoomCtx.strokeStyle = activeStation ? station.color : nearby ? "#f4efe7" : "rgba(255,255,255,0.18)";
+    forgeRoomCtx.lineWidth = activeStation ? 3 : 2;
+    forgeRoomCtx.stroke();
+    forgeRoomCtx.fillStyle = "#f4efe7";
+    forgeRoomCtx.font = "700 12px 'Trebuchet MS', sans-serif";
+    const labelWidth = forgeRoomCtx.measureText(station.label).width;
+    forgeRoomCtx.fillText(station.label, x - labelWidth / 2, y + 4);
+  });
+
+  const fighterX = state.forgeRoom.x * width;
+  const fighterY = state.forgeRoom.y * height;
+  forgeRoomCtx.strokeStyle = "#111";
+  forgeRoomCtx.lineWidth = 8;
+  forgeRoomCtx.beginPath();
+  forgeRoomCtx.moveTo(fighterX, fighterY - 24);
+  forgeRoomCtx.lineTo(fighterX, fighterY + 8);
+  forgeRoomCtx.moveTo(fighterX, fighterY - 10);
+  forgeRoomCtx.lineTo(fighterX - 16, fighterY + 8);
+  forgeRoomCtx.moveTo(fighterX, fighterY - 10);
+  forgeRoomCtx.lineTo(fighterX + 16, fighterY + 8);
+  forgeRoomCtx.moveTo(fighterX, fighterY + 8);
+  forgeRoomCtx.lineTo(fighterX - 12, fighterY + 30);
+  forgeRoomCtx.moveTo(fighterX, fighterY + 8);
+  forgeRoomCtx.lineTo(fighterX + 12, fighterY + 30);
+  forgeRoomCtx.stroke();
+  forgeRoomCtx.fillStyle = "#89e6dc";
+  forgeRoomCtx.beginPath();
+  forgeRoomCtx.arc(fighterX, fighterY - 34, 9, 0, Math.PI * 2);
+  forgeRoomCtx.fill();
+
+  if (nearest) {
+    forgeRoomCtx.strokeStyle = "rgba(255,255,255,0.18)";
+    forgeRoomCtx.setLineDash([6, 8]);
+    forgeRoomCtx.beginPath();
+    forgeRoomCtx.moveTo(fighterX, fighterY - 10);
+    forgeRoomCtx.lineTo(nearest.x * width, nearest.y * height - 30);
+    forgeRoomCtx.stroke();
+    forgeRoomCtx.setLineDash([]);
+  }
+
+  if (ui.forgeRoomStation) {
+    ui.forgeRoomStation.textContent = active.label;
+  }
+  if (ui.forgeRoomFocus) {
+    ui.forgeRoomFocus.textContent = required.label;
+  }
+  if (ui.forgeRoomCopy) {
+    const matchText = active.label === required.label ? "Correct station active." : `Current build wants ${required.label}.`;
+    ui.forgeRoomCopy.textContent = `${forgeStationCatalog[state.forgeRoom.activeStationId].copy} ${matchText}`;
+  }
+}
+
+function updateForgeRoom(dt) {
+  if (state.flow.screen !== "forge" || state.menu.open) {
+    state.forgeRoom.nearestStationId = nearestForgeStationId();
+    return;
+  }
+  let moveX = 0;
+  let moveY = 0;
+  if (state.keysDown.has("ArrowLeft") || state.keysDown.has("KeyA")) {
+    moveX -= 1;
+  }
+  if (state.keysDown.has("ArrowRight") || state.keysDown.has("KeyD")) {
+    moveX += 1;
+  }
+  if (state.keysDown.has("ArrowUp") || state.keysDown.has("KeyW")) {
+    moveY -= 1;
+  }
+  if (state.keysDown.has("ArrowDown") || state.keysDown.has("KeyS")) {
+    moveY += 1;
+  }
+  if (moveX || moveY) {
+    const length = Math.max(1, Math.hypot(moveX, moveY));
+    const speed = 0.34;
+    state.forgeRoom.x = clamp(state.forgeRoom.x + (moveX / length) * dt * speed, 0.08, 0.92);
+    state.forgeRoom.y = clamp(state.forgeRoom.y + (moveY / length) * dt * speed, 0.26, 0.82);
+  }
+  state.forgeRoom.nearestStationId = nearestForgeStationId();
+  renderForgeRoom();
+}
+
 function renderForgeBadges(weapon) {
-  ui.forgeBadges.innerHTML = isRangedWeapon(weapon)
+  ui.forgeBadges.innerHTML = isMagicWeapon(weapon)
+    ? `
+      <span class="menu-status alt">${weapon.classLabel}</span>
+      <span class="menu-status alt">${weapon.magicElementLabel}</span>
+      <span class="menu-status alt">${weapon.magicPatternLabel}</span>
+      <span class="menu-status alt">${weapon.magicFocusLabel}</span>
+      <span class="menu-status alt">${weapon.magicPageLabel}</span>
+      <span class="menu-status alt">${weapon.ammoLabel}</span>
+      <span class="menu-status alt">${weapon.forgeQualityLabel}</span>
+    `
+    : isRangedWeapon(weapon)
     ? `
       <span class="menu-status alt">${weapon.classLabel}</span>
       <span class="menu-status alt">${weapon.fireModeLabel || "Single Shot"}</span>
@@ -7984,6 +9644,18 @@ function renderForgeBadges(weapon) {
 }
 
 function weaponRoleTag(weapon) {
+  if (weapon.kind === "wand") {
+    return "Wand";
+  }
+  if (weapon.kind === "staff") {
+    return "Staff";
+  }
+  if (weapon.kind === "spellbook") {
+    return "Spellbook";
+  }
+  if (weapon.kind === "artifact") {
+    return "Artifact";
+  }
   if (weapon.kind === "sidearm") {
     return "Sidearm";
   }
@@ -8079,6 +9751,28 @@ function weaponPreviewMarkup(weapon) {
       <rect x="${shaft + bladeSize * 1.1}" y="44" width="${Math.max(20, bladeSize * 0.8)}" height="4" rx="2" fill="#d9fbff" />
       <circle cx="${shaft + bladeSize * 1.88}" cy="36" r="5" fill="#efc2ff" />
     `;
+  } else if (isMagicWeapon(weapon)) {
+    if (weapon.kind === "wand") {
+      headMarkup = `
+        <rect x="${shaft - 4}" y="34" width="${Math.max(42, bladeSize * 1.4)}" height="4" rx="2" fill="${handle}" />
+        <circle cx="${shaft + bladeSize * 1.1}" cy="36" r="${Math.max(8, bladeSize * 0.36)}" fill="${color}" />
+      `;
+    } else if (weapon.kind === "staff") {
+      headMarkup = `
+        <rect x="${shaft - 4}" y="34" width="${Math.max(54, bladeSize * 1.8)}" height="4" rx="2" fill="${handle}" />
+        <circle cx="${shaft + bladeSize * 1.5}" cy="36" r="${Math.max(10, bladeSize * 0.4)}" fill="${color}" />
+        <circle cx="${shaft + bladeSize * 1.5}" cy="36" r="${Math.max(16, bladeSize * 0.7)}" fill="${color}33" />
+      `;
+    } else if (weapon.kind === "spellbook") {
+      headMarkup = `
+        <rect x="${shaft - 4}" y="22" width="${Math.max(38, bladeSize * 1.2)}" height="28" rx="6" fill="${color}" />
+        <line x1="${shaft + bladeSize * 0.2}" y1="22" x2="${shaft + bladeSize * 0.2}" y2="50" stroke="#f3ead8" stroke-width="3" />
+      `;
+    } else {
+      headMarkup = `
+        <path d="M ${shaft + 6} 18 L ${shaft + bladeSize * 0.9} 36 L ${shaft + 6} 54 L ${shaft - bladeSize * 0.24} 36 Z" fill="${color}" />
+      `;
+    }
   } else if (isRangedWeapon(weapon)) {
     headMarkup = `
       <rect x="${shaft - 18}" y="28" width="${Math.max(32, bladeSize * 1.3)}" height="16" rx="6" fill="${handle}" />
@@ -8106,6 +9800,51 @@ function weaponPreviewMarkup(weapon) {
 }
 
 function renderForgeDetails(weapon) {
+  if (isMagicWeapon(weapon)) {
+    ui.forgeDetails.innerHTML = `
+      <article class="forge-detail-card">
+        <span>Magic Focus</span>
+        <strong>${weapon.frame} | ${weapon.classLabel}</strong>
+        <p>${weapon.frameSummary}</p>
+      </article>
+      <article class="forge-detail-card">
+        <span>Element</span>
+        <strong>${weapon.magicElementLabel}</strong>
+        <p>${magicElementCatalog[weapon.magicElement]?.summary || ""}</p>
+      </article>
+      <article class="forge-detail-card">
+        <span>Route</span>
+        <strong>${weapon.magicPatternLabel}</strong>
+        <p>${magicPatternCatalog[weapon.magicPattern]?.summary || ""}</p>
+      </article>
+      <article class="forge-detail-card">
+        <span>Focus</span>
+        <strong>${weapon.magicFocusLabel}</strong>
+        <p>${magicFocusCatalog[weapon.magicFocus]?.summary || ""}</p>
+      </article>
+      <article class="forge-detail-card">
+        <span>Bound Page</span>
+        <strong>${weapon.magicPageLabel}</strong>
+        <p>${magicPageCatalog[weapon.magicPage]?.summary || ""}</p>
+      </article>
+      <article class="forge-detail-card">
+        <span>Cast Rule</span>
+        <strong>${weapon.fireModeLabel}</strong>
+        <p>${weapon.abilitySummary}</p>
+      </article>
+      <article class="forge-detail-card">
+        <span>Heat</span>
+        <strong>${weapon.heat}% forge heat</strong>
+        <p>${weapon.heatSummary}</p>
+      </article>
+      <article class="forge-detail-card">
+        <span>Forge Finish</span>
+        <strong>${weapon.forgeQualityLabel}</strong>
+        <p>${weapon.forgeSummary}</p>
+      </article>
+    `;
+    return;
+  }
   if (isRangedWeapon(weapon)) {
     const frame = frameCatalog[weapon.frameId] || frameCatalog.longbow;
     const labels = ammoWorkshopLabelsForFrame(frame);
@@ -8209,6 +9948,81 @@ function renderForgeDetails(weapon) {
 }
 
 function renderForgeStats(weapon) {
+  if (isMagicWeapon(weapon)) {
+    const stats = [
+      {
+        label: "Spell Damage",
+        value: weapon.damage,
+        display: `${weapon.damage}`,
+        max: 42,
+        detail: "Higher spell damage makes each cast hurt more on a clean hit."
+      },
+      {
+        label: "Mana",
+        value: weapon.preloadAmmo,
+        display: `${weapon.preloadAmmo}/${weapon.clipSize}`,
+        max: 10,
+        detail: "Mana is how many casts you get before the focus has to recover."
+      },
+      {
+        label: "Range",
+        value: weapon.projectileRange,
+        display: `${weapon.projectileRange}`,
+        max: 600,
+        detail: "Range controls how far the spell can travel or hold control."
+      },
+      {
+        label: "Cast Speed",
+        value: weapon.projectileSpeed,
+        display: `${weapon.projectileSpeed}`,
+        max: 1180,
+        detail: "Higher cast speed makes the spell reach the rival faster."
+      },
+      {
+        label: "Recovery",
+        value: Math.round((1.2 - weapon.reloadTime) * 100),
+        display: `${weapon.reloadTime.toFixed(2)}s`,
+        max: 90,
+        detail: "Lower recovery means the focus or tome recharges faster between casts."
+      },
+      {
+        label: "Control",
+        value: weapon.blockBreak,
+        display: `${weapon.blockBreak}`,
+        max: 18,
+        detail: "Control measures how much the spell strains guard or field space."
+      },
+      {
+        label: "Weight",
+        value: weapon.weight,
+        display: weapon.weight.toFixed(1),
+        max: 18,
+        detail: "Heavier focuses hit harder, but they slow movement and recovery."
+      },
+      {
+        label: "Move",
+        value: Math.round(weapon.moveScale * 100),
+        display: `${Math.round(weapon.moveScale * 100)}`,
+        max: 118,
+        detail: "Move keeps track of how much the focus slows or frees your movement."
+      }
+    ];
+    ui.forgeStats.innerHTML = stats
+      .map((stat) => `
+        <article class="forge-stat-card">
+          <div class="forge-stat-top">
+            <span>${stat.label}</span>
+            <strong>${stat.display}</strong>
+          </div>
+          <div class="forge-stat-bar">
+            <div class="forge-stat-fill" style="width:${clamp((stat.value / stat.max) * 100, 8, 100)}%"></div>
+          </div>
+          <p>${stat.detail}</p>
+        </article>
+      `)
+      .join("");
+    return;
+  }
   if (isRangedWeapon(weapon)) {
     const stats = [
       {
@@ -8386,6 +10200,60 @@ function renderForgePreview(weapon) {
     previewCtx.moveTo(i * 44, -50);
     previewCtx.lineTo(i * 44 + 8, 46);
     previewCtx.stroke();
+  }
+
+  if (isMagicWeapon(weapon)) {
+    previewCtx.strokeStyle = weapon.color;
+    previewCtx.fillStyle = `${weapon.color}26`;
+    previewCtx.lineWidth = 6;
+    if (weapon.kind === "wand") {
+      previewCtx.beginPath();
+      previewCtx.moveTo(-8, 18);
+      previewCtx.lineTo(94, -16);
+      previewCtx.stroke();
+      previewCtx.beginPath();
+      previewCtx.arc(108, -22, 12, 0, Math.PI * 2);
+      previewCtx.fill();
+      previewCtx.stroke();
+    } else if (weapon.kind === "staff") {
+      previewCtx.beginPath();
+      previewCtx.moveTo(-14, 22);
+      previewCtx.lineTo(124, -26);
+      previewCtx.stroke();
+      previewCtx.beginPath();
+      previewCtx.arc(138, -32, 14, 0, Math.PI * 2);
+      previewCtx.fill();
+      previewCtx.stroke();
+      previewCtx.beginPath();
+      previewCtx.arc(88, -14, 6, 0, Math.PI * 2);
+      previewCtx.fill();
+    } else if (weapon.kind === "spellbook") {
+      previewCtx.fillStyle = "rgba(0,0,0,0.16)";
+      previewCtx.fillRect(8, -36, 118, 78);
+      previewCtx.strokeStyle = weapon.color;
+      previewCtx.lineWidth = 5;
+      previewCtx.strokeRect(14, -30, 106, 66);
+      previewCtx.beginPath();
+      previewCtx.moveTo(67, -30);
+      previewCtx.lineTo(67, 36);
+      previewCtx.stroke();
+    } else {
+      previewCtx.beginPath();
+      previewCtx.moveTo(22, 0);
+      previewCtx.lineTo(64, -38);
+      previewCtx.lineTo(106, 0);
+      previewCtx.lineTo(64, 38);
+      previewCtx.closePath();
+      previewCtx.fill();
+      previewCtx.stroke();
+    }
+
+    previewCtx.fillStyle = "#f4efe7";
+    previewCtx.font = "700 12px 'Trebuchet MS', sans-serif";
+    previewCtx.fillText(`${weapon.magicElementLabel} ${weapon.magicPatternLabel}`, 4, -60);
+    previewCtx.fillText(`${weapon.magicFocusLabel} | ${weapon.magicPageLabel}`, 4, 70);
+    previewCtx.restore();
+    return;
   }
 
   if (isRangedWeapon(weapon)) {
@@ -8772,6 +10640,38 @@ function renderForgeMinigame(weapon) {
       : game.finished
         ? `Throw axe forge finished at ${weapon.forgeQualityLabel}. Throw control landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
         : "No throw axe run yet. Start the drill to tighten the release pattern.";
+  } else if (game.mode === "wand-glyph") {
+    ui.forgeMinigameBar.style.setProperty("--target-start", "0%");
+    ui.forgeMinigameBar.style.setProperty("--target-end", "0%");
+    ui.forgeMinigameStatus.textContent = game.active
+      ? `Catch the 3 drifting rune points. Runes marked: ${game.hits}/${Math.max(game.pips.length, 3)}.`
+      : game.finished
+        ? `Wand rune binding finished at ${weapon.forgeQualityLabel}. Rune tracing landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
+        : "No wand rune run yet. Start the drill to bind the freehand glyph path.";
+  } else if (game.mode === "staff-channel") {
+    ui.forgeMinigameBar.style.setProperty("--target-start", "42%");
+    ui.forgeMinigameBar.style.setProperty("--target-end", "58%");
+    ui.forgeMinigameStatus.textContent = game.active
+      ? `Lock the current in the gold lane 3 times. Channels locked: ${game.hits}/3.`
+      : game.finished
+        ? `Staff channel finished at ${weapon.forgeQualityLabel}. Channel control landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
+        : "No staff channel run yet. Start the drill to lock the staff current.";
+  } else if (game.mode === "spellbook-bind") {
+    ui.forgeMinigameBar.style.setProperty("--target-start", "0%");
+    ui.forgeMinigameBar.style.setProperty("--target-end", "0%");
+    ui.forgeMinigameStatus.textContent = game.active
+      ? `Bind the 4 page seams in order. Pages locked: ${game.hits}/${Math.max(game.pips.length, 4)}.`
+      : game.finished
+        ? `Spellbook binding finished at ${weapon.forgeQualityLabel}. Page lock timing landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
+        : "No spellbook run yet. Start the drill to bind the page seams.";
+  } else if (game.mode === "artifact-seal") {
+    ui.forgeMinigameBar.style.setProperty("--target-start", "0%");
+    ui.forgeMinigameBar.style.setProperty("--target-end", "0%");
+    ui.forgeMinigameStatus.textContent = game.active
+      ? `Catch the 3 orbiting seal points. Seals locked: ${game.hits}/${Math.max(game.pips.length, 3)}.`
+      : game.finished
+        ? `Artifact sealing finished at ${weapon.forgeQualityLabel}. Seal timing landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
+        : "No artifact seal run yet. Start the drill to lock the relic seal.";
   } else {
     ui.forgeMinigameBar.style.setProperty("--target-start", "0%");
     ui.forgeMinigameBar.style.setProperty("--target-end", "0%");
@@ -8794,8 +10694,14 @@ function renderForgeMinigame(weapon) {
 function renderForge() {
   syncForgeOutputs();
   const weapon = currentBlueprint();
+  renderForgeProgress(weapon);
+  renderForgeRoom();
   if (ui.forgeNote) {
-    if (isRangedWeapon(weapon)) {
+    if (isMagicWeapon(weapon)) {
+      ui.forgeNote.textContent =
+        `${weapon.classLabel} magic builds use the arcane workshop instead of ammo. ` +
+        `Bind an element, route, focus, and page, then work the right forge station for cleaner spells.`;
+    } else if (isRangedWeapon(weapon)) {
       ui.forgeNote.textContent =
         `${weapon.classLabel} ranged builds now split weapon body and ammo crafting. ` +
         `Build rounds in the ammo workshop, stack them into the case, and every shot will fire in that exact order.`;
@@ -8814,6 +10720,13 @@ function renderForge() {
   renderForgeMinigame(weapon);
   if (isRangedWeapon(weapon)) {
     renderAmmoWorkshop(weapon);
+  } else if (ui.ammoWorkshop) {
+    ui.ammoWorkshop.hidden = true;
+  }
+  if (isMagicWeapon(weapon)) {
+    renderMagicWorkshop(weapon);
+  } else if (ui.magicWorkshop) {
+    ui.magicWorkshop.hidden = true;
   }
   renderMenuSummary();
   saveProgressState();
@@ -8827,7 +10740,8 @@ function updateHudLabels() {
   const activeWeapon = state.match?.playerWeapon || weaponById(state.activeWeaponId) || currentBlueprint();
   const rivalWeapon = state.match?.rivalWeapon || weaponById(state.rivalWeaponId);
   const stageState = activeStageState();
-  const ranged = isRangedWeapon(activeWeapon);
+  const projectileWeapon = usesProjectileCombat(activeWeapon);
+  const magicWeapon = isMagicWeapon(activeWeapon);
 
   ui.hudPlayerWeapon.textContent = activeWeapon?.name || "Unarmed";
   ui.hudRivalWeapon.textContent = rivalWeapon?.name || "Auto Forge";
@@ -8839,15 +10753,15 @@ function updateHudLabels() {
   ui.battlefieldStage.textContent = currentStageConfig(stageState.id).label;
   ui.battlefieldLoadout.textContent = activeWeapon?.name || "Unarmed";
   if (ui.touchControls) {
-    ui.touchControls.classList.toggle("ranged-mode", ranged);
+    ui.touchControls.classList.toggle("ranged-mode", projectileWeapon);
   }
   if (ui.touchAttack) {
-    setTouchButtonTitle(ui.touchAttack, ranged ? "Fire" : "Strike");
+    setTouchButtonTitle(ui.touchAttack, magicWeapon ? "Cast" : projectileWeapon ? "Fire" : "Strike");
   }
   if (ui.touchReload) {
-    const showReload = ranged;
+    const showReload = projectileWeapon;
     ui.touchReload.hidden = !showReload;
-    setTouchButtonTitle(ui.touchReload, "Reload");
+    setTouchButtonTitle(ui.touchReload, magicWeapon ? "Focus" : "Reload");
   }
   renderSetRecap();
   renderBroadcastPanels();
@@ -8907,7 +10821,8 @@ function renderArmory() {
   }
 
   state.armory.forEach((weapon) => {
-    const rangedWeapon = isRangedWeapon(weapon);
+    const projectileWeapon = usesProjectileCombat(weapon);
+    const magicWeapon = isMagicWeapon(weapon);
     const card = document.createElement("article");
     card.className = "armory-card";
     if (weapon.id === state.activeWeaponId) {
@@ -8941,22 +10856,22 @@ function renderArmory() {
     meta.innerHTML = `
       <span class="pill">${weapon.classLabel}</span>
       <span class="pill">${weapon.material}</span>
-      <span class="pill">${rangedWeapon ? (weapon.fireModeLabel || weapon.edge) : weapon.edge}</span>
+      <span class="pill">${projectileWeapon ? (weapon.fireModeLabel || weapon.edge) : weapon.edge}</span>
       <span class="pill">${weapon.forgeQualityLabel}</span>
       <span class="pill">${weapon.heat}% heat</span>
-      <span class="pill">${rangedWeapon ? weapon.ammoLabel : `${weapon.reach} reach`}</span>
+      <span class="pill">${projectileWeapon ? weapon.ammoLabel : `${weapon.reach} reach`}</span>
     `;
 
     const statRow = document.createElement("div");
     statRow.className = "armory-stat-row";
-    statRow.innerHTML = rangedWeapon
+    statRow.innerHTML = projectileWeapon
       ? `
         <div class="armory-stat">
-          <span>Shot Speed</span>
+          <span>${magicWeapon ? "Cast Speed" : "Shot Speed"}</span>
           <strong>${weapon.projectileSpeed}</strong>
         </div>
         <div class="armory-stat">
-          <span>Reload</span>
+          <span>${magicWeapon ? "Focus" : "Reload"}</span>
           <strong>${weapon.reloadTime.toFixed(2)}s</strong>
         </div>
         <div class="armory-stat">
@@ -9080,6 +10995,27 @@ function renderStageSummary() {
 }
 
 function fighterProfileForWeapon(weapon) {
+  if (isMagicWeapon(weapon)) {
+    const wand = weapon.kind === "wand";
+    const staff = weapon.kind === "staff";
+    const spellbook = weapon.kind === "spellbook";
+    const artifact = weapon.kind === "artifact";
+    return {
+      damage: clamp(Math.round(weapon.damage * 0.82 + (staff ? 2 : artifact ? 1 : wand ? -1 : 0)), 10, 34),
+      reach: clamp(Math.round(54 + weapon.weight * 1.4 + (staff ? 16 : spellbook ? 2 : artifact ? 6 : -2)), 48, 96),
+      windup: clamp(0.06 + weapon.cooldown * 0.16 + (staff ? 0.03 : wand ? -0.01 : artifact ? 0.02 : 0), 0.06, 0.22),
+      active: 0.04,
+      recover: clamp(0.14 + weapon.cooldown * 0.18 + (artifact ? 0.03 : 0), 0.14, 0.34),
+      knockback: clamp(170 + weapon.knockback * 84 + (staff ? 12 : artifact ? 8 : 0), 180, 340),
+      blockDrain: clamp(Math.round(6 + weapon.blockBreak + (staff ? 3 : artifact ? 2 : 1)), 7, 20),
+      lunge: clamp(12 + weapon.speed * 7 - weapon.weight * 0.08, 10, 22),
+      parryWindow: wand ? 0.14 : staff ? 0.15 : 0.13,
+      slideDamage: 0,
+      slideHits: 0,
+      shotDrain: clamp(5 + (staff ? 2 : 0) + (artifact ? 3 : 0) + (weapon.glyphAssist ? 1 : 0), 5, 14)
+    };
+  }
+
   if (isRangedWeapon(weapon)) {
     const heavyGun = weapon.kind === "heavy";
     const sidearm = weapon.kind === "sidearm";
@@ -9161,8 +11097,8 @@ function stageBounds(stageState) {
 }
 
 function spawnFighter({ team, control, weapon, x, name, color }) {
-  const isRanged = isRangedWeapon(weapon);
-  const loadedRounds = isRanged ? ammoRoundListForWeapon(weapon) : [];
+  const projectileWeapon = usesProjectileCombat(weapon);
+  const loadedRounds = projectileWeapon ? ammoRoundListForWeapon(weapon) : [];
   const fighter = {
     team,
     control,
@@ -9201,12 +11137,15 @@ function spawnFighter({ team, control, weapon, x, name, color }) {
     slideCooldown: 0,
     jumpCooldown: 0,
     manualSwingCooldown: 0,
-    ammo: isRanged ? loadedRounds.length : 0,
-    maxAmmo: isRanged ? loadedRounds.length : 0,
+    ammo: projectileWeapon ? loadedRounds.length : 0,
+    maxAmmo: projectileWeapon ? loadedRounds.length : 0,
     loadedRounds,
     roundIndex: 0,
     reloadTimer: 0,
     reloadQueued: false,
+    spellPageIndex: 0,
+    wandGlyph: [],
+    wandGlyphTimer: 0,
     slowTimer: 0,
     poisonTimer: 0,
     poisonTickTimer: 0,
@@ -9421,7 +11360,7 @@ function segmentDistance(ax, ay, bx, by, cx, cy, dx, dy) {
 }
 
 function fighterUsesMouseJab(fighter) {
-  return fighter.control === "p1" && preferredInputMode() === "pc" && fighter.weapon.kind !== "long" && !isRangedWeapon(fighter.weapon);
+  return fighter.control === "p1" && preferredInputMode() === "pc" && fighter.weapon.kind !== "long" && !usesProjectileCombat(fighter.weapon);
 }
 
 function attackActionProgress(fighter) {
@@ -9446,7 +11385,7 @@ function fighterAttackLabel(fighter) {
 function fighterProjectileCounterSegment(fighter) {
   if (
     !fighter.alive ||
-    isRangedWeapon(fighter.weapon) ||
+    usesProjectileCombat(fighter.weapon) ||
     fighter.hitstun > 0 ||
     fighter.stunTimer > 0
   ) {
@@ -9545,27 +11484,36 @@ function weaponPoseForFighter(fighter) {
   const torsoTop = -height * 0.5;
   const shoulderX = fighter.facing * 11;
   const shoulderY = torsoTop * 0.46;
+  const projectileWeapon = usesProjectileCombat(fighter.weapon);
   let weaponAngle = -0.18;
-  let weaponLength = isRangedWeapon(fighter.weapon)
-    ? fighter.weapon.kind === "sidearm"
-      ? 42
-      : fighter.weapon.kind === "assault"
-        ? 58
-        : fighter.weapon.kind === "heavy"
-          ? 72
-          : fighter.weapon.frameId === "ballista"
+  let weaponLength = projectileWeapon
+    ? isMagicWeapon(fighter.weapon)
+      ? fighter.weapon.kind === "wand"
+        ? 38
+        : fighter.weapon.kind === "staff"
+          ? 68
+          : fighter.weapon.kind === "spellbook"
+            ? 34
+            : 42
+      : fighter.weapon.kind === "sidearm"
+        ? 42
+        : fighter.weapon.kind === "assault"
+          ? 58
+          : fighter.weapon.kind === "heavy"
             ? 72
-            : fighter.weapon.frameId === "longbow" || fighter.weapon.frameId === "stormbow"
-              ? 62
-              : fighter.weapon.frameId === "crossbow"
-                ? 58
-                : 66
+            : fighter.weapon.frameId === "ballista"
+              ? 72
+              : fighter.weapon.frameId === "longbow" || fighter.weapon.frameId === "stormbow"
+                ? 62
+                : fighter.weapon.frameId === "crossbow"
+                  ? 58
+                  : 66
     : fighter.profile.reach * 0.78;
   let baseX = fighter.x + shoulderX;
   let baseY = fighter.y + shoulderY;
 
   if (fighter.blocking) {
-    weaponAngle = isRangedWeapon(fighter.weapon) ? -0.4 : -0.92;
+    weaponAngle = projectileWeapon ? -0.4 : -0.92;
   } else if (fighter.attack) {
     const actionWindow = attackActionProgress(fighter);
     if (fighter.attack.style === "shot") {
@@ -9585,7 +11533,7 @@ function weaponPoseForFighter(fighter) {
     }
   } else if (fighter.slideTimer > 0) {
     weaponAngle = 0.02;
-  } else if (fighter.control === "p1" || isRangedWeapon(fighter.weapon)) {
+  } else if (fighter.control === "p1" || projectileWeapon) {
     weaponAngle = fighter.mouseWeaponAngle;
   }
 
@@ -9600,7 +11548,8 @@ function weaponPoseForFighter(fighter) {
 }
 
 function updateMouseWeaponControl(fighter, opponent, dt) {
-  if (fighter.control !== "p1" && !isRangedWeapon(fighter.weapon)) {
+  const projectileWeapon = usesProjectileCombat(fighter.weapon);
+  if (fighter.control !== "p1" && !projectileWeapon) {
     return;
   }
 
@@ -9613,7 +11562,7 @@ function updateMouseWeaponControl(fighter, opponent, dt) {
     preferredInputMode() === "controller" &&
     !usingGamepadAim &&
     opponent &&
-    (isRangedWeapon(fighter.weapon) || fighter.control === "p1");
+    (projectileWeapon || fighter.control === "p1");
   const usingTouchAssist =
     state.inputProfile.touch &&
     !usingGamepadAim &&
@@ -9621,7 +11570,7 @@ function updateMouseWeaponControl(fighter, opponent, dt) {
   let localX;
   let localY;
 
-  if (fighter.control !== "p1" && isRangedWeapon(fighter.weapon) && opponent) {
+  if (fighter.control !== "p1" && projectileWeapon && opponent) {
     const opponentHeight = currentFighterHeight(opponent);
     localX = (opponent.x - shoulderX) * fighter.facing;
     localY = opponent.y - opponentHeight * 0.58 - shoulderY;
@@ -9670,7 +11619,7 @@ function addSpark(match, x, y, color, amount = 8) {
 }
 
 function startReload(fighter, match, manual = false) {
-  if (!isRangedWeapon(fighter.weapon) || fighter.reloadTimer > 0 || fighter.ammo >= fighter.maxAmmo || !fighter.alive) {
+  if (!usesProjectileCombat(fighter.weapon) || fighter.reloadTimer > 0 || fighter.ammo >= fighter.maxAmmo || !fighter.alive) {
     return false;
   }
 
@@ -9682,8 +11631,9 @@ function startReload(fighter, match, manual = false) {
   addSpark(match, fighter.x + fighter.facing * 10, fighter.y - currentFighterHeight(fighter) * 0.56, "rgba(255,255,255,0.8)", 5);
   playSoundEffect("block");
   if (manual) {
-    setMatchSummary(`${fighter.name} started reloading ${fighter.weapon.name}.`);
-    pushFightEvent(match, "Reload", `${fighter.name} is reloading ${fighter.weapon.name}.`, "control");
+    const reloadLabel = isMagicWeapon(fighter.weapon) ? "refocusing mana" : `reloading ${fighter.weapon.name}`;
+    setMatchSummary(`${fighter.name} started ${reloadLabel}.`);
+    pushFightEvent(match, "Reload", `${fighter.name} is ${reloadLabel}.`, "control");
   }
   return true;
 }
@@ -10125,7 +12075,7 @@ function resolveProjectileCounterplay(match) {
   match.projectiles = match.projectiles.filter((projectile) => !projectile.spent);
 }
 
-function spawnZone(match, type, x, y, radius, life, color, power = 0) {
+function spawnZone(match, type, x, y, radius, life, color, power = 0, extra = {}) {
   match.zones.push({
     id: makeId(type),
     type,
@@ -10135,7 +12085,8 @@ function spawnZone(match, type, x, y, radius, life, color, power = 0) {
     life,
     maxLife: life,
     color,
-    power
+    power,
+    ...extra
   });
 }
 
@@ -10416,11 +12367,73 @@ function resolveProjectileHit(projectile, attacker, defender, match) {
 function updateZones(match, dt) {
   match.zones = match.zones.filter((zone) => {
     zone.life -= dt;
+    zone.tickTimer = Math.max(0, (zone.tickTimer || 0) - dt);
     if (zone.type === "blizzard") {
       match.fighters.forEach((fighter) => {
         const targetPoint = projectileTargetPoint(fighter);
         if (Math.hypot(targetPoint.x - zone.x, targetPoint.y - zone.y) <= zone.radius) {
           fighter.slowTimer = Math.max(fighter.slowTimer, zone.power || 0.22);
+        }
+      });
+    } else if (zone.type === "tornado") {
+      match.fighters.forEach((fighter) => {
+        if (!fighter.alive || fighter.team === zone.ownerTeam) {
+          return;
+        }
+        const targetPoint = projectileTargetPoint(fighter);
+        const distance = Math.hypot(targetPoint.x - zone.x, targetPoint.y - zone.y);
+        if (distance > zone.radius) {
+          return;
+        }
+        const pull = Math.sign(zone.x - targetPoint.x) || 1;
+        fighter.vx += pull * 120 * dt;
+        fighter.vy = Math.min(fighter.vy, -150);
+        fighter.slowTimer = Math.max(fighter.slowTimer, 0.22 + (zone.power || 0) * 0.2);
+        if (zone.tickTimer <= 0) {
+          fighter.health = clamp(fighter.health - 2, 0, fighter.maxHealth);
+          fighter.hitstun = Math.max(fighter.hitstun, 0.08);
+          fighter.attackFlash = 0.08;
+          fighter.alive = fighter.health > 0;
+          zone.tickTimer = 0.24;
+        }
+      });
+    } else if (zone.type === "curse") {
+      match.fighters.forEach((fighter) => {
+        if (!fighter.alive || fighter.team === zone.ownerTeam) {
+          return;
+        }
+        const targetPoint = projectileTargetPoint(fighter);
+        const distance = Math.hypot(targetPoint.x - zone.x, targetPoint.y - zone.y);
+        if (distance > zone.radius) {
+          return;
+        }
+        fighter.slowTimer = Math.max(fighter.slowTimer, 0.18 + (zone.power || 0) * 0.2);
+        fighter.poisonTimer = Math.max(fighter.poisonTimer, 1.1 + (zone.power || 0) * 1.6);
+        fighter.poisonTickTimer = Math.min(fighter.poisonTickTimer || 0.45, 0.45);
+        if (zone.tickTimer <= 0) {
+          fighter.health = clamp(fighter.health - 1, 0, fighter.maxHealth);
+          fighter.attackFlash = 0.08;
+          fighter.alive = fighter.health > 0;
+          zone.tickTimer = 0.34;
+        }
+      });
+    } else if (zone.type === "ward") {
+      match.fighters.forEach((fighter) => {
+        if (!fighter.alive) {
+          return;
+        }
+        const targetPoint = projectileTargetPoint(fighter);
+        const distance = Math.hypot(targetPoint.x - zone.x, targetPoint.y - zone.y);
+        if (distance > zone.radius) {
+          return;
+        }
+        if (fighter.team === zone.ownerTeam) {
+          fighter.stamina = clamp(fighter.stamina + dt * 28, 0, fighter.maxStamina);
+        } else if (zone.tickTimer <= 0) {
+          fighter.vx += Math.sign(targetPoint.x - zone.x || 1) * (120 + (zone.power || 0) * 140);
+          fighter.hitstun = Math.max(fighter.hitstun, 0.08);
+          fighter.attackFlash = 0.08;
+          zone.tickTimer = 0.26;
         }
       });
     }
@@ -10559,8 +12572,286 @@ function shotPatternForWeapon(weapon) {
   }));
 }
 
+function cloneMagicRoundForCast(weapon) {
+  const round = cloneAmmoRecipe(weapon?.ammoPrototype) || {
+    id: makeId("mana"),
+    chamberImpacts: [...(weapon?.chamberImpacts || [weapon?.impactType || "ember"])],
+    impactTypes: [...(weapon?.impactTypes || [weapon?.impactType || "ember"])],
+    midAirAddons: [...(weapon?.midAirAddons || [])]
+  };
+  round.chamberImpacts = [...(round.chamberImpacts || [weapon?.impactType || "ember"])];
+  round.impactTypes = [...(round.impactTypes || round.chamberImpacts || [weapon?.impactType || "ember"])];
+  round.midAirAddons = [...(round.midAirAddons || [])];
+  round.damageBonus = round.damageBonus || 0;
+  round.speedBonus = round.speedBonus || 0;
+  round.knockbackBonus = round.knockbackBonus || 0;
+  round.blockBreakBonus = round.blockBreakBonus || 0;
+  round.projectilePierceBonus = round.projectilePierceBonus || 0;
+  round.redirectCharges = round.redirectCharges || 0;
+  round.spiralCount = round.spiralCount || 0;
+  round.explosiveBoost = round.explosiveBoost || 0;
+  round.shockCount = round.shockCount || 0;
+  round.poisonCount = round.poisonCount || 0;
+  round.portalCount = round.portalCount || 0;
+  round.slowCount = round.slowCount || 0;
+  round.ruptureCount = round.ruptureCount || 0;
+  return round;
+}
+
+function pushImpactTag(round, impactId) {
+  if (!round.impactTypes.includes(impactId)) {
+    round.impactTypes.push(impactId);
+  }
+  if (!round.chamberImpacts.includes(impactId)) {
+    round.chamberImpacts.push(impactId);
+  }
+}
+
+function applyMagicPagePayload(round, weapon, pageId, intensity = 1) {
+  round.tipType = pageId;
+  round.tipLabel = magicPageCatalog[pageId]?.label || weapon.magicPageLabel;
+  round.summary = `${round.impactLabel || weapon.impactLabel} | ${round.tipLabel}`;
+  if (pageId === "ember") {
+    pushImpactTag(round, "explosive");
+    round.emberTrail = true;
+    round.explosiveBoost += 0.08 * intensity;
+    round.damageBonus += 2 * intensity;
+  } else if (pageId === "frost") {
+    pushImpactTag(round, "frost");
+    round.blizzardTrail = true;
+    round.slowCount += 1 + intensity;
+    round.speedBonus -= 18;
+  } else if (pageId === "cyclone") {
+    pushImpactTag(round, "shock");
+    round.stormTrail = true;
+    round.spiralCount += 1;
+    round.knockbackBonus += 0.05 * intensity;
+  } else if (pageId === "grave") {
+    pushImpactTag(round, "poison");
+    round.delayedImpact = true;
+    round.poisonCount += 1 + intensity;
+    round.ruptureCount += intensity;
+  } else if (pageId === "ward") {
+    pushImpactTag(round, "concussion");
+    round.blockBreakBonus += 2 * intensity;
+    round.knockbackBonus += 0.08 * intensity;
+  }
+  return round;
+}
+
+function currentSpellbookPageId(fighter) {
+  const pages = Array.isArray(fighter.weapon.spellPages) && fighter.weapon.spellPages.length
+    ? fighter.weapon.spellPages
+    : [fighter.weapon.magicPage];
+  return pages[fighter.spellPageIndex % pages.length] || fighter.weapon.magicPage;
+}
+
+function currentSpellbookPageLabel(fighter) {
+  return magicPageCatalog[currentSpellbookPageId(fighter)]?.label || fighter.weapon.magicPageLabel || "Page";
+}
+
+function cycleSpellbookPage(fighter, match) {
+  if (!isMagicWeapon(fighter.weapon) || fighter.weapon.kind !== "spellbook") {
+    return false;
+  }
+  const pages = Array.isArray(fighter.weapon.spellPages) && fighter.weapon.spellPages.length
+    ? fighter.weapon.spellPages
+    : [fighter.weapon.magicPage];
+  fighter.spellPageIndex = (fighter.spellPageIndex + 1) % pages.length;
+  fighter.attackFlash = Math.max(fighter.attackFlash, 0.08);
+  addSpark(match, fighter.x + fighter.facing * 10, fighter.y - currentFighterHeight(fighter) * 0.62, fighter.weapon.color, 6);
+  playSoundEffect("block");
+  setMatchSummary(`${fighter.name} flipped to ${currentSpellbookPageLabel(fighter)}.`);
+  pushFightEvent(match, "Page Shift", `${fighter.name} switched ${fighter.weapon.name} to ${currentSpellbookPageLabel(fighter)}.`, "control");
+  return true;
+}
+
+function wandGesturePointId(fighter) {
+  if (fighter.mouseWeaponAngle <= -0.72) {
+    return "sky";
+  }
+  if (fighter.mouseWeaponAngle <= -0.28) {
+    return "crest";
+  }
+  if (fighter.mouseWeaponAngle <= 0.18) {
+    return "line";
+  }
+  return "root";
+}
+
+function wandGestureLabel(pointId) {
+  return {
+    sky: "Sky Point",
+    crest: "Crest Point",
+    line: "Line Point",
+    root: "Root Point"
+  }[pointId] || "Rune Point";
+}
+
+function wandCastTypeFromGlyph(fighter) {
+  const requiredPoints = fighter.weapon.glyphAssist ? 2 : 3;
+  const chain = fighter.wandGlyph.slice(-requiredPoints);
+  if (chain.length < requiredPoints) {
+    return null;
+  }
+  const uniqueCount = new Set(chain).size;
+  if (uniqueCount >= requiredPoints) {
+    return "tornado";
+  }
+  if (chain[0] === chain[chain.length - 1]) {
+    return "rift";
+  }
+  if (chain.includes("sky") && chain.includes("root")) {
+    return "burst";
+  }
+  return "lance";
+}
+
+function consumeProjectileCast(fighter, match, staminaCost, muzzleFlash = 0.08) {
+  fighter.attack = {
+    timer: 0,
+    connected: true,
+    style: "shot"
+  };
+  fighter.attackFlash = 0.18;
+  fighter.muzzleFlash = muzzleFlash;
+  fighter.stamina = clamp(fighter.stamina - staminaCost, 0, fighter.maxStamina);
+  fighter.ammo = Math.max(0, fighter.ammo - 1);
+  fighter.reloadQueued = fighter.ammo <= 0;
+  fighter.vx -= fighter.facing * clamp(fighter.weapon.weight * 2.1, 6, 30);
+}
+
+function fireProjectileFamilyCast(fighter, opponent, match, ammoRound, shotWeapon = fighter.weapon) {
+  shotPatternForWeapon(shotWeapon).forEach((shot) => {
+    spawnProjectile(fighter, opponent, match, { ...shot, ammoRound });
+  });
+}
+
+function castMagicZone(fighter, match, type, pageId, options = {}) {
+  const zoneColor = options.color || `${fighter.weapon.color}55`;
+  const x = options.x ?? (fighter.x + fighter.facing * (options.forward || 46));
+  const y = options.y ?? (fighter.y - currentFighterHeight(fighter) * 0.56);
+  spawnZone(
+    match,
+    type,
+    x,
+    y,
+    options.radius || 56,
+    options.life || 0.72,
+    zoneColor,
+    options.power || 0.2,
+    {
+      ownerTeam: fighter.team,
+      pageId,
+      tickTimer: 0
+    }
+  );
+}
+
+function castArtifactRaise(fighter, opponent, match, pageId) {
+  const zombieRound = applyMagicPagePayload(cloneMagicRoundForCast(fighter.weapon), fighter.weapon, pageId, 2);
+  zombieRound.poisonCount = Math.max(zombieRound.poisonCount || 0, 2);
+  zombieRound.homingStrength = Math.max(zombieRound.homingStrength || 0, 0.8);
+  zombieRound.delayedImpact = true;
+  zombieRound.speedBonus -= 180;
+  zombieRound.knockbackBonus += 0.06;
+  const startCount = match.projectiles.length;
+  [-0.14, 0.14].forEach((angleOffset) => {
+    spawnProjectile(fighter, opponent, match, {
+      ammoRound: zombieRound,
+      angleOffset,
+      speedScale: 0.52,
+      damageScale: 0.78,
+      blockScale: 0.84
+    });
+  });
+  match.projectiles.slice(startCount).forEach((projectile, index) => {
+    projectile.x = fighter.x + fighter.facing * (index === 0 ? 12 : 24);
+    projectile.prevX = projectile.x;
+    projectile.y = fighter.y - 22 - index * 10;
+    projectile.prevY = projectile.y;
+    projectile.vy = -24 - index * 12;
+    projectile.gravity = 10;
+    projectile.life += 0.44;
+    projectile.color = "#9ff0a8";
+    projectile.glow = "#9ff0a8";
+    projectile.weaponName = `${fighter.weapon.name} Revenant`;
+  });
+}
+
+function castMagicAttack(fighter, opponent, match, castType, pageId, staminaCost) {
+  const ammoRound = applyMagicPagePayload(cloneMagicRoundForCast(fighter.weapon), fighter.weapon, pageId, castType === "lance" ? 1 : 2);
+  const castLabel =
+    castType === "tornado"
+      ? "tornado spell"
+      : castType === "ward"
+        ? "ward spell"
+        : castType === "curse"
+          ? "curse spell"
+          : castType === "zombie"
+            ? "revenant cast"
+            : castType === "rift"
+              ? "rift cast"
+              : castType === "burst"
+                ? "burst cast"
+                : "spell lance";
+
+  consumeProjectileCast(fighter, match, staminaCost, fighter.weapon.kind === "spellbook" ? 0.12 : 0.09);
+
+  if (castType === "tornado") {
+    castMagicZone(fighter, match, "tornado", pageId, {
+      radius: fighter.weapon.kind === "staff" ? 70 : 58,
+      life: fighter.weapon.kind === "staff" ? 0.94 : 0.78,
+      color: "rgba(158,238,255,0.34)",
+      power: 0.22
+    });
+  } else if (castType === "curse") {
+    castMagicZone(fighter, match, "curse", pageId, {
+      radius: fighter.weapon.kind === "artifact" ? 64 : 52,
+      life: 0.92,
+      color: "rgba(164,255,171,0.26)",
+      power: 0.24
+    });
+  } else if (castType === "ward") {
+    castMagicZone(fighter, match, "ward", pageId, {
+      radius: fighter.weapon.kind === "artifact" ? 72 : 58,
+      life: 0.88,
+      color: "rgba(255,224,143,0.26)",
+      power: 0.26
+    });
+  } else if (castType === "zombie") {
+    castArtifactRaise(fighter, opponent, match, pageId);
+  } else {
+    const shotWeapon = { ...fighter.weapon };
+    if (castType === "rift") {
+      ammoRound.redirectCharges += 1;
+      ammoRound.portalCount += 2;
+      ammoRound.homingStrength = Math.max(ammoRound.homingStrength || 0, 0.3);
+      ammoRound.speedBonus += 44;
+    } else if (castType === "burst") {
+      ammoRound.scatterImpact = true;
+      ammoRound.speedBonus += 18;
+      shotWeapon.burstCount = Math.max(3, fighter.weapon.burstCount || 3);
+      shotWeapon.burstSpread = Math.max(0.08, fighter.weapon.burstSpread || 0.09);
+      shotWeapon.burstDamageScale = 0.58;
+    } else {
+      ammoRound.projectilePierceBonus += 1;
+      ammoRound.speedBonus += 52;
+      ammoRound.damageBonus += 2;
+    }
+    fireProjectileFamilyCast(fighter, opponent, match, ammoRound, shotWeapon);
+  }
+
+  addSpark(match, fighter.x + fighter.facing * 18, fighter.y - currentFighterHeight(fighter) * 0.56, fighter.weapon.color, 8);
+  playSoundEffect("attack");
+  setMatchSummary(`${fighter.name} cast ${castLabel} with ${fighter.weapon.name}.`);
+  pushFightEvent(match, "Magic Cast", `${fighter.name} used ${fighter.weapon.name} to cast ${castLabel}.`, "impact");
+  return true;
+}
+
 function startAttack(fighter, opponent = null, match = state.match) {
-  const staminaCost = isRangedWeapon(fighter.weapon) ? fighter.profile.shotDrain || 8 : 8;
+  const projectileWeapon = usesProjectileCombat(fighter.weapon);
+  const staminaCost = projectileWeapon ? fighter.profile.shotDrain || 8 : 8;
   if (
     !fighter.alive ||
     fighter.hitstun > 0 ||
@@ -10572,6 +12863,73 @@ function startAttack(fighter, opponent = null, match = state.match) {
     fighter.stamina < staminaCost
   ) {
     return false;
+  }
+
+  if (isMagicWeapon(fighter.weapon)) {
+    if (fighter.reloadTimer > 0) {
+      return false;
+    }
+    if (fighter.ammo <= 0) {
+      return startReload(fighter, match, true);
+    }
+
+    const pageId = fighter.weapon.kind === "spellbook" ? currentSpellbookPageId(fighter) : fighter.weapon.magicPage;
+    const target = opponent || match?.fighters?.find((candidate) => candidate.team !== fighter.team) || null;
+
+    if (fighter.weapon.kind === "wand") {
+      const pointId = wandGesturePointId(fighter);
+      const requiredPoints = fighter.weapon.glyphAssist ? 2 : 3;
+      fighter.wandGlyph.push(pointId);
+      fighter.wandGlyph = fighter.wandGlyph.slice(-requiredPoints);
+      fighter.wandGlyphTimer = 1.5;
+      fighter.attackFlash = Math.max(fighter.attackFlash, 0.08);
+      addSpark(match, fighter.x + fighter.facing * 18, fighter.y - currentFighterHeight(fighter) * 0.66, fighter.weapon.color, 4);
+      const castType = wandCastTypeFromGlyph(fighter);
+      if (!castType) {
+        setMatchSummary(`${wandGestureLabel(pointId)} set. ${requiredPoints - fighter.wandGlyph.length} more point${requiredPoints - fighter.wandGlyph.length === 1 ? "" : "s"} to cast.`);
+        return true;
+      }
+      const casted = castMagicAttack(fighter, target, match, castType, pageId, staminaCost);
+      fighter.wandGlyph = [];
+      fighter.wandGlyphTimer = 0;
+      return casted;
+    }
+
+    if (fighter.weapon.kind === "spellbook") {
+      const castType =
+        pageId === "cyclone"
+          ? "tornado"
+          : pageId === "grave"
+            ? "curse"
+            : pageId === "ward"
+              ? "ward"
+              : pageId === "frost"
+                ? "burst"
+                : "lance";
+      return castMagicAttack(fighter, target, match, castType, pageId, staminaCost);
+    }
+
+    if (fighter.weapon.kind === "artifact") {
+      const castType =
+        fighter.weapon.specialType === "artifact-raise"
+          ? "zombie"
+          : fighter.weapon.specialType === "artifact-curse"
+            ? "curse"
+            : "ward";
+      return castMagicAttack(fighter, target, match, castType, pageId, staminaCost);
+    }
+
+    const castType =
+      fighter.weapon.magicPattern === "cyclone"
+        ? "tornado"
+        : fighter.weapon.magicPattern === "ward"
+          ? "ward"
+          : fighter.weapon.magicPattern === "grave"
+            ? "curse"
+            : fighter.weapon.magicPattern === "rift"
+              ? "rift"
+              : "lance";
+    return castMagicAttack(fighter, target, match, castType, pageId, staminaCost);
   }
 
   if (isRangedWeapon(fighter.weapon)) {
@@ -10935,7 +13293,7 @@ function attemptComboAttackHit(attacker, defender, match, segment, index) {
 function attemptMouseSwingHit(attacker, defender, match, dt) {
   if (
     attacker.control !== "p1" ||
-    isRangedWeapon(attacker.weapon) ||
+    usesProjectileCombat(attacker.weapon) ||
     !attacker.alive ||
     !defender.alive ||
     attacker.hitstun > 0 ||
@@ -11259,6 +13617,7 @@ function updateAttackState(fighter, opponent, match, dt) {
 
 function applyHumanControl(fighter, input, match) {
   fighter.moveIntent = 0;
+  const spellbookCycler = isMagicWeapon(fighter.weapon) && fighter.weapon.kind === "spellbook";
 
   if (!fighter.alive) {
     fighter.blocking = false;
@@ -11300,8 +13659,12 @@ function applyHumanControl(fighter, input, match) {
   if (input.attackPressed || (isRangedWeapon(fighter.weapon) && input.attack)) {
     startAttack(fighter, match.fighters.find((candidate) => candidate.team !== fighter.team), match);
   }
+  if (spellbookCycler && input.blockPressed) {
+    cycleSpellbookPage(fighter, match);
+  }
   if (
     input.blockPressed &&
+    !spellbookCycler &&
     fighter.onGround &&
     !fighter.attack &&
     fighter.dodgeTimer <= 0 &&
@@ -11311,6 +13674,7 @@ function applyHumanControl(fighter, input, match) {
   }
 
   fighter.blocking =
+    !spellbookCycler &&
     input.block &&
     fighter.onGround &&
     !fighter.attack &&
@@ -11343,8 +13707,8 @@ function applyAiControl(fighter, opponent, match, dt) {
 
   const gap = opponent.x - fighter.x;
   const absGap = Math.abs(gap);
-  const rangedFighter = isRangedWeapon(fighter.weapon);
-  const preferredGap = rangedFighter ? clamp((fighter.weapon.projectileRange || 420) * 0.45, 180, 320) : fighter.profile.reach + 42;
+  const projectileFighter = usesProjectileCombat(fighter.weapon);
+  const preferredGap = projectileFighter ? clamp((fighter.weapon.projectileRange || 420) * 0.45, 180, 320) : fighter.profile.reach + 42;
 
   if (fighter.aiDecisionTimer <= 0) {
     fighter.aiDecisionTimer = randomRange(0.08, 0.22);
@@ -11359,13 +13723,13 @@ function applyAiControl(fighter, opponent, match, dt) {
       } else {
         performBackstep(fighter, match);
       }
-    } else if (rangedFighter && fighter.reloadTimer > 0) {
+    } else if (projectileFighter && fighter.reloadTimer > 0) {
       fighter.aiIntent.left = gap > 0;
       fighter.aiIntent.right = gap < 0;
       if (absGap < 120 && Math.random() < 0.44) {
         performBackstep(fighter, match);
       }
-    } else if (rangedFighter && absGap < 112) {
+    } else if (projectileFighter && absGap < 112) {
       fighter.aiIntent.left = gap > 0;
       fighter.aiIntent.right = gap < 0;
       if (Math.random() < 0.42) {
@@ -11374,11 +13738,11 @@ function applyAiControl(fighter, opponent, match, dt) {
     } else if (absGap > preferredGap) {
       fighter.aiIntent.right = gap > 0;
       fighter.aiIntent.left = gap < 0;
-    } else if (!rangedFighter && absGap < fighter.profile.reach * 0.7 && Math.random() < 0.26) {
+    } else if (!projectileFighter && absGap < fighter.profile.reach * 0.7 && Math.random() < 0.26) {
       performBackstep(fighter, match);
-    } else if (Math.random() < (rangedFighter ? 0.68 : 0.55)) {
+    } else if (Math.random() < (projectileFighter ? 0.68 : 0.55)) {
       startAttack(fighter, opponent, match);
-    } else if (Math.random() < (rangedFighter ? 0.16 : 0.22)) {
+    } else if (Math.random() < (projectileFighter ? 0.16 : 0.22)) {
       performLunge(fighter, match);
     } else if (Math.random() < 0.14) {
       performJump(fighter, match);
@@ -11429,6 +13793,7 @@ function updateFighter(fighter, opponent, match, dt) {
   fighter.jumpCooldown = Math.max(0, fighter.jumpCooldown - dt);
   fighter.manualSwingCooldown = Math.max(0, fighter.manualSwingCooldown - dt);
   fighter.reloadTimer = Math.max(0, fighter.reloadTimer - dt);
+  fighter.wandGlyphTimer = Math.max(0, fighter.wandGlyphTimer - dt);
   fighter.slowTimer = Math.max(0, fighter.slowTimer - dt);
   fighter.poisonTimer = Math.max(0, fighter.poisonTimer - dt);
   fighter.poisonTickTimer = Math.max(0, fighter.poisonTickTimer - dt);
@@ -11437,16 +13802,21 @@ function updateFighter(fighter, opponent, match, dt) {
   fighter.dashSpeed = Math.max(0, fighter.dashSpeed - dt * 1180);
   fighter.slideHitCooldown = Math.max(0, fighter.slideHitCooldown - dt);
 
-  if (wasReloading && fighter.reloadTimer <= 0 && isRangedWeapon(fighter.weapon)) {
+  if (wasReloading && fighter.reloadTimer <= 0 && usesProjectileCombat(fighter.weapon)) {
     fighter.loadedRounds = ammoRoundListForWeapon(fighter.weapon);
     fighter.maxAmmo = fighter.loadedRounds.length;
     fighter.ammo = fighter.maxAmmo;
     fighter.roundIndex = 0;
     addSpark(match, fighter.x + fighter.facing * 8, fighter.y - currentFighterHeight(fighter) * 0.54, "rgba(255,255,255,0.85)", 8);
     if (fighter.team === PLAYER_TEAM) {
-      setMatchSummary(`${fighter.weapon.name} reloaded.`);
-      pushFightEvent(match, "Reload Ready", `${fighter.name} reloaded ${fighter.weapon.name}.`, "control");
+      const reloadReadyLabel = isMagicWeapon(fighter.weapon) ? `${fighter.weapon.name} focus restored.` : `${fighter.weapon.name} reloaded.`;
+      setMatchSummary(reloadReadyLabel);
+      pushFightEvent(match, "Reload Ready", `${fighter.name} reset ${fighter.weapon.name}.`, "control");
     }
+  }
+
+  if (fighter.wandGlyphTimer <= 0 && fighter.wandGlyph.length) {
+    fighter.wandGlyph = [];
   }
 
   if (fighter.poisonTimer > 0 && fighter.poisonTickTimer <= 0) {
@@ -12441,7 +14811,91 @@ function drawFighter(fighter) {
     }
   }
 
-  if (isRangedWeapon(fighter.weapon)) {
+  if (isMagicWeapon(fighter.weapon)) {
+    const dx = weaponTipX - weaponRenderBaseX;
+    const dy = weaponTipY - weaponRenderBaseY;
+    const length = Math.max(1, Math.hypot(dx, dy));
+    const ux = dx / length;
+    const uy = dy / length;
+    const px = -uy;
+    const py = ux;
+    const castAngle = Math.atan2(dy, dx);
+
+    if (fighter.weapon.kind === "wand" || fighter.weapon.kind === "staff") {
+      ctx.strokeStyle = "rgba(0,0,0,0.3)";
+      ctx.lineWidth = fighter.weapon.kind === "staff" ? 8 : 6;
+      ctx.beginPath();
+      ctx.moveTo(weaponRenderBaseX - ux * 6, weaponRenderBaseY - uy * 6);
+      ctx.lineTo(weaponTipX, weaponTipY);
+      ctx.stroke();
+
+      ctx.strokeStyle = fighter.weapon.color;
+      ctx.lineWidth = fighter.weapon.kind === "staff" ? 5 : 4;
+      ctx.beginPath();
+      ctx.moveTo(weaponRenderBaseX - ux * 6, weaponRenderBaseY - uy * 6);
+      ctx.lineTo(weaponTipX, weaponTipY);
+      ctx.stroke();
+
+      ctx.fillStyle = `${fighter.weapon.color}55`;
+      ctx.beginPath();
+      ctx.arc(weaponTipX, weaponTipY, fighter.weapon.kind === "staff" ? 8 : 6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = fighter.weapon.color;
+      ctx.beginPath();
+      ctx.arc(weaponTipX, weaponTipY, fighter.weapon.kind === "staff" ? 5.5 : 4, 0, Math.PI * 2);
+      ctx.fill();
+    } else if (fighter.weapon.kind === "spellbook") {
+      ctx.save();
+      ctx.translate(weaponTipX, weaponTipY);
+      ctx.rotate(castAngle);
+      ctx.fillStyle = "rgba(0,0,0,0.28)";
+      ctx.fillRect(-16, -12, 32, 24);
+      ctx.strokeStyle = fighter.weapon.color;
+      ctx.lineWidth = 4;
+      ctx.strokeRect(-14, -10, 28, 20);
+      ctx.strokeStyle = "#f4efe7";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, -10);
+      ctx.lineTo(0, 10);
+      ctx.stroke();
+      ctx.restore();
+    } else {
+      ctx.strokeStyle = "rgba(0,0,0,0.3)";
+      ctx.lineWidth = 7;
+      ctx.beginPath();
+      ctx.moveTo(weaponRenderBaseX, weaponRenderBaseY);
+      ctx.lineTo(weaponTipX, weaponTipY);
+      ctx.stroke();
+
+      ctx.strokeStyle = fighter.weapon.color;
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(weaponRenderBaseX, weaponRenderBaseY);
+      ctx.lineTo(weaponTipX, weaponTipY);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(weaponTipX, weaponTipY - 10);
+      ctx.lineTo(weaponTipX + px * 10, weaponTipY);
+      ctx.lineTo(weaponTipX, weaponTipY + 10);
+      ctx.lineTo(weaponTipX - px * 10, weaponTipY);
+      ctx.closePath();
+      ctx.fillStyle = `${fighter.weapon.color}66`;
+      ctx.fill();
+      ctx.strokeStyle = fighter.weapon.color;
+      ctx.lineWidth = 3;
+      ctx.stroke();
+    }
+
+    if (fighter.muzzleFlash > 0) {
+      ctx.strokeStyle = `rgba(255,255,255,${fighter.muzzleFlash * 6})`;
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(weaponTipX, weaponTipY, 12 + fighter.muzzleFlash * 18, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  } else if (isRangedWeapon(fighter.weapon)) {
     const dx = weaponTipX - weaponRenderBaseX;
     const dy = weaponTipY - weaponRenderBaseY;
     const length = Math.max(1, Math.hypot(dx, dy));
@@ -12594,6 +15048,20 @@ function drawZones(match) {
     ctx.beginPath();
     ctx.arc(x, y, zone.radius, 0, Math.PI * 2);
     ctx.fill();
+    if (zone.type === "tornado" || zone.type === "ward" || zone.type === "curse") {
+      ctx.strokeStyle =
+        zone.type === "tornado"
+          ? `rgba(190,245,255,${alpha * 0.7})`
+          : zone.type === "ward"
+            ? `rgba(255,231,163,${alpha * 0.72})`
+            : `rgba(168,255,178,${alpha * 0.68})`;
+      ctx.lineWidth = zone.type === "ward" ? 3 : 2.5;
+      ctx.setLineDash(zone.type === "curse" ? [8, 6] : []);
+      ctx.beginPath();
+      ctx.arc(x, y, zone.radius * (zone.type === "tornado" ? 0.72 : 0.84), 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
   });
 }
 
@@ -12604,9 +15072,9 @@ function drawProjectiles(match) {
     const endX = stageOffsetX() + projectile.x;
     const endY = STAGE_TOP + projectile.y + 10;
     const glow = projectile.glow || (projectile.ammoType === "rail" ? "#d1f7ff" : projectile.color);
-    const outerWidth = projectile.ammoType === "rail" ? 7 : projectile.ammoType === "bolt" ? 5 : 4;
-    const innerWidth = projectile.ammoType === "rail" ? 3 : projectile.ammoType === "bolt" ? 2.6 : 2.2;
-    const tipRadius = projectile.tipType === "blunt" ? 4.2 : projectile.tipType === "drill" ? 3.6 : 3.2;
+    const outerWidth = projectile.ammoType === "rail" ? 7 : projectile.ammoType === "bolt" ? 5 : projectile.ammoType === "mana" ? 5.6 : 4;
+    const innerWidth = projectile.ammoType === "rail" ? 3 : projectile.ammoType === "bolt" ? 2.6 : projectile.ammoType === "mana" ? 3 : 2.2;
+    const tipRadius = projectile.ammoType === "mana" ? 4.4 : projectile.tipType === "blunt" ? 4.2 : projectile.tipType === "drill" ? 3.6 : 3.2;
 
     ctx.save();
     ctx.globalAlpha = projectile.weakened ? 0.58 : 1;
@@ -12645,17 +15113,26 @@ function drawSparks(match) {
   ctx.globalAlpha = 1;
 }
 
+function fighterResourceText(fighter) {
+  if (isMagicWeapon(fighter.weapon)) {
+    const pageText = fighter.weapon.kind === "spellbook" ? ` | ${currentSpellbookPageLabel(fighter).replace(" Page", "").toUpperCase()}` : "";
+    const runeText = fighter.weapon.kind === "wand" && fighter.wandGlyph.length ? ` | ${fighter.wandGlyph.length} RUNE` : "";
+    const reloadText = fighter.reloadTimer > 0 ? " | FOCUS" : "";
+    return `${fighter.ammo}/${fighter.maxAmmo} MANA${reloadText}${pageText}${runeText}`;
+  }
+  if (isRangedWeapon(fighter.weapon)) {
+    return `${fighter.ammo}/${fighter.maxAmmo} ${fighter.weapon.ammoType}${fighter.reloadTimer > 0 ? " | RELOAD" : ""}`;
+  }
+  return `${Math.ceil(fighter.stamina)} stamina`;
+}
+
 function drawHud(match) {
   const [player, enemy] = match.fighters;
   const playerLabel = `${player.name.toUpperCase()}  ${match.playerWeapon.name.toUpperCase()}`;
   const enemyLabel = `${enemy.name.toUpperCase()}  ${match.rivalWeapon.name.toUpperCase()}`;
   const timerText = `${Math.ceil(match.timer)}`;
-  const playerAmmo = isRangedWeapon(player.weapon)
-    ? `${player.ammo}/${player.maxAmmo} ${player.weapon.ammoType}${player.reloadTimer > 0 ? " | RELOAD" : ""}`
-    : `${Math.ceil(player.stamina)} stamina`;
-  const enemyAmmo = isRangedWeapon(enemy.weapon)
-    ? `${enemy.ammo}/${enemy.maxAmmo} ${enemy.weapon.ammoType}${enemy.reloadTimer > 0 ? " | RELOAD" : ""}`
-    : `${Math.ceil(enemy.stamina)} stamina`;
+  const playerAmmo = fighterResourceText(player);
+  const enemyAmmo = fighterResourceText(enemy);
 
   fillRoundedRect(ctx, 24, 10, 348, 56, 20, "rgba(0,0,0,0.34)");
   fillRoundedRect(ctx, canvas.width - 372, 10, 348, 56, 20, "rgba(0,0,0,0.34)");
@@ -12704,7 +15181,7 @@ function drawHud(match) {
   } else if (player.stunTimer > 0) {
     drawStatusPill(40, 80, "STUN", "#ffd47c");
   } else if (player.reloadTimer > 0) {
-    drawStatusPill(40, 80, "RELOAD", "#f2dcaa");
+    drawStatusPill(40, 80, isMagicWeapon(player.weapon) ? "FOCUS" : "RELOAD", "#f2dcaa");
   } else if (player.poisonTimer > 0) {
     drawStatusPill(40, 80, "POISON", "#9ef58c");
   } else if (player.slowTimer > 0) {
@@ -12716,7 +15193,7 @@ function drawHud(match) {
   } else if (enemy.stunTimer > 0) {
     drawStatusPill(canvas.width - 40, 80, "STUN", "#ffd47c", true);
   } else if (enemy.reloadTimer > 0) {
-    drawStatusPill(canvas.width - 40, 80, "RELOAD", "#f2dcaa", true);
+    drawStatusPill(canvas.width - 40, 80, isMagicWeapon(enemy.weapon) ? "FOCUS" : "RELOAD", "#f2dcaa", true);
   } else if (enemy.poisonTimer > 0) {
     drawStatusPill(canvas.width - 40, 80, "POISON", "#9ef58c", true);
   } else if (enemy.slowTimer > 0) {
@@ -12833,6 +15310,7 @@ function loop(now) {
   const dt = clamp((now - state.lastFrameTime) / 1000, 0, 0.033);
   state.lastFrameTime = now;
   pollGamepadState();
+  updateForgeRoom(dt);
   updateForgeMinigame(dt);
   updateStyleTraining(dt);
   if (!state.menu.open && state.flow.screen === "arena") {
@@ -12872,6 +15350,11 @@ function handleForgeChange() {
     frame: requestedFrame,
     material: ui.materialSelect.value,
     edge: state.forge.edge,
+    enchant: ui.enchantSelect?.value || state.forge.enchant,
+    magicElement: ui.magicElement?.value || state.forge.magicElement,
+    magicPattern: ui.magicPattern?.value || state.forge.magicPattern,
+    magicFocus: ui.magicFocus?.value || state.forge.magicFocus,
+    magicPage: ui.magicPage?.value || state.forge.magicPage,
     impactChambers: ui.impactChambers.value || state.forge.impactChambers,
     impactMount: ui.impactMount.value || state.forge.impactMount,
     chamberImpacts: state.forge.chamberImpacts,
@@ -12890,6 +15373,11 @@ function handleForgeChange() {
     previousForge.kind !== state.forge.kind ||
     previousForge.frame !== state.forge.frame ||
     previousForge.material !== state.forge.material ||
+    previousForge.enchant !== state.forge.enchant ||
+    previousForge.magicElement !== state.forge.magicElement ||
+    previousForge.magicPattern !== state.forge.magicPattern ||
+    previousForge.magicFocus !== state.forge.magicFocus ||
+    previousForge.magicPage !== state.forge.magicPage ||
     previousForge.edge !== state.forge.edge ||
     previousForge.impactChambers !== state.forge.impactChambers ||
     previousForge.impactMount !== state.forge.impactMount ||
@@ -13032,6 +15520,11 @@ function bindEvents() {
     ui.frameSelect,
     ui.materialSelect,
     ui.edgeSelect,
+    ui.enchantSelect,
+    ui.magicElement,
+    ui.magicPattern,
+    ui.magicFocus,
+    ui.magicPage,
     ui.impactChambers,
     ui.impactMount,
     ui.launchType,
@@ -13077,13 +15570,25 @@ function bindEvents() {
 
   ui.forgeStart.addEventListener("click", () => {
     startForgeMinigame();
-    setMatchSummary(`Forge drill started for ${currentBlueprint().classLabel.toLowerCase()} ${isRangedWeapon(currentBlueprint()) ? "ammo tuning" : "weapon work"}.`);
+    const blueprint = currentBlueprint();
+    const forgeWorkLabel = isMagicWeapon(blueprint)
+      ? "arcane binding"
+      : isRangedWeapon(blueprint)
+        ? "ammo tuning"
+        : "weapon work";
+    setMatchSummary(`Forge drill started for ${blueprint.classLabel.toLowerCase()} ${forgeWorkLabel}.`);
   });
 
   ui.forgeAction.addEventListener("click", () => {
     handleForgeMinigameAction();
     const quality = forgeRatingLabel(state.forge.forgeQuality ?? state.forgeGame.rating);
     setMatchSummary(`Forge finish now reads ${quality}.`);
+  });
+  ui.forgeInteract?.addEventListener("click", () => {
+    useForgeStation();
+  });
+  ui.forgeCycleStation?.addEventListener("click", () => {
+    cycleForgeStation();
   });
 
   ui.presetButtons.forEach((button) => {
@@ -13275,6 +15780,16 @@ function bindEvents() {
       event.preventDefault();
       handleForgeMinigameAction();
       renderForge();
+      return;
+    }
+    if (state.flow.screen === "forge" && event.code === "KeyF") {
+      event.preventDefault();
+      useForgeStation();
+      return;
+    }
+    if (state.flow.screen === "forge" && event.code === "KeyC") {
+      event.preventDefault();
+      cycleForgeStation();
       return;
     }
     if (preventedKeys.has(event.code)) {

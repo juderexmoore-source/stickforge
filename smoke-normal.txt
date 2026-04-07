@@ -1,12 +1,26 @@
+﻿msedge.exe : [8224:13528:0407/185154.699:ERROR:chrome\browser\task_manager\providers\fallback_task_provider.cc:126] 
+Every renderer should have at least one task provided by a primary task provider. If a "Renderer" fallback task is 
+shown, it is a bug. If you have repro steps, please file a new bug and tag it as a dependency of crbug.com/40528867.
+At line:2 char:162
++ ... ndex.html'; & $edge --headless --disable-gpu --allow-file-access-from ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([8224:13528:040...g.com/40528867.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[8224:13528:0407/185156.216:ERROR:chrome\browser\task_manager\providers\fallback_task_provider.cc:126] Every renderer 
+should have at least one task provided by a primary task provider. If a "Renderer" fallback task is shown, it is a 
+bug. If you have repro steps, please file a new bug and tag it as a dependency of crbug.com/40528867.
+[8224:13528:0407/185156.294:ERROR:components\device_event_log\device_event_log_impl.cc:248] [18:51:56.294] USB: 
+usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: Element not 
+found. (0x490)
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Stickforge Arena</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css">
   </head>
-  <body>
+  <body class="arena-focus">
     <div class="backdrop backdrop-one"></div>
     <div class="backdrop backdrop-two"></div>
 
@@ -26,7 +40,7 @@
       </div>
     </section>
 
-    <section class="main-menu" id="main-menu" aria-label="Main menu">
+    <section class="main-menu hidden" id="main-menu" aria-label="Main menu">
       <div class="main-menu-shell panel">
         <div class="main-menu-hero">
           <div>
@@ -48,7 +62,37 @@
             <button id="menu-open-workshop" class="ghost-button" type="button">Forge Screen</button>
             <button id="menu-open-style-lab" class="ghost-button" type="button">Style Lab</button>
           </div>
-          <div class="menu-summary" id="menu-summary"></div>
+          <div class="menu-summary" id="menu-summary">
+    <article class="menu-summary-card">
+      <span class="menu-summary-kicker">Guest Slot</span>
+      <strong>Guest</strong>
+      <p>Sign in to save reviews locally and build a career record.</p>
+      <div class="menu-summary-meta">
+        <span>No account stats yet</span>
+        <span>Guest mode</span>
+        <span>PC controls</span>
+      </div>
+    </article>
+    <article class="menu-summary-card">
+      <span class="menu-summary-kicker">Arena Start</span>
+      <strong>Fight First</strong>
+      <p>Bot matches, PvP sets, and the tutorial all start straight in the arena now.</p>
+      <div class="menu-summary-meta">
+        <span>Vs Bot</span>
+        <span>2 rounds to win</span>
+        <span>Rival: Bot</span>
+      </div>
+    </article>
+    <article class="menu-summary-card">
+      <span class="menu-summary-kicker">Forge Screen</span>
+      <strong>3 Saved Loadouts</strong>
+      <p>Open the forge screen when you want to rebuild weapons, armory picks, or the stage rules.</p>
+      <div class="menu-summary-meta">
+        <span>Foundry</span>
+        <span>Hazard punishes standing still</span>
+      </div>
+    </article>
+  </div>
           <div class="menu-feature-grid">
             <article class="menu-feature-card">
               <span>Arena</span>
@@ -72,14 +116,10 @@
           <div>
             <p class="eyebrow">New Player Check</p>
             <h3>It Looks Like You're New. Want The Tutorial?</h3>
-            <p class="arena-hint" id="tutorial-offer-copy">
-              Choose whether you are on PC, mobile, or controller first. Then the
-              tutorial will explain the right buttons and guide you through a safe
-              practice fight step by step.
-            </p>
+            <p class="arena-hint" id="tutorial-offer-copy">Choose your controls first. Right now the guided tutorial is set for PC and will walk you through the buttons in a safe practice fight.</p>
           </div>
           <div class="device-choice-row" id="device-choice">
-            <button class="ghost-button device-choice-button" data-device-choice="pc" type="button">PC</button>
+            <button class="ghost-button device-choice-button active" data-device-choice="pc" type="button">PC</button>
             <button class="ghost-button device-choice-button" data-device-choice="mobile" type="button">Mobile</button>
             <button class="ghost-button device-choice-button" data-device-choice="controller" type="button">Controller</button>
           </div>
@@ -99,19 +139,17 @@
               <span class="section-tag">Saved here</span>
             </div>
 
-            <p id="account-status" class="arena-hint">
-              No account is signed in. Sign in to save reviews, friends, and local fight history.
-            </p>
+            <p id="account-status" class="arena-hint">No account is signed in. Sign in to save reviews, friends, and local fight history.</p>
 
             <div class="forge-grid account-grid">
               <label>
                 <span>Name</span>
-                <input id="account-name" type="text" maxlength="12" placeholder="Arena name" />
+                <input id="account-name" type="text" maxlength="12" placeholder="Arena name">
               </label>
 
               <label>
                 <span>Passcode</span>
-                <input id="account-passcode" type="password" maxlength="24" placeholder="Local passcode" />
+                <input id="account-passcode" type="password" maxlength="24" placeholder="Local passcode">
               </label>
             </div>
 
@@ -121,9 +159,7 @@
               <button id="logout-account" class="ghost-button" type="button">Log Out</button>
             </div>
 
-            <p id="account-note" class="arena-hint">
-              Feedback is open to everyone now. Sign in when you want your own name, reviews, and friend list saved here.
-            </p>
+            <p id="account-note" class="arena-hint">Create a local account to keep your player name, reviews, and friends on this browser.</p>
 
             <div class="section-head compact">
               <div>
@@ -131,7 +167,7 @@
                 <h3>Local Inbox</h3>
               </div>
             </div>
-            <div id="feedback-inbox" class="feedback-inbox"></div>
+            <div id="feedback-inbox" class="feedback-inbox"><p class="arena-hint">No saved feedback yet. Play a set and leave the first arena note.</p></div>
           </section>
 
           <section class="menu-card">
@@ -156,12 +192,7 @@
 
             <label class="feedback-label" for="review-note">
               <span>Short review</span>
-              <textarea
-                id="review-note"
-                rows="4"
-                maxlength="180"
-                placeholder="Example: the spear feels clear now and local pvp is easier to understand."
-              ></textarea>
+              <textarea id="review-note" rows="4" maxlength="180" placeholder="Example: the spear feels clear now and local pvp is easier to understand."></textarea>
             </label>
 
             <div class="feedback-actions">
@@ -175,7 +206,7 @@
                 <h3>Arena Reviews</h3>
               </div>
             </div>
-            <div id="review-list" class="feedback-inbox"></div>
+            <div id="review-list" class="feedback-inbox"><p class="arena-hint">No menu reviews yet. Sign in and leave the first one.</p></div>
           </section>
 
           <section class="menu-card menu-card-wide">
@@ -187,14 +218,12 @@
               <span class="section-tag">Saved here</span>
             </div>
 
-            <p id="friend-status" class="arena-hint">
-              Sign in to save a local friend list for this browser.
-            </p>
+            <p id="friend-status" class="arena-hint">Sign in to save a local friend list for this browser.</p>
 
             <div class="forge-grid account-grid">
               <label>
                 <span>Friend Name</span>
-                <input id="friend-name" type="text" maxlength="12" placeholder="Friend tag or account" />
+                <input id="friend-name" type="text" maxlength="12" placeholder="Friend tag or account">
               </label>
             </div>
 
@@ -202,7 +231,7 @@
               <button id="add-friend" class="primary-button" type="button">Add Friend</button>
             </div>
 
-            <div id="friend-list" class="feedback-inbox"></div>
+            <div id="friend-list" class="feedback-inbox"><p class="arena-hint">No active profile. Sign in before adding friends.</p></div>
           </section>
 
           <section class="menu-card menu-card-wide" id="style-lab-card">
@@ -214,14 +243,12 @@
               <span class="section-tag">Skill tree</span>
             </div>
 
-            <p id="style-lab-status" class="arena-hint">
-              Sign in to earn style skill points from matches, train paths, and work toward mastery weapons.
-            </p>
+            <p id="style-lab-status" class="arena-hint">Sign in to earn style skill points, level paths, and unlock mastery weapons.</p>
 
             <div class="style-lab-top">
               <label>
                 <span>Active Style</span>
-                <select id="style-select"></select>
+                <select id="style-select"><option value="tempest">Tempest</option><option value="bastion">Bastion</option><option value="phantom">Phantom</option></select>
               </label>
               <div class="style-lab-points">
                 <article class="style-pill-card">
@@ -239,26 +266,26 @@
               </div>
             </div>
 
-            <div id="style-summary" class="menu-summary"></div>
+            <div id="style-summary" class="menu-summary"><article class="menu-summary-card"><span class="menu-summary-kicker">Guest</span><strong>No style profile</strong><p>Match rewards only save to signed-in accounts.</p></article></div>
 
             <div class="style-path-grid" id="style-path-grid">
               <article class="style-path-card">
                 <span>Agility</span>
               <strong id="style-agility-level">0 / 50</strong>
                 <p id="style-agility-copy">Train movement and evasive control.</p>
-                <button id="train-agility" class="ghost-button" type="button">Train Agility</button>
+                <button id="train-agility" class="ghost-button" type="button" disabled="">Train Agility</button>
               </article>
               <article class="style-path-card">
                 <span>Strength</span>
               <strong id="style-strength-level">0 / 50</strong>
                 <p id="style-strength-copy">Train power and hit finishers.</p>
-                <button id="train-strength" class="ghost-button" type="button">Train Strength</button>
+                <button id="train-strength" class="ghost-button" type="button" disabled="">Train Strength</button>
               </article>
               <article class="style-path-card">
                 <span>Defense</span>
               <strong id="style-defense-level">0 / 50</strong>
                 <p id="style-defense-copy">Train guard and survival tools.</p>
-                <button id="train-defense" class="ghost-button" type="button">Train Defense</button>
+                <button id="train-defense" class="ghost-button" type="button" disabled="">Train Defense</button>
               </article>
             </div>
 
@@ -291,19 +318,19 @@
               </div>
               <p class="arena-hint" id="style-training-status">No trial running. Choose a style path to start.</p>
               <div class="action-row forge-minigame-actions">
-                <button id="style-training-start" class="ghost-button" type="button">Start Trial</button>
-                <button id="style-training-action" class="primary-button" type="button">Act</button>
+                <button id="style-training-start" class="ghost-button" type="button" disabled="">Start Trial</button>
+                <button id="style-training-action" class="primary-button" type="button" disabled="">Act</button>
               </div>
             </div>
 
             <div class="style-unlock-grid">
               <article class="style-unlock-card">
                 <span>Unlocked Passives</span>
-                <div id="style-passives" class="feedback-inbox"></div>
+                <div id="style-passives" class="feedback-inbox"><p class="arena-hint">No passives yet.</p></div>
               </article>
               <article class="style-unlock-card">
                 <span>Path Abilities</span>
-                <div id="style-abilities" class="feedback-inbox"></div>
+                <div id="style-abilities" class="feedback-inbox"><p class="arena-hint">No abilities yet.</p></div>
               </article>
             </div>
           </section>
@@ -311,7 +338,7 @@
 
         <div class="menu-footer">
           <div class="menu-footer-actions">
-            <button id="menu-toggle-sound" class="ghost-button" type="button">Sound: On</button>
+            <button id="menu-toggle-sound" class="ghost-button active" type="button">Sound: On</button>
             <button id="close-menu" class="ghost-button" type="button">Close Menu</button>
           </div>
           <p class="arena-hint">
@@ -354,18 +381,31 @@
                   <p class="eyebrow">Forge Rank</p>
                   <h3>Upgradeable Forge</h3>
                 </div>
-                <span class="section-tag" id="forge-upgrade-bonus">Basic Hall</span>
+                <span class="section-tag" id="forge-upgrade-bonus">Cinder Bench</span>
               </div>
               <div class="forge-progress-row">
                 <div class="forge-progress-bar">
-                  <div class="forge-progress-fill" id="forge-xp-fill"></div>
+                  <div class="forge-progress-fill" id="forge-xp-fill" style="width: 0%;"></div>
                 </div>
                 <strong id="forge-xp-text">0 / 60 XP</strong>
               </div>
-              <p class="arena-hint" id="forge-upgrade-copy">
-                Level the forge to unlock bigger classes, rarer materials, stronger ammo limits, enchanting, and magic work.
-              </p>
-              <div class="forge-unlock-grid" id="forge-unlocks"></div>
+              <p class="arena-hint" id="forge-upgrade-copy">Cinder Bench is active. Current build wants the Anvil Station. Forge ease bonus: +4 timing and +8 finish.</p>
+              <div class="forge-unlock-grid" id="forge-unlocks">
+          <div class="forge-unlock-chip">
+            <span>Unlocked</span>
+            <strong>Short and medium melee</strong>
+          </div>
+        
+          <div class="forge-unlock-chip">
+            <span>Unlocked</span>
+            <strong>Sidearms</strong>
+          </div>
+        
+          <div class="forge-unlock-chip">
+            <span>Unlocked</span>
+            <strong>Ironwood and Sunsteel</strong>
+          </div>
+        </div>
             </article>
 
             <article class="forge-room-card">
@@ -388,12 +428,10 @@
                 </div>
                 <div class="forge-room-chip">
                   <span>Focus</span>
-                  <strong id="forge-room-focus">Base forge work</strong>
+                  <strong id="forge-room-focus">Anvil Station</strong>
                 </div>
               </div>
-              <p class="arena-hint" id="forge-room-copy">
-                Move your stickman through the forge and use the correct station for the current build.
-              </p>
+              <p class="arena-hint" id="forge-room-copy">Use the anvil for core weapon bodies, blade shaping, and most non-magical frame work. Correct station active.</p>
               <div class="action-row forge-room-actions">
                 <button id="forge-interact" class="ghost-button" type="button">Use Station</button>
                 <button id="forge-cycle-station" class="ghost-button" type="button">Cycle Station</button>
@@ -404,76 +442,79 @@
           <div class="forge-grid">
             <label>
               <span>Name</span>
-              <input id="weapon-name" type="text" maxlength="12" value="Ashbite" />
+              <input id="weapon-name" type="text" maxlength="12" value="Ashbite">
             </label>
 
             <label>
               <span>Combat Type</span>
-              <select id="family-select"></select>
+              <select id="family-select"><option value="melee">Melee</option><option value="ranged">Ranged</option></select>
             </label>
 
             <label>
               <span>Weapon Class</span>
-              <select id="class-select"></select>
+              <select id="class-select"><option value="medium">Medium</option><option value="short">Short</option></select>
             </label>
 
             <label>
               <span>Sub-Type</span>
-              <select id="frame-select"></select>
+              <select id="frame-select"><option value="katana">Katana</option><option value="capesh">Capesh</option><option value="saber">Saber</option><option value="cutlass">Cutlass</option><option value="falchion">Falchion</option><option value="twinblade">Twinblade</option><option value="rapier">Rapier</option><option value="glaive">Glaive</option><option value="riftblade">Rift Blade</option></select>
             </label>
 
             <label>
               <span>Material</span>
-              <select id="material-select"></select>
+              <select id="material-select"><option value="ironwood">Ironwood Core</option><option value="sunsteel">Sunsteel</option></select>
             </label>
 
             <label id="enchant-label">
               <span>Enchant</span>
-              <select id="enchant-select"></select>
+              <select id="enchant-select" disabled=""><option value="none">No Enchant</option></select>
             </label>
 
-            <label id="style-label">
+            <label id="style-label" hidden="">
               <span>Style</span>
-              <select id="edge-select"></select>
+              <select id="edge-select" disabled=""><option value="class-special">Built-In Weapon Trait</option></select>
             </label>
 
             <label>
               <span>Heat</span>
-              <input id="heat-range" type="range" min="0" max="100" value="58" />
+              <input id="heat-range" type="range" min="0" max="100" value="58">
               <output id="heat-value">58%</output>
             </label>
           </div>
 
-          <p class="arena-hint forge-note">
-            Pick melee or ranged first, then the class and sub-type. Melee weapons now use built-in weapon traits only, while ranged weapons build ammo through chambers, launch powder, mid-flight mods, and tip tuning. Heat still raises both damage and weight.
-          </p>
+          <p class="arena-hint forge-note">Medium blades now use built-in class traits only. Saber trait: Dash becomes a solid forward slash with no extra gimmick.</p>
 
           <div class="preview-card">
             <canvas id="forge-preview" width="360" height="150"></canvas>
             <div>
               <h3 id="weapon-title">Ashbite</h3>
-              <p id="weapon-lore">
-                A responsive forge piece tuned for quick openings and clean
-                finishers.
-              </p>
-              <div class="forge-badges" id="forge-badges"></div>
+              <p id="weapon-lore">Saber with sunsteel and saber class special at 58% heat, built for solid slash pressure with built-in weapon traits. Rough finish: usable, but the edges and timing are a little loose.</p>
+              <div class="forge-badges" id="forge-badges">
+      <span class="menu-status alt">Medium Class</span>
+      <span class="menu-status alt">Straight duel blade</span>
+      <span class="menu-status alt">Medium Trait</span>
+      <span class="menu-status alt">Rough Forged</span>
+      <span class="menu-status alt">13.5 wt</span>
+      <span class="menu-status alt">84 reach</span>
+      <span class="menu-status alt">dash slash</span>
+    </div>
               <div class="forge-minigame" id="forge-minigame">
                 <div class="forge-minigame-head">
                   <div>
-                    <p class="eyebrow" id="forge-minigame-title">Forge Drill</p>
-                    <p id="forge-minigame-copy">Start the forge drill to tune this blade.</p>
+                    <p class="eyebrow" id="forge-minigame-title">Medium Blade Rhythm Forge</p>
+                    <p id="forge-minigame-copy">Medium blades want measured rhythm. Strike as the marker crosses each target to keep the slash line clean.</p>
                   </div>
-                  <span class="menu-status alt" id="forge-minigame-rating">Field Ready</span>
+                  <span class="menu-status alt" id="forge-minigame-rating">Rough Forged</span>
                 </div>
-                <div class="forge-minigame-bar" id="forge-minigame-bar">
+                <div class="forge-minigame-bar" id="forge-minigame-bar" style="--indicator: 18%; --target-start: 0%; --target-end: 0%;">
                   <div class="forge-minigame-target" id="forge-minigame-target"></div>
                   <div class="forge-minigame-indicator" id="forge-minigame-indicator"></div>
-                  <div class="forge-minigame-pips" id="forge-minigame-pips"></div>
+                  <div class="forge-minigame-pips" id="forge-minigame-pips"><span class="forge-pip" style="left: 24%;"></span><span class="forge-pip" style="left: 50%;"></span><span class="forge-pip" style="left: 76%;"></span></div>
                 </div>
                 <div class="forge-minigame-meta" id="forge-minigame-meta">
                   <div class="forge-minigame-chip">
                     <span>Progress</span>
-                    <strong id="forge-minigame-progress">0%</strong>
+                    <strong id="forge-minigame-progress">50%</strong>
                   </div>
                   <div class="forge-minigame-chip">
                     <span>Time</span>
@@ -484,19 +525,106 @@
                     <strong id="forge-minigame-streak">x0</strong>
                   </div>
                 </div>
-                <p class="arena-hint" id="forge-minigame-status">No forging run yet. This weapon is using a balanced default finish.</p>
+                <p class="arena-hint" id="forge-minigame-status">No medium-blade run yet. Start the drill to tune the slash rhythm. Press Enter or Space to strike once the drill starts.</p>
                 <div class="action-row forge-minigame-actions">
                   <button id="forge-start" class="ghost-button" type="button">Start Forge Drill</button>
-                  <button id="forge-action" class="primary-button" type="button">Strike</button>
+                  <button id="forge-action" class="primary-button" type="button">Hammer Hit</button>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="stats-grid" id="forge-stats"></div>
-          <div class="forge-details" id="forge-details"></div>
+          <div class="stats-grid" id="forge-stats"><div class="stat-card">
+      <span>Damage</span>
+      <strong>23</strong>
+      <div class="bar-track">
+        <div class="bar-fill" style="width: 55%"></div>
+      </div>
+      <p>Higher damage removes more health on a clean hit.</p>
+    </div><div class="stat-card">
+      <span>Weight</span>
+      <strong>13.5</strong>
+      <div class="bar-track">
+        <div class="bar-fill" style="width: 40%"></div>
+      </div>
+      <p>More weight hits harder, but it also slows movement and recovery.</p>
+    </div><div class="stat-card">
+      <span>Reach</span>
+      <strong>84</strong>
+      <div class="bar-track">
+        <div class="bar-fill" style="width: 59%"></div>
+      </div>
+      <p>Higher reach lets you touch the rival from farther away.</p>
+    </div><div class="stat-card">
+      <span>Speed</span>
+      <strong>102</strong>
+      <div class="bar-track">
+        <div class="bar-fill" style="width: 73%"></div>
+      </div>
+      <p>Higher speed makes the attack start faster.</p>
+    </div><div class="stat-card">
+      <span>Recovery</span>
+      <strong>57</strong>
+      <div class="bar-track">
+        <div class="bar-fill" style="width: 70%"></div>
+      </div>
+      <p>Higher recovery means you can move again sooner after swinging.</p>
+    </div><div class="stat-card">
+      <span>Push</span>
+      <strong>120</strong>
+      <div class="bar-track">
+        <div class="bar-fill" style="width: 65%"></div>
+      </div>
+      <p>Higher push shoves rivals farther and strains their block more.</p>
+    </div><div class="stat-card">
+      <span>Class</span>
+      <strong>Medium</strong>
+      <div class="bar-track">
+        <div class="bar-fill" style="width: 67%"></div>
+      </div>
+      <p>Medium stays balanced, keeps built-in weapon traits, and turns dash into a pass-through slash.</p>
+    </div><div class="stat-card">
+      <span>Finish</span>
+      <strong>50</strong>
+      <div class="bar-track">
+        <div class="bar-fill" style="width: 50%"></div>
+      </div>
+      <p>Better forge drill results give small boosts to damage, speed, recovery, and handling.</p>
+    </div></div>
+          <div class="forge-details" id="forge-details">
+    <article class="forge-detail-card">
+      <span>Weapon Type</span>
+      <strong>Saber | Medium</strong>
+      <p>Reliable medium blade. No execute gimmick, just stable jabs, clean slashes, and balanced dash pressure.</p>
+    </article>
+    <article class="forge-detail-card">
+      <span>Class Trait</span>
+      <strong>Saber Trait</strong>
+      <p>Medium weapons carry built-in class traits tuned to their class. Dash becomes a solid forward slash with no extra gimmick.</p>
+    </article>
+    <article class="forge-detail-card">
+      <span>Material</span>
+      <strong>Sunsteel</strong>
+      <p>Safe all-round metal. Small damage boost without pushing the weapon too far in any direction.</p>
+    </article>
+    <article class="forge-detail-card">
+      <span>Special</span>
+      <strong>dash slash</strong>
+      <p>Dash becomes a solid forward slash with no extra gimmick.</p>
+    </article>
+    <article class="forge-detail-card">
+      <span>Heat</span>
+      <strong>58% forge heat</strong>
+      <p>Mid heat adds extra damage without pushing the weight too far.</p>
+    </article>
+    <article class="forge-detail-card">
+      <span>Forge Finish</span>
+      <strong>Rough Forged</strong>
+      <p>Rough finish: usable, but the edges and timing are a little loose.</p>
+    </article>
+  </div>
 
-          <section class="ammo-workshop" id="ammo-workshop">
+          <section class="ammo-workshop" id="ammo-workshop" hidden="">
             <div class="section-head compact">
               <div>
                 <p class="eyebrow">Ammo Workshop</p>
@@ -509,27 +637,27 @@
             </p>
             <div class="ammo-workshop-grid">
               <div class="ammo-card">
-                <label id="impact-chambers-label">
+                <label id="impact-chambers-label" hidden="">
                   <span>Impact Chambers</span>
                   <select id="impact-chambers"></select>
                 </label>
 
-                <label id="impact-mount-label">
+                <label id="impact-mount-label" hidden="">
                   <span>Chamber Layout</span>
                   <select id="impact-mount"></select>
                 </label>
 
-                <div class="ammo-stack-field" id="impact-type-label">
+                <div class="ammo-stack-field" id="impact-type-label" hidden="">
                   <span>Per-Chamber Impacts</span>
                   <div class="impact-chamber-list" id="impact-chamber-list"></div>
                 </div>
 
-                <label id="launch-type-label">
+                <label id="launch-type-label" hidden="">
                   <span>Launch</span>
                   <select id="launch-type"></select>
                 </label>
 
-                <div class="ammo-stack-field" id="mid-air-type-label">
+                <div class="ammo-stack-field" id="mid-air-type-label" hidden="">
                   <span>Mid Air Add-Ons</span>
                   <div class="inline-select-row">
                     <select id="mid-air-type"></select>
@@ -538,12 +666,12 @@
                   <div class="token-list" id="mid-air-addon-list"></div>
                 </div>
 
-                <label id="tip-type-label">
+                <label id="tip-type-label" hidden="">
                   <span>Tip</span>
                   <select id="tip-type"></select>
                 </label>
 
-                <label id="preload-ammo-label">
+                <label id="preload-ammo-label" hidden="">
                   <span>Preload Ammo</span>
                   <select id="preload-ammo"></select>
                 </label>
@@ -583,7 +711,7 @@
             </div>
           </section>
 
-          <section class="ammo-workshop magic-workshop" id="magic-workshop" hidden>
+          <section class="ammo-workshop magic-workshop" id="magic-workshop" hidden="">
             <div class="section-head compact">
               <div>
                 <p class="eyebrow">Arcane Workshop</p>
@@ -636,7 +764,154 @@
               <h3>Armory</h3>
             </div>
           </div>
-          <div id="armory-list" class="armory-list"></div>
+          <div id="armory-list" class="armory-list"><article class="armory-card active"><header>
+      <div>
+        <strong>Ashbite</strong>
+        <span class="armory-frame-name">Saber</span>
+      </div>
+      <span class="pill">Medium</span>
+    </header><div class="armory-showcase">
+      
+    <svg viewBox="0 0 150 72" class="armory-preview-svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="armoryGlow-weapon-player" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#f0d48b" stop-opacity="0.08"></stop>
+          <stop offset="100%" stop-color="#f0d48b" stop-opacity="0.42"></stop>
+        </linearGradient>
+      </defs>
+      <rect x="6" y="10" width="138" height="52" rx="18" fill="rgba(255,255,255,0.04)"></rect>
+      <rect x="18" y="33" width="60" height="6" rx="3" fill="#f0d48b"></rect>
+      <rect x="10" y="31" width="14" height="10" rx="3" fill="#f3ead8"></rect>
+      <rect x="18" y="28" width="60" height="16" rx="8" fill="url(#armoryGlow-weapon-player)"></rect>
+      
+    <path d="M 60 23.119999999999997 L 82.96 36 L 60 48.88 Z" fill="#f0d48b"></path>
+  
+    </svg>
+  
+      <div class="armory-ribbons">
+        <span class="armory-badge player">P1 Loadout</span>
+        
+      </div>
+    </div><div class="armory-meta">
+      <span class="pill">Medium</span>
+      <span class="pill">Sunsteel</span>
+      <span class="pill">Medium Trait</span>
+      <span class="pill">Rough Forged</span>
+      <span class="pill">58% heat</span>
+      <span class="pill">84 reach</span>
+    </div><div class="armory-stat-row">
+        <div class="armory-stat">
+          <span>Speed</span>
+          <strong>102</strong>
+        </div>
+        <div class="armory-stat">
+          <span>Push</span>
+          <strong>120</strong>
+        </div>
+        <div class="armory-stat">
+          <span>Weight</span>
+          <strong>13.5</strong>
+        </div>
+      </div><div class="armory-actions"><button class="ghost-button">Equip</button><button class="ghost-button">Set Rival</button><button class="ghost-button">Reforge</button><button class="ghost-button">Delete</button></div><p class="arena-hint">Dash becomes a solid forward slash with no extra gimmick.</p></article><article class="armory-card rival"><header>
+      <div>
+        <strong>Nightreaver</strong>
+        <span class="armory-frame-name">Katana</span>
+      </div>
+      <span class="pill">Medium</span>
+    </header><div class="armory-showcase">
+      
+    <svg viewBox="0 0 150 72" class="armory-preview-svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="armoryGlow-rival-8dh8ylo" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#89e6dc" stop-opacity="0.08"></stop>
+          <stop offset="100%" stop-color="#89e6dc" stop-opacity="0.42"></stop>
+        </linearGradient>
+      </defs>
+      <rect x="6" y="10" width="138" height="52" rx="18" fill="rgba(255,255,255,0.04)"></rect>
+      <rect x="18" y="33" width="65" height="6" rx="3" fill="#89e6dc"></rect>
+      <rect x="10" y="31" width="14" height="10" rx="3" fill="#f3ead8"></rect>
+      <rect x="18" y="28" width="65" height="16" rx="8" fill="url(#armoryGlow-rival-8dh8ylo)"></rect>
+      
+      <path d="M 63 31.68 L 85.16 34.08 L 86.6 36 L 85.16 37.92 L 63 40.32 Z" fill="#89e6dc"></path>
+    
+    </svg>
+  
+      <div class="armory-ribbons">
+        
+        <span class="armory-badge rival">Rival Loadout</span>
+      </div>
+    </div><div class="armory-meta">
+      <span class="pill">Medium</span>
+      <span class="pill">Ironwood Core</span>
+      <span class="pill">Medium Trait</span>
+      <span class="pill">Rough Forged</span>
+      <span class="pill">29% heat</span>
+      <span class="pill">90 reach</span>
+    </div><div class="armory-stat-row">
+        <div class="armory-stat">
+          <span>Speed</span>
+          <strong>107</strong>
+        </div>
+        <div class="armory-stat">
+          <span>Push</span>
+          <strong>114</strong>
+        </div>
+        <div class="armory-stat">
+          <span>Weight</span>
+          <strong>10.4</strong>
+        </div>
+      </div><div class="armory-actions"><button class="ghost-button">Equip</button><button class="ghost-button">Set Rival</button><button class="ghost-button">Reforge</button><button class="ghost-button">Delete</button></div><p class="arena-hint">Dash slash executes if it cuts through an unblocked rival at 30% or less.</p></article><article class="armory-card"><header>
+      <div>
+        <strong>Stormfang</strong>
+        <span class="armory-frame-name">Revolver</span>
+      </div>
+      <span class="pill">Sidearm</span>
+    </header><div class="armory-showcase">
+      
+    <svg viewBox="0 0 150 72" class="armory-preview-svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="armoryGlow-rival-e6r3kcq" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#f0d48b" stop-opacity="0.08"></stop>
+          <stop offset="100%" stop-color="#f0d48b" stop-opacity="0.42"></stop>
+        </linearGradient>
+      </defs>
+      <rect x="6" y="10" width="138" height="52" rx="18" fill="rgba(255,255,255,0.04)"></rect>
+      <rect x="18" y="33" width="98" height="6" rx="3" fill="#f0d48b"></rect>
+      <rect x="10" y="31" width="14" height="10" rx="3" fill="#f3ead8"></rect>
+      <rect x="18" y="28" width="98" height="16" rx="8" fill="url(#armoryGlow-rival-e6r3kcq)"></rect>
+      
+      <rect x="80" y="28" width="37.7" height="16" rx="6" fill="#f3ead8"></rect>
+      <rect x="94" y="24" width="49.3" height="10" rx="4" fill="#f0d48b"></rect>
+      <rect x="124.1" y="28" width="14.5" height="4" rx="2" fill="#f0d48b"></rect>
+      <rect x="106.12" y="38" width="10" height="14" rx="4" fill="#f3ead8"></rect>
+    
+    </svg>
+  
+      <div class="armory-ribbons">
+        
+        
+      </div>
+    </div><div class="armory-meta">
+      <span class="pill">Sidearm</span>
+      <span class="pill">Sunsteel</span>
+      <span class="pill">Single Shot</span>
+      <span class="pill">Tempered</span>
+      <span class="pill">80% heat</span>
+      <span class="pill">6/6 bullet</span>
+    </div><div class="armory-stat-row">
+        <div class="armory-stat">
+          <span>Shot Speed</span>
+          <strong>800</strong>
+        </div>
+        <div class="armory-stat">
+          <span>Reload</span>
+          <strong>0.90s</strong>
+        </div>
+        <div class="armory-stat">
+          <span>Weight</span>
+          <strong>8.8</strong>
+        </div>
+      </div><div class="armory-actions"><button class="ghost-button">Equip</button><button class="ghost-button">Set Rival</button><button class="ghost-button">Reforge</button><button class="ghost-button">Delete</button></div><p class="arena-hint">Fast draw pistol built for light rounds and quick reloads. Standard ammo uses shared chamber tech and straightforward shot tuning. 1 chamber | Standard | Quake Powder | Redirect | Serrated tip. Standard ammo uses shared chamber tech and straightforward shot tuning. Load order: 1. Standard Serrated Quake.</p></article></div>
         </section>
 
         <section class="panel arena-panel">
@@ -649,12 +924,30 @@
           </div>
 
           <div class="preset-row">
-            <button class="ghost-button preset-button" data-preset="foundry">Foundry</button>
-            <button class="ghost-button preset-button" data-preset="ring">Ring</button>
-            <button class="ghost-button preset-button" data-preset="crossfire">Crossfire</button>
-            <button class="ghost-button preset-button" data-preset="stormspire">Stormspire</button>
-            <button class="ghost-button preset-button" data-preset="gravevault">Gravevault</button>
-            <button class="ghost-button preset-button" data-preset="voidhangar">Voidhangar</button>
+            <button class="ghost-button preset-button active" data-preset="foundry" style="--preset-top: #31161b; --preset-glow: #ff875266;">
+      <strong>Foundry</strong>
+      <small>Molten pressure lane</small>
+    </button>
+            <button class="ghost-button preset-button" data-preset="ring" style="--preset-top: #192036; --preset-glow: #cfd8ff66;">
+      <strong>Ring</strong>
+      <small>Clean championship platform</small>
+    </button>
+            <button class="ghost-button preset-button" data-preset="crossfire" style="--preset-top: #2a1f16; --preset-glow: #ffd37d66;">
+      <strong>Crossfire</strong>
+      <small>Trial lane with pressure zones</small>
+    </button>
+            <button class="ghost-button preset-button" data-preset="stormspire" style="--preset-top: #17304b; --preset-glow: #82d7ff66;">
+      <strong>Stormspire</strong>
+      <small>Sky bridge under live charge</small>
+    </button>
+            <button class="ghost-button preset-button" data-preset="gravevault" style="--preset-top: #1a171e; --preset-glow: #90ffbe66;">
+      <strong>Gravevault</strong>
+      <small>Cold stone with sealed fire</small>
+    </button>
+            <button class="ghost-button preset-button" data-preset="voidhangar" style="--preset-top: #101423; --preset-glow: #a48dff66;">
+      <strong>Voidhangar</strong>
+      <small>Silent dock over black space</small>
+    </button>
           </div>
 
           <div class="arena-hint">
@@ -662,7 +955,35 @@
             the match atmosphere.
           </div>
 
-          <div id="stage-summary" class="stage-summary"></div>
+          <div id="stage-summary" class="stage-summary">
+    <article class="stage-card">
+      <div class="stage-card-top">
+        <div>
+          <h3>Foundry</h3>
+          <p class="stage-tagline">Molten pressure lane</p>
+        </div>
+        <span class="pill">Hazard punishes standing still</span>
+      </div>
+      <p>A molten forge lane with chain lifts, ash smoke, and a furnace pit in the middle.</p>
+      <div class="stage-highlight-grid">
+        <div class="stage-highlight">
+          <span>Hazard</span>
+          <strong>Live</strong>
+        </div>
+        <div class="stage-highlight">
+          <span>Layout</span>
+          <strong>Pillars In</strong>
+        </div>
+        <div class="stage-highlight">
+          <span>Crowd</span>
+          <strong>Lights Up</strong>
+        </div>
+      </div>
+      <div class="armory-meta">
+        <span class="pill">Center hazard on</span><span class="pill">Corner pillars on</span><span class="pill">Crowd lights on</span>
+      </div>
+    </article>
+  </div>
 
           <div class="action-row">
             <button id="toggle-hazard" class="ghost-button">Center Hazard: On</button>
@@ -690,11 +1011,11 @@
 
             <label id="rounds-label">
               <span>Rounds To Win</span>
-              <input id="rounds-to-win" type="range" min="1" max="3" value="2" />
+              <input id="rounds-to-win" type="range" min="1" max="3" value="2">
               <output id="rounds-to-win-value">2</output>
             </label>
 
-            <button id="toggle-sound" class="ghost-button" type="button">Sound: On</button>
+            <button id="toggle-sound" class="ghost-button active" type="button">Sound: On</button>
             <button id="toggle-screen-focus" class="ghost-button" type="button">Forge Screen</button>
             <button id="open-menu" class="ghost-button" type="button">Main Menu</button>
             <button id="start-match" class="primary-button" type="button">Start Set</button>
@@ -708,7 +1029,7 @@
           </div>
           <div class="hud-chip">
             <span>Challenger</span>
-            <strong id="hud-rival-weapon">Auto Forge</strong>
+            <strong id="hud-rival-weapon">Nightreaver</strong>
           </div>
           <div class="hud-chip">
             <span>Stage</span>
@@ -731,13 +1052,13 @@
             <span class="battlefield-mode" id="battlefield-mode">Vs Bot</span>
           </div>
 
-          <div class="battlefield-phase" id="battlefield-phase">Awaiting next set.</div>
+          <div class="battlefield-phase" id="battlefield-phase">Awaiting next set. Start a fight, jump into the tutorial, or open the forge screen when you want to rebuild.</div>
 
           <div class="broadcast-deck">
             <article class="duelist-card player-side">
               <span class="duelist-tag">Player Corner</span>
               <strong id="broadcast-player-name">Player 1</strong>
-              <p id="broadcast-player-loadout">Ashbite | Balanced</p>
+              <p id="broadcast-player-loadout">Ashbite | Medium</p>
               <div class="duelist-meta">
                 <span id="broadcast-player-record">Guest profile</span>
                 <span id="broadcast-player-form">Ready to fight</span>
@@ -747,17 +1068,30 @@
             <article class="versus-card">
               <span class="duelist-tag">Tonight's Card</span>
               <strong id="broadcast-stage-name">Foundry</strong>
-              <p id="broadcast-stage-note">Molten pressure lane | First to 2 rounds</p>
-              <div id="broadcast-round-pips" class="broadcast-round-pips"></div>
+              <p id="broadcast-stage-note">Molten pressure lane | Hazard punishes standing still | First to 2</p>
+              <div id="broadcast-round-pips" class="broadcast-round-pips">
+    
+    <div class="round-pip-row">
+      <span>P1</span>
+      <div class="round-pip-track"><span class="round-pip"></span><span class="round-pip"></span></div>
+    </div>
+  
+    
+    <div class="round-pip-row">
+      <span>Rival</span>
+      <div class="round-pip-track"><span class="round-pip"></span><span class="round-pip"></span></div>
+    </div>
+  
+  </div>
             </article>
 
             <article class="duelist-card rival-side">
               <span class="duelist-tag">Rival Corner</span>
               <strong id="broadcast-rival-name">Bot</strong>
-              <p id="broadcast-rival-loadout">Auto Forge | Balanced</p>
+              <p id="broadcast-rival-loadout">Nightreaver | Medium</p>
               <div class="duelist-meta">
-                <span id="broadcast-rival-record">Generated rival</span>
-                <span id="broadcast-rival-form">Waiting for set</span>
+                <span id="broadcast-rival-record">Foundry generated rival</span>
+                <span id="broadcast-rival-form">Vs Bot</span>
               </div>
             </article>
           </div>
@@ -772,7 +1106,7 @@
                 <span class="touch-button-code">START</span>
                 <strong class="touch-button-title">Pause</strong>
               </button>
-              <button class="touch-control-button touch-shoulder-button touch-reload-button" data-touch="reload" type="button">
+              <button class="touch-control-button touch-shoulder-button touch-reload-button" data-touch="reload" type="button" hidden="">
                 <span class="touch-button-code">R1</span>
                 <strong class="touch-button-title">Reload</strong>
               </button>
@@ -826,7 +1160,7 @@
           <div class="battlefield-footer">
             <div class="battlefield-stat">
               <span>Fight Style</span>
-              <strong id="battlefield-style">Balanced duel control</strong>
+              <strong id="battlefield-style">solid slash pressure with built-in weapon traits</strong>
             </div>
             <div class="battlefield-stat">
               <span>Current Stage</span>
@@ -846,7 +1180,13 @@
                   <h3>Fight Feed</h3>
                 </div>
               </div>
-              <div id="fight-feed" class="fight-feed"></div>
+              <div id="fight-feed" class="fight-feed"><article class="fight-feed-entry control">
+      <span>Broadcast Desk</span>
+      <p>Start a set to light up the live fight feed.</p>
+    </article><article class="fight-feed-entry">
+      <span>Tip</span>
+      <p>Long reach controls space. Fast builds win scrambles. Heavy builds break guard.</p>
+    </article></div>
             </article>
 
             <article class="broadcast-card">
@@ -856,7 +1196,43 @@
                   <h3>Pressure Report</h3>
                 </div>
               </div>
-              <div id="set-stats" class="set-stats"></div>
+              <div id="set-stats" class="set-stats">
+        <article class="set-stat-card">
+          <span>Damage</span>
+          <strong>0 - 0</strong>
+          <p>Player 1 / Bot total damage</p>
+        </article>
+      
+        <article class="set-stat-card">
+          <span>Openings</span>
+          <strong>0 - 0</strong>
+          <p>Clean hit count</p>
+        </article>
+      
+        <article class="set-stat-card">
+          <span>Blocks</span>
+          <strong>0 - 0</strong>
+          <p>Successful defense checks</p>
+        </article>
+      
+        <article class="set-stat-card">
+          <span>Guard Breaks</span>
+          <strong>0 - 0</strong>
+          <p>Heavy pressure conversions</p>
+        </article>
+      
+        <article class="set-stat-card">
+          <span>Parries</span>
+          <strong>0 - 0</strong>
+          <p>Timed block reversals</p>
+        </article>
+      
+        <article class="set-stat-card">
+          <span>Stuns</span>
+          <strong>0 - 0</strong>
+          <p>Parries, breaks, and heavy interrupts</p>
+        </article>
+      </div>
             </article>
           </div>
 
@@ -935,19 +1311,32 @@
         <div class="footer-row">
           <div class="controls-card">
             <h3>Controls</h3>
-            <div id="control-guide" class="control-guide"></div>
+            <div id="control-guide" class="control-guide">
+        <article class="control-guide-card">
+          <span>Selected Device</span>
+          <strong>PC Mouse And Keys</strong>
+          <p>A and D move, W jumps, S crouches, left click throws a jab, right click blocks or parries, Q backsteps, and E dashes.</p>
+        </article>
+      
+        <article class="control-guide-card">
+          <span>Arena Tip</span>
+          <strong>Mouse controls the weapon</strong>
+          <p>Keep the mouse pointed at Bot while you move so your jab line and freeform weapon drags stay on target. Clean swings and parry timing now cut shots into weak bursts.</p>
+        </article>
+      </div>
               <p><strong>Local PvP:</strong> Player 2 uses J/L move, I jump, K crouch, O strike, U block, P backstep, and ; dash.</p>
           </div>
           <div class="controls-card">
             <h3>Fight Feed</h3>
-            <p id="match-summary">
-              Open the menu, choose bot or PvP, and launch a proper round set.
-            </p>
+            <p id="match-summary">Press Play on the intro screen, choose your controls, then start the tutorial, bot fight, PvP set, or forge screen.</p>
           </div>
         </div>
       </section>
     </main>
 
-    <script src="game.js" defer></script>
-  </body>
-</html>
+    <script src="game.js" defer=""></script>
+  
+
+</body></html>
+[8224:17364:0407/185156.728:ERROR:components\sync\engine\get_updates_processor.cc:424] PostClientToServerMessage() 
+failed during GetUpdates with error Network error (ERR_ABORTED)
