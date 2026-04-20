@@ -1,0 +1,145 @@
+{
+   "checksum": "f64b0f28b4dab03850e84c3b97a2ac4d",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13310600601060651",
+            "date_last_used": "0",
+            "guid": "148a12e3-ffcc-42ac-a21b-e234d217c791",
+            "id": "10",
+            "name": "CodeCombat",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://codecombat.com/play/dungeon",
+            "visit_count": 0
+         }, {
+            "date_added": "13352254616443248",
+            "date_last_used": "0",
+            "guid": "12f85ea3-fd78-42ae-8947-65b26ce70f44",
+            "id": "11",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "diep.io",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://diep.io/",
+            "visit_count": 0
+         }, {
+            "date_added": "13369173216015027",
+            "date_last_used": "13407543120383442",
+            "guid": "0de28326-9cd5-450d-9846-ddb5a55ca06a",
+            "id": "12",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Roblox Tutorial",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://create.roblox.com/docs/tutorials/core",
+            "visit_count": 11
+         }, {
+            "date_added": "13380410293240938",
+            "date_last_used": "13414277590072765",
+            "guid": "d717c198-fae4-452d-a656-c560758eb1b1",
+            "id": "13",
+            "name": "ChatGPT",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://chatgpt.com/",
+            "visit_count": 12
+         }, {
+            "date_added": "13417464588221435",
+            "date_last_used": "13418165590899537",
+            "guid": "3f36abc9-5e95-4265-adc2-d9b41d9a26c1",
+            "id": "14",
+            "name": "Stickforge Arena",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "file:///C:/Users/juder/OneDrive/Documents/Projects/Games/stickforge/index.html",
+            "visit_count": 2
+         }, {
+            "date_added": "13421188656422104",
+            "date_last_used": "0",
+            "guid": "00b1a771-0f69-47f4-a9e4-627bc0ffeae5",
+            "id": "9",
+            "name": "ASUS Software Portal - Exclusive technology",
+            "show_icon": false,
+            "source": "oem_preload",
+            "type": "url",
+            "url": "https://www.asus.com/Software-and-Innovations-Portal/",
+            "visit_count": 0
+         }, {
+            "date_added": "13421188656421433",
+            "date_last_used": "0",
+            "guid": "49e99b8d-081b-4e26-9a87-385e3fecf9c9",
+            "id": "8",
+            "name": "MyASUS Software - Get the best from ASUS PC",
+            "show_icon": false,
+            "source": "oem_preload",
+            "type": "url",
+            "url": "https://www.asus.com/ASUS-Software/",
+            "visit_count": 0
+         }, {
+            "date_added": "13421188656420733",
+            "date_last_used": "0",
+            "guid": "12772483-9914-41d2-a067-8120d357f495",
+            "id": "7",
+            "name": "McAfee LiveSafe",
+            "show_icon": false,
+            "source": "oem_preload",
+            "type": "url",
+            "url": "https://home.mcafee.com/root/campaign.aspx?cid=247829",
+            "visit_count": 0
+         } ],
+         "date_added": "13421188656308217",
+         "date_last_used": "0",
+         "date_modified": "13421188656422104",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Favorites bar",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13421188656308217",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Other favorites",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13421188656308217",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Mobile favorites",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "workspaces_v2": {
+         "children": [  ],
+         "date_added": "13421188656308217",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "75aa6670-344f-549d-b742-660f029506ab",
+         "id": "5",
+         "name": "Workspaces",
+         "source": "unknown",
+         "type": "folder"
+      }
+   },
+   "sync_metadata": "CjEKDgiIgQISCNEzR/icAQAAEgAqGFYrbHUyYW53M0tnSVk0UnhpMFYxQmc9PUgDoAYJEo4BCAUSiQEKHHdSQnJaTCs2UEE5YXZLZ2pOUDdKWERMY2Z2cz0SJDE1ZmYxMGVkLTJjY2YtNTVkYi1hNzNmLTQ2MTE0ZDEzZTE5YRgAIAAoADD/uKvpmDM4zLmr6ZgzQMy5q+mYM0ocbm14NjVzUUR2eEk4VGdFZXYrQStudHRvU240PVoAZQAAAADCPgJgABKOAQgCEokBChxZY1NUb252RVNQd3FDczRMMmNyVmh2NjhMOTg9EiRhMDIwNmFlMC1mNTJjLTUyMzItODQ1OC0yMTcxMmQ1ZjBkNmIYACAAKAAwhM2ArLkwOP3PgKy5MED9z4CsuTBKHG9QVmtod0JSYlY2NUtDV1IyK0lPTkhXb091OD1aAGUAAAAAwj4CYAASrQEIDRKoAQoccmxBTVcvbEoybXZaZE9MQjl6ZTg0ZW1tQzhnPRIkZDcxN2MxOTgtZmFlNC00NTJkLWE2NTYtYzU2MDc1OGViMWIxGAAgACgAMMLAtvHMMziR2o7vwjJAkdqO78IyShxhUzh2RGhNQTVOR2R0WTVGU0lPQmUrdGMvOEE9Wh8iHfZuc3FBa3lEdXdncTN5S2c3YlFmZnp5WVQwVEE9ZYal2MjCPgJgBRKtAQgMEqgBChwxTXVHdENVR0U1WFdoUE9wbFJWN1dUdTNrRm89EiQwZGUyODMyNi05Y2Q1LTQ1MGQtOTg0Ni1kZGI1YTU1Y2EwNmEYACAAKAAw05mH+aczOPWl7oCZMkD1pe6AmTJKHGo3MUc0YlFaM0xRZmtoSktBeC90TzByODUxWT1aHyId7HFuRzZPWFF4S3Y2T1hTK3lYMGI4WWtNNkwraz1lx2gjK8I+AmAFEqwBCAoSpwEKHDJQRzFGRVA1VmluWXhQWU1QbFJSRkVCWW1uTT0SJDE0OGExMmUzLWZmY2MtNDJhYy1hMjFiLWUyMzRkMjE3Yzc5MRgAIAAoADCT5bPnvjA4tvyh574wQLb8oee+MEoceEVIZVVkRkRhZEwzZHFaY2xCNDFMSFIwSW1nPVoeIhxnbTFKRzl3UDd5ZTE4bFBubnhwbW5OVlB2Vjg9ZV+kewHCPgJgBRKOAQgBEokBChx5eEovNmZ2a2VjcjdrcDVFUXpCNHRXTHBkYkU9EiQ3MDM2YzE1Zi03ZGE0LTVhZTMtOGU1Ni0zYWE5YjJlMWYwYTUYACAAKAAwhM2ArLkwOM7PgKy5MEDOz4CsuTBKHGFSQ1dMZ2hGOWI1SW5xS0lEdnVKL2p2UWtGYz1aAGUAAAAAwj4CYAASrQEICxKoAQocZVpuV0lMZkNSYjRlaUlIbXJHQ3FyYkJPOVJZPRIkMTJmODVlYTMtZmQ3OC00MmFlLTg5NDctNjViMjZjZTcwZjQ0GAAgACgAMNqruP3ZMTiyrbj92TFAsq24/dkxShxJL1VkZ0lCNXZkeHJHSUxRWEtnMDEzUlhrdWc9Wh8iHbNNU1d6R3Zoa2srNnZjMHRmNHpuZEs3TDZMY289ZV5z1EbCPgJgBRKtAQgOEqgBChwvMk5UbmFrdVNPbnhvN3N4L1NlNGdUSkZxdTg9EiQzZjM2YWJjOS01ZTk1LTQyNjUtYWRjMi1kOWI0MWQ5YTI2YzEYACAAKAAw0Oecws8zOKub+/PMM0Crm/vzzDNKHHhEeklSR1IwQ2U1WkZlZHBQVXNFQzZ3L0w3Yz1aHyId+002TStQL0dtSGtFeGxxQ0RNRXpwUzF4ZGc0Yz1lAAAAAMI+AmAFEo4BCAMSiQEKHG5qZ0R1ODhlQ3J2WHA4NnBEN2ZIR2NxRnA4OD0SJDIzY2JkYTdiLTQzYmMtNWNjNC1hZDYwLTc3ZjRlNTFkY2VlYRgAIAAoADCEzYCsuTA4qdGArLkwQKnRgKy5MEoceXpOQjAxY241NEE3Y1JVMHVUKy9QZ21UdFVvPVoAZQAAAADCPgJgADAAOAA=",
+   "version": 1
+}

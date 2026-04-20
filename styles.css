@@ -754,6 +754,8 @@ body.forge-focus .footer-row {
 .forge-upgrade-card,
 .forge-room-card,
 .forge-dashboard-card {
+  position: relative;
+  overflow: hidden;
   display: grid;
   gap: 12px;
   padding: 16px;
@@ -762,6 +764,23 @@ body.forge-focus .footer-row {
     linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.12)),
     rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.forge-room-card::before,
+.forge-dashboard-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at top right, rgba(255, 156, 99, 0.12), transparent 34%),
+    radial-gradient(circle at bottom left, rgba(139, 183, 255, 0.1), transparent 32%);
+}
+
+.forge-room-card > *,
+.forge-dashboard-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .forge-progress-row {
@@ -1145,9 +1164,43 @@ output {
 }
 
 .magic-workshop {
+  position: relative;
+  overflow: hidden;
   background:
     radial-gradient(circle at top right, rgba(144, 162, 255, 0.16), transparent 42%),
     radial-gradient(circle at bottom left, rgba(137, 230, 220, 0.1), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.12)),
+    rgba(255, 255, 255, 0.03);
+}
+
+.magic-workshop[data-magic-kind="wand"] {
+  background:
+    radial-gradient(circle at top right, rgba(194, 169, 255, 0.22), transparent 42%),
+    radial-gradient(circle at bottom left, rgba(137, 230, 220, 0.12), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.12)),
+    rgba(255, 255, 255, 0.03);
+}
+
+.magic-workshop[data-magic-kind="staff"] {
+  background:
+    radial-gradient(circle at top right, rgba(111, 199, 255, 0.2), transparent 42%),
+    radial-gradient(circle at bottom left, rgba(241, 202, 124, 0.12), transparent 36%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.12)),
+    rgba(255, 255, 255, 0.03);
+}
+
+.magic-workshop[data-magic-kind="spellbook"] {
+  background:
+    radial-gradient(circle at top right, rgba(139, 183, 255, 0.24), transparent 42%),
+    radial-gradient(circle at bottom left, rgba(246, 205, 111, 0.1), transparent 36%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.12)),
+    rgba(255, 255, 255, 0.03);
+}
+
+.magic-workshop[data-magic-kind="artifact"] {
+  background:
+    radial-gradient(circle at top right, rgba(255, 154, 214, 0.22), transparent 42%),
+    radial-gradient(circle at bottom left, rgba(255, 224, 143, 0.12), transparent 36%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.12)),
     rgba(255, 255, 255, 0.03);
 }
@@ -1163,6 +1216,34 @@ output {
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.04),
     0 18px 34px rgba(0, 0, 0, 0.24);
+}
+
+#magic-preview[data-magic-kind="wand"] {
+  background:
+    radial-gradient(circle at center, rgba(194, 169, 255, 0.22), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent),
+    rgba(10, 10, 15, 0.48);
+}
+
+#magic-preview[data-magic-kind="staff"] {
+  background:
+    radial-gradient(circle at center, rgba(111, 199, 255, 0.2), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent),
+    rgba(10, 10, 15, 0.48);
+}
+
+#magic-preview[data-magic-kind="spellbook"] {
+  background:
+    radial-gradient(circle at center, rgba(139, 183, 255, 0.22), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent),
+    rgba(10, 10, 15, 0.48);
+}
+
+#magic-preview[data-magic-kind="artifact"] {
+  background:
+    radial-gradient(circle at center, rgba(255, 154, 214, 0.22), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent),
+    rgba(10, 10, 15, 0.48);
 }
 
 .ammo-workshop-grid,

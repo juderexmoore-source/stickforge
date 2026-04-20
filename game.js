@@ -2748,25 +2748,358 @@ const wandFlowCatalog = {
   }
 };
 
+const spellbookCoverCatalog = {
+  ironhide: {
+    label: "Ironhide Cover",
+    summary: "Reinforced cover with steadier page turns, heavier casts, and stronger guard-like pressure.",
+    damage: 1,
+    knockback: 0.08,
+    cooldown: 0.02,
+    reload: 0.01,
+    weight: 1.6,
+    moveScale: -0.03,
+    speed: -0.02
+  },
+  silkbound: {
+    label: "Silkbound Cover",
+    summary: "Light stitched cover for faster page shifts, cleaner movement, and lighter recovery.",
+    damage: 0,
+    knockback: 0,
+    cooldown: -0.04,
+    reload: -0.06,
+    weight: -1,
+    moveScale: 0.05,
+    speed: 0.04
+  },
+  mirrorplate: {
+    label: "Mirrorplate Cover",
+    summary: "Reflective cover for phase pages, cleaner redirects, and more reliable high-class page casting.",
+    damage: 0,
+    knockback: 0.04,
+    cooldown: -0.01,
+    reload: -0.03,
+    weight: 0.2,
+    moveScale: 0.02,
+    speed: 0.01
+  },
+  graveleather: {
+    label: "Graveleather Cover",
+    summary: "A dark stitched cover that leans into curses, slower page pressure, and uglier lingering hits.",
+    damage: 1,
+    knockback: 0.02,
+    cooldown: 0.03,
+    reload: 0,
+    weight: 0.8,
+    moveScale: -0.01,
+    speed: 0
+  }
+};
+
+const spellbookInkCatalog = {
+  emberink: {
+    label: "Ember Ink",
+    element: "ember",
+    summary: "Hot script for burst pages, stronger explosive lines, and harsher direct casts.",
+    damage: 2,
+    projectileSpeed: 18,
+    explosiveBoost: 0.08,
+    shockCount: 0,
+    poisonCount: 0,
+    slowCount: 0,
+    portalCount: 0,
+    ruptureCount: 0
+  },
+  frostink: {
+    label: "Frost Ink",
+    element: "frost",
+    summary: "Cold script for slower pages, chill fields, and control-heavy follow-up pressure.",
+    damage: 0,
+    projectileSpeed: -18,
+    explosiveBoost: 0,
+    shockCount: 0,
+    poisonCount: 0,
+    slowCount: 2,
+    portalCount: 0,
+    ruptureCount: 0
+  },
+  stormink: {
+    label: "Storm Ink",
+    element: "storm",
+    summary: "Charged script for tornado pages, sharper speed, and stronger shock pressure.",
+    damage: 1,
+    projectileSpeed: 24,
+    explosiveBoost: 0,
+    shockCount: 2,
+    poisonCount: 0,
+    slowCount: 0,
+    portalCount: 0,
+    ruptureCount: 0
+  },
+  voidink: {
+    label: "Void Ink",
+    element: "void",
+    summary: "Phase script for blink pages, redirects, and warped book pressure.",
+    damage: 0,
+    projectileSpeed: 12,
+    explosiveBoost: 0,
+    shockCount: 0,
+    poisonCount: 0,
+    slowCount: 0,
+    portalCount: 2,
+    ruptureCount: 0
+  },
+  graveink: {
+    label: "Grave Ink",
+    element: "grave",
+    summary: "Necrotic script for curse pages, poison, and lingering pressure.",
+    damage: 1,
+    projectileSpeed: -8,
+    explosiveBoost: 0,
+    shockCount: 0,
+    poisonCount: 2,
+    slowCount: 0,
+    portalCount: 0,
+    ruptureCount: 1
+  },
+  haloink: {
+    label: "Halo Ink",
+    element: "radiance",
+    summary: "Sanctified script for halo pages, steadier knockback, and cleaner ward pressure.",
+    damage: 1,
+    projectileSpeed: 10,
+    explosiveBoost: 0,
+    shockCount: 0,
+    poisonCount: 0,
+    slowCount: 0,
+    portalCount: 0,
+    ruptureCount: 0
+  }
+};
+
+const spellbookBindingCatalog = {
+  quickleaf: {
+    label: "Quickleaf Binding",
+    summary: "Fast page bind that flips cleaner and keeps the whole book lighter under pressure.",
+    cooldown: -0.04,
+    reload: -0.06,
+    moveScale: 0.05,
+    speed: 0.04,
+    blockBreak: 0,
+    redirectCharges: 0,
+    bonusPage: "ember"
+  },
+  chainlock: {
+    label: "Chainlock Binding",
+    summary: "A heavy lock that raises page impact and guard strain, but it slows the turn.",
+    cooldown: 0.03,
+    reload: 0.02,
+    moveScale: -0.02,
+    speed: -0.01,
+    blockBreak: 2,
+    redirectCharges: 0,
+    bonusPage: "ward"
+  },
+  omenstitch: {
+    label: "Omen Stitch",
+    summary: "Dark stitch binding that deepens curse lines and leaves slower, dirtier follow-up pressure.",
+    cooldown: 0,
+    reload: -0.01,
+    moveScale: 0,
+    speed: 0,
+    blockBreak: 1,
+    redirectCharges: 0,
+    bonusPage: "grave"
+  },
+  grandindex: {
+    label: "Grand Index",
+    summary: "Indexed binding that makes page order easier to control and gives stronger high-class page routing.",
+    cooldown: -0.02,
+    reload: -0.02,
+    moveScale: 0.01,
+    speed: 0.02,
+    blockBreak: 1,
+    redirectCharges: 1,
+    bonusPage: "rift"
+  }
+};
+
+const artifactCoreCatalog = {
+  cindercore: {
+    label: "Cinder Core",
+    element: "ember",
+    summary: "An unstable fire core that makes relic releases burst harder and detonate cleaner.",
+    damage: 2,
+    knockback: 0.04,
+    explosiveBoost: 0.14,
+    shockCount: 0,
+    poisonCount: 0,
+    portalCount: 0,
+    slowCount: 0,
+    ruptureCount: 0
+  },
+  frostshard: {
+    label: "Frost Shard",
+    element: "frost",
+    summary: "A cold relic core built for anchors, chill clouds, and slower punishing zones.",
+    damage: 0,
+    knockback: 0,
+    explosiveBoost: 0,
+    shockCount: 0,
+    poisonCount: 0,
+    portalCount: 0,
+    slowCount: 2,
+    ruptureCount: 0
+  },
+  voidheart: {
+    label: "Void Heart",
+    element: "void",
+    summary: "A phase core for rift anchors, warped seals, and blink-heavy relic casts.",
+    damage: 0,
+    knockback: 0.02,
+    explosiveBoost: 0,
+    shockCount: 0,
+    poisonCount: 0,
+    portalCount: 2,
+    slowCount: 0,
+    ruptureCount: 0
+  },
+  graveash: {
+    label: "Grave Ash Core",
+    element: "grave",
+    summary: "A dead ash core that leans hard into poison, revenant pressure, and cursed decay.",
+    damage: 1,
+    knockback: 0,
+    explosiveBoost: 0,
+    shockCount: 0,
+    poisonCount: 2,
+    portalCount: 0,
+    slowCount: 0,
+    ruptureCount: 1
+  },
+  sunhalo: {
+    label: "Sun Halo Core",
+    element: "radiance",
+    summary: "A sanctified core for brighter wards, cleaner pushes, and steadier seal control.",
+    damage: 1,
+    knockback: 0.08,
+    explosiveBoost: 0,
+    shockCount: 0,
+    poisonCount: 0,
+    portalCount: 0,
+    slowCount: 0,
+    ruptureCount: 0
+  }
+};
+
+const artifactVesselCatalog = {
+  idolframe: {
+    label: "Idol Frame",
+    summary: "Stable idol body with safer releases and stronger lane presence.",
+    weight: 1.2,
+    cooldown: 0.02,
+    moveScale: -0.02,
+    speed: -0.01,
+    knockback: 0.06,
+    blockBreak: 1
+  },
+  urnshell: {
+    label: "Urn Shell",
+    summary: "A brittle vessel that releases dirtier curse clouds and nastier delayed pressure.",
+    weight: 0.4,
+    cooldown: 0.04,
+    moveScale: 0,
+    speed: 0,
+    knockback: 0.02,
+    blockBreak: 0
+  },
+  prismcage: {
+    label: "Prism Cage",
+    summary: "A glassy cage for phase and halo relics, with cleaner redirects and faster releases.",
+    weight: -0.4,
+    cooldown: -0.04,
+    moveScale: 0.03,
+    speed: 0.03,
+    knockback: 0.02,
+    blockBreak: 1
+  },
+  reliquary: {
+    label: "Reliquary Case",
+    summary: "A heavy sanctified casing that trades speed for stronger field pressure and cleaner finish power.",
+    weight: 1.8,
+    cooldown: 0.02,
+    moveScale: -0.03,
+    speed: -0.02,
+    knockback: 0.08,
+    blockBreak: 2
+  }
+};
+
+const artifactSealCatalog = {
+  legion: {
+    label: "Legion Seal",
+    summary: "A necrotic seal that favors raising swarms, revenant pressure, and dead-lane control.",
+    castType: "zombie",
+    burstCount: 2,
+    redirectCharges: 0
+  },
+  hex: {
+    label: "Hex Seal",
+    summary: "A curse seal for poison, slows, and ugly lingering artifact pressure.",
+    castType: "curse",
+    burstCount: 1,
+    redirectCharges: 0
+  },
+  ward: {
+    label: "Ward Seal",
+    summary: "A sanctified seal for ring bursts, protective pulses, and stronger clean knockback.",
+    castType: "ward",
+    burstCount: 1,
+    redirectCharges: 0
+  },
+  rift: {
+    label: "Rift Seal",
+    summary: "A phase seal for warped detonations, blink bursts, and redirect-heavy relic casts.",
+    castType: "rift",
+    burstCount: 1,
+    redirectCharges: 1
+  }
+};
+
 const forgeStationCatalog = {
   anvil: {
     label: "Anvil Station",
     family: "melee",
+    unlockLevel: 1,
     copy: "Use the anvil for core weapon bodies, blade shaping, and most non-magical frame work."
   },
   ammo: {
     label: "Ammo Rack",
     family: "ranged",
+    unlockLevel: 2,
     copy: "Use the ammo rack for chambers, cases, bolts, rails, and powder-heavy ranged work."
   },
   arcane: {
-    label: "Arcane Loom",
+    label: "Wand Loom",
     family: "magic",
-    copy: "Use the arcane loom for staffs, wands, spellbooks, artifacts, and rune binding."
+    unlockLevel: 4,
+    copy: "Use the wand loom for wand bodies, staff heads, channels, and freehand rune binding."
+  },
+  scriptorium: {
+    label: "Scriptorium Desk",
+    family: "magic",
+    unlockLevel: 5,
+    copy: "Use the scriptorium to bind covers, inks, page seams, and page order into spellbooks."
+  },
+  relic: {
+    label: "Relic Crucible",
+    family: "magic",
+    unlockLevel: 6,
+    copy: "Use the relic crucible to seat cores, vessels, seals, and one-use artifact releases."
   },
   enchant: {
     label: "Enchant Font",
     family: "enchant",
+    unlockLevel: 5,
     copy: "Use the enchant font to bind magic into a forged weapon and improve advanced forge quality."
   }
 };
@@ -2786,15 +3119,15 @@ const forgeProgressionCatalog = {
   },
   4: {
     name: "Arcane Annex",
-    unlocks: ["Wands", "Moonthread", "Magic family access"]
+    unlocks: ["Wands", "Moonthread", "Wand Loom access"]
   },
   5: {
     name: "Spell Hall",
-    unlocks: ["Staffs and spellbooks", "Enchanting", "3 impact chambers"]
+    unlocks: ["Staffs and spellbooks", "Scriptorium Desk", "Enchanting", "3 impact chambers"]
   },
   6: {
     name: "Relic Vault",
-    unlocks: ["Artifacts", "Runestone alloy", "Stronger forge quality floor"]
+    unlocks: ["Artifacts", "Relic Crucible", "Runestone alloy", "Stronger forge quality floor"]
   },
   7: {
     name: "Grand Crucible",
@@ -3754,6 +4087,12 @@ const state = {
     wandOrb: "embercore",
     wandStick: "ashwood",
     wandFlow: "snap",
+    spellbookCover: "silkbound",
+    spellbookInk: "emberink",
+    spellbookBinding: "quickleaf",
+    artifactCore: "cindercore",
+    artifactVessel: "idolframe",
+    artifactSeal: "legion",
     magicElement: "ember",
     magicPattern: "lance",
     magicFocus: "freehand",
@@ -4003,6 +4342,23 @@ function enchantUnlocked(level = state.forgeProgress.level) {
   return level >= 5;
 }
 
+function stationUnlocked(stationId, level = currentForgeProgress().level) {
+  const station = forgeStationCatalog[stationId];
+  return Boolean(station) && level >= Number(station.unlockLevel || 1);
+}
+
+function unlockedForgeStationIds(level = currentForgeProgress().level) {
+  return Object.keys(forgeStationCatalog).filter((stationId) => stationUnlocked(stationId, level));
+}
+
+function activeForgeStationId(level = currentForgeProgress().level) {
+  const unlockedStations = unlockedForgeStationIds(level);
+  if (unlockedStations.includes(state.forgeRoom.activeStationId)) {
+    return state.forgeRoom.activeStationId;
+  }
+  return unlockedStations[0] || "anvil";
+}
+
 function forgeXpToNextLevel(level = 1) {
   return 60 + (Math.max(1, level) - 1) * 40;
 }
@@ -4044,6 +4400,13 @@ function frameUnlocked(frameId, level = currentForgeProgress().level) {
 function stationRequiredForForge(source = state.forge) {
   const family = source.family || forgeFamilyForKind(source.kind || frameCatalog[source.frame]?.kind || "medium");
   if (family === "magic") {
+    const kind = source.kind || frameCatalog[source.frame]?.kind || "wand";
+    if (kind === "spellbook") {
+      return "scriptorium";
+    }
+    if (kind === "artifact") {
+      return "relic";
+    }
     return "arcane";
   }
   if ((source.enchant && source.enchant !== "none") || (source.enchantType && source.enchantType !== "none")) {
@@ -4056,6 +4419,10 @@ function stationRequiredForForge(source = state.forge) {
 }
 
 function forgeStationMatchBonus(stationId = state.forgeRoom.activeStationId, source = state.forge) {
+  const level = currentForgeProgress().level;
+  if (!stationUnlocked(stationId, level)) {
+    return 0;
+  }
   const required = stationRequiredForForge(source);
   if (stationId === required) {
     return 0.08;
@@ -4184,6 +4551,93 @@ function defaultWandFlowForFrame(frame) {
   return "snap";
 }
 
+function defaultSpellbookCoverForFrame(frame) {
+  if (frame?.frameId === "sanctumtome" || frame?.label === "Sanctum Tome") {
+    return "mirrorplate";
+  }
+  if (frame?.frameId === "gravegrimoire" || frame?.label === "Grave Grimoire") {
+    return "graveleather";
+  }
+  return "silkbound";
+}
+
+function defaultSpellbookInkForFrame(frame) {
+  if (frame?.frameId === "gravegrimoire" || frame?.label === "Grave Grimoire") {
+    return "graveink";
+  }
+  if (frame?.frameId === "cyclonetome" || frame?.label === "Cyclone Tome") {
+    return "stormink";
+  }
+  if (frame?.frameId === "sanctumtome" || frame?.label === "Sanctum Tome") {
+    return "haloink";
+  }
+  if (frame?.frameId === "mirrortome" || frame?.label === "Mirror Tome") {
+    return "voidink";
+  }
+  return "emberink";
+}
+
+function defaultSpellbookBindingForFrame(frame) {
+  if (frame?.frameId === "gravegrimoire" || frame?.label === "Grave Grimoire") {
+    return "omenstitch";
+  }
+  if (frame?.frameId === "mirrortome" || frame?.label === "Mirror Tome") {
+    return "grandindex";
+  }
+  if (frame?.frameId === "sanctumtome" || frame?.label === "Sanctum Tome") {
+    return "chainlock";
+  }
+  return "quickleaf";
+}
+
+function defaultArtifactCoreForFrame(frame) {
+  if (frame?.frameId === "necroidol" || frame?.label === "Necro Idol") {
+    return "graveash";
+  }
+  if (frame?.frameId === "hexrelic" || frame?.label === "Hex Relic") {
+    return "voidheart";
+  }
+  if (frame?.frameId === "sunshard" || frame?.label === "Sun Shard") {
+    return "sunhalo";
+  }
+  if (frame?.frameId === "graveurn" || frame?.label === "Grave Urn") {
+    return "graveash";
+  }
+  if (frame?.frameId === "eclipseidol" || frame?.label === "Eclipse Idol") {
+    return "voidheart";
+  }
+  return "cindercore";
+}
+
+function defaultArtifactVesselForFrame(frame) {
+  if (frame?.frameId === "graveurn" || frame?.label === "Grave Urn") {
+    return "urnshell";
+  }
+  if (frame?.frameId === "sunshard" || frame?.label === "Sun Shard") {
+    return "prismcage";
+  }
+  if (frame?.frameId === "eclipseidol" || frame?.label === "Eclipse Idol") {
+    return "reliquary";
+  }
+  return "idolframe";
+}
+
+function defaultArtifactSealForFrame(frame) {
+  if (frame?.frameId === "necroidol" || frame?.label === "Necro Idol") {
+    return "legion";
+  }
+  if (frame?.frameId === "hexrelic" || frame?.label === "Hex Relic") {
+    return "hex";
+  }
+  if (frame?.frameId === "sunshard" || frame?.label === "Sun Shard") {
+    return "ward";
+  }
+  if (frame?.frameId === "eclipseidol" || frame?.label === "Eclipse Idol") {
+    return "rift";
+  }
+  return "legion";
+}
+
 function wandOrbIdFromForge(forge, frame) {
   const requested = forge?.wandOrb || forge?.magicElement;
   if (wandOrbCatalog[requested]) {
@@ -4201,6 +4655,36 @@ function wandStickIdFromForge(forge, frame) {
 function wandFlowIdFromForge(forge, frame) {
   const requested = forge?.wandFlow || forge?.magicFocus;
   return wandFlowCatalog[requested] ? requested : defaultWandFlowForFrame(frameCatalog[forge?.frame] || frame);
+}
+
+function spellbookCoverIdFromForge(forge, frame) {
+  const requested = forge?.spellbookCover || forge?.magicElement;
+  return spellbookCoverCatalog[requested] ? requested : defaultSpellbookCoverForFrame(frameCatalog[forge?.frame] || frame);
+}
+
+function spellbookInkIdFromForge(forge, frame) {
+  const requested = forge?.spellbookInk || forge?.magicPattern;
+  return spellbookInkCatalog[requested] ? requested : defaultSpellbookInkForFrame(frameCatalog[forge?.frame] || frame);
+}
+
+function spellbookBindingIdFromForge(forge, frame) {
+  const requested = forge?.spellbookBinding || forge?.magicFocus;
+  return spellbookBindingCatalog[requested] ? requested : defaultSpellbookBindingForFrame(frameCatalog[forge?.frame] || frame);
+}
+
+function artifactCoreIdFromForge(forge, frame) {
+  const requested = forge?.artifactCore || forge?.magicElement;
+  return artifactCoreCatalog[requested] ? requested : defaultArtifactCoreForFrame(frameCatalog[forge?.frame] || frame);
+}
+
+function artifactVesselIdFromForge(forge, frame) {
+  const requested = forge?.artifactVessel || forge?.magicPattern;
+  return artifactVesselCatalog[requested] ? requested : defaultArtifactVesselForFrame(frameCatalog[forge?.frame] || frame);
+}
+
+function artifactSealIdFromForge(forge, frame) {
+  const requested = forge?.artifactSeal || forge?.magicFocus;
+  return artifactSealCatalog[requested] ? requested : defaultArtifactSealForFrame(frameCatalog[forge?.frame] || frame);
 }
 
 function defaultMagicPageForOrb(orbId) {
@@ -4253,6 +4737,25 @@ function wandSpellListForConfig(orbId, flowId) {
             : ["Lance", "Rift", "Burst"];
 
   return Array.from(new Set([...flowSpells, signatureSpell]));
+}
+
+function spellbookPagesForConfig(inkId, bindingId, pageId) {
+  const ink = spellbookInkCatalog[inkId] || spellbookInkCatalog.emberink;
+  const binding = spellbookBindingCatalog[bindingId] || spellbookBindingCatalog.quickleaf;
+  const elementPage =
+    ink.element === "frost"
+      ? "frost"
+      : ink.element === "storm"
+        ? "cyclone"
+        : ink.element === "void"
+          ? "rift"
+          : ink.element === "grave"
+            ? "grave"
+            : ink.element === "radiance"
+              ? "halo"
+              : "ember";
+  const pages = [pageId, elementPage, binding.bonusPage, "ward"].filter(Boolean);
+  return Array.from(new Set(pages)).slice(0, 4);
 }
 
 function emptyPlayerLoadoutSlots() {
@@ -5032,26 +5535,42 @@ function normalizeForgeState(forge = state.forge) {
   const wandOrb = kind === "wand" ? wandOrbIdFromForge(forge, frame) : defaultWandOrbForFrame(frame);
   const wandStick = kind === "wand" ? wandStickIdFromForge(forge, frame) : defaultWandStickForFrame(frame);
   const wandFlow = kind === "wand" ? wandFlowIdFromForge(forge, frame) : defaultWandFlowForFrame(frame);
+  const spellbookCover = kind === "spellbook" ? spellbookCoverIdFromForge(forge, frame) : defaultSpellbookCoverForFrame(frame);
+  const spellbookInk = kind === "spellbook" ? spellbookInkIdFromForge(forge, frame) : defaultSpellbookInkForFrame(frame);
+  const spellbookBinding = kind === "spellbook" ? spellbookBindingIdFromForge(forge, frame) : defaultSpellbookBindingForFrame(frame);
+  const artifactCore = kind === "artifact" ? artifactCoreIdFromForge(forge, frame) : defaultArtifactCoreForFrame(frame);
+  const artifactVessel = kind === "artifact" ? artifactVesselIdFromForge(forge, frame) : defaultArtifactVesselForFrame(frame);
+  const artifactSeal = kind === "artifact" ? artifactSealIdFromForge(forge, frame) : defaultArtifactSealForFrame(frame);
   const magicElement =
     kind === "wand"
       ? wandOrbCatalog[wandOrb]?.element || "ember"
-      : magicElementCatalog[forge.magicElement]
-        ? forge.magicElement
-        : "ember";
-  const magicPatternSet = kind === "wand" ? wandStickCatalog : magicPatternsForKind(kind);
+      : kind === "spellbook"
+        ? spellbookInkCatalog[spellbookInk]?.element || "ember"
+        : kind === "artifact"
+          ? artifactCoreCatalog[artifactCore]?.element || "ember"
+          : magicElementCatalog[forge.magicElement]
+            ? forge.magicElement
+            : "ember";
   const magicPattern =
     kind === "wand"
       ? wandStick
-      : magicPatternSet[forge.magicPattern]
-        ? forge.magicPattern
-        : defaultMagicPatternForKind(kind);
-  const magicFocusSet = kind === "wand" ? wandFlowCatalog : magicFocusOptionsForKind(kind);
+      : kind === "spellbook"
+        ? spellbookInk
+        : kind === "artifact"
+          ? artifactVessel
+          : magicPatternsForKind(kind)[forge.magicPattern]
+            ? forge.magicPattern
+            : defaultMagicPatternForKind(kind);
   const magicFocus =
     kind === "wand"
       ? wandFlow
-      : magicFocusSet[forge.magicFocus]
-        ? forge.magicFocus
-        : Object.keys(magicFocusSet)[0] || "freehand";
+      : kind === "spellbook"
+        ? spellbookBinding
+        : kind === "artifact"
+          ? artifactSeal
+          : magicFocusOptionsForKind(kind)[forge.magicFocus]
+            ? forge.magicFocus
+            : Object.keys(magicFocusOptionsForKind(kind))[0] || "freehand";
   const magicPage =
     kind === "wand"
       ? defaultMagicPageForOrb(wandOrb)
@@ -5069,6 +5588,12 @@ function normalizeForgeState(forge = state.forge) {
     wandOrb,
     wandStick,
     wandFlow,
+    spellbookCover,
+    spellbookInk,
+    spellbookBinding,
+    artifactCore,
+    artifactVessel,
+    artifactSeal,
     magicElement,
     magicPattern,
     magicFocus,
@@ -5968,26 +6493,73 @@ function syncForgeSelectors() {
 
   if (magic) {
     const wand = frame.kind === "wand";
+    const spellbook = frame.kind === "spellbook";
+    const artifact = frame.kind === "artifact";
     if (ui.magicElementLabel) {
-      ui.magicElementLabel.querySelector("span").textContent = wand ? "Orb" : "Element";
+      ui.magicElementLabel.querySelector("span").textContent = wand ? "Orb" : spellbook ? "Cover" : artifact ? "Core" : "Element";
     }
     if (ui.magicPatternLabel) {
-      ui.magicPatternLabel.querySelector("span").textContent = wand ? "Stick" : "Spell Route";
+      ui.magicPatternLabel.querySelector("span").textContent = wand ? "Stick" : spellbook ? "Ink" : artifact ? "Vessel" : "Spell Route";
     }
     if (ui.magicFocusLabel) {
-      ui.magicFocusLabel.querySelector("span").textContent = wand ? "Flow" : "Focus";
+      ui.magicFocusLabel.querySelector("span").textContent = wand ? "Flow" : spellbook ? "Binding" : artifact ? "Seal" : "Focus";
     }
     if (ui.magicPageLabel) {
-      ui.magicPageLabel.querySelector("span").textContent = "Bound Page";
+      ui.magicPageLabel.querySelector("span").textContent = spellbook ? "Page Set" : artifact ? "Manifest" : "Bound Page";
       ui.magicPageLabel.hidden = wand;
     }
-    populateSelect(ui.magicElement, wand ? wandOrbCatalog : magicElementCatalog);
-    populateSelect(ui.magicPattern, wand ? wandStickCatalog : magicPatternsForKind(frame.kind));
-    populateSelect(ui.magicFocus, wand ? wandFlowCatalog : magicFocusOptionsForKind(frame.kind));
+    populateSelect(
+      ui.magicElement,
+      wand
+        ? wandOrbCatalog
+        : spellbook
+          ? spellbookCoverCatalog
+          : artifact
+            ? artifactCoreCatalog
+            : magicElementCatalog
+    );
+    populateSelect(
+      ui.magicPattern,
+      wand
+        ? wandStickCatalog
+        : spellbook
+          ? spellbookInkCatalog
+          : artifact
+            ? artifactVesselCatalog
+            : magicPatternsForKind(frame.kind)
+    );
+    populateSelect(
+      ui.magicFocus,
+      wand
+        ? wandFlowCatalog
+        : spellbook
+          ? spellbookBindingCatalog
+          : artifact
+            ? artifactSealCatalog
+            : magicFocusOptionsForKind(frame.kind)
+    );
     populateSelect(ui.magicPage, magicPageCatalog);
-    ui.magicElement.value = wand ? state.forge.wandOrb : state.forge.magicElement;
-    ui.magicPattern.value = wand ? state.forge.wandStick : state.forge.magicPattern;
-    ui.magicFocus.value = wand ? state.forge.wandFlow : state.forge.magicFocus;
+    ui.magicElement.value = wand
+      ? state.forge.wandOrb
+      : spellbook
+        ? state.forge.spellbookCover
+        : artifact
+          ? state.forge.artifactCore
+          : state.forge.magicElement;
+    ui.magicPattern.value = wand
+      ? state.forge.wandStick
+      : spellbook
+        ? state.forge.spellbookInk
+        : artifact
+          ? state.forge.artifactVessel
+          : state.forge.magicPattern;
+    ui.magicFocus.value = wand
+      ? state.forge.wandFlow
+      : spellbook
+        ? state.forge.spellbookBinding
+        : artifact
+          ? state.forge.artifactSeal
+          : state.forge.magicFocus;
     ui.magicPage.value = state.forge.magicPage;
   }
 
@@ -6749,6 +7321,12 @@ function forgeBlueprintFromWeapon(weapon) {
     wandOrb: weapon?.wandOrb || weapon?.magicElement || "embercore",
     wandStick: weapon?.wandStick || weapon?.magicPattern || "ashwood",
     wandFlow: weapon?.wandFlow || weapon?.magicFocus || "snap",
+    spellbookCover: weapon?.spellbookCover || "silkbound",
+    spellbookInk: weapon?.spellbookInk || "emberink",
+    spellbookBinding: weapon?.spellbookBinding || "quickleaf",
+    artifactCore: weapon?.artifactCore || "cindercore",
+    artifactVessel: weapon?.artifactVessel || "idolframe",
+    artifactSeal: weapon?.artifactSeal || "legion",
     magicElement: weapon?.magicElement || "ember",
     magicPattern: weapon?.magicPattern || "lance",
     magicFocus: weapon?.magicFocus || "freehand",
@@ -8666,19 +9244,42 @@ function buildWeaponFromForge(forge) {
 
   if (isMagic) {
     const wandBuild = frame.kind === "wand";
+    const spellbookBuild = frame.kind === "spellbook";
+    const artifactBuild = frame.kind === "artifact";
+    const staffBuild = frame.kind === "staff";
     const wandOrbId = wandBuild ? safeForge.wandOrb : null;
     const wandStickId = wandBuild ? safeForge.wandStick : null;
     const wandFlowId = wandBuild ? safeForge.wandFlow : null;
+    const spellbookCoverId = spellbookBuild ? safeForge.spellbookCover : null;
+    const spellbookInkId = spellbookBuild ? safeForge.spellbookInk : null;
+    const spellbookBindingId = spellbookBuild ? safeForge.spellbookBinding : null;
+    const artifactCoreId = artifactBuild ? safeForge.artifactCore : null;
+    const artifactVesselId = artifactBuild ? safeForge.artifactVessel : null;
+    const artifactSealId = artifactBuild ? safeForge.artifactSeal : null;
     const orb = wandBuild ? wandOrbCatalog[wandOrbId] || wandOrbCatalog.embercore : null;
     const stick = wandBuild ? wandStickCatalog[wandStickId] || wandStickCatalog.ashwood : null;
     const flow = wandBuild ? wandFlowCatalog[wandFlowId] || wandFlowCatalog.snap : null;
-    const elementKey = wandBuild ? orb.element : safeForge.magicElement;
+    const cover = spellbookBuild ? spellbookCoverCatalog[spellbookCoverId] || spellbookCoverCatalog.silkbound : null;
+    const ink = spellbookBuild ? spellbookInkCatalog[spellbookInkId] || spellbookInkCatalog.emberink : null;
+    const binding = spellbookBuild ? spellbookBindingCatalog[spellbookBindingId] || spellbookBindingCatalog.quickleaf : null;
+    const core = artifactBuild ? artifactCoreCatalog[artifactCoreId] || artifactCoreCatalog.cindercore : null;
+    const vessel = artifactBuild ? artifactVesselCatalog[artifactVesselId] || artifactVesselCatalog.idolframe : null;
+    const seal = artifactBuild ? artifactSealCatalog[artifactSealId] || artifactSealCatalog.legion : null;
+    const elementKey = wandBuild ? orb.element : spellbookBuild ? ink.element : artifactBuild ? core.element : safeForge.magicElement;
     const element = magicElementCatalog[elementKey] || magicElementCatalog.ember;
     const pattern = wandBuild
       ? { label: stick.label, summary: stick.summary }
+      : spellbookBuild
+        ? { label: ink.label, summary: ink.summary }
+        : artifactBuild
+          ? { label: vessel.label, summary: vessel.summary }
       : magicPatternCatalog[safeForge.magicPattern] || magicPatternCatalog[defaultMagicPatternForKind(frame.kind)];
     const focus = wandBuild
       ? { label: flow.label, summary: flow.summary }
+      : spellbookBuild
+        ? { label: binding.label, summary: binding.summary }
+        : artifactBuild
+          ? { label: seal.label, summary: seal.summary }
       : magicFocusCatalog[safeForge.magicFocus] || magicFocusCatalog.freehand;
     const pageId = wandBuild ? defaultMagicPageForOrb(wandOrbId) : safeForge.magicPage;
     const page = magicPageCatalog[pageId] || magicPageCatalog[defaultMagicPageForKind(frame.kind)];
@@ -8716,6 +9317,7 @@ function buildWeaponFromForge(forge) {
     let delayedImpact = false;
     let glyphPointCount = wandBuild ? flow.glyphPoints : 3;
     let spellRole = "";
+    let artifactCastType = null;
 
     switch (element.label) {
       case "Ember":
@@ -8780,7 +9382,7 @@ function buildWeaponFromForge(forge) {
         projectilePierce += 1;
       }
       spellRole = `${orb.label.toLowerCase()} pressure with ${flow.label.toLowerCase()} gestures`;
-    } else {
+    } else if (staffBuild) {
       switch (safeForge.magicPattern) {
         case "lance":
           fireModeLabel = "Spell Lance";
@@ -8820,52 +9422,97 @@ function buildWeaponFromForge(forge) {
           break;
       }
 
-      if (frame.kind === "staff") {
-        fireModeLabel = "Channel Cast";
+      fireModeLabel = `${pattern.label} Channel`;
+      blockBreak += 2;
+      knockback = clamp(knockback + 0.08, 0.82, 1.8);
+      projectileSpeed = clamp(projectileSpeed + 12, 600, 1180);
+      spellRole = `${element.label.toLowerCase()} channel pressure through ${pattern.label.toLowerCase()}`;
+    } else if (spellbookBuild) {
+      clipSize = clamp(clipSize + (binding.redirectCharges ? 1 : 0), 4, 8);
+      damage = clamp(damage + (cover.damage || 0), 11, 42);
+      projectileSpeed = clamp(projectileSpeed + (ink.projectileSpeed || 0), 600, 1220);
+      cooldown = clamp(Number((cooldown + (cover.cooldown || 0) + (binding.cooldown || 0)).toFixed(2)), 0.2, 0.88);
+      reloadTime = clamp(Number((reloadTime + (cover.reload || 0) + (binding.reload || 0)).toFixed(2)), 0.26, 1.08);
+      knockback = clamp(knockback + (cover.knockback || 0), 0.82, 1.9);
+      weight = clamp(Number((weight + (cover.weight || 0)).toFixed(1)), 3, 18);
+      moveScale = clamp(Number((moveScale + (cover.moveScale || 0) + (binding.moveScale || 0)).toFixed(2)), 0.8, 1.24);
+      speed = clamp(Number((speed + (cover.speed || 0) + (binding.speed || 0)).toFixed(2)), 0.82, 1.34);
+      blockBreak += binding.blockBreak || 0;
+      redirectCharges += binding.redirectCharges || 0;
+      explosiveBoost += ink.explosiveBoost || 0;
+      shockCount += ink.shockCount || 0;
+      poisonCount += ink.poisonCount || 0;
+      slowCount += ink.slowCount || 0;
+      portalCount += ink.portalCount || 0;
+      ruptureCount += ink.ruptureCount || 0;
+      fireModeLabel = `${binding.label} Page Cast`;
+      burstCount = pageId === "cyclone" ? 2 : burstCount;
+      burstSpread = pageId === "cyclone" ? 0.022 : burstSpread;
+      burstDamageScale = pageId === "cyclone" ? 0.78 : burstDamageScale;
+      if (pageId === "grave") {
+        poisonCount += 1;
+      } else if (pageId === "frost") {
+        slowCount += 1;
+      } else if (pageId === "ward" || pageId === "halo") {
         blockBreak += 2;
-        knockback = clamp(knockback + 0.08, 0.82, 1.8);
-        projectileSpeed = clamp(projectileSpeed + 12, 600, 1180);
-      } else if (frame.kind === "spellbook") {
-        fireModeLabel = "Page Cast";
-        burstCount = pageId === "cyclone" ? 2 : burstCount;
-        burstSpread = pageId === "cyclone" ? 0.022 : burstSpread;
-        burstDamageScale = pageId === "cyclone" ? 0.78 : burstDamageScale;
-        if (pageId === "grave") {
-          poisonCount += 1;
-        } else if (pageId === "frost") {
-          slowCount += 1;
-        } else if (pageId === "ward" || pageId === "halo") {
-          blockBreak += 2;
-        } else if (pageId === "rift") {
-          redirectCharges += 1;
-          portalCount += 1;
-        }
-      } else if (frame.kind === "artifact") {
-        fireModeLabel = "Relic Release";
-        cooldown = clamp(cooldown + 0.08, 0.24, 0.9);
-        blockBreak += 2;
-        if (safeForge.magicPattern === "grave") {
-          ruptureCount += 2;
-        }
-        if (safeForge.magicPattern === "ward") {
-          portalCount += 1;
-        }
-        clipSize = 1;
+      } else if (pageId === "rift") {
+        redirectCharges += 1;
+        portalCount += 1;
       }
+      spellRole = `${ink.label.toLowerCase()} pages with ${binding.label.toLowerCase()} binding`;
+    } else if (artifactBuild) {
+      clipSize = 1;
+      damage = clamp(damage + (core.damage || 0), 11, 42);
+      cooldown = clamp(Number((cooldown + 0.08 + (vessel.cooldown || 0)).toFixed(2)), 0.24, 0.96);
+      reloadTime = clamp(Number((reloadTime + 0.08).toFixed(2)), 0.3, 1.12);
+      knockback = clamp(knockback + (vessel.knockback || 0), 0.82, 1.95);
+      weight = clamp(Number((weight + (vessel.weight || 0)).toFixed(1)), 4, 20);
+      moveScale = clamp(Number((moveScale + (vessel.moveScale || 0)).toFixed(2)), 0.76, 1.16);
+      speed = clamp(Number((speed + (vessel.speed || 0)).toFixed(2)), 0.8, 1.24);
+      blockBreak += vessel.blockBreak || 0;
+      explosiveBoost += core.explosiveBoost || 0;
+      shockCount += core.shockCount || 0;
+      poisonCount += core.poisonCount || 0;
+      slowCount += core.slowCount || 0;
+      portalCount += core.portalCount || 0;
+      ruptureCount += core.ruptureCount || 0;
+      redirectCharges += seal.redirectCharges || 0;
+      burstCount = Math.max(burstCount, seal.burstCount || 1);
+      artifactCastType = seal.castType;
+      fireModeLabel = `${seal.label} Release`;
+      if (pageId === "grave") {
+        poisonCount += 1;
+        ruptureCount += 1;
+        delayedImpact = true;
+      } else if (pageId === "ward" || pageId === "halo") {
+        blockBreak += 2;
+      } else if (pageId === "rift") {
+        portalCount += 1;
+        redirectCharges += 1;
+      } else if (pageId === "frost") {
+        slowCount += 1;
+      }
+      spellRole = `${core.label.toLowerCase()} relic using ${seal.label.toLowerCase()} release`;
     }
 
-    const pageCycle = [pageId, ...Object.keys(magicPageCatalog).filter((id) => id !== pageId)].slice(0, 4);
+    const pageCycle = spellbookBuild
+      ? spellbookPagesForConfig(spellbookInkId, spellbookBindingId, pageId)
+      : [pageId, ...Object.keys(magicPageCatalog).filter((id) => id !== pageId)].slice(0, 4);
     const glyphGuide = wandBuild
       ? `${flow.label} needs ${glyphPointCount} clean point${glyphPointCount === 1 ? "" : "s"} before the spell releases.`
-      : safeForge.magicFocus === "spellbook"
-        ? "Bound spellbook focus feeds guide points into advanced casts and makes page cycling cleaner."
-        : safeForge.magicFocus === "artifact"
-          ? "Artifact focus skews the cast toward seals, curses, and field pressure."
+      : spellbookBuild
+        ? `${binding.label} controls how fast the pages flip and which bonus page joins the deck.`
+        : artifactBuild
+          ? `${seal.label} defines the relic release. ${page.label} shapes the visible manifestation when the artifact breaks open.`
           : "Freehand focus keeps the full raw gesture path in your own hand.";
     const wandSpellList = wandBuild ? wandSpellListForConfig(wandOrbId, wandFlowId) : [];
     const abilitySummary = wandBuild
       ? `${frame.special?.summary || ""} ${orb.summary} ${stick.summary} ${flow.summary} ${glyphGuide}`.trim()
-      : `${frame.special?.summary || ""} ${pattern.summary} ${glyphGuide}`.trim();
+      : spellbookBuild
+        ? `${frame.special?.summary || ""} ${cover.summary} ${ink.summary} ${binding.summary} ${glyphGuide}`.trim()
+        : artifactBuild
+          ? `${frame.special?.summary || ""} ${core.summary} ${vessel.summary} ${seal.summary} ${glyphGuide}`.trim()
+          : `${frame.special?.summary || ""} ${pattern.summary} ${glyphGuide}`.trim();
     const forgeSummary =
       forgeQuality >= 0.9
         ? "Masterbound finish: cleaner casts, lighter mana recovery, and stronger spell control."
@@ -8882,27 +9529,45 @@ function buildWeaponFromForge(forge) {
         : heat >= 40
           ? "Mid forge heat keeps the magic stable while still adding extra spell power."
           : "Lower forge heat keeps the focus lighter and easier to control.";
-    const impactLabel = wandBuild ? `${orb.label} ${flow.label}` : `${element.label} ${pattern.label}`;
+    const impactLabel = wandBuild
+      ? `${orb.label} ${flow.label}`
+      : spellbookBuild
+        ? `${ink.label} ${binding.label}`
+        : artifactBuild
+          ? `${core.label} ${seal.label}`
+          : `${element.label} ${pattern.label}`;
     const ammoPrototype = {
       id: makeId("mana"),
-      name: wandBuild ? `${orb.label} ${flow.label}` : `${element.label} ${pattern.label}`,
+      name: wandBuild
+        ? `${orb.label} ${flow.label}`
+        : spellbookBuild
+          ? `${cover.label} ${binding.label}`
+          : artifactBuild
+            ? `${core.label} ${seal.label}`
+            : `${element.label} ${pattern.label}`,
       ammoFamily: "mana",
       impactChambers: 1,
       impactMount: "sigil",
-      impactMountLabel: wandBuild ? `${orb.label} Lattice` : `${element.label} Sigil`,
+      impactMountLabel: wandBuild
+        ? `${orb.label} Lattice`
+        : spellbookBuild
+          ? `${cover.label} Weave`
+          : artifactBuild
+            ? `${seal.label} Seal`
+            : `${element.label} Sigil`,
       chamberImpacts: [elementKey],
       impactTypes: [elementKey],
       impactLabel,
-      launchType: wandBuild ? wandFlowId : safeForge.magicPattern,
-      launchLabel: wandBuild ? flow.label : pattern.label,
-      midAirAddons: [wandBuild ? wandStickId : safeForge.magicFocus].filter(Boolean),
-      midAirLabel: wandBuild ? stick.label : focus.label,
+      launchType: wandBuild ? wandFlowId : spellbookBuild ? spellbookInkId : artifactBuild ? artifactCoreId : safeForge.magicPattern,
+      launchLabel: wandBuild ? flow.label : spellbookBuild ? ink.label : artifactBuild ? core.label : pattern.label,
+      midAirAddons: [wandBuild ? wandStickId : spellbookBuild ? spellbookBindingId : artifactBuild ? artifactSealId : safeForge.magicFocus].filter(Boolean),
+      midAirLabel: wandBuild ? stick.label : spellbookBuild ? binding.label : artifactBuild ? seal.label : focus.label,
       tipType: pageId,
       tipLabel: page.label,
       quality: forgeQuality,
       qualityLabel: forgeRatingLabel(forgeQuality),
-      damageBonus: 4 + (wandBuild ? (flow.complexBias === "quick" ? 1 : 0) : safeForge.magicFocus === "spellbook" ? 1 : 0),
-      speedBonus: wandBuild ? 72 : 60,
+      damageBonus: 4 + (wandBuild ? (flow.complexBias === "quick" ? 1 : 0) : spellbookBuild ? 1 : artifactBuild ? 2 : 0),
+      speedBonus: wandBuild ? 72 : spellbookBuild ? 64 : artifactBuild ? 54 : 60,
       knockbackBonus: 0.08,
       blockBreakBonus: blockBreak,
       projectilePierceBonus: projectilePierce,
@@ -8923,7 +9588,11 @@ function buildWeaponFromForge(forge) {
       ruptureCount,
       summary: wandBuild
         ? `${orb.label} | ${stick.label} | ${flow.label}. ${flow.summary}`
-        : `${impactLabel} | ${focus.label} | ${page.label}. ${pattern.summary}`
+        : spellbookBuild
+          ? `${cover.label} | ${ink.label} | ${binding.label}. ${binding.summary}`
+          : artifactBuild
+            ? `${core.label} | ${vessel.label} | ${seal.label}. ${seal.summary}`
+            : `${impactLabel} | ${focus.label} | ${page.label}. ${pattern.summary}`
     };
 
     const artifactOneUse = frame.kind === "artifact";
@@ -8939,8 +9608,8 @@ function buildWeaponFromForge(forge) {
       family: "magic",
       materialId: safeForge.material,
       material: material.label,
-      edgeId: wandBuild ? wandStickId : safeForge.magicPattern,
-      edge: wandBuild ? stick.label : pattern.label,
+      edgeId: wandBuild ? wandStickId : spellbookBuild ? spellbookBindingId : artifactBuild ? artifactSealId : safeForge.magicPattern,
+      edge: wandBuild ? stick.label : spellbookBuild ? binding.label : artifactBuild ? seal.label : pattern.label,
       usesStyle: false,
       enchant: "none",
       heat,
@@ -8958,10 +9627,22 @@ function buildWeaponFromForge(forge) {
       frameSummary: frame.summary,
       frameDesign: frame.design,
       materialSummary: material.summary,
-      edgeSummary: wandBuild ? `${orb.label} | ${stick.label} | ${flow.label}` : `${pattern.label} route | ${focus.label} | ${page.label}`,
+      edgeSummary: wandBuild
+        ? `${orb.label} | ${stick.label} | ${flow.label}`
+        : spellbookBuild
+          ? `${cover.label} cover | ${ink.label} ink | ${binding.label} binding`
+          : artifactBuild
+            ? `${core.label} core | ${vessel.label} vessel | ${seal.label} seal`
+            : `${pattern.label} route | ${focus.label} | ${page.label}`,
       heatSummary,
       forgeSummary,
-      styleText: wandBuild ? `${frame.classLabel} magic | ${orb.label} | ${flow.label}` : `${frame.classLabel} magic | ${element.label} | ${fireModeLabel}`,
+      styleText: wandBuild
+        ? `${frame.classLabel} magic | ${orb.label} | ${flow.label}`
+        : spellbookBuild
+          ? `${frame.classLabel} magic | ${ink.label} | ${binding.label}`
+          : artifactBuild
+            ? `${frame.classLabel} magic | ${core.label} | ${seal.label}`
+            : `${frame.classLabel} magic | ${element.label} | ${fireModeLabel}`,
       abilitySummary,
       specialType: frame.special?.type || "magic-cast",
       executeThreshold: 0,
@@ -8977,11 +9658,11 @@ function buildWeaponFromForge(forge) {
       impactType: elementKey,
       impactTypes: [elementKey],
       impactLabel,
-      launchType: wandBuild ? wandFlowId : safeForge.magicPattern,
-      launchLabel: wandBuild ? flow.label : pattern.label,
-      midAirType: wandBuild ? wandStickId : safeForge.magicFocus,
-      midAirAddons: [wandBuild ? wandStickId : safeForge.magicFocus].filter(Boolean),
-      midAirLabel: wandBuild ? stick.label : focus.label,
+      launchType: wandBuild ? wandFlowId : spellbookBuild ? spellbookInkId : artifactBuild ? artifactCoreId : safeForge.magicPattern,
+      launchLabel: wandBuild ? flow.label : spellbookBuild ? ink.label : artifactBuild ? core.label : pattern.label,
+      midAirType: wandBuild ? wandStickId : spellbookBuild ? spellbookBindingId : artifactBuild ? artifactSealId : safeForge.magicFocus,
+      midAirAddons: [wandBuild ? wandStickId : spellbookBuild ? spellbookBindingId : artifactBuild ? artifactSealId : safeForge.magicFocus].filter(Boolean),
+      midAirLabel: wandBuild ? stick.label : spellbookBuild ? binding.label : artifactBuild ? seal.label : focus.label,
       tipType: pageId,
       tipLabel: page.label,
       projectileSpeed,
@@ -9022,11 +9703,11 @@ function buildWeaponFromForge(forge) {
       projectileGlow: element.color,
       fireModeLabel,
       magicElement: elementKey,
-      magicElementLabel: wandBuild ? orb.label : element.label,
-      magicPattern: wandBuild ? wandStickId : safeForge.magicPattern,
-      magicPatternLabel: wandBuild ? stick.label : pattern.label,
-      magicFocus: wandBuild ? wandFlowId : safeForge.magicFocus,
-      magicFocusLabel: wandBuild ? flow.label : focus.label,
+      magicElementLabel: element.label,
+      magicPattern: wandBuild ? wandStickId : spellbookBuild ? spellbookInkId : artifactBuild ? artifactVesselId : safeForge.magicPattern,
+      magicPatternLabel: wandBuild ? stick.label : spellbookBuild ? ink.label : artifactBuild ? vessel.label : pattern.label,
+      magicFocus: wandBuild ? wandFlowId : spellbookBuild ? spellbookBindingId : artifactBuild ? artifactSealId : safeForge.magicFocus,
+      magicFocusLabel: wandBuild ? flow.label : spellbookBuild ? binding.label : artifactBuild ? seal.label : focus.label,
       magicPage: pageId,
       magicPageLabel: page.label,
       wandOrb: wandBuild ? wandOrbId : null,
@@ -9035,16 +9716,37 @@ function buildWeaponFromForge(forge) {
       wandStickLabel: wandBuild ? stick.label : "",
       wandFlow: wandBuild ? wandFlowId : null,
       wandFlowLabel: wandBuild ? flow.label : "",
+      spellbookCover: spellbookBuild ? spellbookCoverId : null,
+      spellbookCoverLabel: spellbookBuild ? cover.label : "",
+      spellbookInk: spellbookBuild ? spellbookInkId : null,
+      spellbookInkLabel: spellbookBuild ? ink.label : "",
+      spellbookBinding: spellbookBuild ? spellbookBindingId : null,
+      spellbookBindingLabel: spellbookBuild ? binding.label : "",
+      artifactCore: artifactBuild ? artifactCoreId : null,
+      artifactCoreLabel: artifactBuild ? core.label : "",
+      artifactVessel: artifactBuild ? artifactVesselId : null,
+      artifactVesselLabel: artifactBuild ? vessel.label : "",
+      artifactSeal: artifactBuild ? artifactSealId : null,
+      artifactSealLabel: artifactBuild ? seal.label : "",
       wandSpellList,
-      glyphAssist: wandBuild ? flow.complexBias === "scripted" : safeForge.magicFocus === "spellbook",
+      glyphAssist: wandBuild ? flow.complexBias === "scripted" : false,
       glyphPointCount,
       artifactOneUse,
+      artifactCastType,
       spellPages: pageCycle,
       lore: wandBuild
         ? `${frame.label} bound with ${material.label.toLowerCase()}, ${orb.label.toLowerCase()}, ${stick.label.toLowerCase()}, and ${flow.label.toLowerCase()}. ` +
           `It leans into ${spellRole || "arcane pressure"}, and its live spell list includes ${wandSpellList.map((spell) => spell.toLowerCase()).join(", ")}. ${forgeSummary}`
-        : `${frame.label} bound with ${material.label.toLowerCase()}, ${element.label.toLowerCase()} power, ${pattern.label.toLowerCase()} routing, ` +
-          `${focus.label.toLowerCase()}, and a ${page.label.toLowerCase()} binding. It leans into ${spellRole || "arcane pressure"}. ${forgeSummary}`
+        : spellbookBuild
+          ? `${frame.label} was stitched in ${material.label.toLowerCase()} with a ${cover.label.toLowerCase()} cover, ` +
+            `${ink.label.toLowerCase()}, ${binding.label.toLowerCase()}, and a ${page.label.toLowerCase()} deck. ` +
+            `It leans into ${spellRole || "disciplined casting"}. ${forgeSummary}`
+          : artifactBuild
+            ? `${frame.label} was seated in ${material.label.toLowerCase()} around a ${core.label.toLowerCase()}, ` +
+              `${vessel.label.toLowerCase()}, and ${seal.label.toLowerCase()} release. ` +
+              `It leans into ${spellRole || "single-use relic pressure"}. ${forgeSummary}`
+            : `${frame.label} bound with ${material.label.toLowerCase()}, ${element.label.toLowerCase()} power, ${pattern.label.toLowerCase()} routing, ` +
+              `${focus.label.toLowerCase()}, and a ${page.label.toLowerCase()} binding. It leans into ${spellRole || "arcane pressure"}. ${forgeSummary}`
     };
   }
 
@@ -10353,8 +11055,10 @@ function renderMagicPreview(weapon) {
   if (!magicPreviewCtx || !ui.magicPreview) {
     return;
   }
+  ui.magicPreview.dataset.magicKind = weapon.kind;
   magicPreviewCtx.clearRect(0, 0, ui.magicPreview.width, ui.magicPreview.height);
   const element = magicElementCatalog[weapon.magicElement] || magicElementCatalog.ember;
+  const spellPages = Array.isArray(weapon.spellPages) && weapon.spellPages.length ? weapon.spellPages : [weapon.magicPage].filter(Boolean);
   const centerX = ui.magicPreview.width * 0.5;
   const centerY = ui.magicPreview.height * 0.52;
   const pulse = (Math.sin(performance.now() * 0.0032) + 1) * 0.5;
@@ -10374,6 +11078,13 @@ function renderMagicPreview(weapon) {
     magicPreviewCtx.lineTo(centerX + 16, centerY - 12);
     magicPreviewCtx.stroke();
     magicPreviewCtx.beginPath();
+    magicPreviewCtx.arc(centerX - 8, centerY + 2, 34 + pulse * 5, Math.PI * 0.12, Math.PI * 1.82);
+    magicPreviewCtx.strokeStyle = `${element.color}66`;
+    magicPreviewCtx.lineWidth = 2;
+    magicPreviewCtx.stroke();
+    magicPreviewCtx.strokeStyle = element.color;
+    magicPreviewCtx.lineWidth = 5;
+    magicPreviewCtx.beginPath();
     magicPreviewCtx.arc(centerX + 26, centerY - 16, 14, 0, Math.PI * 2);
     magicPreviewCtx.stroke();
     magicPreviewCtx.fillStyle = `${element.color}33`;
@@ -10388,20 +11099,48 @@ function renderMagicPreview(weapon) {
     magicPreviewCtx.beginPath();
     magicPreviewCtx.arc(centerX + 78, centerY - 36, 12 + pulse * 4, 0, Math.PI * 2);
     magicPreviewCtx.stroke();
+    magicPreviewCtx.strokeStyle = `${element.color}55`;
+    magicPreviewCtx.lineWidth = 2;
+    magicPreviewCtx.beginPath();
+    magicPreviewCtx.arc(centerX + 14, centerY - 6, 18 + pulse * 4, 0, Math.PI * 2);
+    magicPreviewCtx.stroke();
+    magicPreviewCtx.strokeStyle = element.color;
+    magicPreviewCtx.lineWidth = 5;
   } else if (weapon.kind === "spellbook") {
+    magicPreviewCtx.fillStyle = "rgba(17, 22, 34, 0.34)";
+    magicPreviewCtx.fillRect(centerX - 58, centerY - 36, 116, 72);
     magicPreviewCtx.strokeRect(centerX - 56, centerY - 34, 112, 68);
     magicPreviewCtx.beginPath();
     magicPreviewCtx.moveTo(centerX, centerY - 34);
     magicPreviewCtx.lineTo(centerX, centerY + 34);
     magicPreviewCtx.stroke();
+    magicPreviewCtx.strokeStyle = `${element.color}88`;
+    magicPreviewCtx.lineWidth = 2;
+    [0, 1, 2].forEach((index) => {
+      magicPreviewCtx.beginPath();
+      magicPreviewCtx.moveTo(centerX - 44, centerY - 14 + index * 14);
+      magicPreviewCtx.lineTo(centerX + 44, centerY - 14 + index * 14);
+      magicPreviewCtx.stroke();
+    });
+    magicPreviewCtx.strokeStyle = element.color;
+    magicPreviewCtx.lineWidth = 5;
   } else {
+    magicPreviewCtx.fillStyle = `${element.color}22`;
     magicPreviewCtx.beginPath();
     magicPreviewCtx.moveTo(centerX - 40, centerY);
     magicPreviewCtx.lineTo(centerX, centerY - 46);
     magicPreviewCtx.lineTo(centerX + 40, centerY);
     magicPreviewCtx.lineTo(centerX, centerY + 46);
     magicPreviewCtx.closePath();
+    magicPreviewCtx.fill();
     magicPreviewCtx.stroke();
+    magicPreviewCtx.strokeStyle = `${element.color}66`;
+    magicPreviewCtx.lineWidth = 2;
+    magicPreviewCtx.beginPath();
+    magicPreviewCtx.arc(centerX, centerY, 30 + pulse * 7, 0, Math.PI * 2);
+    magicPreviewCtx.stroke();
+    magicPreviewCtx.strokeStyle = element.color;
+    magicPreviewCtx.lineWidth = 5;
   }
 
   magicPreviewCtx.fillStyle = "#f4efe7";
@@ -10409,6 +11148,12 @@ function renderMagicPreview(weapon) {
   if (weapon.kind === "wand") {
     magicPreviewCtx.fillText(`${weapon.wandOrbLabel} | ${weapon.wandStickLabel}`, 18, 24);
     magicPreviewCtx.fillText(`${weapon.wandFlowLabel} | ${weapon.magicPageLabel}`, 18, ui.magicPreview.height - 18);
+  } else if (weapon.kind === "spellbook") {
+    magicPreviewCtx.fillText(`${weapon.spellbookCoverLabel} | ${weapon.spellbookInkLabel}`, 18, 24);
+    magicPreviewCtx.fillText(`${weapon.spellbookBindingLabel} | ${spellPages.length} page deck`, 18, ui.magicPreview.height - 18);
+  } else if (weapon.kind === "artifact") {
+    magicPreviewCtx.fillText(`${weapon.artifactCoreLabel} | ${weapon.artifactVesselLabel}`, 18, 24);
+    magicPreviewCtx.fillText(`${weapon.artifactSealLabel} | ${weapon.magicPageLabel}`, 18, ui.magicPreview.height - 18);
   } else {
     magicPreviewCtx.fillText(`${weapon.magicElementLabel} | ${weapon.magicPatternLabel}`, 18, 24);
     magicPreviewCtx.fillText(`${weapon.magicFocusLabel} | ${weapon.magicPageLabel}`, 18, ui.magicPreview.height - 18);
@@ -10419,88 +11164,121 @@ function renderMagicWorkshop(weapon) {
   if (!ui.magicWorkshop || !isMagicWeapon(weapon)) {
     return;
   }
-
+  ui.magicWorkshop.hidden = false;
+  ui.magicWorkshop.dataset.magicKind = weapon.kind;
   const wand = weapon.kind === "wand";
+  const spellbook = weapon.kind === "spellbook";
+  const artifact = weapon.kind === "artifact";
+  const staff = weapon.kind === "staff";
   const element = magicElementCatalog[weapon.magicElement] || magicElementCatalog.ember;
-  const pattern = wand
-    ? wandStickCatalog[weapon.wandStick] || wandStickCatalog.ashwood
-    : magicPatternCatalog[weapon.magicPattern] || magicPatternCatalog.lance;
-  const focus = wand
-    ? wandFlowCatalog[weapon.wandFlow] || wandFlowCatalog.snap
-    : magicFocusCatalog[weapon.magicFocus] || magicFocusCatalog.freehand;
-  const page = magicPageCatalog[weapon.magicPage] || magicPageCatalog.ember;
+  const spellPages = Array.isArray(weapon.spellPages) && weapon.spellPages.length ? weapon.spellPages : [weapon.magicPage].filter(Boolean);
   const orb = wand ? wandOrbCatalog[weapon.wandOrb] || wandOrbCatalog.embercore : null;
-  const boundBookText =
-    wand
-      ? `${weapon.wandFlowLabel} is active. This wand wants ${weapon.glyphPointCount} clean point${weapon.glyphPointCount === 1 ? "" : "s"} before the cast releases.`
-      : weapon.kind === "spellbook"
-        ? "Block flips the bound page in combat, so each page cast changes the spell."
-        : weapon.kind === "artifact"
-          ? "Artifacts are one-time-use relics for the round. Once the relic fires, it is spent."
-          : "Staff channels hold a cleaner lane and throw heavier elemental control spells.";
+  const stick = wand ? wandStickCatalog[weapon.wandStick] || wandStickCatalog.ashwood : null;
+  const flow = wand ? wandFlowCatalog[weapon.wandFlow] || wandFlowCatalog.snap : null;
+  const cover = spellbook ? spellbookCoverCatalog[weapon.spellbookCover] || spellbookCoverCatalog.silkbound : null;
+  const ink = spellbook ? spellbookInkCatalog[weapon.spellbookInk] || spellbookInkCatalog.emberink : null;
+  const binding = spellbook ? spellbookBindingCatalog[weapon.spellbookBinding] || spellbookBindingCatalog.quickleaf : null;
+  const core = artifact ? artifactCoreCatalog[weapon.artifactCore] || artifactCoreCatalog.cindercore : null;
+  const vessel = artifact ? artifactVesselCatalog[weapon.artifactVessel] || artifactVesselCatalog.idolframe : null;
+  const seal = artifact ? artifactSealCatalog[weapon.artifactSeal] || artifactSealCatalog.legion : null;
+  const pattern = staff ? magicPatternCatalog[weapon.magicPattern] || magicPatternCatalog.lance : null;
+  const focus = staff ? magicFocusCatalog[weapon.magicFocus] || magicFocusCatalog.freehand : null;
+  const page = magicPageCatalog[weapon.magicPage] || magicPageCatalog.ember;
+  const requiredStation = forgeStationCatalog[stationRequiredForForge(state.forge)] || forgeStationCatalog.anvil;
+  const forgeLevel = currentForgeProgress().level;
+  const stationOnline = stationUnlocked(requiredStation.id, forgeLevel);
+  const boundBookText = wand
+    ? `${weapon.wandFlowLabel} is active. This wand wants ${weapon.glyphPointCount} clean point${weapon.glyphPointCount === 1 ? "" : "s"} before the cast releases.`
+    : spellbook
+      ? `${weapon.spellbookBindingLabel} controls page speed. Block flips through the ${spellPages.length}-page deck during live combat.`
+      : artifact
+        ? `${weapon.artifactSealLabel} defines the one-time relic release. Once fired, the artifact stays spent for the round.`
+        : "Staff channels hold a cleaner lane and throw heavier elemental control spells.";
 
   ui.magicWorkshopFamily.textContent = `${weapon.classLabel} Craft`;
   ui.magicWorkshopNote.textContent =
     wand
-      ? `${weapon.frame} is bound with ${orb.label.toLowerCase()}, ${pattern.label.toLowerCase()}, and ${focus.label.toLowerCase()}. ${boundBookText}`
-      : `${weapon.frame} is using ${element.label.toLowerCase()} power through the ${pattern.label.toLowerCase()} route. ${boundBookText}`;
+      ? `${weapon.frame} is bound with ${orb.label.toLowerCase()}, ${stick.label.toLowerCase()}, and ${flow.label.toLowerCase()}. ${boundBookText}`
+      : spellbook
+        ? `${weapon.frame} is stitched with ${cover.label.toLowerCase()}, ${ink.label.toLowerCase()}, and ${binding.label.toLowerCase()}. ${boundBookText}`
+        : artifact
+          ? `${weapon.frame} is seated with ${core.label.toLowerCase()}, ${vessel.label.toLowerCase()}, and ${seal.label.toLowerCase()}. ${boundBookText}`
+          : `${weapon.frame} is using ${element.label.toLowerCase()} power through the ${pattern.label.toLowerCase()} route. ${boundBookText}`;
   renderMagicPreview(weapon);
   ui.magicSummary.innerHTML = `
     <div class="ammo-summary-grid">
       <div class="ammo-summary-chip">
-        <span>${wand ? "Orb" : "Element"}</span>
-        <strong>${wand ? weapon.wandOrbLabel : element.label}</strong>
+        <span>${wand ? "Orb" : spellbook ? "Cover" : artifact ? "Core" : "Element"}</span>
+        <strong>${wand ? weapon.wandOrbLabel : spellbook ? weapon.spellbookCoverLabel : artifact ? weapon.artifactCoreLabel : element.label}</strong>
       </div>
       <div class="ammo-summary-chip">
-        <span>${wand ? "Stick" : "Route"}</span>
-        <strong>${pattern.label}</strong>
+        <span>${wand ? "Stick" : spellbook ? "Ink" : artifact ? "Vessel" : "Route"}</span>
+        <strong>${wand ? weapon.wandStickLabel : spellbook ? weapon.spellbookInkLabel : artifact ? weapon.artifactVesselLabel : pattern.label}</strong>
       </div>
       <div class="ammo-summary-chip">
-        <span>${wand ? "Flow" : "Focus"}</span>
-        <strong>${focus.label}</strong>
+        <span>${wand ? "Flow" : spellbook ? "Binding" : artifact ? "Seal" : "Focus"}</span>
+        <strong>${wand ? weapon.wandFlowLabel : spellbook ? weapon.spellbookBindingLabel : artifact ? weapon.artifactSealLabel : focus.label}</strong>
       </div>
       <div class="ammo-summary-chip">
-        <span>${wand ? "Spells" : "Page"}</span>
-        <strong>${wand ? `${weapon.wandSpellList.length}` : page.label}</strong>
+        <span>${wand ? "Spells" : spellbook ? "Deck" : artifact ? "Manifest" : "Page"}</span>
+        <strong>${wand ? `${weapon.wandSpellList.length}` : spellbook ? `${spellPages.length} pages` : page.label}</strong>
       </div>
     </div>
     <p>${weapon.abilitySummary}</p>
   `;
 
-  const featureRows = [
-    {
-      title: wand ? "Orb Core" : "Element Role",
-      copy: wand ? orb.summary : element.summary
-    },
-    {
-      title: wand ? "Stick Frame" : "Spell Route",
-      copy: pattern.summary
-    },
-    {
-      title: wand ? "Flow Rule" : "Focus Rule",
-      copy: focus.summary
-    },
-    {
-      title: wand ? "Spell Seed" : "Page Rule",
-      copy: page.summary
-    }
-  ];
+  const featureRows = wand
+    ? [
+        { title: "Orb Core", copy: orb.summary },
+        { title: "Stick Frame", copy: stick.summary },
+        { title: "Flow Rule", copy: flow.summary },
+        { title: "Spell Seed", copy: page.summary }
+      ]
+    : spellbook
+      ? [
+          { title: "Cover Shell", copy: cover.summary },
+          { title: "Ink Route", copy: ink.summary },
+          { title: "Binding Rule", copy: binding.summary },
+          { title: "Page Deck", copy: `Bound deck: ${spellPages.map((pageId) => magicPageCatalog[pageId]?.label || pageId).join(", ")}.` }
+        ]
+      : artifact
+        ? [
+            { title: "Relic Core", copy: core.summary },
+            { title: "Vessel Body", copy: vessel.summary },
+            { title: "Seal Rule", copy: seal.summary },
+            { title: "Manifest", copy: page.summary }
+          ]
+        : [
+            { title: "Element Role", copy: element.summary },
+            { title: "Spell Route", copy: pattern.summary },
+            { title: "Focus Rule", copy: focus.summary },
+            { title: "Page Rule", copy: page.summary }
+          ];
   if (wand) {
     featureRows.push({
       title: "Gesture Cast",
       copy: `Move the wand freely around your fighter, click to place points, and finish ${weapon.glyphPointCount}-point chains. This build can cast ${weapon.wandSpellList.join(", ")}.`
     });
-  } else if (weapon.kind === "spellbook") {
+  } else if (spellbook) {
     featureRows.push({
       title: "Page Switch",
       copy: "Attack casts the current page. Block flips the book to the next bound page instead of raising a full normal guard."
     });
-  } else if (weapon.kind === "artifact") {
+  } else if (artifact) {
     featureRows.push({
       title: "Relic Effect",
-      copy: "Artifacts summon zones, zombies, curses, or wards instead of fighting like a normal blade."
+      copy: `${weapon.artifactSealLabel} releases a ${weapon.artifactCastType || "ward"} cast. Artifacts summon zones, zombies, curses, or wards instead of fighting like a normal blade.`
+    });
+  } else {
+    featureRows.push({
+      title: "Channel Cast",
+      copy: "Staves reward stable timing. They cast heavier route-driven spells with more direct field control than wands or books."
     });
   }
+  featureRows.push({
+    title: "Forge Station",
+    copy: `${requiredStation.label} is required for this craft path. ${stationOnline ? "That wing is already online for your forge level." : `Reach Forge Lv ${requiredStation.unlockLevel} to open it.`}`
+  });
   ui.magicSpellList.innerHTML = featureRows
     .map(
       (row) => `
@@ -10518,9 +11296,11 @@ function renderMagicWorkshop(weapon) {
 function forgeRoomStations() {
   return {
     anvil: { ...forgeStationCatalog.anvil, x: 0.16, y: 0.68, color: "#ff9c63" },
-    ammo: { ...forgeStationCatalog.ammo, x: 0.41, y: 0.62, color: "#89e6dc" },
-    arcane: { ...forgeStationCatalog.arcane, x: 0.67, y: 0.58, color: "#c6a9ff" },
-    enchant: { ...forgeStationCatalog.enchant, x: 0.84, y: 0.7, color: "#ffe08f" }
+    ammo: { ...forgeStationCatalog.ammo, x: 0.35, y: 0.64, color: "#89e6dc" },
+    arcane: { ...forgeStationCatalog.arcane, x: 0.56, y: 0.54, color: "#c6a9ff" },
+    scriptorium: { ...forgeStationCatalog.scriptorium, x: 0.76, y: 0.46, color: "#8bb7ff" },
+    relic: { ...forgeStationCatalog.relic, x: 0.86, y: 0.7, color: "#ff9ad6" },
+    enchant: { ...forgeStationCatalog.enchant, x: 0.66, y: 0.76, color: "#ffe08f" }
   };
 }
 
@@ -10539,6 +11319,12 @@ function useForgeStation(stationId = nearestForgeStationId()) {
   if (!forgeStationCatalog[stationId]) {
     return;
   }
+  if (!stationUnlocked(stationId)) {
+    const station = forgeStationCatalog[stationId];
+    setMatchSummary(`${station.label} unlocks at Forge Lv ${station.unlockLevel}.`);
+    renderForge();
+    return;
+  }
   state.forgeRoom.activeStationId = stationId;
   state.forgeRoom.nearestStationId = stationId;
   renderForge();
@@ -10546,7 +11332,7 @@ function useForgeStation(stationId = nearestForgeStationId()) {
 }
 
 function cycleForgeStation() {
-  const stationIds = Object.keys(forgeStationCatalog);
+  const stationIds = unlockedForgeStationIds();
   const currentIndex = Math.max(0, stationIds.indexOf(state.forgeRoom.activeStationId));
   useForgeStation(stationIds[(currentIndex + 1) % stationIds.length]);
 }
@@ -10554,10 +11340,15 @@ function cycleForgeStation() {
 function renderForgeProgress(weapon = currentBlueprint()) {
   const progress = currentForgeProgress();
   const levelMeta = forgeProgressionCatalog[progress.level] || forgeProgressionCatalog[1];
+  const nextLevelMeta = progress.level < FORGE_LEVEL_MAX ? forgeProgressionCatalog[progress.level + 1] || null : null;
   const xpToNext = progress.level >= FORGE_LEVEL_MAX ? 1 : forgeXpToNextLevel(progress.level);
   const xpRatio = progress.level >= FORGE_LEVEL_MAX ? 1 : progress.xp / xpToNext;
   const requiredStation = forgeStationCatalog[stationRequiredForForge(state.forge)] || forgeStationCatalog.anvil;
   const assist = forgeAssistProfile();
+  const accessibleAreas = unlockedForgeStationIds(progress.level).map((stationId) => forgeStationCatalog[stationId]?.label).filter(Boolean);
+  const lockedAreas = Object.entries(forgeStationCatalog)
+    .filter(([, station]) => station.unlockLevel > progress.level)
+    .map(([, station]) => `${station.label} at Lv ${station.unlockLevel}`);
 
   if (ui.forgeLevelTag) {
     ui.forgeLevelTag.textContent = `Forge Lv ${progress.level}`;
@@ -10574,10 +11365,17 @@ function renderForgeProgress(weapon = currentBlueprint()) {
   if (ui.forgeUpgradeCopy) {
     ui.forgeUpgradeCopy.textContent =
       `${levelMeta.name} is active. Current build wants the ${requiredStation.label}. ` +
+      `Accessible areas: ${accessibleAreas.join(", ")}. ` +
+      `${nextLevelMeta ? `Next rank is ${nextLevelMeta.name} at Lv ${progress.level + 1}, unlocking ${nextLevelMeta.unlocks[0]}. ` : "All forge wings are online. "}` +
       `Forge ease bonus: +${Math.round(assist.windowBonus * 100)} timing and +${Math.round(assist.qualityBonus * 100)} finish.`;
   }
   if (ui.forgeUnlocks) {
-    ui.forgeUnlocks.innerHTML = levelMeta.unlocks
+    ui.forgeUnlocks.innerHTML = [
+      ...levelMeta.unlocks,
+      ...accessibleAreas.map((label) => `${label} online`),
+      ...(nextLevelMeta ? nextLevelMeta.unlocks.slice(0, 2).map((unlock) => `Next Lv ${progress.level + 1}: ${unlock}`) : []),
+      ...(lockedAreas.length ? lockedAreas.slice(0, 1).map((lock) => `Locked: ${lock}`) : [])
+    ]
       .map(
         (unlock) => `
           <div class="forge-unlock-chip">
@@ -10595,13 +11393,18 @@ function forgeChecklistEntries(weapon = currentBlueprint()) {
   const requiredStationId = stationRequiredForForge(state.forge);
   const requiredStation = forgeStationCatalog[requiredStationId] || forgeStationCatalog.anvil;
   const activeStation = forgeStationCatalog[state.forgeRoom.activeStationId] || forgeStationCatalog.anvil;
+  const spellPages = Array.isArray(weapon.spellPages) && weapon.spellPages.length ? weapon.spellPages : [weapon.magicPage].filter(Boolean);
   const savedToArmory = state.armory.some((candidate) => candidate.id === weapon.id);
   const forgeTuned = Math.abs((state.forge.forgeQuality ?? 0.5) - 0.5) > 0.015;
   const loadedRounds = Array.isArray(state.forge.ammoCase) ? state.forge.ammoCase.length : 0;
   const payloadReady = isMagicWeapon(weapon)
     ? weapon.kind === "wand"
       ? Boolean(weapon.wandOrb && weapon.wandStick && weapon.wandFlow)
-      : Boolean(weapon.magicElement && weapon.magicPattern && weapon.magicFocus && weapon.magicPage)
+      : weapon.kind === "spellbook"
+        ? Boolean(weapon.spellbookCover && weapon.spellbookInk && weapon.spellbookBinding && weapon.magicPage)
+        : weapon.kind === "artifact"
+          ? Boolean(weapon.artifactCore && weapon.artifactVessel && weapon.artifactSeal && weapon.magicPage)
+          : Boolean(weapon.magicElement && weapon.magicPattern && weapon.magicFocus && weapon.magicPage)
     : isRangedWeapon(weapon)
       ? loadedRounds > 0
       : true;
@@ -10633,7 +11436,11 @@ function forgeChecklistEntries(weapon = currentBlueprint()) {
       copy: isMagicWeapon(weapon)
         ? weapon.kind === "wand"
           ? `${weapon.wandOrbLabel}, ${weapon.wandStickLabel}, and ${weapon.wandFlowLabel} are bound for ${weapon.glyphPointCount}-point casting.`
-          : `${weapon.magicElementLabel}, ${weapon.magicPatternLabel}, ${weapon.magicFocusLabel}, and ${weapon.magicPageLabel} are bound.`
+          : weapon.kind === "spellbook"
+            ? `${weapon.spellbookCoverLabel}, ${weapon.spellbookInkLabel}, ${weapon.spellbookBindingLabel}, and a ${spellPages.length}-page deck are bound.`
+            : weapon.kind === "artifact"
+              ? `${weapon.artifactCoreLabel}, ${weapon.artifactVesselLabel}, ${weapon.artifactSealLabel}, and ${weapon.magicPageLabel} are sealed into a one-use relic.`
+              : `${weapon.magicElementLabel}, ${weapon.magicPatternLabel}, ${weapon.magicFocusLabel}, and ${weapon.magicPageLabel} are bound.`
         : isRangedWeapon(weapon)
           ? payloadReady
             ? `${loadedRounds}/${Math.max(1, Number(weapon.preloadAmmo || weapon.clipSize || 1))} rounds are stacked in firing order.`
@@ -10663,26 +11470,45 @@ function renderForgeDashboard(weapon = currentBlueprint()) {
   const currentStation = forgeStationCatalog[state.forgeRoom.activeStationId] || forgeStationCatalog.anvil;
   const assist = forgeAssistProfile();
   const stage = currentStageConfig();
+  const progress = currentForgeProgress();
+  const nextLevelMeta = progress.level < FORGE_LEVEL_MAX ? forgeProgressionCatalog[progress.level + 1] || null : null;
+  const accessibleAreas = unlockedForgeStationIds(progress.level).map((stationId) => forgeStationCatalog[stationId]?.label).filter(Boolean);
+  const lockedAreas = Object.entries(forgeStationCatalog)
+    .filter(([, station]) => station.unlockLevel > progress.level)
+    .map(([, station]) => `${station.label} (Lv ${station.unlockLevel})`);
   const checklist = forgeChecklistEntries(weapon);
   const doneCount = checklist.filter((entry) => entry.done).length;
+  const spellPages = Array.isArray(weapon.spellPages) && weapon.spellPages.length ? weapon.spellPages : [weapon.magicPage].filter(Boolean);
   const ammoLoaded = Array.isArray(state.forge.ammoCase) ? state.forge.ammoCase.length : 0;
   const ammoCapacity = Math.max(1, Number(weapon.preloadAmmo || weapon.clipSize || frame.clipSize || 1));
   const spellDeck = isMagicWeapon(weapon)
     ? weapon.kind === "wand"
       ? weapon.wandSpellList.join(", ")
-      : `${weapon.magicPageLabel} page`
+      : weapon.kind === "spellbook"
+        ? spellPages.map((pageId) => magicPageCatalog[pageId]?.label || pageId).join(", ")
+        : weapon.kind === "artifact"
+          ? `${weapon.artifactSealLabel} | ${weapon.magicPageLabel}`
+          : `${weapon.magicPageLabel} page`
     : weapon.abilitySummary;
   const payloadTitle = isMagicWeapon(weapon)
     ? weapon.kind === "wand"
       ? `${weapon.wandOrbLabel} | ${weapon.wandStickLabel}`
-      : `${weapon.magicElementLabel} | ${weapon.magicPatternLabel}`
+      : weapon.kind === "spellbook"
+        ? `${weapon.spellbookCoverLabel} | ${weapon.spellbookInkLabel}`
+        : weapon.kind === "artifact"
+          ? `${weapon.artifactCoreLabel} | ${weapon.artifactVesselLabel}`
+          : `${weapon.magicElementLabel} | ${weapon.magicPatternLabel}`
     : isRangedWeapon(weapon)
       ? weapon.fireModeLabel
       : `${weapon.frame} Trait`;
   const payloadCopy = isMagicWeapon(weapon)
     ? weapon.kind === "wand"
       ? `${weapon.wandFlowLabel} with ${weapon.glyphPointCount}-point casting. Spell list: ${weapon.wandSpellList.join(", ")}.`
-      : `${weapon.magicFocusLabel} with ${weapon.magicPageLabel} bound for the live cast rule.`
+      : weapon.kind === "spellbook"
+        ? `${weapon.spellbookBindingLabel} binding with ${spellPages.length} live pages. Block flips the tome during combat.`
+        : weapon.kind === "artifact"
+          ? `${weapon.artifactSealLabel} seal with a ${weapon.artifactCastType || "ward"} release. This relic fires once per round.`
+          : `${weapon.magicFocusLabel} with ${weapon.magicPageLabel} bound for the live cast rule.`
     : isRangedWeapon(weapon)
       ? `${ammoLoaded}/${ammoCapacity} rounds loaded. ${weapon.ammoCaseSummary || "Craft and order rounds in the case."}`
       : weapon.abilitySummary;
@@ -10698,6 +11524,13 @@ function renderForgeDashboard(weapon = currentBlueprint()) {
         <span>Forge Station</span>
         <strong>${requiredStation.label}</strong>
         <p>${state.forgeRoom.activeStationId === requiredStation.id ? "You are standing at the correct station." : `Current station: ${currentStation.label}. Move over for the best forge assist.`}</p>
+      </article>
+      <article class="forge-overview-card">
+        <span>Area Access</span>
+        <strong>${accessibleAreas.length} online | ${lockedAreas.length} locked</strong>
+        <p>${lockedAreas.length
+          ? `${accessibleAreas.join(", ")} are open. ${nextLevelMeta ? `${nextLevelMeta.name} at Lv ${progress.level + 1} unlocks ${nextLevelMeta.unlocks[0]}.` : ""}`
+          : "Every forge wing is open, including advanced magic, ranged, relic, and enchant stations."}</p>
       </article>
       <article class="forge-overview-card">
         <span>Payload</span>
@@ -10718,7 +11551,9 @@ function renderForgeDashboard(weapon = currentBlueprint()) {
               ? "Artifacts are single-use relics. Save them for a swing moment because they do not reload this round."
               : weapon.kind === "wand"
                 ? "Orb picks the element, stick shapes handling, and flow decides how many points your best casts need."
-                : "Magic pages and routes stay on the weapon, so you can forge around a specific cast pattern."
+                : weapon.kind === "spellbook"
+                  ? "Spellbooks are stitched from cover, ink, and binding. The deck is fixed at the forge, then block flips through it in live combat."
+                  : "Staves still use element, route, focus, and page. They are the cleanest way to channel heavier direct spells."
             : isRangedWeapon(weapon)
               ? "Ammo order still matters. Reloads pull from the crafted case in sequence."
               : "Heavy, medium, and short melee classes still keep their built-in fight traits."
@@ -10757,6 +11592,7 @@ function renderForgeRoom() {
   if (!forgeRoomCtx || !ui.forgeRoom) {
     return;
   }
+  state.forgeRoom.activeStationId = activeForgeStationId();
   const width = ui.forgeRoom.width;
   const height = ui.forgeRoom.height;
   const stations = forgeRoomStations();
@@ -10764,6 +11600,7 @@ function renderForgeRoom() {
   const nearest = stations[state.forgeRoom.nearestStationId];
   const active = stations[state.forgeRoom.activeStationId] || stations.anvil;
   const required = stations[stationRequiredForForge(state.forge)] || stations.anvil;
+  const forgeLevel = currentForgeProgress().level;
 
   forgeRoomCtx.clearRect(0, 0, width, height);
   const bg = forgeRoomCtx.createLinearGradient(0, 0, 0, height);
@@ -10778,19 +11615,41 @@ function renderForgeRoom() {
   Object.entries(stations).forEach(([id, station]) => {
     const x = station.x * width;
     const y = station.y * height;
+    const zoneWidth = 138;
+    const zoneHeight = 92;
     const activeStation = id === state.forgeRoom.activeStationId;
     const nearby = id === state.forgeRoom.nearestStationId;
-    forgeRoomCtx.fillStyle = `${station.color}${activeStation ? "55" : "24"}`;
+    const unlocked = stationUnlocked(id, forgeLevel);
+    forgeRoomCtx.fillStyle = unlocked ? `${station.color}14` : "rgba(255,255,255,0.025)";
+    forgeRoomCtx.beginPath();
+    forgeRoomCtx.roundRect(x - zoneWidth / 2, y - zoneHeight / 2, zoneWidth, zoneHeight, 20);
+    forgeRoomCtx.fill();
+    forgeRoomCtx.strokeStyle = unlocked ? `${station.color}26` : "rgba(255,255,255,0.07)";
+    forgeRoomCtx.lineWidth = 1.5;
+    forgeRoomCtx.stroke();
+    forgeRoomCtx.fillStyle = unlocked ? "rgba(244,239,231,0.34)" : "rgba(244,239,231,0.18)";
+    forgeRoomCtx.font = "600 10px 'Trebuchet MS', sans-serif";
+    const zoneText = unlocked ? "OPEN" : `LOCKED LV ${station.unlockLevel}`;
+    const zoneWidthText = forgeRoomCtx.measureText(zoneText).width;
+    forgeRoomCtx.fillText(zoneText, x - zoneWidthText / 2, y - 34);
+    forgeRoomCtx.fillStyle = unlocked ? `${station.color}${activeStation ? "55" : "24"}` : "rgba(255,255,255,0.03)";
     forgeRoomCtx.beginPath();
     forgeRoomCtx.roundRect(x - 34, y - 26, 68, 52, 16);
     forgeRoomCtx.fill();
-    forgeRoomCtx.strokeStyle = activeStation ? station.color : nearby ? "#f4efe7" : "rgba(255,255,255,0.18)";
+    forgeRoomCtx.strokeStyle = !unlocked ? "rgba(255,255,255,0.14)" : activeStation ? station.color : nearby ? "#f4efe7" : "rgba(255,255,255,0.18)";
     forgeRoomCtx.lineWidth = activeStation ? 3 : 2;
     forgeRoomCtx.stroke();
-    forgeRoomCtx.fillStyle = "#f4efe7";
+    forgeRoomCtx.fillStyle = unlocked ? "#f4efe7" : "rgba(244,239,231,0.52)";
     forgeRoomCtx.font = "700 12px 'Trebuchet MS', sans-serif";
     const labelWidth = forgeRoomCtx.measureText(station.label).width;
     forgeRoomCtx.fillText(station.label, x - labelWidth / 2, y + 4);
+    if (!unlocked) {
+      forgeRoomCtx.fillStyle = "#f2dcaa";
+      forgeRoomCtx.font = "700 11px 'Trebuchet MS', sans-serif";
+      const lockText = `Lv ${station.unlockLevel}`;
+      const lockWidth = forgeRoomCtx.measureText(lockText).width;
+      forgeRoomCtx.fillText(lockText, x - lockWidth / 2, y + 20);
+    }
   });
 
   const fighterX = state.forgeRoom.x * width;
@@ -10831,8 +11690,10 @@ function renderForgeRoom() {
     ui.forgeRoomFocus.textContent = required.label;
   }
   if (ui.forgeRoomCopy) {
+    const nearestUnlocked = stationUnlocked(state.forgeRoom.nearestStationId, forgeLevel);
     const matchText = active.label === required.label ? "Correct station active." : `Current build wants ${required.label}.`;
-    ui.forgeRoomCopy.textContent = `${forgeStationCatalog[state.forgeRoom.activeStationId].copy} ${matchText}`;
+    const lockText = nearestUnlocked ? "" : ` The nearby station is locked until Forge Lv ${stations[state.forgeRoom.nearestStationId]?.unlockLevel || 1}.`;
+    ui.forgeRoomCopy.textContent = `${forgeStationCatalog[state.forgeRoom.activeStationId].copy} ${matchText}${lockText}`;
   }
 }
 
@@ -10866,13 +11727,44 @@ function updateForgeRoom(dt) {
 }
 
 function renderForgeBadges(weapon) {
+  const spellPages = Array.isArray(weapon.spellPages) && weapon.spellPages.length ? weapon.spellPages : [weapon.magicPage].filter(Boolean);
   ui.forgeBadges.innerHTML = isMagicWeapon(weapon)
-    ? `
+    ? weapon.kind === "wand"
+      ? `
       <span class="menu-status alt">${weapon.classLabel}</span>
-      <span class="menu-status alt">${weapon.kind === "wand" ? weapon.wandOrbLabel : weapon.magicElementLabel}</span>
-      <span class="menu-status alt">${weapon.kind === "wand" ? weapon.wandStickLabel : weapon.magicPatternLabel}</span>
-      <span class="menu-status alt">${weapon.kind === "wand" ? weapon.wandFlowLabel : weapon.magicFocusLabel}</span>
-      <span class="menu-status alt">${weapon.kind === "wand" ? `${weapon.glyphPointCount} points` : weapon.magicPageLabel}</span>
+      <span class="menu-status alt">${weapon.wandOrbLabel}</span>
+      <span class="menu-status alt">${weapon.wandStickLabel}</span>
+      <span class="menu-status alt">${weapon.wandFlowLabel}</span>
+      <span class="menu-status alt">${weapon.glyphPointCount} points</span>
+      <span class="menu-status alt">${weapon.ammoLabel}</span>
+      <span class="menu-status alt">${weapon.forgeQualityLabel}</span>
+    `
+      : weapon.kind === "spellbook"
+        ? `
+      <span class="menu-status alt">${weapon.classLabel}</span>
+      <span class="menu-status alt">${weapon.spellbookCoverLabel}</span>
+      <span class="menu-status alt">${weapon.spellbookInkLabel}</span>
+      <span class="menu-status alt">${weapon.spellbookBindingLabel}</span>
+      <span class="menu-status alt">${spellPages.length} pages</span>
+      <span class="menu-status alt">${weapon.ammoLabel}</span>
+      <span class="menu-status alt">${weapon.forgeQualityLabel}</span>
+    `
+        : weapon.kind === "artifact"
+          ? `
+      <span class="menu-status alt">${weapon.classLabel}</span>
+      <span class="menu-status alt">${weapon.artifactCoreLabel}</span>
+      <span class="menu-status alt">${weapon.artifactVesselLabel}</span>
+      <span class="menu-status alt">${weapon.artifactSealLabel}</span>
+      <span class="menu-status alt">1 use relic</span>
+      <span class="menu-status alt">${weapon.magicPageLabel}</span>
+      <span class="menu-status alt">${weapon.forgeQualityLabel}</span>
+    `
+          : `
+      <span class="menu-status alt">${weapon.classLabel}</span>
+      <span class="menu-status alt">${weapon.magicElementLabel}</span>
+      <span class="menu-status alt">${weapon.magicPatternLabel}</span>
+      <span class="menu-status alt">${weapon.magicFocusLabel}</span>
+      <span class="menu-status alt">${weapon.magicPageLabel}</span>
       <span class="menu-status alt">${weapon.ammoLabel}</span>
       <span class="menu-status alt">${weapon.forgeQualityLabel}</span>
     `
@@ -11056,6 +11948,7 @@ function weaponPreviewMarkup(weapon) {
 
 function renderForgeDetails(weapon) {
   if (isMagicWeapon(weapon)) {
+    const spellPages = Array.isArray(weapon.spellPages) && weapon.spellPages.length ? weapon.spellPages : [weapon.magicPage].filter(Boolean);
     if (weapon.kind === "wand") {
       ui.forgeDetails.innerHTML = `
         <article class="forge-detail-card">
@@ -11085,6 +11978,96 @@ function renderForgeDetails(weapon) {
         </article>
         <article class="forge-detail-card">
           <span>Cast Rule</span>
+          <strong>${weapon.fireModeLabel}</strong>
+          <p>${weapon.abilitySummary}</p>
+        </article>
+        <article class="forge-detail-card">
+          <span>Heat</span>
+          <strong>${weapon.heat}% forge heat</strong>
+          <p>${weapon.heatSummary}</p>
+        </article>
+        <article class="forge-detail-card">
+          <span>Forge Finish</span>
+          <strong>${weapon.forgeQualityLabel}</strong>
+          <p>${weapon.forgeSummary}</p>
+        </article>
+      `;
+      return;
+    }
+    if (weapon.kind === "spellbook") {
+      ui.forgeDetails.innerHTML = `
+        <article class="forge-detail-card">
+          <span>Spellbook Frame</span>
+          <strong>${weapon.frame} | ${weapon.classLabel}</strong>
+          <p>${weapon.frameSummary}</p>
+        </article>
+        <article class="forge-detail-card">
+          <span>Cover</span>
+          <strong>${weapon.spellbookCoverLabel}</strong>
+          <p>${spellbookCoverCatalog[weapon.spellbookCover]?.summary || ""}</p>
+        </article>
+        <article class="forge-detail-card">
+          <span>Ink</span>
+          <strong>${weapon.spellbookInkLabel}</strong>
+          <p>${spellbookInkCatalog[weapon.spellbookInk]?.summary || ""}</p>
+        </article>
+        <article class="forge-detail-card">
+          <span>Binding</span>
+          <strong>${weapon.spellbookBindingLabel}</strong>
+          <p>${spellbookBindingCatalog[weapon.spellbookBinding]?.summary || ""}</p>
+        </article>
+        <article class="forge-detail-card">
+          <span>Deck</span>
+          <strong>${spellPages.map((pageId) => magicPageCatalog[pageId]?.label || pageId).join(", ")}</strong>
+          <p>Attack casts the active page. Block flips to the next page in this forged deck.</p>
+        </article>
+        <article class="forge-detail-card">
+          <span>Cast Rule</span>
+          <strong>${weapon.fireModeLabel}</strong>
+          <p>${weapon.abilitySummary}</p>
+        </article>
+        <article class="forge-detail-card">
+          <span>Heat</span>
+          <strong>${weapon.heat}% forge heat</strong>
+          <p>${weapon.heatSummary}</p>
+        </article>
+        <article class="forge-detail-card">
+          <span>Forge Finish</span>
+          <strong>${weapon.forgeQualityLabel}</strong>
+          <p>${weapon.forgeSummary}</p>
+        </article>
+      `;
+      return;
+    }
+    if (weapon.kind === "artifact") {
+      ui.forgeDetails.innerHTML = `
+        <article class="forge-detail-card">
+          <span>Artifact Frame</span>
+          <strong>${weapon.frame} | ${weapon.classLabel}</strong>
+          <p>${weapon.frameSummary}</p>
+        </article>
+        <article class="forge-detail-card">
+          <span>Core</span>
+          <strong>${weapon.artifactCoreLabel}</strong>
+          <p>${artifactCoreCatalog[weapon.artifactCore]?.summary || ""}</p>
+        </article>
+        <article class="forge-detail-card">
+          <span>Vessel</span>
+          <strong>${weapon.artifactVesselLabel}</strong>
+          <p>${artifactVesselCatalog[weapon.artifactVessel]?.summary || ""}</p>
+        </article>
+        <article class="forge-detail-card">
+          <span>Seal</span>
+          <strong>${weapon.artifactSealLabel}</strong>
+          <p>${artifactSealCatalog[weapon.artifactSeal]?.summary || ""}</p>
+        </article>
+        <article class="forge-detail-card">
+          <span>Manifest</span>
+          <strong>${weapon.magicPageLabel}</strong>
+          <p>${magicPageCatalog[weapon.magicPage]?.summary || ""} This relic only fires once per round.</p>
+        </article>
+        <article class="forge-detail-card">
+          <span>Release</span>
           <strong>${weapon.fireModeLabel}</strong>
           <p>${weapon.abilitySummary}</p>
         </article>
@@ -11249,6 +12232,39 @@ function renderForgeDetails(weapon) {
 
 function renderForgeStats(weapon) {
   if (isMagicWeapon(weapon)) {
+    const spellPages = Array.isArray(weapon.spellPages) && weapon.spellPages.length ? weapon.spellPages : [weapon.magicPage].filter(Boolean);
+    const magicResourceStat =
+      weapon.kind === "wand"
+        ? {
+            label: "Gesture",
+            value: weapon.glyphPointCount,
+            display: `${weapon.glyphPointCount} pts`,
+            max: 5,
+            detail: "Wands cast from point chains. Lower counts release faster, while higher counts support richer spell patterns."
+          }
+        : weapon.kind === "spellbook"
+          ? {
+              label: "Deck",
+              value: spellPages.length,
+              display: `${spellPages.length} pages`,
+              max: 6,
+              detail: "Books carry a forged live deck. Block flips the active page, so a larger deck gives more in-round options."
+            }
+          : weapon.kind === "artifact"
+            ? {
+                label: "Relic",
+                value: 1,
+                display: "1 use",
+                max: 1,
+                detail: "Artifacts are one-use relics for the round. The forged seal decides how that single release behaves."
+              }
+            : {
+                label: "Mana",
+                value: weapon.preloadAmmo,
+                display: `${weapon.preloadAmmo}/${weapon.clipSize}`,
+                max: 10,
+                detail: "Mana is how many casts you get before the focus has to recover."
+              };
     const stats = [
       {
         label: "Spell Damage",
@@ -11257,13 +12273,7 @@ function renderForgeStats(weapon) {
         max: 42,
         detail: "Higher spell damage makes each cast hurt more on a clean hit."
       },
-      {
-        label: "Mana",
-        value: weapon.preloadAmmo,
-        display: `${weapon.preloadAmmo}/${weapon.clipSize}`,
-        max: 10,
-        detail: "Mana is how many casts you get before the focus has to recover."
-      },
+      magicResourceStat,
       {
         label: "Range",
         value: weapon.projectileRange,
@@ -11283,14 +12293,20 @@ function renderForgeStats(weapon) {
         value: Math.round((1.2 - weapon.reloadTime) * 100),
         display: `${weapon.reloadTime.toFixed(2)}s`,
         max: 90,
-        detail: "Lower recovery means the focus or tome recharges faster between casts."
+        detail: weapon.kind === "artifact"
+          ? "Lower recovery means the relic settles and fires cleaner before it is spent."
+          : "Lower recovery means the focus or tome recharges faster between casts."
       },
       {
         label: "Control",
         value: weapon.blockBreak,
         display: `${weapon.blockBreak}`,
         max: 18,
-        detail: "Control measures how much the spell strains guard or field space."
+        detail: weapon.kind === "spellbook"
+          ? "Control measures how hard each forged page strains guard and field space."
+          : weapon.kind === "artifact"
+            ? "Control measures how much the sealed release distorts the field when it breaks open."
+            : "Control measures how much the spell strains guard or field space."
       },
       {
         label: "Weight",
@@ -11482,6 +12498,7 @@ function renderForgeStats(weapon) {
 
 function renderForgePreview(weapon) {
   previewCtx.clearRect(0, 0, ui.forgePreview.width, ui.forgePreview.height);
+  const spellPages = Array.isArray(weapon.spellPages) && weapon.spellPages.length ? weapon.spellPages : [weapon.magicPage].filter(Boolean);
 
   const gradient = previewCtx.createLinearGradient(0, 0, 0, ui.forgePreview.height);
   gradient.addColorStop(0, "rgba(255,255,255,0.08)");
@@ -11502,11 +12519,11 @@ function renderForgePreview(weapon) {
     previewCtx.stroke();
   }
 
-  if (isMagicWeapon(weapon)) {
-    previewCtx.strokeStyle = weapon.color;
-    previewCtx.fillStyle = `${weapon.color}26`;
-    previewCtx.lineWidth = 6;
-    if (weapon.kind === "wand") {
+    if (isMagicWeapon(weapon)) {
+      previewCtx.strokeStyle = weapon.color;
+      previewCtx.fillStyle = `${weapon.color}26`;
+      previewCtx.lineWidth = 6;
+      if (weapon.kind === "wand") {
       previewCtx.beginPath();
       previewCtx.moveTo(-8, 18);
       previewCtx.lineTo(94, -16);
@@ -11548,10 +12565,21 @@ function renderForgePreview(weapon) {
       previewCtx.stroke();
     }
 
-    previewCtx.fillStyle = "#f4efe7";
-    previewCtx.font = "700 12px 'Trebuchet MS', sans-serif";
-    previewCtx.fillText(`${weapon.magicElementLabel} ${weapon.magicPatternLabel}`, 4, -60);
-    previewCtx.fillText(`${weapon.magicFocusLabel} | ${weapon.magicPageLabel}`, 4, 70);
+      previewCtx.fillStyle = "#f4efe7";
+      previewCtx.font = "700 12px 'Trebuchet MS', sans-serif";
+    if (weapon.kind === "wand") {
+      previewCtx.fillText(`${weapon.wandOrbLabel} ${weapon.wandStickLabel}`, 4, -60);
+      previewCtx.fillText(`${weapon.wandFlowLabel} | ${weapon.magicPageLabel}`, 4, 70);
+    } else if (weapon.kind === "spellbook") {
+      previewCtx.fillText(`${weapon.spellbookCoverLabel} ${weapon.spellbookInkLabel}`, 4, -60);
+      previewCtx.fillText(`${weapon.spellbookBindingLabel} | ${spellPages.length} pages`, 4, 70);
+    } else if (weapon.kind === "artifact") {
+      previewCtx.fillText(`${weapon.artifactCoreLabel} ${weapon.artifactVesselLabel}`, 4, -60);
+      previewCtx.fillText(`${weapon.artifactSealLabel} | ${weapon.magicPageLabel}`, 4, 70);
+    } else {
+      previewCtx.fillText(`${weapon.magicElementLabel} ${weapon.magicPatternLabel}`, 4, -60);
+      previewCtx.fillText(`${weapon.magicFocusLabel} | ${weapon.magicPageLabel}`, 4, 70);
+    }
     previewCtx.restore();
     return;
   }
@@ -11810,8 +12838,27 @@ function renderForgeMinigame(weapon) {
   const game = state.forgeGame;
   const meta = forgeModeMeta(frameCatalog[weapon.frameId] || weapon);
   const rangedWeapon = isRangedWeapon(weapon);
-  ui.forgeMinigameTitle.textContent = meta.title;
-  ui.forgeMinigameCopy.textContent = meta.copy;
+  const spellPages = Array.isArray(weapon.spellPages) && weapon.spellPages.length ? weapon.spellPages : [weapon.magicPage].filter(Boolean);
+  const requiredStation = forgeStationCatalog[stationRequiredForForge(state.forge)] || forgeStationCatalog.anvil;
+  let minigameTitle = meta.title;
+  let minigameCopy = meta.copy;
+  if (isMagicWeapon(weapon)) {
+    if (weapon.kind === "wand") {
+      minigameTitle = `${weapon.wandFlowLabel} Rune Trace`;
+      minigameCopy = `${weapon.wandOrbLabel}, ${weapon.wandStickLabel}, and ${weapon.wandFlowLabel} are being bound at the ${requiredStation.label}. Catch the drifting sigils cleanly so full-circle casts read fast and stable.`;
+    } else if (weapon.kind === "staff") {
+      minigameTitle = `${weapon.magicPatternLabel} Channel Lock`;
+      minigameCopy = `${weapon.magicElementLabel} is being driven through ${weapon.magicPatternLabel} and ${weapon.magicFocusLabel} at the ${requiredStation.label}. Keep the current steady to strengthen heavy channel casts.`;
+    } else if (weapon.kind === "spellbook") {
+      minigameTitle = `${weapon.spellbookBindingLabel} Page Bind`;
+      minigameCopy = `${weapon.spellbookCoverLabel}, ${weapon.spellbookInkLabel}, and ${weapon.spellbookBindingLabel} are being stitched in the ${requiredStation.label}. Lock the page seams so the ${spellPages.length}-page deck flips cleanly in combat.`;
+    } else if (weapon.kind === "artifact") {
+      minigameTitle = `${weapon.artifactSealLabel} Relic Seal`;
+      minigameCopy = `${weapon.artifactCoreLabel}, ${weapon.artifactVesselLabel}, and ${weapon.artifactSealLabel} are being seated in the ${requiredStation.label}. Seal the one-use relic cleanly so the release lands at full strength.`;
+    }
+  }
+  ui.forgeMinigameTitle.textContent = minigameTitle;
+  ui.forgeMinigameCopy.textContent = minigameCopy;
   ui.forgeAction.textContent = meta.action;
   ui.forgeMinigameRating.textContent = weapon.forgeQualityLabel;
   ui.forgeStart.textContent = game.active ? "Restart Drill" : game.finished ? "Run Again" : "Start Forge Drill";
@@ -11946,32 +12993,32 @@ function renderForgeMinigame(weapon) {
     ui.forgeMinigameStatus.textContent = game.active
       ? `Catch the 3 drifting rune points. Runes marked: ${game.hits}/${Math.max(game.pips.length, 3)}.`
       : game.finished
-        ? `Wand rune binding finished at ${weapon.forgeQualityLabel}. Rune tracing landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
-        : "No wand rune run yet. Start the drill to bind the freehand glyph path.";
+        ? `${weapon.wandOrbLabel} wand binding finished at ${weapon.forgeQualityLabel}. Rune tracing landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
+        : `No ${weapon.wandFlowLabel.toLowerCase()} wand run yet. Start the drill to bind the freehand glyph path.`;
   } else if (game.mode === "staff-channel") {
     ui.forgeMinigameBar.style.setProperty("--target-start", "42%");
     ui.forgeMinigameBar.style.setProperty("--target-end", "58%");
     ui.forgeMinigameStatus.textContent = game.active
       ? `Lock the current in the gold lane 3 times. Channels locked: ${game.hits}/3.`
       : game.finished
-        ? `Staff channel finished at ${weapon.forgeQualityLabel}. Channel control landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
-        : "No staff channel run yet. Start the drill to lock the staff current.";
+        ? `${weapon.magicPatternLabel} staff channel finished at ${weapon.forgeQualityLabel}. Channel control landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
+        : `No ${weapon.magicPatternLabel.toLowerCase()} staff run yet. Start the drill to lock the staff current.`;
   } else if (game.mode === "spellbook-bind") {
     ui.forgeMinigameBar.style.setProperty("--target-start", "0%");
     ui.forgeMinigameBar.style.setProperty("--target-end", "0%");
     ui.forgeMinigameStatus.textContent = game.active
       ? `Bind the 4 page seams in order. Pages locked: ${game.hits}/${Math.max(game.pips.length, 4)}.`
       : game.finished
-        ? `Spellbook binding finished at ${weapon.forgeQualityLabel}. Page lock timing landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
-        : "No spellbook run yet. Start the drill to bind the page seams.";
+        ? `${weapon.spellbookBindingLabel} spellbook binding finished at ${weapon.forgeQualityLabel}. Page lock timing landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
+        : `No ${weapon.spellbookBindingLabel.toLowerCase()} spellbook run yet. Start the drill to bind the page seams.`;
   } else if (game.mode === "artifact-seal") {
     ui.forgeMinigameBar.style.setProperty("--target-start", "0%");
     ui.forgeMinigameBar.style.setProperty("--target-end", "0%");
     ui.forgeMinigameStatus.textContent = game.active
       ? `Catch the 3 orbiting seal points. Seals locked: ${game.hits}/${Math.max(game.pips.length, 3)}.`
       : game.finished
-        ? `Artifact sealing finished at ${weapon.forgeQualityLabel}. Seal timing landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
-        : "No artifact seal run yet. Start the drill to lock the relic seal.";
+        ? `${weapon.artifactSealLabel} relic sealing finished at ${weapon.forgeQualityLabel}. Seal timing landed ${Math.round(weapon.forgeQuality * 100)}% clean.`
+        : `No ${weapon.artifactSealLabel.toLowerCase()} relic run yet. Start the drill to lock the seal.`;
   } else {
     ui.forgeMinigameBar.style.setProperty("--target-start", "0%");
     ui.forgeMinigameBar.style.setProperty("--target-end", "0%");
@@ -12004,8 +13051,11 @@ function renderForge() {
     if (isMagicWeapon(weapon)) {
       ui.forgeNote.textContent = weapon.kind === "wand"
         ? `${weapon.classLabel} magic builds use the arcane workshop instead of ammo. Wands now bind an orb, a stick, and a flow, then cast by drawing full-circle point chains with the mouse.`
-        : `${weapon.classLabel} magic builds use the arcane workshop instead of ammo. ` +
-          `Bind an element, route, focus, and page, then work the right forge station for cleaner spells.`;
+        : weapon.kind === "spellbook"
+          ? `${weapon.classLabel} builds use the scriptorium instead of the wand loom. Stitch a cover, ink, binding, and page deck, then flip pages with block during combat.`
+          : weapon.kind === "artifact"
+            ? `${weapon.classLabel} builds use the relic crucible. Seat a core, vessel, seal, and manifest, then save the one-use cast for the right moment.`
+            : `${weapon.classLabel} magic builds use the wand loom. Bind an element, route, focus, and page, then work the right forge station for cleaner staff channels.`;
     } else if (isRangedWeapon(weapon)) {
       ui.forgeNote.textContent =
         `${weapon.classLabel} ranged builds now split weapon body and ammo crafting. ` +
@@ -14454,11 +15504,12 @@ function startAttack(fighter, opponent = null, match = state.match) {
 
     if (fighter.weapon.kind === "artifact") {
       const castType =
-        fighter.weapon.specialType === "artifact-raise"
+        fighter.weapon.artifactCastType ||
+        (fighter.weapon.specialType === "artifact-raise"
           ? "zombie"
           : fighter.weapon.specialType === "artifact-curse"
             ? "curse"
-            : "ward";
+            : "ward");
       const casted = castMagicAttack(fighter, target, match, castType, pageId, staminaCost);
       if (casted) {
         fighter.reloadQueued = false;
@@ -16905,6 +17956,12 @@ function handleForgeChange() {
     wandOrb: ui.magicElement?.value || state.forge.wandOrb,
     wandStick: ui.magicPattern?.value || state.forge.wandStick,
     wandFlow: ui.magicFocus?.value || state.forge.wandFlow,
+    spellbookCover: ui.magicElement?.value || state.forge.spellbookCover,
+    spellbookInk: ui.magicPattern?.value || state.forge.spellbookInk,
+    spellbookBinding: ui.magicFocus?.value || state.forge.spellbookBinding,
+    artifactCore: ui.magicElement?.value || state.forge.artifactCore,
+    artifactVessel: ui.magicPattern?.value || state.forge.artifactVessel,
+    artifactSeal: ui.magicFocus?.value || state.forge.artifactSeal,
     magicElement: ui.magicElement?.value || state.forge.magicElement,
     magicPattern: ui.magicPattern?.value || state.forge.magicPattern,
     magicFocus: ui.magicFocus?.value || state.forge.magicFocus,
@@ -16931,6 +17988,12 @@ function handleForgeChange() {
     previousForge.wandOrb !== state.forge.wandOrb ||
     previousForge.wandStick !== state.forge.wandStick ||
     previousForge.wandFlow !== state.forge.wandFlow ||
+    previousForge.spellbookCover !== state.forge.spellbookCover ||
+    previousForge.spellbookInk !== state.forge.spellbookInk ||
+    previousForge.spellbookBinding !== state.forge.spellbookBinding ||
+    previousForge.artifactCore !== state.forge.artifactCore ||
+    previousForge.artifactVessel !== state.forge.artifactVessel ||
+    previousForge.artifactSeal !== state.forge.artifactSeal ||
     previousForge.magicElement !== state.forge.magicElement ||
     previousForge.magicPattern !== state.forge.magicPattern ||
     previousForge.magicFocus !== state.forge.magicFocus ||
